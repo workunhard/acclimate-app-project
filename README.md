@@ -24,11 +24,13 @@ Technologies used for this project include:
 - JQuery
 - MySQL
 
-
 ## Content
 
+```
 Top level of project folder:
+
 ├── .gitignore               # Git ignore file
+
 ├── README.md
 
 It has the following subfolders and files:
