@@ -1,11 +1,16 @@
 body {
   font-family: Calibri, "Segoe UI", Arial, sans-serif;
 }
-h1 {
+
+nav {
   text-align: center;
 }
-.content {
-  margin: 0 auto;
-  width: 800px;
-  text-align: center;
-}
+
+/*-------------------------------------
+ * customize material design icon sizes 
+ *-------------------------------------
+ */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
