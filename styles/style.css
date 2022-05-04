@@ -60,29 +60,28 @@ nav {
   font-weight: bold;
 }
 
-.homeIcon {
-  display: block;
-  position: absolute;
-  left: 10%;
+.footerPlaceholder {
+  position: fixed;
+  left: 0;
   bottom: 0;
+  width: 100%;
+  background-color: teal;
+}
+
+.homeIcon {
+  color: white;
+  position: absolute;
+  left: 100px;
 }
 
 .camera {
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
+  color: white;
 }
 
 .search {
-  display: block;
+  color: white;
   position: absolute;
-  right: 10%;
-  bottom: 0;
-}
-
-footer {
-  background-color: teal;
+  right: 100px;
 }
 
 /*-------------------------------------
