@@ -33,6 +33,10 @@ Top level of project folder:
 
 ├── README.md
 
+├── index.html
+
+├── style.css
+
 It has the following subfolders and files:
 
 ├──
