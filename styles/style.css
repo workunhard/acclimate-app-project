@@ -1,11 +1,13 @@
 body {
   height: 100%;
   font-family: Calibri, "Segoe UI", Arial, sans-serif;
+  overflow-y: scroll;
 }
 
 nav {
   text-align: center;
 }
+
 
 /* Style the navigation menu */
 .navbar {
@@ -70,6 +72,13 @@ nav {
   bottom: 0;
   width: 100%;
   background-color: teal;
+}
+
+#navbarPlaceholder {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
 }
 
 .homeIcon {
