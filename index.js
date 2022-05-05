@@ -10,7 +10,7 @@ const {
 app.use("/scripts", express.static("public/scripts"));
 app.use("/styles", express.static("public/styles"));
 app.use("/images", express.static("public/images"));
-app.use("/html", express.static("./html"));
+app.use("/html", express.static("public/html"));
 
 app.use(session({
     secret: "extra text that no one will guess",
@@ -23,7 +23,7 @@ app.get("/", function (req, res) {
     if (req.session.loggedIn) {
         res.redirect("/dashboard");
     } else {
-        let doc = fs.readFileSync("./html/login.html", "utf8");
+        let doc = fs.readFileSync("./app/html/login.html", "utf8");
         res.set("Server", "Code Engine");
         res.set("X-Powered-By", "Code");
         res.send(doc);
@@ -34,7 +34,7 @@ app.get("/dashboard", function (req, res) {
 
     if (req.session.loggedIn) {
 
-        let profile = fs.readFileSync("/dashboard.html", "utf8");
+        let profile = fs.readFileSync("./app/html/dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
 
         // Print data from bby23db
