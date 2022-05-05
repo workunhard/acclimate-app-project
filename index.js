@@ -21,9 +21,9 @@ app.use(session({
 
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
-        res.redirect("/profile");
+        res.redirect("/dashboard");
     } else {
-        let doc = fs.readFileSync("html/login.html", "utf8");
+        let doc = fs.readFileSync("./public/html/login.html", "utf8");
         res.set("Server", "Code Engine");
         res.set("X-Powered-By", "Code");
         res.send(doc);
@@ -34,20 +34,12 @@ app.get("/dashboard", function (req, res) {
 
     if (req.session.loggedIn) {
 
-        let profile = fs.readFileSync("html/dashboard.html", "utf8");
+        let profile = fs.readFileSync("./public/html/dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
 
         // Print data from bby23db
         profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name +".";
 
-        // New connection query for creature data
-        const mysql = require("mysql2");
-        const connection = mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "",
-            database: "bby23db"
-        });
     } else {
         res.redirect("/");
     }
@@ -61,9 +53,6 @@ app.use(express.urlencoded({
 // Log-in
 app.post("/login", function (req, res) {
     res.setHeader("Content-Type", "application/json");
-
-    console.log("What was sent", req.body.email, req.body.password);
-
     let results = authenticate(req.body.email, req.body.password,
         function (userRecord) {
             if (userRecord == null) {
@@ -113,10 +102,6 @@ function authenticate(email, pwd, callback) {
     connection.query(
         "SELECT * FROM user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
-            // results is an array of records, in JSON format
-            // fields contains extra meta data about results
-            console.log("Results from DB", results, "and the # of records returned", results.length);
-
             if (error) {
                 console.log(error);
             }
