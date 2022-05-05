@@ -154,7 +154,7 @@ async function init() {
     if (rows.length == 0) {
         let userRecords = "insert into user (name, email, password) values ?";
         let recordValues = [
-            ["Code", "code_workun@bcit.ca", "abc123"],
+            ["Code", "Code@acclimate.com", "abcdefg"],
             ["Bruce", "bruce_link@bcit.ca", "abc123"],
             ["John", "john_romero@bcit.ca", "abc123"]
         ];

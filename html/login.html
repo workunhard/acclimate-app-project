@@ -14,8 +14,8 @@
     <div id="formPanel">
         <form id='loginForm'>
           <p id="formTitle">Welcome</p>
-          <input id='email' type='email' required="required" placeholder="Email" value="user@domain.com"/>
-          <input id='password' type='password' required="required" placeholder="Password" value="XXXXX"/>
+          <input id='email' type='email' required="required" placeholder="Email" value="code@acclimate.com"/>
+          <input id='password' type='password' required="required" placeholder="Password" value="abcdefg"/>
           <input type="button" value="Login" id="submit"/>
           <p><span id="serverMsg"></span></p>
           <p id="forgotP"><a href="#">Forgot Login</a>?</p>
@@ -30,7 +30,7 @@
    
           $("#submit").click(function() {
               $.ajax({
-                  url: "/dashboard",
+                  url: "/authenticate",
                   type: "POST",
                   dataType: "JSON",
                   data: { email: $("#email").val(), password: $("#password").val() },
