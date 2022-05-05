@@ -1,0 +1,13 @@
+body {
+    background-color: #89E6FB;
+}
+
+#formTitle {
+    color: white;
+    text-shadow: 2px 2px 4px black;
+}
+
+#formpanel {
+    background-color: #89E6FB;
+    border: black 1px;
+}
