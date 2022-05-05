@@ -112,6 +112,20 @@ nav {
   color: red;
 }
 
+#alerts {
+  text-align: center;
+}
+
+dd {
+  font-style: italic;
+  font-weight: bold;
+}
+
+#bbymap {
+  width: 100%;
+  height: 100%;
+}
+
 @media only screen and (max-width: 800px) {
   .container{
     display:grid;
@@ -135,6 +149,7 @@ nav {
     grid-column: 1;
     grid-row: 3;
     background-color: beige;
+    text-align: center;
   }
 
   #forecast {
