@@ -34,7 +34,7 @@ app.get("/dashboard", function (req, res) {
 
     if (req.session.loggedIn) {
 
-        let profile = fs.readFileSync("/html/dashboard.html", "utf8");
+        let profile = fs.readFileSync("/dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
 
         // Print data from bby23db
@@ -66,6 +66,7 @@ app.post("/login", function (req, res) {
                 req.session.email = userRecord.email;
                 req.session.name = userRecord.name;
                 req.session.password = userRecord.password;
+                req.session.admin = userRecord.admin;
                 req.session.save(function (err) {});
 
                 res.send({
@@ -77,7 +78,6 @@ app.post("/login", function (req, res) {
 });
 
 app.get("/logout", function (req, res) {
-
     if (req.session) {
         req.session.destroy(function (error) {
             if (error) {
@@ -90,7 +90,6 @@ app.get("/logout", function (req, res) {
 });
 
 function authenticate(email, pwd, callback) {
-
     const mysql = require("mysql2");
     const connection = mysql.createConnection({
         host: "localhost",
@@ -131,17 +130,18 @@ async function init() {
             name varchar(30),
             email varchar(30),
             password varchar(30),
+            admin boolean,
             PRIMARY KEY (ID));`;
     await connection.query(createDBAndTables);
 
     // Data for user table
     const [rows, fields] = await connection.query("SELECT * FROM user");
     if (rows.length == 0) {
-        let userRecords = "insert into user (name, email, password) values ?";
+        let userRecords = "insert into user (name, email, password, admin) values ?";
         let recordValues = [
-            ["Code", "Code@acclimate.com", "abcdefg"],
-            ["Bruce", "bruce_link@bcit.ca", "abc123"],
-            ["John", "john_romero@bcit.ca", "abc123"]
+            ["Code", "Code@acclimate.com", "abcdefg", true],
+            ["Bruce", "bruce_link@bcit.ca", "abc123", false],
+            ["John", "john_romero@bcit.ca", "abc123", false]
         ];
         await connection.query(userRecords, [recordValues]);
     }
