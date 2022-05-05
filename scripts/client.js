@@ -47,7 +47,7 @@ ready(function () {
 		let email = document.getElementById("email");
 		let password = document.getElementById("password");
 		let queryString = "email=" + email.value + "&password=" + password.value;
-		//console.log("data that we will send", email.value, password.value);
+		console.log("data that we will send", email.value, password.value);
 
 		ajaxPOST(
 			"/login",
@@ -66,27 +66,6 @@ ready(function () {
 			queryString
 		);
 	});
-
-	//
-	//    // CLEAR THE DATE IN THE PARAGRAPH
-	//    document.querySelector("#clearDate").addEventListener("click", function(e) {
-	//        e.preventDefault();
-	//
-	//        document.getElementById("p1").innerHTML = "<b>Date goes here</b>";
-	//
-	//    });
-	//
-	//    // GET THE DATE FROM THE SERVER
-	//    document.querySelector("#getDate").addEventListener("click", function(e) {
-	//        e.preventDefault();
-	//        ajaxGET("/ajax-date", function(data) {
-	//            console.log(data);
-	//            // this call is JSON so we have to parse it:
-	//            let parsedData = JSON.parse(data);
-	//            document.getElementById("p1").innerHTML = parsedData.currentTime;
-	//        });
-	//    });
-	//
 });
 
 function ready(callback) {

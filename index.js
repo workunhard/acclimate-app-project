@@ -4,6 +4,14 @@ const app = express();
 const fs = require("fs");
 const { JSDOM } = require("jsdom");
 
+const dbConnection = {
+	host: "localhost",
+	user: "root",
+	password: "",
+	database: "bby23db",
+    multipleStatements: "true",
+};
+
 // static path mappings
 app.use("/scripts", express.static("/scripts"));
 app.use("/styles", express.static("/styles"));
@@ -105,12 +113,7 @@ app.get("/logout", function (req, res) {
 
 function authenticate(email, pwd, callback) {
 	const mysql = require("mysql2");
-	const connection = mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "",
-		database: "bby23db",
-	});
+	const connection = mysql.createConnection(dbConnection);
 	connection.connect();
 	connection.query(
 		"SELECT * FROM user WHERE email = ? AND password = ?",
@@ -141,10 +144,10 @@ function authenticate(email, pwd, callback) {
 async function init() {
 	const mysql = require("mysql2/promise");
 	const connection = await mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "",
-		multipleStatements: true,
+		host: dbConnection.host,
+		user: dbConnection.user,
+		password: dbConnection.password,
+		multipleStatements: dbConnection.multipleStatements,
 	});
 	const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23db;
         use bby23db;
@@ -165,6 +168,7 @@ async function init() {
 			["Code", "code_workun@bcit.ca", "abc123"],
 			["Bruce", "bruce_link@bcit.ca", "abc123"],
 			["John", "john_romero@bcit.ca", "abc123"],
+            ["test", "test@test.ca", "test"]
 		];
 		await connection.query(userRecords, [recordValues]);
 	}
