@@ -175,3 +175,51 @@ dd {
     grid-row: 5;
   }
 }
+
+@media only screen and (min-width: 801px) {
+  .container{
+    display:grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 27% 27% 29% 7%;
+    height: 100vh;
+    padding: 1em;
+  }
+  #navbarPlaceholder {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #alerts {
+    grid-column: 1;
+    grid-row: 2;
+    background-color:blanchedalmond;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #map {
+    grid-column: 1;
+    grid-row: 3;
+    background-color: beige;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #forecast {
+    grid-column: 1;
+    grid-row: 4;
+    background-color: cornsilk;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #footerPlaceholder {
+    grid-column: 1;
+    grid-row: 5;
+  }
+
+  #forecastTable {
+    width:
+  }
+
+
+}
