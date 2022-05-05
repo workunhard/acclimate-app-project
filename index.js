@@ -30,7 +30,7 @@ app.get("/", function (req, res) {
     }
 });
 
-app.get("/profile", function (req, res) {
+app.get("/dashboard", function (req, res) {
 
     if (req.session.loggedIn) {
 
