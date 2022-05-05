@@ -103,3 +103,31 @@ nav {
 .profile_name {
   color: red;
 }
+
+@media only screen and(max-width: 800px) {
+  .container{
+    display:grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 33% 34% 33%;
+    height: 100vh;
+  }
+
+  #alerts {
+    grid-column: 1;
+    grid-row: 1;
+    background-color: aqua;
+  }
+
+  #map {
+    grid-column: 1;
+    grid-row: 2;
+    background-color: beige;
+  }
+
+  #forecast {
+    grid-column: 1;
+    grid-row: 3;
+    background-color: cornsilk;
+  }
+
+}
