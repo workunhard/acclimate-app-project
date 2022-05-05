@@ -139,7 +139,8 @@ dd {
     grid-template-columns: 100%;
     grid-template-rows: 10% 27% 27% 29% 7%;
     height: 100vh;
-    padding: 1em;
+    padding: 0.5em;
+    grid-gap: 5px;
   }
 
   #navbarPlaceholder {
