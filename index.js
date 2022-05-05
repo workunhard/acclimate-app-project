@@ -7,10 +7,10 @@ const {
 } = require('jsdom');
 
 // static path mappings
-app.use("/scripts", express.static("/scripts"));
-app.use("/styles", express.static("/styles"));
-app.use("/images", express.static("/images"));
-app.use("/html", express.static("/html"));
+app.use("/scripts", express.static("public/scripts"));
+app.use("/styles", express.static("public/styles"));
+app.use("/images", express.static("public/images"));
+app.use("/html", express.static("public/html"));
 
 app.use(session({
     secret: "extra text that no one will guess",
