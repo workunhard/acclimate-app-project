@@ -1,4 +1,5 @@
 body {
+  height: 100%;
   font-family: Calibri, "Segoe UI", Arial, sans-serif;
 }
 
@@ -10,7 +11,8 @@ nav {
 .navbar {
   overflow: hidden;
   background-color: #333;
-  position: relative;
+  position: fixed;
+  width: 100%;
 }
 
 /* Hide the links inside the navigation menu (except for logo/home) */
@@ -29,22 +31,25 @@ nav {
 
 /* nav menu profile icon */
 .navbar a.profile {
-  background: black;
   display: block;
   position: absolute;
-}
+  top: 14px;
+} 
+
 /* nav menu hamburger icon */
-.navbar a.icon {
-  background: black;
+.navbar a.menu {
   display: block;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 14px;
 }
 
 /* when hovering above nav menu */
 .navbar a:hover {
-  background-color:darkgray;
+  color: black;
+}
+
+.footerPlaceholder a:hover {
   color: black;
 }
 
@@ -56,7 +61,7 @@ nav {
 
 /* nav menu logo text */
 #logoText {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
 }
 
