@@ -17,7 +17,7 @@
     #formPanel {
         height: 100%;
         display: grid;
-        grid-template-columns: 33% 33% 33%;
+        grid-template-columns: 20% 60% 20%;
         grid-template-rows: 33% 33% 33%;
         text-align: center;
         color: white;
@@ -44,6 +44,14 @@
     }
 
     #forgotP a:hover {
+        color: white;
+        border: 1px solid white;
+        border-radius: 3px;
+        padding: 0em 1em;
+        transition: 0.3s;
+    }
+
+    #notMemberP a:hover {
         color: white;
         border: 1px solid white;
         border-radius: 3px;
