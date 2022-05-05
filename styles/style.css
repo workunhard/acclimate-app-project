@@ -122,8 +122,15 @@ dd {
 }
 
 #bbymap {
-  width: 100%;
+  width: 95%;
   height: 100%;
+  border-radius: 10px 10px 10px 10px;
+}
+
+#forecastTable {
+  width: 95%;
+  height: 100%;
+  border-radius: 10px 10px 10px 10px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -132,6 +139,7 @@ dd {
     grid-template-columns: 100%;
     grid-template-rows: 10% 27% 27% 29% 7%;
     height: 100vh;
+    padding: 1em;
   }
 
   #navbarPlaceholder {
@@ -142,7 +150,8 @@ dd {
   #alerts {
     grid-column: 1;
     grid-row: 2;
-    background-color: aqua;
+    background-color:blanchedalmond;
+    border-radius: 10px 10px 10px 10px;
   }
 
   #map {
@@ -150,12 +159,15 @@ dd {
     grid-row: 3;
     background-color: beige;
     text-align: center;
+    border-radius: 10px 10px 10px 10px;
   }
 
   #forecast {
     grid-column: 1;
     grid-row: 4;
     background-color: cornsilk;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
   }
 
   #footerPlaceholder {
