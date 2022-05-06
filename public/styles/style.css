@@ -1,17 +1,20 @@
 body {
+  height: 100%;
   font-family: Calibri, "Segoe UI", Arial, sans-serif;
   background-color: #89E6FB;
+  overflow-y: scroll;
 }
 
 nav {
   text-align: center;
 }
 
+
 /* Style the navigation menu */
 .navbar {
   overflow: hidden;
   background-color: #333;
-  position: relative;
+  width: 100%;
 }
 
 /* Hide the links inside the navigation menu (except for logo/home) */
@@ -30,22 +33,25 @@ nav {
 
 /* nav menu profile icon */
 .navbar a.profile {
-  background: black;
   display: block;
   position: absolute;
-}
+  top: 8px;
+} 
+
 /* nav menu hamburger icon */
-.navbar a.icon {
-  background: black;
+.navbar a.menu {
   display: block;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 8px;
 }
 
 /* when hovering above nav menu */
 .navbar a:hover {
-  background-color:darkgray;
+  color: black;
+}
+
+.footerPlaceholder a:hover {
   color: black;
 }
 
@@ -57,8 +63,39 @@ nav {
 
 /* nav menu logo text */
 #logoText {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
+}
+
+.footerPlaceholder {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: teal;
+}
+
+#navbarPlaceholder {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.homeIcon {
+  color: white;
+  position: absolute;
+  left: 100px;
+}
+
+.camera {
+  color: white;
+}
+
+.search {
+  color: white;
+  position: absolute;
+  right: 100px;
 }
 
 /*-------------------------------------
@@ -74,4 +111,127 @@ nav {
 
 .profile_name {
   color: red;
+}
+
+#alerts {
+  text-align: center;
+}
+
+dd {
+  font-style: italic;
+  font-weight: bold;
+}
+
+#bbymap {
+  width: 95%;
+  height: 100%;
+  border-radius: 10px 10px 10px 10px;
+}
+
+#forecastTable {
+  width: 95%;
+  height: 100%;
+  border-radius: 10px 10px 10px 10px;
+}
+
+@media only screen and (max-width: 800px) {
+  .container{
+    display:grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 27% 27% 29% 7%;
+    height: 100vh;
+    padding: 0.5em;
+    grid-gap: 5px;
+  }
+
+  #navbarPlaceholder {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #alerts {
+    grid-column: 1;
+    grid-row: 2;
+    background-color:blanchedalmond;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #map {
+    grid-column: 1;
+    grid-row: 3;
+    background-color: beige;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #forecast {
+    grid-column: 1;
+    grid-row: 4;
+    background-color: cornsilk;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #footerPlaceholder {
+    grid-column: 1;
+    grid-row: 5;
+  }
+}
+
+@media only screen and (min-width: 801px) {
+  .container{
+    display:grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 10% 42% 41% 7%;
+    height: 100vh;
+    padding: 1em;
+  }
+  #navbarPlaceholder {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  #alerts {
+    grid-column: 1;
+    grid-row: 2 / span 2;;
+    background-color:blanchedalmond;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #map {
+    grid-column: 2;
+    grid-row: 2;
+    /* background-color: beige; */
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #forecast {
+    grid-column: 2;
+    grid-row: 3;
+    /* background-color: cornsilk; */
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+    margin-top: 10px;
+  }
+
+  #footerPlaceholder {
+    grid-column: 1;
+    grid-row: 5;
+  }
+
+  #bbymap {
+    width: 70%;
+    height: 100%;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid grey;
+    
+  }
+  
+  #forecastTable {
+    width: 70%;
+    height: 100%;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid grey;
+  }
 }
