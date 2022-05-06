@@ -3,25 +3,32 @@
 @media only screen and (max-width: 700px) {
 
     body {
-        background-color: #89E6FB;
+        background-image: url('/images/loginbg.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        margin: 0;
+        background-position: bottom center, 50%, 50%;
+        /* background-color: #52BBE7; */
         font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
     }
 
     #formTitle {
-        color: white;
-        text-shadow: 2px 2px 4px black;
+        color: #52BBE7;
+        font-size: 40pt;
+        /* text-shadow: 2px 2px 4px black; */
     }
 
     #formPanel {
-        background-color: #89E6FB;
+        /* background-color: #52BBE7; */
         border: black 1px;
     }
 
     #formPanel {
-        height: 100%;
+        height: 100vh;
         display: grid;
-        grid-template-columns: 20% 60% 20%;
-        grid-template-rows: 33% 33% 33%;
+        grid-template-columns: 10% 80% 10%;
+        grid-template-rows: 20% 60% 20%;
         text-align: center;
         color: white;
     }
@@ -29,7 +36,7 @@
     #formPanel a,
     a:visited {
         text-decoration: none;
-        color: white;
+        color: black;
     }
 
     #formPanel a:hover {
@@ -38,6 +45,9 @@
     }
 
     #loginForm {
+        background-color: white;
+        filter: drop-shadow(0px 0px 10px #000000);
+        border-radius: 10%;
         grid-row: 2 / span 1;
         grid-column: 2 / span 1;
     }
@@ -47,16 +57,16 @@
     }
 
     #forgotP a:hover {
-        color: white;
-        border: 1px solid white;
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
         border-radius: 3px;
         padding: 0em 1em;
         transition: 0.3s;
     }
 
     #notMemberP a:hover {
-        color: white;
-        border: 1px solid white;
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
         border-radius: 3px;
         padding: 0em 1em;
         transition: 0.3s;
@@ -75,7 +85,7 @@
 
     #submit:hover {
         color: white;
-        background-color: black;
+        background-color: #52BBE7;
         border: 5px solid white;
         transform: scale(110%);
     }
@@ -88,36 +98,44 @@
     }
 
     #footer {
-        grid-row: 3 / span 1;
-        grid-column: 1 / span 3;
-        background-color: black;
+        background-color: #52BBE7;
+        background-size: 100%;
         text-align: center;
-        display: grid;
+        display: block;
         align-content: center;
+        margin:auto;
+        padding: 5%;
     }
 }
 
 @media only screen and (min-width: 701px) {
     body {
-        background-color: #89E6FB;
+        background-image: url('/images/loginbg.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        margin: 0;
+        background-position: bottom center, 50%, 50%;
+        /* background-color: #52BBE7; */
         font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
     }
 
     #formTitle {
-        color: white;
-        text-shadow: 2px 2px 4px black;
+        color: #52BBE7;
+        font-size: 40pt;
+        /* text-shadow: 2px 2px 4px black; */
     }
 
     #formPanel {
-        background-color: #89E6FB;
+        /* background-color: #52BBE7; */
         border: black 1px;
     }
 
     #formPanel {
-        height: 100%;
+        height: 100vh;
         display: grid;
-        grid-template-columns: 20% 60% 20%;
-        grid-template-rows: 33% 33% 33%;
+        grid-template-columns: 30% 40% 30%;
+        grid-template-rows: 20% 60% 20%;
         text-align: center;
         color: white;
     }
@@ -125,7 +143,7 @@
     #formPanel a,
     a:visited {
         text-decoration: none;
-        color: white;
+        color: black;
     }
 
     #formPanel a:hover {
@@ -134,6 +152,9 @@
     }
 
     #loginForm {
+        background-color: white;
+        filter: drop-shadow(0px 0px 10px #000000);
+        border-radius: 10%;
         grid-row: 2 / span 1;
         grid-column: 2 / span 1;
     }
@@ -143,23 +164,23 @@
     }
 
     #forgotP a:hover {
-        color: white;
-        border: 1px solid white;
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
         border-radius: 3px;
         padding: 0em 1em;
         transition: 0.3s;
     }
 
     #notMemberP a:hover {
-        color: white;
-        border: 1px solid white;
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
         border-radius: 3px;
         padding: 0em 1em;
         transition: 0.3s;
     }
 
     #submit {
-        font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
+        font-family: 'Radio Canada', sans serif;
         font-size: 16pt;
         background-color: white;
         text-decoration: none;
@@ -171,7 +192,7 @@
 
     #submit:hover {
         color: white;
-        background-color: black;
+        background-color: #52BBE7;
         border: 5px solid white;
         transform: scale(110%);
     }
@@ -184,12 +205,12 @@
     }
 
     #footer {
-        grid-row: 3 / span 1;
-        grid-column: 1 / span 3;
-        background-color: black;
+        background-color: #52BBE7;
+        background-size: 100%;
         text-align: center;
-        display: grid;
+        display: block;
         align-content: center;
+        margin:auto;
+        padding: 5%;
     }
-
 }
