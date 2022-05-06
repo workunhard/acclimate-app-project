@@ -14,7 +14,7 @@ body {
   /* Style the navigation menu */
   .navbar {
     overflow: hidden;
-    background-color: #333;
+    background-color: #52BBE7;
     width: 100%;
   }
   
@@ -58,7 +58,7 @@ body {
   
   /* nav menu logo */
   .logo {
-    background-color:teal;
+    background-color:#52BBE7;
     color: white;
   }
   
@@ -73,7 +73,7 @@ body {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: teal;
+    background-color: #52BBE7;
   }
   
   #navbarPlaceholder {
