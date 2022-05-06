@@ -39,6 +39,7 @@ app.get("/dashboard", function (req, res) {
 
         // Print data from bby23db
         profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name +".";
+        res.send(profileDOM.serialize());
 
     } else {
         res.redirect("/");
