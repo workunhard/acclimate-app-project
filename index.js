@@ -33,15 +33,20 @@ app.get("/", function (req, res) {
 
 app.get("/dashboard", function (req, res) {
 
-    if (req.session.loggedIn) {
+    if (req.session.loggedIn && req.session.admin == 1) {
 
-        let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
+        let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
 
-        // Print data from bby23db
         profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name +".";
         res.send(profileDOM.serialize());
 
+    } else if (req.session.loggedIn && req.session.admin == 0) {
+        let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
+        let profileDOM = new JSDOM(profile);
+
+        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name +".";
+        res.send(profileDOM.serialize());
     } else {
         res.redirect("/");
     }
