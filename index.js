@@ -109,7 +109,7 @@ function authenticate(email, pwd, callback) {
         "SELECT * FROM user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
             if (error) {
-                // console.log(error);
+                res.redirect("/");
             }
             if (results.length > 0) {
                 return callback(results[0]);

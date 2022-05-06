@@ -1,6 +1,6 @@
 ready(function() {
 
-    console.log("Client script loaded.");
+    // console.log("Client script loaded.");
 
     function ajaxGET(url, callback) {
 
