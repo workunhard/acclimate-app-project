@@ -34,7 +34,7 @@ body {
   .navbar a.profile {
     display: block;
     position: absolute;
-    top: 14px;
+    top: 8px;
   } 
   
   /* nav menu hamburger icon */
@@ -42,7 +42,7 @@ body {
     display: block;
     position: absolute;
     right: 0;
-    top: 14px;
+    top: 8px;
   }
   
   /* when hovering above nav menu */
@@ -153,9 +153,17 @@ body {
     }
   
     #alerts {
-      grid-column: 1;
+      display: none;
+      /* grid-column: 1;
       grid-row: 2;
       background-color:blanchedalmond;
+      border-radius: 10px 10px 10px 10px; */
+    }
+
+    #adminArea {
+      grid-column: 1;
+      grid-row: 2;
+      background-color: blanchedalmond;
       border-radius: 10px 10px 10px 10px;
     }
   
