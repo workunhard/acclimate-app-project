@@ -1,0 +1,249 @@
+body {
+    height: 100%;
+    font-family: Calibri, "Segoe UI", Arial, sans-serif;
+    overflow-y: scroll;
+  }
+  
+  nav {
+    text-align: center;
+  }
+  
+  
+  /* Style the navigation menu */
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    width: 100%;
+  }
+  
+  /* Hide the links inside the navigation menu (except for logo/home) */
+  .navbar #navLinks {
+    display: none;
+  }
+  
+  /* nav menu links */
+  .navbar a {
+    color: white;
+    padding: 12px 18px;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+  }
+  
+  /* nav menu profile icon */
+  .navbar a.profile {
+    display: block;
+    position: absolute;
+    top: 14px;
+  } 
+  
+  /* nav menu hamburger icon */
+  .navbar a.menu {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 14px;
+  }
+  
+  /* when hovering above nav menu */
+  .navbar a:hover {
+    color: black;
+  }
+  
+  .footerPlaceholder a:hover {
+    color: black;
+  }
+  
+  /* nav menu logo */
+  .logo {
+    background-color:teal;
+    color: white;
+  }
+  
+  /* nav menu logo text */
+  #logoText {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .footerPlaceholder {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: teal;
+  }
+  
+  #navbarPlaceholder {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  
+  .homeIcon {
+    color: white;
+    position: absolute;
+    left: 100px;
+  }
+  
+  .camera {
+    color: white;
+  }
+  
+  .search {
+    color: white;
+    position: absolute;
+    right: 100px;
+  }
+  
+  /*-------------------------------------
+   * customize material design icon sizes 
+   *-------------------------------------
+   */
+  .material-icons.md-18 { font-size: 18px; }
+  .material-icons.md-24 { font-size: 24px; }
+  .material-icons.md-36 { font-size: 36px; }
+  .material-icons.md-48 { font-size: 48px; }
+  
+  /* Dashboard Stuff */
+  
+  .profile_name {
+    color: red;
+  }
+  
+  #alerts {
+    text-align: center;
+  }
+  
+  dd {
+    font-style: italic;
+    font-weight: bold;
+  }
+  
+  #bbymap {
+    width: 95%;
+    height: 100%;
+    border-radius: 10px 10px 10px 10px;
+  }
+  
+  #forecastTable {
+    width: 95%;
+    height: 100%;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #adminArea {
+      text-align: center;
+  }
+  
+  @media only screen and (max-width: 800px) {
+    .container{
+      display:grid;
+      grid-template-columns: 100%;
+      grid-template-rows: 10% 27% 27% 29% 7%;
+      height: 100vh;
+      padding: 0.5em;
+      grid-gap: 5px;
+    }
+  
+    #navbarPlaceholder {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  
+    #alerts {
+      grid-column: 1;
+      grid-row: 2;
+      background-color:blanchedalmond;
+      border-radius: 10px 10px 10px 10px;
+    }
+  
+    #map {
+      grid-column: 1;
+      grid-row: 3;
+      background-color: beige;
+      text-align: center;
+      border-radius: 10px 10px 10px 10px;
+    }
+  
+    #forecast {
+      grid-column: 1;
+      grid-row: 4;
+      background-color: cornsilk;
+      text-align: center;
+      border-radius: 10px 10px 10px 10px;
+    }
+  
+    #footerPlaceholder {
+      grid-column: 1;
+      grid-row: 5;
+    }
+  }
+  
+  @media only screen and (min-width: 801px) {
+    .container{
+      display:grid;
+      grid-template-columns: 25% 75%;
+      grid-template-rows: 10% 42% 41% 7%;
+      height: 100vh;
+      padding: 1em;
+    }
+    #navbarPlaceholder {
+      grid-column: 1 / span 2;
+      grid-row: 1;
+    }
+  
+    #alerts {
+      grid-column: 1;
+      grid-row: 2 / span 1;
+      background-color:blanchedalmond;
+      border-radius: 10px 10px 10px 10px;
+    }
+
+    #adminArea {
+        grid-column: 1;
+        grid-row: 3;
+        background-color: blanchedalmond;
+        border-radius: 10px 10px 10px 10px;
+        margin-top: 10px;
+    }
+  
+    #map {
+      grid-column: 2;
+      grid-row: 2;
+      /* background-color: beige; */
+      text-align: center;
+      border-radius: 10px 10px 10px 10px;
+    }
+  
+    #forecast {
+      grid-column: 2;
+      grid-row: 3;
+      /* background-color: cornsilk; */
+      text-align: center;
+      border-radius: 10px 10px 10px 10px;
+      margin-top: 10px;
+    }
+  
+    #footerPlaceholder {
+      grid-column: 1;
+      grid-row: 5;
+    }
+  
+    #bbymap {
+      width: 70%;
+      height: 100%;
+      border-radius: 10px 10px 10px 10px;
+      border: 1px solid grey;
+      
+    }
+    
+    #forecastTable {
+      width: 70%;
+      height: 100%;
+      border-radius: 10px 10px 10px 10px;
+      border: 1px solid grey;
+    }
+  }
+  
