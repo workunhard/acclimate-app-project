@@ -91,6 +91,7 @@
         grid-column: 2 / span 1;
         bottom: 0;
         vertical-align: bottom;
+        color: red;
     }
 
     #footer {
@@ -101,6 +102,10 @@
         align-content: center;
         margin:auto;
         padding: 5%;
+    }
+
+    #errorMsg {
+        color: red;
     }
 }
 
@@ -194,6 +199,7 @@
         grid-column: 2 / span 1;
         bottom: 0;
         vertical-align: bottom;
+        color: red;
     }
 
     #footer {
@@ -204,5 +210,9 @@
         align-content: center;
         margin:auto;
         padding: 5%;
+    }
+
+    #errorMsg {
+        color: red;
     }
 }
