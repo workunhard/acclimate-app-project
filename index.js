@@ -7,10 +7,10 @@ const {
 } = require('jsdom');
 
 // static path mappings
-app.use("/scripts", express.static("/scripts"));
-app.use("/styles", express.static("/styles"));
-app.use("/images", express.static("/images"));
-app.use("/html", express.static("/html"));
+app.use("/scripts", express.static("public/scripts"));
+app.use("/styles", express.static("public/styles"));
+app.use("/images", express.static("public/images"));
+app.use("/html", express.static("public/html"));
 
 app.use(session({
     secret: "extra text that no one will guess",
@@ -21,33 +21,26 @@ app.use(session({
 
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
-        res.redirect("/profile");
+        res.redirect("/dashboard");
     } else {
-        let doc = fs.readFileSync("html/login.html", "utf8");
+        let doc = fs.readFileSync("./app/html/login.html", "utf8");
         res.set("Server", "Code Engine");
         res.set("X-Powered-By", "Code");
         res.send(doc);
     }
 });
 
-app.get("/profile", function (req, res) {
+app.get("/dashboard", function (req, res) {
 
     if (req.session.loggedIn) {
 
-        let profile = fs.readFileSync("html/dashboard.html", "utf8");
+        let profile = fs.readFileSync("./app/html/dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
 
         // Print data from bby23db
         profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name +".";
+        res.send(profileDOM.serialize());
 
-        // New connection query for creature data
-        const mysql = require("mysql2");
-        const connection = mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "",
-            database: "bby23db"
-        });
     } else {
         res.redirect("/");
     }
@@ -61,9 +54,6 @@ app.use(express.urlencoded({
 // Log-in
 app.post("/login", function (req, res) {
     res.setHeader("Content-Type", "application/json");
-
-    console.log("What was sent", req.body.email, req.body.password);
-
     let results = authenticate(req.body.email, req.body.password,
         function (userRecord) {
             if (userRecord == null) {
@@ -77,6 +67,7 @@ app.post("/login", function (req, res) {
                 req.session.email = userRecord.email;
                 req.session.name = userRecord.name;
                 req.session.password = userRecord.password;
+                req.session.admin = userRecord.admin;
                 req.session.save(function (err) {});
 
                 res.send({
@@ -88,7 +79,6 @@ app.post("/login", function (req, res) {
 });
 
 app.get("/logout", function (req, res) {
-
     if (req.session) {
         req.session.destroy(function (error) {
             if (error) {
@@ -101,7 +91,6 @@ app.get("/logout", function (req, res) {
 });
 
 function authenticate(email, pwd, callback) {
-
     const mysql = require("mysql2");
     const connection = mysql.createConnection({
         host: "localhost",
@@ -113,10 +102,6 @@ function authenticate(email, pwd, callback) {
     connection.query(
         "SELECT * FROM user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
-            // results is an array of records, in JSON format
-            // fields contains extra meta data about results
-            console.log("Results from DB", results, "and the # of records returned", results.length);
-
             if (error) {
                 console.log(error);
             }
@@ -146,17 +131,18 @@ async function init() {
             name varchar(30),
             email varchar(30),
             password varchar(30),
+            admin boolean,
             PRIMARY KEY (ID));`;
     await connection.query(createDBAndTables);
 
     // Data for user table
     const [rows, fields] = await connection.query("SELECT * FROM user");
     if (rows.length == 0) {
-        let userRecords = "insert into user (name, email, password) values ?";
+        let userRecords = "insert into user (name, email, password, admin) values ?";
         let recordValues = [
-            ["Code", "code_workun@bcit.ca", "abc123"],
-            ["Bruce", "bruce_link@bcit.ca", "abc123"],
-            ["John", "john_romero@bcit.ca", "abc123"]
+            ["Code", "Code@acclimate.com", "abcdefg", true],
+            ["Bruce", "bruce_link@bcit.ca", "abc123", false],
+            ["John", "john_romero@bcit.ca", "abc123", false]
         ];
         await connection.query(userRecords, [recordValues]);
     }

@@ -1,0 +1,95 @@
+@media only screen and (max-width: 700px) {
+
+    body {
+        background-color: #89E6FB;
+    }
+
+    #formTitle {
+        color: white;
+        text-shadow: 2px 2px 4px black;
+    }
+
+    #formPanel {
+        background-color: #89E6FB;
+        border: black 1px;
+    }
+
+    #formPanel {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 20% 60% 20%;
+        grid-template-rows: 33% 33% 33%;
+        text-align: center;
+        color: white;
+    }
+
+    #formPanel a,
+    a:visited {
+        text-decoration: none;
+        color: white;
+    }
+
+    #formPanel a:hover {
+        text-decoration: none;
+        color: rgb(45, 45, 45);
+    }
+
+    #loginForm {
+        grid-row: 2 / span 1;
+        grid-column: 2 / span 1;
+    }
+
+    #logIn {
+        font-size: 20pt;
+    }
+
+    #forgotP a:hover {
+        color: white;
+        border: 1px solid white;
+        border-radius: 3px;
+        padding: 0em 1em;
+        transition: 0.3s;
+    }
+
+    #notMemberP a:hover {
+        color: white;
+        border: 1px solid white;
+        border-radius: 3px;
+        padding: 0em 1em;
+        transition: 0.3s;
+    }
+
+    #submit {
+        font-family: 'Ubuntu';
+        font-size: 16pt;
+        background-color: white;
+        text-decoration: none;
+        border: 5px solid black;
+        border-radius: 8px;
+        padding: 1em 2em;
+        transition: 0.3s;
+    }
+
+    #submit:hover {
+        color: white;
+        background-color: black;
+        border: 5px solid white;
+        transform: scale(110%);
+    }
+
+    #passHint {
+        grid-row: 3 / span 1;
+        grid-column: 2 / span 1;
+        bottom: 0;
+        vertical-align: bottom;
+    }
+
+    #footer {
+        grid-row: 3 / span 1;
+        grid-column: 1 / span 3;
+        background-color: black;
+        text-align: center;
+        display: grid;
+        align-content: center;
+    }
+}
