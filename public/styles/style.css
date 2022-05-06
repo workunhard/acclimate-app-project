@@ -58,7 +58,7 @@ nav {
 
 /* nav menu logo */
 .logo {
-  background-color:teal;
+  background-color:#52BBE7;
   color: white;
 }
 
@@ -73,7 +73,7 @@ nav {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: teal;
+  background-color: #52BBE7;
 }
 
 #navbarPlaceholder {

@@ -9,18 +9,15 @@
         display: block;
         margin: 0;
         background-position: bottom center, 50%, 50%;
-        /* background-color: #52BBE7; */
         font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
     }
 
     #formTitle {
         color: #52BBE7;
         font-size: 40pt;
-        /* text-shadow: 2px 2px 4px black; */
     }
 
     #formPanel {
-        /* background-color: #52BBE7; */
         border: black 1px;
     }
 
@@ -87,7 +84,6 @@
         color: white;
         background-color: #52BBE7;
         border: 5px solid white;
-        transform: scale(110%);
     }
 
     #passHint {
@@ -116,18 +112,15 @@
         display: block;
         margin: 0;
         background-position: bottom center, 50%, 50%;
-        /* background-color: #52BBE7; */
         font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
     }
 
     #formTitle {
         color: #52BBE7;
         font-size: 40pt;
-        /* text-shadow: 2px 2px 4px black; */
     }
 
     #formPanel {
-        /* background-color: #52BBE7; */
         border: black 1px;
     }
 
@@ -194,7 +187,6 @@
         color: white;
         background-color: #52BBE7;
         border: 5px solid white;
-        transform: scale(110%);
     }
 
     #passHint {
