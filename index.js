@@ -10,7 +10,8 @@ const {
 app.use("/scripts", express.static("public/scripts"));
 app.use("/styles", express.static("public/styles"));
 app.use("/images", express.static("public/images"));
-app.use("/html", express.static("public/html"));
+app.use("/html", express.static("app/html"));
+app.use("/text", express.static("app/text"));
 
 app.use(session({
     secret: "extra text that no one will guess",
