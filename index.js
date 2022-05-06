@@ -34,7 +34,7 @@ app.get("/dashboard", function (req, res) {
 
     if (req.session.loggedIn) {
 
-        let profile = fs.readFileSync("./app/html/dashboard.html", "utf8");
+        let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
 
         // Print data from bby23db
