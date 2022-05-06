@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/styles/style.css" rel="stylesheet">
     <link href="/styles/login.css" rel="stylesheet">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <meta author="Code Workun">
     <title>Sign-In :: AccliMate</title>
 </head>
 
@@ -27,10 +29,10 @@
     </div>
     <div id="footer">
         Created by BBY-23, COMP 2800<br><br>Spring 2022
-    </div>
+    </footer>
 
     <script src="scripts/client.js"></script>
-    <script>
+    <!-- <script>
         $(document).ready(function () {
 
             $("#submit").click(function () {
@@ -55,18 +57,17 @@
                 });
             });
         });
-    </script>
-    <!-- Script for password hint; temporary, to be deleted before production -->
+    </script> --> 
+
     <script>
         function passHint() {
             var hint = document.getElementById("passHint");
             var tryThis = document.getElementById("errorMsg");
             tryThis.innerHTML = "For logons, try:";
-            hint.innerHTML =
-                "Admin User: Code@acclimate.com<br>Pass: abcdefg<br><br>Regular User: bruce_link@bcit.ca<br>Pass: abc123";
+            hint.innerHTML = "Admin User: Code@acclimate.com<br>Pass: abcdefg<br><br>Regular User: bruce_link@bcit.ca<br>Pass: abc123";
         }
     </script>
 
 </body>
 
-</html>
+</html> 
