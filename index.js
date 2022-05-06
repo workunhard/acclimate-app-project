@@ -109,7 +109,7 @@ function authenticate(email, pwd, callback) {
         "SELECT * FROM user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
             if (error) {
-                console.log(error);
+                // console.log(error);
             }
             if (results.length > 0) {
                 return callback(results[0]);
@@ -152,7 +152,6 @@ async function init() {
         ];
         await connection.query(userRecords, [recordValues]);
     }
-    console.log("Listening on port " + port + "!");
 }
 
 // RUN SERVER
