@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard :: Acclimate</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/admin-style.css">
+</head>
+
+<body>
+    <div class="container">
+    <nav id="navbarPlaceholder"></nav>
+        <div id ="alerts">
+            <h2 id="profile_name">PROFILE_NAME</h2>
+            <h3>Recent Alerts</h3>
+            <dl>
+                <dt>Who needs to pay for a sauna with this current heat wave</dt>
+                <dd>-everyonesGrandma @ 12:45PM</dd>
+                <dt>Residents advised to stay indoors today amidst record high heatwave temperatures this afternoon</dt>
+                <dd>- BC Ministry of Health @ 9:10AM</dd>
+                <dt>A tree fell on top of another car on SW Marine drive. </dt>
+                <dd>- Wrongplacewrongtime @3:40PM</dd>
+            </dl>
+        </div>
+        <div id = "adminArea">
+            <h3>Admin Dashboard</h3>
+            <h4>User Options</h4>
+            <button>Add</button>
+            <button>Edit</button>
+            <button>Delete</button>
+        </div>
+        <div id ="map">
+            <img id = "bbymap" src = "../images/bbymap2.jpg" alt = "burnaby map">
+        </div>
+        <div id = "forecast"><img src="../images/forecast.jpeg" id="forecastTable" alt="example forecast"></div>
+        <nav id="footerPlaceholder"></nav>
+    </div>
+
+    <script src="../scripts/skeleton.js"></script>
+
+</body>
+
+</html>

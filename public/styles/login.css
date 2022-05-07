@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+@media only screen and (max-width: 700px) {
+
+    body {
+        background-image: url('/images/loginbg.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        margin: 0;
+        background-position: bottom center, 50%, 50%;
+        font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
+    }
+
+    #formTitle {
+        color: #52BBE7;
+        font-size: 40pt;
+    }
+
+    #formPanel {
+        border: black 1px;
+    }
+
+    #formPanel {
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 10% 80% 10%;
+        grid-template-rows: 20% 60% 20%;
+        text-align: center;
+        color: white;
+    }
+
+    #formPanel a,
+    a:visited {
+        text-decoration: none;
+        color: black;
+    }
+
+    #formPanel a:hover {
+        text-decoration: none;
+        color: rgb(45, 45, 45);
+    }
+
+    #loginForm {
+        background-color: white;
+        filter: drop-shadow(0px 0px 10px #000000);
+        border-radius: 10%;
+        grid-row: 2 / span 1;
+        grid-column: 2 / span 1;
+    }
+
+    #logIn {
+        font-size: 20pt;
+    }
+
+    #forgotP a:hover {
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
+        border-radius: 3px;
+        padding: 0em 1em;
+        transition: 0.3s;
+    }
+
+    #notMemberP a:hover {
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
+        border-radius: 3px;
+        padding: 0em 1em;
+        transition: 0.3s;
+    }
+
+    #submit {
+        font-family: 'Radio Canada', sans serif;
+        font-size: 16pt;
+        background-color: white;
+        text-decoration: none;
+        border: 5px solid black;
+        border-radius: 8px;
+        padding: 1em 2em;
+        transition: 0.3s;
+    }
+
+    #submit:hover {
+        color: white;
+        background-color: #52BBE7;
+        border: 5px solid white;
+    }
+
+    #passHint {
+        grid-row: 3 / span 1;
+        grid-column: 2 / span 1;
+        bottom: 0;
+        vertical-align: bottom;
+        color: red;
+    }
+
+    #footer {
+        background-color: #52BBE7;
+        background-size: 100%;
+        text-align: center;
+        display: block;
+        align-content: center;
+        margin:auto;
+        padding: 5%;
+    }
+
+    #errorMsg {
+        color: red;
+    }
+}
+
+@media only screen and (min-width: 701px) {
+    body {
+        background-image: url('/images/loginbg.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        margin: 0;
+        background-position: bottom center, 50%, 50%;
+        font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
+    }
+
+    #formTitle {
+        color: #52BBE7;
+        font-size: 40pt;
+    }
+
+    #formPanel {
+        border: black 1px;
+    }
+
+    #formPanel {
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 30% 40% 30%;
+        grid-template-rows: 20% 60% 20%;
+        text-align: center;
+        color: white;
+    }
+
+    #formPanel a,
+    a:visited {
+        text-decoration: none;
+        color: black;
+    }
+
+    #formPanel a:hover {
+        text-decoration: none;
+        color: rgb(45, 45, 45);
+    }
+
+    #loginForm {
+        background-color: white;
+        filter: drop-shadow(0px 0px 10px #000000);
+        border-radius: 10%;
+        grid-row: 2 / span 1;
+        grid-column: 2 / span 1;
+    }
+
+    #logIn {
+        font-size: 20pt;
+    }
+
+    #forgotP a:hover {
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
+        border-radius: 3px;
+        padding: 0em 1em;
+        transition: 0.3s;
+    }
+
+    #notMemberP a:hover {
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
+        border-radius: 3px;
+        padding: 0em 1em;
+        transition: 0.3s;
+    }
+
+    #submit {
+        font-family: 'Radio Canada', sans serif;
+        font-size: 16pt;
+        background-color: white;
+        text-decoration: none;
+        border: 5px solid black;
+        border-radius: 8px;
+        padding: 1em 2em;
+        transition: 0.3s;
+    }
+
+    #submit:hover {
+        color: white;
+        background-color: #52BBE7;
+        border: 5px solid white;
+    }
+
+    #passHint {
+        grid-row: 3 / span 1;
+        grid-column: 2 / span 1;
+        bottom: 0;
+        vertical-align: bottom;
+        color: red;
+    }
+
+    #footer {
+        background-color: #52BBE7;
+        background-size: 100%;
+        text-align: center;
+        display: block;
+        align-content: center;
+        margin:auto;
+        padding: 5%;
+    }
+
+    #errorMsg {
+        color: red;
+    }
+/**/
+}
