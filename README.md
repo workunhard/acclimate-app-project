@@ -2,6 +2,7 @@
 
 - [General info](#general-info)
 - [Technologies](#technologies)
+- [Milestones](#Milestones)
 - [Contents](#content)
 
 ## General Info
@@ -24,20 +25,58 @@ Technologies used for this project include:
 - JQuery
 - MySQL
 
-## Content
+## Milestones
+
+Milestone #1:
+- Structured project files
+- Designed html template
+- Created log-in, admin/user dashboards
+- Implemented session-handling
+- Unified design across functional html pages
+
+## Contents
 
 ```
 Top level of project folder:
 
+├── apps
+    ├── /html
+        /login.html             # Site root; log-in page
+        /admin_dashboard.html   # 'Admin' landing page after successful log-in
+        /user-dashboard.html    # 'User' landing page after successful log-in
+        /template.html          # template for future html pages
+
+├── node_modules             # required node modules
+
+├── public                   # Folder for images, scripts, and stylesheets
+    ├── /images              # Subolder for images
+        /bbymap.jpg
+        /bbymap2.jpg
+        /forecast.jpeg
+        /loginbg.svg
+        /smiley.jpg
+        ├── /favicon         # Subfolder for favicons
+            /android-chrome-192x192.png
+            /android-chrome-512x512.png
+            /apple-touch-icon.png
+            /favicon-16x16.png
+            /favicon-32x32.png
+            /favicon.ico
+            /site.webmanifest   
+    ├── /scripts             # Subfolder for scripts
+        /client.js
+        /skeleton.js
+    ├── /styles              # Subfolder for styles
+        /admin-style.css
+        /login.css
+        /style.css
+
 ├── .gitignore               # Git ignore file
 
+├── index.js                 # script to initialize web app (node index.js from CLI)
+
+├── package-lock.json
+
+├──package.json
+
 ├── README.md
-
-├── index.html
-
-├── style.css
-
-It has the following subfolders and files:
-
-├──
-
