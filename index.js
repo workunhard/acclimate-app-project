@@ -130,58 +130,6 @@ function authenticate(email, pwd, callback) {
 	);
 }
 
-// // Connect to DBMS and create tables
-// function init() {
-// 	const mysql = require("mysql2");
-// 	const connection = mysql.createConnection({
-// 		host: dbConnection.host,
-// 		user: dbConnection.user,
-// 		password: dbConnection.password,
-// 		multipleStatements: dbConnection.multipleStatements,
-// 	});
-// 	connection.connect();
-
-// 	var rl = readLine.createInterface({
-// 		input: fs.createReadStream('./app/sql/db.sql'),
-// 		terminal: false,
-// 	});
-
-// 	rl.on("line", function (line) {
-// 		connection.query(line.toString('ascii'), function (err, sets, fields) {
-// 			if (err) console.log(err);
-// 		});
-// 	});
-
-// 	rl.on("close", function () {
-// 		console.log("Listening on port " + port + "!");
-// 	});
-
-// 	// const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23db;
-// 	//     use bby23db;
-
-// 	//     CREATE TABLE IF NOT EXISTS user (
-// 	//         ID int NOT NULL AUTO_INCREMENT,
-// 	//         name varchar(30),
-// 	//         email varchar(30),
-// 	//         password varchar(30),
-// 	//         admin boolean,
-// 	//         PRIMARY KEY (ID));`;
-// 	// await connection.query(createDBAndTables);
-
-// 	// // Data for user table
-// 	// const [rows, fields] = await connection.query("SELECT * FROM user");
-// 	// if (rows.length == 0) {
-// 	//     let userRecords = "insert into user (name, email, password, admin) values ?";
-// 	//     let recordValues = [
-// 	//         ["Code", "Code@acclimate.com", "abcdefg", true],
-// 	//         ["Bruce", "bruce_link@bcit.ca", "abc123", false],
-// 	//         ["John", "john_romero@bcit.ca", "abc123", false]
-// 	//     ];
-// 	//     await connection.query(userRecords, [recordValues]);
-// 	// }
-// 	// console.log("Listening on port " + port + "!");
-// }
-
 function init() {
     const mysql = require("mysql2");
     const con = mysql.createConnection({
@@ -196,11 +144,7 @@ function init() {
         input: fs.createReadStream('./app/sql/db.sql'),
         terminal: false
     });
-    rl.on('line', function (chunk) {
-        con.query(chunk.toString('ascii'), function (err, sets, fields) {
-            // if (err) console.log(err);
-        });
-    });
+
     rl.on('close', function () {
         console.log("Listening on port " + port + "!");
     });
