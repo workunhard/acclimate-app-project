@@ -1,6 +1,6 @@
 ready(function() {
 
-    // console.log("Client script loaded.");
+    console.log("Client script loaded.");
 
     function ajaxGET(url, callback) {
 
@@ -10,9 +10,9 @@ ready(function() {
                 //console.log('responseText:' + xhr.responseText);
                 callback(this.responseText);
 
-            } /*else {
+            } else {
                 console.log(this.status);
-            }*/
+            }
         }
         xhr.open("GET", url);
         xhr.send();
@@ -23,16 +23,16 @@ ready(function() {
         let params = typeof data == 'string' ? data : Object.keys(data).map(
                 function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
             ).join('&');
-        // console.log("params in ajaxPOST", params);
+        console.log("params in ajaxPOST", params);
 
         const xhr = new XMLHttpRequest();
         xhr.onload = function() {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                 callback(this.responseText);
 
-            } /* else {
+            } else {
                 console.log(this.status);
-            }*/
+            }
         }
         xhr.open("POST", url);
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -40,7 +40,6 @@ ready(function() {
         xhr.send(params);
     }
 
-    // POST TO THE SERVER
     document.querySelector("#submit").addEventListener("click", function(e) {
         e.preventDefault();
         let email = document.getElementById("email");
@@ -51,7 +50,7 @@ ready(function() {
 
             if(data) {
                 let dataParsed = JSON.parse(data);
-                // console.log(dataParsed);
+                console.log(dataParsed);
                 if(dataParsed.status == "fail") {
                     document.getElementById("errorMsg").innerHTML = dataParsed.msg;
                 } else {
@@ -67,5 +66,6 @@ function ready(callback) {
         callback();
     } else {
         document.addEventListener("DOMContentLoaded", callback);
+        console.log("Listener was invoked");
     }
 }

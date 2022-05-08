@@ -32,33 +32,6 @@
     </footer>
 
     <script src="scripts/client.js"></script>
-    <!-- <script>
-        $(document).ready(function () {
-
-            $("#submit").click(function () {
-                $.ajax({
-                    url: "/authenticate",
-                    type: "POST",
-                    dataType: "JSON",
-                    data: {
-                        email: $("#email").val(),
-                        password: $("#password").val()
-                    },
-                    success: function (data) {
-                        if (data['status'] == "success") {
-                            window.location.replace("/dashboard");
-                        } else {
-                            $("#errorMsg").html(data['msg']);
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        $("body").text(jqXHR.statusText);
-                    }
-                });
-            });
-        });
-    </script> --> 
-
     <script>
         function passHint() {
             var hint = document.getElementById("passHint");
