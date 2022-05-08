@@ -196,7 +196,11 @@ function init() {
         input: fs.createReadStream('./app/sql/db.sql'),
         terminal: false
     });
-
+    rl.on('line', function (chunk) {
+        con.query(chunk.toString('ascii'), function (err, sets, fields) {
+            // if (err) console.log(err);
+        });
+    });
     rl.on('close', function () {
         console.log("Listening on port " + port + "!");
     });
