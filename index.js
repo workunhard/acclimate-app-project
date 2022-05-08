@@ -5,6 +5,7 @@ const fs = require("fs");
 const { JSDOM } = require("jsdom");
 const readline = require("readline");
 
+
 const dbConnection = {
 	host: "localhost",
 	user: "root",
@@ -20,6 +21,8 @@ app.use("/images", express.static("public/images"));
 app.use("/html", express.static("app/html"));
 app.use("/text", express.static("app/text"));
 app.use("/sql", express.static("app/sql"));
+app.use(express.json());
+app.use(express.urlencoded({extended: true,}));
 
 app.use(
 	session({
@@ -35,8 +38,6 @@ app.get("/", function (req, res) {
 		res.redirect("/dashboard");
 	} else {
 		let doc = fs.readFileSync("./app/html/login.html", "utf8");
-		res.set("Server", "Code Engine");
-		res.set("X-Powered-By", "Code");
 		res.send(doc);
 	}
 });
@@ -61,12 +62,7 @@ app.get("/dashboard", function (req, res) {
 	}
 });
 
-app.use(express.json());
-app.use(
-	express.urlencoded({
-		extended: true,
-	})
-);
+
 
 // Log-in
 app.post("/login", function (req, res) {
@@ -130,31 +126,31 @@ function authenticate(email, pwd, callback) {
 	);
 }
 
-// // Connect to DBMS and create tables
-// function init() {
-// 	const mysql = require("mysql2");
-// 	const connection = mysql.createConnection({
-// 		host: dbConnection.host,
-// 		user: dbConnection.user,
-// 		password: dbConnection.password,
-// 		multipleStatements: dbConnection.multipleStatements,
-// 	});
-// 	connection.connect();
+// Connect to DBMS and create tables
+function init() {
+	const mysql = require("mysql2");
+	const connection = mysql.createConnection({
+		host: dbConnection.host,
+		user: dbConnection.user,
+		password: dbConnection.password,
+		multipleStatements: dbConnection.multipleStatements,
+	});
+	connection.connect();
 
-// 	var rl = readLine.createInterface({
-// 		input: fs.createReadStream('./app/sql/db.sql'),
-// 		terminal: false,
-// 	});
+	var rl = readline.createInterface({
+		input: fs.createReadStream('./app/sql/db.sql'),
+		terminal: false,
+	});
 
-// 	rl.on("line", function (line) {
-// 		connection.query(line.toString('ascii'), function (err, sets, fields) {
-// 			if (err) console.log(err);
-// 		});
-// 	});
+	rl.on('line', function (line) {
+		connection.query(line.toString('ascii'), function (err, sets, fields) {
+			if (err) console.log(err);
+		});
+	});
 
-// 	rl.on("close", function () {
-// 		console.log("Listening on port " + port + "!");
-// 	});
+	rl.on('close', function () {
+		console.log("Listening on port " + port + "!");
+	});
 
 // 	// const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23db;
 // 	//     use bby23db;
@@ -181,29 +177,6 @@ function authenticate(email, pwd, callback) {
 // 	// }
 // 	// console.log("Listening on port " + port + "!");
 // }
-
-function init() {
-    const mysql = require("mysql2");
-    const con = mysql.createConnection({
-        host: dbConnection.host,
-        user: dbConnection.user,
-        password: dbConnection.password,
-        multipleStatements: dbConnection.multipleStatements,
-    });
-    con.connect();
-
-    var rl = readline.createInterface({
-        input: fs.createReadStream('./app/sql/db.sql'),
-        terminal: false
-    });
-    rl.on('line', function (chunk) {
-        con.query(chunk.toString('ascii'), function (err, sets, fields) {
-            if (err) console.log(err);
-        });
-    });
-    rl.on('close', function () {
-        console.log("Listening on port " + port + "!");
-    });
 }
 
 // RUN SERVER
