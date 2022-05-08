@@ -102,11 +102,11 @@ function authenticate(email, pwd, callback) {
         host: "localhost",
         user: "root",
         password: "",
-        database: "BBY23"
+        database: "bby23"
     });
     connection.connect();
     connection.query(
-        "SELECT * FROM user WHERE email = ? AND password = ?", [email, pwd],
+        "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
             if (error) {
                 res.redirect("/");
@@ -129,10 +129,10 @@ async function init() {
         password: "",
         multipleStatements: true
     });
-    const createDBAndTables = `CREATE DATABASE IF NOT EXISTS BBY23;
-        use BBY23;
+    const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23;
+        use bby23;
 
-        CREATE TABLE IF NOT EXISTS BBY23_user (
+        CREATE TABLE IF NOT EXISTS bby23_user (
             ID int NOT NULL AUTO_INCREMENT,
             name varchar(30),
             email varchar(30),
@@ -142,9 +142,9 @@ async function init() {
     await connection.query(createDBAndTables);
 
     // Data for user table
-    const [rows, fields] = await connection.query("SELECT * FROM BBY23_user");
+    const [rows, fields] = await connection.query("SELECT * FROM bby23_user");
     if (rows.length == 0) {
-        let userRecords = "insert into user (name, email, password, admin) values ?";
+        let userRecords = "insert into bby23_user (name, email, password, admin) values ?";
         let recordValues = [
             ["Code", "code@acclimate.com", "abcdefg", true],
             ["Bruce", "bruce_link@bcit.ca", "abc123", false],
