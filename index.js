@@ -19,7 +19,7 @@ app.use("/styles", express.static("public/styles"));
 app.use("/images", express.static("public/images"));
 app.use("/html", express.static("app/html"));
 app.use("/text", express.static("app/text"));
-app.use("/sql", express.static("app/sql"));
+// app.use("/sql", express.static("app/sql"));
 
 app.use(
 	session({
@@ -196,11 +196,7 @@ function init() {
         input: fs.createReadStream('./app/sql/db.sql'),
         terminal: false
     });
-    rl.on('line', function (chunk) {
-        con.query(chunk.toString('ascii'), function (err, sets, fields) {
-            if (err) console.log(err);
-        });
-    });
+
     rl.on('close', function () {
         console.log("Listening on port " + port + "!");
     });
