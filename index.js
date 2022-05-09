@@ -10,7 +10,7 @@ const dbConnection = {
 	user: "root",
 	password: "",
 	database: "bby23db",
-	multipleStatements: true
+	multipleStatements: true,
 };
 
 // static path mappings
@@ -19,7 +19,7 @@ app.use("/styles", express.static("public/styles"));
 app.use("/images", express.static("public/images"));
 app.use("/html", express.static("app/html"));
 app.use("/text", express.static("app/text"));
-// app.use("/sql", express.static("app/sql"));
+app.use("/sql", express.static("app/sql"));
 
 app.use(
 	session({
@@ -131,23 +131,33 @@ function authenticate(email, pwd, callback) {
 }
 
 function init() {
-    const mysql = require("mysql2");
-    const con = mysql.createConnection({
-        host: dbConnection.host,
-        user: dbConnection.user,
-        password: dbConnection.password,
-        multipleStatements: dbConnection.multipleStatements,
-    });
-    con.connect();
+	const mysql = require("mysql2");
+	const con = mysql.createConnection({
+		host: dbConnection.host,
+		user: dbConnection.user,
+		password: dbConnection.password,
+		multipleStatements: dbConnection.multipleStatements,
+	});
+	con.connect();
 
-    var rl = readline.createInterface({
-        input: fs.createReadStream('./app/sql/db.sql'),
-        terminal: false
-    });
+	var rl = readline.createInterface({
+		input: fs.createReadStream("./app/sql/db.sql"),
+		// input: fs.createReadStream("./app/sql/table.sql"),
+		// input: fs.createReadStream("./app/sql/query.sql"),
+		terminal: false,
+	});
 
-    rl.on('close', function () {
-        console.log("Listening on port " + port + "!");
-    });
+	rl.on("line", function (line) {
+		console.log(line);
+		con.query(line.toString(), function (err, sets, fields) {
+			if (err) console.log(err);
+		});
+	});
+
+	rl.on("close", function () {
+		console.log("Listening on port " + port + "!");
+		// con.end();
+	});
 }
 
 // RUN SERVER
