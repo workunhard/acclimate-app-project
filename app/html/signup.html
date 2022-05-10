@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/styles/style.css" rel="stylesheet">
+    <link href="/styles/login.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Sign-In | AccliMate</title>
+</head>
+
+<body>
+
+    <div id="formPanel">
+        <form id="loginForm">
+            <h1 id="formTitle">AccliMate</h1>
+            <input id="email" type="email" required="required" placeholder="Email"  /><br>
+            <input id="name" type="name" required="required" placeholder="Name"  /><br>
+            <input id="password" type="password" required="required" placeholder="Password" />
+            <br><br>
+            <input type="button" value="Sign-In" id="submit" />
+            <p><span id="serverMsg"></span></p>
+            <p id="forgotP"><a href="#" onClick='passHint()'>Forgot email/password?</a></p>
+            <p id="notMemberP"><a href="#">Don't have an account? Sign Up</a></p>
+            <p id="errorMsg">&nbsp;</p>
+            <p id="passHint">&nbsp;</p>
+        </form>
+    </div>
+    <div id="footer">
+        Created by BBY-23, COMP 2800<br><br>Spring 2022
+    </div>
+
+        <script src="scripts/client.js"></script>
+        <script>
+            function passHint() {
+                var hint = document.getElementById("passHint");
+                var tryThis = document.getElementById("errorMsg");
+                tryThis.innerHTML = "For logons, try:";
+                hint.innerHTML =
+                    "Admin User: code@acclimate.com<br>Pass: abcdefg<br><br>Regular User: bruce_link@bcit.ca<br>Pass: abc123";
+            }
+        </script>
+</body>
+</html>
