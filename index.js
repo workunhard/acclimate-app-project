@@ -1,3 +1,4 @@
+const { response } = require("express");
 const express = require("express");
 const session = require("express-session");
 const app = express();
@@ -5,6 +6,14 @@ const fs = require("fs");
 const {
     JSDOM
 } = require('jsdom');
+
+const dbConnection = {
+	host: "localhost",
+  user: "root",
+  password: "",
+  database: "bby23",
+	multipleStatements: true
+}
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -84,6 +93,25 @@ app.post("/login", function (req, res) {
         });
 });
 
+app.post("/signup", function (req, res) {
+	res.setHeader("Content-Type", "application/json");
+	const userInfo = req.body;
+	const userName = userInfo.name;
+	const password = userInfo.password;
+	const email = userInfo.email;
+
+	const sqlQuery = "INSERT INTO `users` (name, email, password, admin) values ('" + userName + "','" + email + "','" + password + "')";
+	const connection = mysql.createConnection(dbConnection);
+	connection.query(sqlQuery, function (err, result) {
+		if (error) {
+			console.log(Nah);
+		} 
+	})
+
+}) 
+
+
+
 app.get("/logout", function (req, res) {
     if (req.session) {
         req.session.destroy(function (error) {
@@ -98,12 +126,7 @@ app.get("/logout", function (req, res) {
 
 function authenticate(email, pwd, callback) {
     const mysql = require("mysql2");
-    const connection = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "bby23"
-    });
+    const connection = mysql.createConnection(dbConnection);
     connection.connect();
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
@@ -124,10 +147,10 @@ function authenticate(email, pwd, callback) {
 async function init() {
     const mysql = require("mysql2/promise");
     const connection = await mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        multipleStatements: true
+        host: dbConnection.host,
+        user: dbConnection.user,
+        password: dbConnection.password,
+        multipleStatements: dbConnection.multipleStatements
     });
     const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23;
         use bby23;
