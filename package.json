@@ -6,6 +6,7 @@
     "mysql2": "^2.3.3"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js",
+    "heroku-postbuild": "npm run build"
   }
 }
