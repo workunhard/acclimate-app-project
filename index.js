@@ -122,36 +122,36 @@ function authenticate(email, pwd, callback) {
 
 // Connect to DBMS and create tables
 async function init() {
-    const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        multipleStatements: true
-    });
-    const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23;
-        use bby23;
+    // const mysql = require("mysql2/promise");
+    // const connection = await mysql.createConnection({
+    //     host: "localhost",
+    //     user: "root",
+    //     password: "",
+    //     multipleStatements: true
+    // });
+    // const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23;
+    //     use bby23;
 
-        CREATE TABLE IF NOT EXISTS bby23_user (
-            ID int NOT NULL AUTO_INCREMENT,
-            name varchar(30),
-            email varchar(30),
-            password varchar(30),
-            admin boolean,
-            PRIMARY KEY (ID));`;
-    await connection.query(createDBAndTables);
+    //     CREATE TABLE IF NOT EXISTS bby23_user (
+    //         ID int NOT NULL AUTO_INCREMENT,
+    //         name varchar(30),
+    //         email varchar(30),
+    //         password varchar(30),
+    //         admin boolean,
+    //         PRIMARY KEY (ID));`;
+    // await connection.query(createDBAndTables);
 
-    // Data for user table
-    const [rows, fields] = await connection.query("SELECT * FROM bby23_user");
-    if (rows.length == 0) {
-        let userRecords = "insert into bby23_user (name, email, password, admin) values ?";
-        let recordValues = [
-            ["Code", "code@acclimate.com", "abcdefg", true],
-            ["Bruce", "bruce_link@bcit.ca", "abc123", false],
-            ["John", "john_romero@bcit.ca", "abc123", false]
-        ];
-        await connection.query(userRecords, [recordValues]);
-    }
+    // // Data for user table
+    // const [rows, fields] = await connection.query("SELECT * FROM bby23_user");
+    // if (rows.length == 0) {
+    //     let userRecords = "insert into bby23_user (name, email, password, admin) values ?";
+    //     let recordValues = [
+    //         ["Code", "code@acclimate.com", "abcdefg", true],
+    //         ["Bruce", "bruce_link@bcit.ca", "abc123", false],
+    //         ["John", "john_romero@bcit.ca", "abc123", false]
+    //     ];
+    //     await connection.query(userRecords, [recordValues]);
+    // }
     console.log("Listening on port " + port + "!");
 }
 
