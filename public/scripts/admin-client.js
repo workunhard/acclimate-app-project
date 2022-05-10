@@ -95,7 +95,7 @@ function editCell(e) {
 
                     // 200 means everthing worked
                     if (xhr.status === 200) {
-                        document.getElementById("status").innerHTML = "Record updated.";
+                        // document.getElementById("status").innerHTML = "Record updated.";
                         getUsers();
 
 
