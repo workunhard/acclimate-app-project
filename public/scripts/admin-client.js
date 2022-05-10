@@ -33,9 +33,9 @@ function getUsers() {
                     for (let j = 0; j < records.length; j++) {
                         records[j].addEventListener("click", editCell);
                     }
-                    let userRecords = document.querySelectorAll("td[class='name' span");
-                    for (let j = 0; j < userRecords.length; j++) {
-                        records[j].addEventListener("click", editCell);
+                    let userRecords = document.querySelectorAll("td[class='name'] span");
+                    for (let k = 0; k < userRecords.length; k++) {
+                        userRecords[k].addEventListener("click", editCell);
                     }
 
                 } else {
@@ -69,15 +69,15 @@ function editCell(e) {
     let input = document.createElement("input");
     input.value = spanText;
     input.addEventListener("keyup", function (e) {
-        let u = null;
         let v = null;
+        let u = null;
         // pressed enter
         if (e.which == 13) {
             v = input.value;
             u = input.value;
             let newSpan = document.createElement("span");
             // have to wire an event listener to the new element
-            newSpan.addEventListener("click", editCell);
+            newSpan.innerHTML = u;
             newSpan.innerHTML = v;
             parent.innerHTML = "";
             parent.appendChild(newSpan);
