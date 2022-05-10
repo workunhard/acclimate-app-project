@@ -1,3 +1,4 @@
+'use strict;'
 function loadSkeleton(){
     console.log($('#navbarPlaceholder').load('/text/nav.html'));
     console.log($('#footerPlaceholder').load('/text/footer.html'));
