@@ -4,7 +4,6 @@
     "express-session": "^1.17.2",
     "jsdom": "^19.0.0",
     "mysql2": "^2.3.3",
-    "start": "^5.1.0"
   },
   "scripts": {
     "start": "node index.js"
