@@ -102,7 +102,7 @@ function authenticate(email, pwd, callback) {
         host: "localhost",
         user: "root",
         password: "",
-        database: "bby23"
+        database: "comp2800"
     });
     connection.connect();
     connection.query(
