@@ -59,6 +59,16 @@ ready(function() {
             }
         }, queryString);
     });
+
+    function loadTemplate() {
+        $('#inputBox').load('/text/signup.html');
+    }
+    
+    document.querySelector("#signUp").addEventListener("click", function(e) {
+        e.preventDefault();
+        $('#inputBox').load('/text/signup.html');
+        document.getElementById('submit').value = "Sign-Up";
+    });
 });
 
 function ready(callback) {
