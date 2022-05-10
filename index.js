@@ -120,6 +120,29 @@ function authenticate(email, pwd, callback) {
     );
 }
 
+app.get('/get-users', function (req, res) {
+
+    const mysql = require("mysql2");
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'COMP2800'
+    });
+    connection.connect();
+    connection.query('SELECT * FROM bby23_user', function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        console.log('Rows returned are: ', results);
+        res.send({ status: "success", rows: results });
+
+    });
+    connection.end();
+
+
+});
+
 // Connect to DBMS and create tables
 async function init() {
     // const mysql = require("mysql2/promise");
