@@ -7,6 +7,7 @@
     "start": "^5.1.0"
   },
   "scripts": {
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "start": "node index.js"
   }
 }
