@@ -170,7 +170,7 @@ function editCellName(e) {
             xhr.open("POST", "/update-name");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            //console.log("dataToSend", "id=" + dataToSend.id + "&email=" + dataToSend.email);
+            // console.log("dataToSend", "id=" + dataToSend.id + "&email=" + dataToSend.email);
             xhr.send("id=" + dataToSend.id + "&name=" + dataToSend.name);
 
         }

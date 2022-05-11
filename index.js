@@ -159,7 +159,7 @@ app.post('/add-user', function (req, res) {
 	// TO PREVENT SQL INJECTION, DO THIS:
 	// (FROM https://www.npmjs.com/package/mysql#escaping-query-values)
 	connection.query('INSERT INTO bby23_user (name, email, password) values (?, ?, ?)',
-		  [req.body.name, req.body.email, password],
+		  [req.body.name, req.body.email, req.body.password],
 		  function (error, results, fields) {
 	  if (error) {
 		  console.log(error);
