@@ -186,10 +186,12 @@ document.getElementById("submit").addEventListener("click", function(e) {
 
     let formData = { name: document.getElementById("name").value,
                      email: document.getElementById("email").value,
-                     password: document.getElementById("password").value};
+                     password: document.getElementById("password").value,
+                    admin: document.getElementById("admin").value};
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
+    document.getElementById("admin").value = "";
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -215,6 +217,6 @@ document.getElementById("submit").addEventListener("click", function(e) {
     xhr.open("POST", "/add-user");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send("name=" + formData.name + "&email=" + formData.email + "&password=" + formData.password);
+    xhr.send("name=" + formData.name + "&email=" + formData.email + "&password=" + formData.password + "&admin=" + formData.admin);
 
 })

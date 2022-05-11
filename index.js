@@ -148,6 +148,7 @@ app.post('/add-user', function (req, res) {
 	console.log("Name", req.body.name);
 	console.log("Email", req.body.email);
 	console.log("Password", req.body.password);
+    console.log("Admin", req.body.admin);
 
 	let connection = mysql.createConnection({
 	  host: 'localhost',
@@ -158,8 +159,8 @@ app.post('/add-user', function (req, res) {
 	connection.connect();
 	// TO PREVENT SQL INJECTION, DO THIS:
 	// (FROM https://www.npmjs.com/package/mysql#escaping-query-values)
-	connection.query('INSERT INTO bby23_user (name, email, password) values (?, ?, ?)',
-		  [req.body.name, req.body.email, req.body.password],
+	connection.query('INSERT INTO bby23_user (name, email, password, admin) values (?, ?, ?, ?)',
+		  [req.body.name, req.body.email, req.body.password, req.body.admin],
 		  function (error, results, fields) {
 	  if (error) {
 		  console.log(error);

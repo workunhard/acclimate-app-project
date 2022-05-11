@@ -135,6 +135,10 @@ body {
     border-radius: 10px 10px 10px 10px;
   }
 
+  form {
+    text-align: center;
+  }
+
   #adminArea {
       text-align: center;
   }
