@@ -81,7 +81,7 @@ app.use(express.urlencoded({
 // Log-in
 app.post("/login", function (req, res) {
     res.setHeader("Content-Type", "application/json");
-    let results = authenticate(req.body.email, req.body.password,
+    let results = authenticate(res, req.body.email, req.body.password,
         function (userRecord) {
             if (userRecord == null) {
                 res.send({
@@ -117,7 +117,7 @@ app.get("/logout", function (req, res) {
     }
 });
 
-function authenticate(email, pwd, callback) {
+function authenticate(res, email, pwd, callback) {
     const mysql = require("mysql2");
     const connection = mysql.createConnection(dbconfig);
     connection.connect();
