@@ -1,11 +1,11 @@
-ready(function() {
+ready(function () {
 
     console.log("Client script loaded.");
 
     function ajaxGET(url, callback) {
 
         const xhr = new XMLHttpRequest();
-        xhr.onload = function() {
+        xhr.onload = function () {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                 //console.log('responseText:' + xhr.responseText);
                 callback(this.responseText);
@@ -21,12 +21,12 @@ ready(function() {
     function ajaxPOST(url, callback, data) {
 
         let params = typeof data == 'string' ? data : Object.keys(data).map(
-                function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
-            ).join('&');
+            function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+        ).join('&');
         console.log("params in ajaxPOST", params);
 
         const xhr = new XMLHttpRequest();
-        xhr.onload = function() {
+        xhr.onload = function () {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                 callback(this.responseText);
 
@@ -40,18 +40,18 @@ ready(function() {
         xhr.send(params);
     }
 
-    document.querySelector("#submit").addEventListener("click", function(e) {
+    document.querySelector("#submit").addEventListener("click", function (e) {
         e.preventDefault();
         let email = document.getElementById("email");
         let password = document.getElementById("password");
         let queryString = "email=" + email.value + "&password=" + password.value;
 
-        ajaxPOST("/login", function(data) {
+        ajaxPOST("/login", function (data) {
 
-            if(data) {
+            if (data) {
                 let dataParsed = JSON.parse(data);
                 console.log(dataParsed);
-                if(dataParsed.status == "fail") {
+                if (dataParsed.status == "fail") {
                     document.getElementById("errorMsg").innerHTML = dataParsed.msg;
                 } else {
                     window.location.replace("/dashboard");
