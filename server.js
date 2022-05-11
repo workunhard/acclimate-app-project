@@ -14,7 +14,7 @@ const localDbConfig = {
     database: 'COMP2800'
   };
 
-const herokuDbConf = {
+const herokuDbConfig = {
     host: 'qz8si2yulh3i7gl3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     user: 'i8titfbhmggktzud',
     password: 't5frs4lz1adk3rmr',
