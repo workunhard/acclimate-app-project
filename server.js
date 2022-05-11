@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const mysql = require("mysql2");
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
@@ -27,7 +28,6 @@ if (is_heroku) {
     var dbconfig = localDbConfig;
 }
 
-const mysql = require("mysql2");
 const connection = mysql.createConnection(dbconfig);
 connection.connect();
 
