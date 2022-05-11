@@ -156,5 +156,10 @@ async function init() {
 }
 
 // RUN SERVER
-let port = 8000;
-app.listen(port, init);
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log('App listening on port ${PORT}');
+    console.log('Press Ctrl+C to quit.');
+})
+// let port = 8000;
+// app.listen(port, init);
