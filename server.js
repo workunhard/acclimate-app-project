@@ -29,6 +29,7 @@ if (is_heroku) {
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection(dbconfig);
+connection.connect();
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -121,7 +122,6 @@ app.get("/logout", function (req, res) {
 });
 
 function authenticate(res, email, pwd, callback) {
-    connection.connect();
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
@@ -140,7 +140,6 @@ function authenticate(res, email, pwd, callback) {
 }
 
 app.get('/get-users', function (req, res) {
-    connection.connect();
     connection.query('SELECT * FROM bby23_user', function (error, results, fields) {
         if (error) {
             console.log(error);
@@ -180,7 +179,6 @@ app.post('/update-email', function (req, res) {
 
 app.post('/update-name', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    connection.connect();
     console.log("updated values", req.body.name, req.body.id)
     connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
         [req.body.name, req.body.id],
