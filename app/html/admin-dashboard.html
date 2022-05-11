@@ -32,6 +32,8 @@
                 <dd>- Wrongplacewrongtime @3:40PM</dd>
             </dl>
         </div>
+
+        <div id = "adminDashboard">
         <table id="adminArea">
             <!-- <h3>Admin Dashboard</h3>
             <h4>User Options</h4>
@@ -39,6 +41,22 @@
             <button>Edit</button>
             <button>Delete</button> -->
         </table>
+        <form>
+            <fieldset>
+              <legend>Add a Customer</legend>
+              <input type="text" placeholder="name" id="name"/>
+              <input type="email" placeholder="email" id="email"/>
+              <input type="text" placeholder="password" id="password"/>
+              <input type="checkbox" placeholder="admin" id="admin" value="true"/>
+              <input type="button" id="submit" value="Submit"/>
+            </fieldset>
+            <fieldset>
+              <legend>Delete All Customers (use with caution!)</legend>
+              <input type="button" id="deleteAll" value="Delete All"/>
+            </fieldset>
+          </form>
+        </div>
+        
         <div id="map">
             <img id="bbymap" src="../images/bbymap2.jpg" alt="burnaby map">
         </div>

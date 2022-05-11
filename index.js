@@ -5,6 +5,7 @@ const fs = require("fs");
 const {
     JSDOM
 } = require('jsdom');
+const mysql = require('mysql2');
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -139,7 +140,35 @@ app.get('/get-users', function (req, res) {
 
     });
     connection.end();
+});
 
+app.post('/add-user', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+	console.log("Name", req.body.name);
+	console.log("Email", req.body.email);
+	console.log("Password", req.body.password);
+
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
+	connection.connect();
+	// TO PREVENT SQL INJECTION, DO THIS:
+	// (FROM https://www.npmjs.com/package/mysql#escaping-query-values)
+	connection.query('INSERT INTO bby23_user (name, email, password) values (?, ?, ?)',
+		  [req.body.name, req.body.email, password],
+		  function (error, results, fields) {
+	  if (error) {
+		  console.log(error);
+	  }
+	  //console.log('Rows returned are: ', results);
+	  res.send({ status: "success", msg: "Record added." });
+
+	});
+	connection.end();
 
 });
 

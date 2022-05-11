@@ -20,10 +20,10 @@ function getUsers() {
                     for (let i = 0; i < data.rows.length; i++) {
                         let row = data.rows[i];
                         //console.log("row", row);
-                        str += ("<tr><td class='id'>" + row.ID
-                            + "</td><td class='name'><span>" + row.name
-                            + "</span></td><td class='email'><span>"
-                            + row.email + "</span></td></tr>");
+                        str += ("<tr><td class='id'>" + row.ID +
+                            "</td><td class='name'><span>" + row.name +
+                            "</span></td><td class='email'><span>" +
+                            row.email + "</span></td></tr>");
                     }
                     //console.log(str);
                     document.getElementById("adminArea").innerHTML = str;
@@ -179,3 +179,42 @@ function editCellName(e) {
     parent.appendChild(input);
 
 }
+
+//Add user
+document.getElementById("submit").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    let formData = { name: document.getElementById("name").value,
+                     email: document.getElementById("email").value,
+                     password: document.getElementById("password").value};
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (this.readyState == XMLHttpRequest.DONE) {
+
+            // 200 means everthing worked
+            if (xhr.status === 200) {
+
+              getUsers();
+            //   document.getElementById("status").innerHTML = "DB updated.";
+
+            } else {
+
+              // not a 200, could be anything (404, 500, etc.)
+              console.log(this.status);
+
+            }
+
+        } else {
+            console.log("ERROR", this.status);
+        }
+    }
+    xhr.open("POST", "/add-user");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send("name=" + formData.name + "&email=" + formData.email + "&password=" + formData.password);
+
+})
