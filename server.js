@@ -57,19 +57,14 @@ app.get("/", function (req, res) {
 });
 
 app.get("/dashboard", function (req, res) {
-
     if (req.session.loggedIn && req.session.admin == 1) {
-
         let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
-
         profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name + ".";
         res.send(profileDOM.serialize());
-
     } else if (req.session.loggedIn && req.session.admin == 0) {
         let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
-
         profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name + ".";
         res.send(profileDOM.serialize());
     } else {
@@ -100,7 +95,6 @@ app.post("/login", function (req, res) {
                 req.session.password = userRecord.password;
                 req.session.admin = userRecord.admin;
                 req.session.save(function (err) {});
-
                 res.send({
                     status: "success",
                     msg: "Logged in."
