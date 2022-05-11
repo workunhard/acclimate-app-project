@@ -187,11 +187,11 @@ document.getElementById("submit").addEventListener("click", function(e) {
     let formData = { name: document.getElementById("name").value,
                      email: document.getElementById("email").value,
                      password: document.getElementById("password").value,
-                    admin: document.getElementById("admin").value};
+                    admin: document.querySelector('input[name="admin"]:checked').value}
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
-    document.getElementById("admin").value = "";
+    // document.getElementById("admin").value = "";
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
