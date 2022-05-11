@@ -143,7 +143,7 @@ app.get('/get-users', function (req, res) {
 
 });
 
-app.post('/update-users', function (req, res) {
+app.post('/update-email', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
 	const mysql = require("mysql2");
@@ -154,15 +154,41 @@ app.post('/update-users', function (req, res) {
 	  database: 'COMP2800'
 	});
 	connection.connect();
-console.log("update values", req.body.email, req.body.id)
-	connection.query('UPDATE bby23_user SET name= ? SET email = ? WHERE ID = ?',
+console.log("updated values", req.body.email, req.body.id)
+	connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
 		  [req.body.email, req.body.id],
 		  function (error, results, fields) {
 	  if (error) {
 		  console.log(error);
 	  }
 	  //console.log('Rows returned are: ', results);
-	  res.send({ status: "success", msg: "Recorded updated." });
+	  res.send({ status: "success", msg: "Recorded update." });
+
+	});
+	connection.end();
+
+});
+
+app.post('/update-name', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+	const mysql = require("mysql2");
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
+	connection.connect();
+console.log("updated values", req.body.name, req.body.id)
+	connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
+		  [req.body.name, req.body.id],
+		  function (error, results, fields) {
+	  if (error) {
+		  console.log(error);
+	  }
+	  //console.log('Rows returned are: ', results);
+	  res.send({ status: "success", msg: "Recorded update." });
 
 	});
 	connection.end();
