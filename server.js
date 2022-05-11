@@ -12,7 +12,7 @@ const localDbConfig = {
     user: 'root',
     password: '',
     database: 'COMP2800'
-  };
+};
 
 const herokuDbConfig = {
     host: 'qz8si2yulh3i7gl3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
@@ -59,14 +59,14 @@ app.get("/dashboard", function (req, res) {
         let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
 
-        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name +".";
+        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name + ".";
         res.send(profileDOM.serialize());
 
     } else if (req.session.loggedIn && req.session.admin == 0) {
         let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
 
-        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name +".";
+        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name + ".";
         res.send(profileDOM.serialize());
     } else {
         res.redirect("/");
@@ -125,12 +125,14 @@ function authenticate(res, email, pwd, callback) {
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
             if (error) {
+                console.log(error);
                 res.redirect("/");
-            }
-            if (results.length > 0) {
-                return callback(results[0]);
             } else {
-                return callback(null);
+                if (results.length > 0) {
+                    return callback(results[0]);
+                } else {
+                    return callback(null);
+                }
             }
         }
     );
@@ -146,7 +148,10 @@ app.get('/get-users', function (req, res) {
             console.log(error);
         }
         console.log('Rows returned are: ', results);
-        res.send({ status: "success", rows: results });
+        res.send({
+            status: "success",
+            rows: results
+        });
 
     });
     connection.end();
@@ -155,44 +160,50 @@ app.get('/get-users', function (req, res) {
 });
 
 app.post('/update-email', function (req, res) {
-	res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
 
-	const mysql = require("mysql2");
+    const mysql = require("mysql2");
     const connection = mysql.createConnection(dbconfig);
-	connection.connect();
-console.log("updated values", req.body.email, req.body.id)
-	connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
-		  [req.body.email, req.body.id],
-		  function (error, results, fields) {
-	  if (error) {
-		  console.log(error);
-	  }
-	  //console.log('Rows returned are: ', results);
-	  res.send({ status: "success", msg: "Recorded update." });
+    connection.connect();
+    console.log("updated values", req.body.email, req.body.id)
+    connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
+        [req.body.email, req.body.id],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            //console.log('Rows returned are: ', results);
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
 
-	});
-	connection.end();
+        });
+    connection.end();
 
 });
 
 app.post('/update-name', function (req, res) {
-	res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
 
-	const mysql = require("mysql2");
+    const mysql = require("mysql2");
     const connection = mysql.createConnection(dbconfig);
-	connection.connect();
-console.log("updated values", req.body.name, req.body.id)
-	connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
-		  [req.body.name, req.body.id],
-		  function (error, results, fields) {
-	  if (error) {
-		  console.log(error);
-	  }
-	  //console.log('Rows returned are: ', results);
-	  res.send({ status: "success", msg: "Recorded update." });
+    connection.connect();
+    console.log("updated values", req.body.name, req.body.id)
+    connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
+        [req.body.name, req.body.id],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            //console.log('Rows returned are: ', results);
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
 
-	});
-	connection.end();
+        });
+    connection.end();
 
 });
 
