@@ -14,6 +14,7 @@ function getUsers() {
 <th class="id_header"><span>ID</span></th>
 <th class="name_header"><span>Name</span></th>
 <th class="email_header"><span>Email</span></th>
+<th class="delete_header">Delete</th>
 </tr>`;
 
 
@@ -23,7 +24,7 @@ function getUsers() {
                         str += ("<tr><td class='id'>" + row.ID +
                             "</td><td class='name'><span>" + row.name +
                             "</span></td><td class='email'><span>" +
-                            row.email + "</span></td></tr>");
+                            row.email + "</span></td><td class ='delete'><input type='button' id='delete' value='Delete'></td></tr>");
                     }
                     //console.log(str);
                     document.getElementById("adminArea").innerHTML = str;
@@ -220,3 +221,33 @@ document.getElementById("submit").addEventListener("click", function(e) {
     xhr.send("name=" + formData.name + "&email=" + formData.email + "&password=" + formData.password + "&admin=" + formData.admin);
 
 })
+
+document.getElementById("deleteAll").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (this.readyState == XMLHttpRequest.DONE) {
+
+            // 200 means everthing worked
+            if (xhr.status === 200) {
+
+              getCustomers();
+            //   document.getElementById("status").innerHTML = "All records deleted.";
+
+            } else {
+
+              // not a 200, could be anything (404, 500, etc.)
+              console.log(this.status);
+
+            }
+
+        } else {
+            console.log("ERROR", this.status);
+        }
+    }
+    xhr.open("POST", "/delete-all-users");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send();
+});

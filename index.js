@@ -225,6 +225,30 @@ console.log("updated values", req.body.name, req.body.id)
 
 });
 
+// POST: we are changing stuff on the server!!!
+app.post('/delete-all-users', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
+	connection.connect();
+	// NOT WISE TO DO, BUT JUST SHOWING YOU CAN
+	connection.query('DELETE FROM bby23_user',
+		  function (error, results, fields) {
+	  if (error) {
+		  console.log(error);
+	  }
+	  //console.log('Rows returned are: ', results);
+	  res.send({ status: "success", msg: "Recorded all deleted." });
+
+	});
+	connection.end();
+
+});
 
 // Connect to DBMS and create tables
 async function init() {
