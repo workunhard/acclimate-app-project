@@ -1,10 +1,31 @@
 const express = require("express");
-const session = require("cookie-session");
+const session = require("express-session");
 const app = express();
 const fs = require("fs");
+const is_heroku = process.env.IS_HEROKU || false;
 const {
     JSDOM
 } = require('jsdom');
+
+const localDbConfig = {
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'COMP2800'
+  };
+
+const herokuDbConf = {
+    host: 'qz8si2yulh3i7gl3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user: 'i8titfbhmggktzud',
+    password: 't5frs4lz1adk3rmr',
+    database: 'qhfgyfeinmbwri94'
+}
+
+if (is_heroku) {
+    var dbconfig = herokuDbConfig;
+} else {
+    var dbconfig = localDbConfig;
+}
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -98,12 +119,7 @@ app.get("/logout", function (req, res) {
 
 function authenticate(email, pwd, callback) {
     const mysql = require("mysql2");
-    const connection = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "comp2800"
-    });
+    const connection = mysql.createConnection(dbconfig);
     connection.connect();
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
@@ -123,12 +139,7 @@ function authenticate(email, pwd, callback) {
 app.get('/get-users', function (req, res) {
 
     const mysql = require("mysql2");
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'COMP2800'
-    });
+    const connection = mysql.createConnection(dbconfig);
     connection.connect();
     connection.query('SELECT * FROM bby23_user', function (error, results, fields) {
         if (error) {
@@ -147,12 +158,7 @@ app.post('/update-email', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
 	const mysql = require("mysql2");
-	let connection = mysql.createConnection({
-	  host: 'localhost',
-	  user: 'root',
-	  password: '',
-	  database: 'COMP2800'
-	});
+    const connection = mysql.createConnection(dbconfig);
 	connection.connect();
 console.log("updated values", req.body.email, req.body.id)
 	connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
@@ -173,12 +179,7 @@ app.post('/update-name', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
 	const mysql = require("mysql2");
-	let connection = mysql.createConnection({
-	  host: 'localhost',
-	  user: 'root',
-	  password: '',
-	  database: 'COMP2800'
-	});
+    const connection = mysql.createConnection(dbconfig);
 	connection.connect();
 console.log("updated values", req.body.name, req.body.id)
 	connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
