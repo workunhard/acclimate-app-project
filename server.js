@@ -116,6 +116,8 @@ app.get("/logout", function (req, res) {
 });
 
 function authenticate(res, email, pwd, callback) {
+    const connection = mysql.createConnection(dbconfig);
+connection.connect();
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
