@@ -3,14 +3,12 @@ function getUsers() {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (this.readyState == XMLHttpRequest.DONE) {
-
-            // 200 means everthing worked
             if (xhr.status === 200) {
 
                 let data = JSON.parse(this.responseText);
                 if (data.status == "success") {
 
-                    let str = `        <tr>
+                    let str = `<tr>
 <th class="id_header"><span>ID</span></th>
 <th class="name_header"><span>Name</span></th>
 <th class="email_header"><span>Email</span></th>
@@ -37,6 +35,10 @@ function getUsers() {
                     let userRecords = document.querySelectorAll("td[class='name'] span");
                     for (let k = 0; k < userRecords.length; k++) {
                         userRecords[k].addEventListener("click", editCellName);
+                    }
+                    let deleteRecords = document.querySelectorAll("td[class='delete']");
+                    for (let i = 0; i < deleteRecords.length; i++) {
+                        deleteRecords[i].addEventListener("click", deleteUser);
                     }
 
                 } else {
@@ -110,7 +112,6 @@ function editCellEmail(e) {
             xhr.open("POST", "/update-email");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            //console.log("dataToSend", "id=" + dataToSend.id + "&email=" + dataToSend.email);
             xhr.send("id=" + dataToSend.id + "&email=" + dataToSend.email);
 
         }
@@ -146,24 +147,14 @@ function editCellName(e) {
                 email: parent.parentNode.querySelector(".email").innerHTML
             };
 
-            // now send
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
                 if (this.readyState == XMLHttpRequest.DONE) {
-
-                    // 200 means everthing worked
                     if (xhr.status === 200) {
-                        // document.getElementById("status").innerHTML = "Record updated.";
                         getUsers();
-
-
                     } else {
-
-                        // not a 200, could be anything (404, 500, etc.)
                         console.log(this.status);
-
                     }
-
                 } else {
                     console.log("ERROR", this.status);
                 }
@@ -171,7 +162,6 @@ function editCellName(e) {
             xhr.open("POST", "/update-name");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            // console.log("dataToSend", "id=" + dataToSend.id + "&email=" + dataToSend.email);
             xhr.send("id=" + dataToSend.id + "&name=" + dataToSend.name);
 
         }
@@ -182,17 +172,18 @@ function editCellName(e) {
 }
 
 //Add user
-document.getElementById("submit").addEventListener("click", function(e) {
+document.getElementById("submit").addEventListener("click", function (e) {
     e.preventDefault();
 
-    let formData = { name: document.getElementById("name").value,
-                     email: document.getElementById("email").value,
-                     password: document.getElementById("password").value,
-                    admin: document.querySelector('input[name="admin"]:checked').value}
+    let formData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        admin: document.querySelector('input[name="admin"]:checked').value
+    }
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
-    // document.getElementById("admin").value = "";
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -200,15 +191,9 @@ document.getElementById("submit").addEventListener("click", function(e) {
 
             // 200 means everthing worked
             if (xhr.status === 200) {
-
-              getUsers();
-            //   document.getElementById("status").innerHTML = "DB updated.";
-
+                getUsers();
             } else {
-
-              // not a 200, could be anything (404, 500, etc.)
-              console.log(this.status);
-
+                console.log(this.status);
             }
 
         } else {
@@ -222,32 +207,26 @@ document.getElementById("submit").addEventListener("click", function(e) {
 
 })
 
-document.getElementById("deleteAll").addEventListener("click", function(e) {
+function deleteUser(e) {
+
     e.preventDefault();
+    let parent = e.target.parentNode;
+    let formData = { id: parent.parentNode.querySelector(".id").innerHTML }
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (this.readyState == XMLHttpRequest.DONE) {
-
-            // 200 means everthing worked
             if (xhr.status === 200) {
-
-              getCustomers();
-            //   document.getElementById("status").innerHTML = "All records deleted.";
-
+                getUsers();
             } else {
-
-              // not a 200, could be anything (404, 500, etc.)
-              console.log(this.status);
-
+                console.log(this.status);
             }
-
         } else {
             console.log("ERROR", this.status);
         }
     }
-    xhr.open("POST", "/delete-all-users");
+    xhr.open("POST", "/delete-user");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send();
-});
+    xhr.send("id=" + formData.id);
+}

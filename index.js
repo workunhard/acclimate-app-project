@@ -21,6 +21,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// Access login page
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
         res.redirect("/dashboard");
@@ -32,6 +33,7 @@ app.get("/", function (req, res) {
     }
 });
 
+// Access dashboard
 app.get("/dashboard", function (req, res) {
 
     if (req.session.loggedIn && req.session.admin == 1) {
@@ -165,7 +167,6 @@ app.post('/add-user', function (req, res) {
 	  if (error) {
 		  console.log(error);
 	  }
-	  //console.log('Rows returned are: ', results);
 	  res.send({ status: "success", msg: "Record added." });
 
 	});
@@ -191,7 +192,6 @@ console.log("updated values", req.body.email, req.body.id)
 	  if (error) {
 		  console.log(error);
 	  }
-	  //console.log('Rows returned are: ', results);
 	  res.send({ status: "success", msg: "Recorded update." });
 
 	});
@@ -217,7 +217,6 @@ console.log("updated values", req.body.name, req.body.id)
 	  if (error) {
 		  console.log(error);
 	  }
-	  //console.log('Rows returned are: ', results);
 	  res.send({ status: "success", msg: "Recorded update." });
 
 	});
@@ -225,10 +224,11 @@ console.log("updated values", req.body.name, req.body.id)
 
 });
 
-// POST: we are changing stuff on the server!!!
-app.post('/delete-all-users', function (req, res) {
+// Deletes users
+app.post('/delete-user', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
+    const mysql = require("mysql2");
 	let connection = mysql.createConnection({
 	  host: 'localhost',
 	  user: 'root',
@@ -236,55 +236,53 @@ app.post('/delete-all-users', function (req, res) {
 	  database: 'COMP2800'
 	});
 	connection.connect();
-	// NOT WISE TO DO, BUT JUST SHOWING YOU CAN
-	connection.query('DELETE FROM bby23_user',
+	connection.query('DELETE FROM bby23_user WHERE ID = ?',
+        [req.body.id],
 		  function (error, results, fields) {
 	  if (error) {
 		  console.log(error);
 	  }
-	  //console.log('Rows returned are: ', results);
-	  res.send({ status: "success", msg: "Recorded all deleted." });
-
+	  res.send({ status: "success", msg: req.body.id + " deleted." });
 	});
 	connection.end();
-
 });
 
 // Connect to DBMS and create tables
-async function init() {
-    // const mysql = require("mysql2/promise");
-    // const connection = await mysql.createConnection({
-    //     host: "localhost",
-    //     user: "root",
-    //     password: "",
-    //     multipleStatements: true
-    // });
-    // const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23;
-    //     use bby23;
+// async function init() {
+//     const mysql = require("mysql2/promise");
+//     const connection = await mysql.createConnection({
+//         host: "localhost",
+//         user: "root",
+//         password: "",
+//         multipleStatements: true
+//     });
+//     const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23;
+//         use bby23;
 
-    //     CREATE TABLE IF NOT EXISTS bby23_user (
-    //         ID int NOT NULL AUTO_INCREMENT,
-    //         name varchar(30),
-    //         email varchar(30),
-    //         password varchar(30),
-    //         admin boolean,
-    //         PRIMARY KEY (ID));`;
-    // await connection.query(createDBAndTables);
+//         CREATE TABLE IF NOT EXISTS bby23_user (
+//             ID int NOT NULL AUTO_INCREMENT,
+//             name varchar(30),
+//             email varchar(30),
+//             password varchar(30),
+//             admin boolean,
+//             PRIMARY KEY (ID));`;
+//     await connection.query(createDBAndTables);
 
-    // // Data for user table
-    // const [rows, fields] = await connection.query("SELECT * FROM bby23_user");
-    // if (rows.length == 0) {
-    //     let userRecords = "insert into bby23_user (name, email, password, admin) values ?";
-    //     let recordValues = [
-    //         ["Code", "code@acclimate.com", "abcdefg", true],
-    //         ["Bruce", "bruce_link@bcit.ca", "abc123", false],
-    //         ["John", "john_romero@bcit.ca", "abc123", false]
-    //     ];
-    //     await connection.query(userRecords, [recordValues]);
-    // }
-    console.log("Listening on port " + port + "!");
-}
+//     // Data for user table
+//     const [rows, fields] = await connection.query("SELECT * FROM bby23_user");
+//     if (rows.length == 0) {
+//         let userRecords = "insert into bby23_user (name, email, password, admin) values ?";
+//         let recordValues = [
+//             ["Code", "code@acclimate.com", "abcdefg", true],
+//             ["Bruce", "bruce_link@bcit.ca", "abc123", false],
+//             ["John", "john_romero@bcit.ca", "abc123", false]
+//         ];
+//         await connection.query(userRecords, [recordValues]);
+//     }
+//     console.log("Listening on port " + port + "!");
+// }
 
 // RUN SERVER
 let port = 8000;
-app.listen(port, init);
+app.listen(port);
+console.log("Listening on port " + port + "!");
