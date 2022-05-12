@@ -1,6 +1,6 @@
 const express = require("express");
 const session = require("express-session");
-const mysql = require("mysql2");
+
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
@@ -27,9 +27,6 @@ if (is_heroku) {
 } else {
     var dbconfig = localDbConfig;
 }
-
-const connection = mysql.createConnection(dbconfig);
-connection.connect();
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -79,6 +76,9 @@ app.use(express.urlencoded({
 
 // Log-in
 app.post("/login", function (req, res) {
+    const mysql = require("mysql2");
+    const connection = mysql.createConnection(dbconfig);
+    connection.connect();
     res.setHeader("Content-Type", "application/json");
     let results = authenticate(res, req.body.email, req.body.password,
         function (userRecord) {
@@ -116,6 +116,9 @@ app.get("/logout", function (req, res) {
 });
 
 function authenticate(res, email, pwd, callback) {
+    const mysql = require("mysql2");
+    const connection = mysql.createConnection(dbconfig);
+    connection.connect();
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
@@ -134,6 +137,9 @@ function authenticate(res, email, pwd, callback) {
 }
 
 app.get('/get-users', function (req, res) {
+    const mysql = require("mysql2");
+    const connection = mysql.createConnection(dbconfig);
+    connection.connect();
     connection.query('SELECT * FROM bby23_user', function (error, results, fields) {
         if (error) {
             console.log(error);
@@ -152,6 +158,9 @@ app.get('/get-users', function (req, res) {
 
 app.post('/update-email', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
+    const mysql = require("mysql2");
+    const connection = mysql.createConnection(dbconfig);
+    connection.connect();
     connection.connect();
     console.log("updated values", req.body.email, req.body.id)
     connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
