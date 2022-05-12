@@ -1,6 +1,6 @@
 const express = require("express");
 const session = require("express-session");
-
+const multer = require("multer");
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
@@ -30,6 +30,24 @@ if (is_heroku) {
 
 const mysql = require("mysql2");
 const connection = mysql.createPool(dbconfig);
+
+const storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "./app/images/");
+    },
+    filename: function(req, file, callback) {
+        callback(null, "my-img-" + file.originalname.split('/').pop().trim())
+    }
+})
+
+const upload = multer({storage: storage});
+
+app.post('/upload-images', upload.array("files"), function (req, res) {
+    console.log(req.files);
+    for (let i = 0; i < req.files.length; i++) {
+        req.files[i].filename = req.files[i].originalname;
+    }
+})
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -66,6 +84,7 @@ app.get("/dashboard", function (req, res) {
         let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
         profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name + ".";
+        // profileDOM.window.document.getElementById("userAvatar").src = ;
         res.send(profileDOM.serialize());
     } else {
         res.redirect("/");
@@ -145,6 +164,10 @@ function authenticate(res, email, pwd, callback) {
         }
     );
 }
+
+app.get('/profile', function (req, res) {
+    connection.query('SELECT name FROM bby23_img WHERE email')
+})
 
 app.get('/get-users', function (req, res) {
 
