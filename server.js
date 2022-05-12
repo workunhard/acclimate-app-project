@@ -123,6 +123,12 @@ function authenticate(res, email, pwd, callback) {
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
             console.log("Authenticate query callback");
+            console.log("email: ");
+            console.log(email);
+            console.log("pword: ");
+            console.log(pwd);
+            console.log("results: ");
+            console.log(results);
             if (error) {
                 console.log("Authenticate query error");
                 console.log(error);
