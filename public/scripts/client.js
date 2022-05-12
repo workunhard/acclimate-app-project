@@ -1,7 +1,5 @@
 ready(function () {
 
-    console.log("Client script loaded.");
-
     function ajaxGET(url, callback) {
 
         const xhr = new XMLHttpRequest();
@@ -66,6 +64,5 @@ function ready(callback) {
         callback();
     } else {
         document.addEventListener("DOMContentLoaded", callback);
-        console.log("Listener was invoked");
     }
 }

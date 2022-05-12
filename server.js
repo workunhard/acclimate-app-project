@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
@@ -13,7 +14,7 @@ const localDbConfig = {
     user: 'root',
     password: '',
     database: 'COMP2800'
-  };
+};
 
 const herokuDbConfig = {
     host: 'qz8si2yulh3i7gl3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
@@ -27,6 +28,8 @@ if (is_heroku) {
 } else {
     var dbconfig = localDbConfig;
 }
+
+const connection = mysql.createPool(dbconfig);
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -56,20 +59,15 @@ app.get("/", function (req, res) {
 
 // Access dashboard
 app.get("/dashboard", function (req, res) {
-
     if (req.session.loggedIn && req.session.admin == 1) {
-
         let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
-
-        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name +".";
+        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name + ".";
         res.send(profileDOM.serialize());
-
     } else if (req.session.loggedIn && req.session.admin == 0) {
         let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
-
-        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name +".";
+        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name + ".";
         res.send(profileDOM.serialize());
     } else {
         res.redirect("/");
@@ -83,8 +81,10 @@ app.use(express.urlencoded({
 
 // Log-in
 app.post("/login", function (req, res) {
+
     res.setHeader("Content-Type", "application/json");
-    let results = authenticate(req.body.email, req.body.password,
+    console.log("pre-authenticate");
+    let results = authenticate(res, req.body.email, req.body.password,
         function (userRecord) {
             if (userRecord == null) {
                 res.send({
@@ -99,7 +99,6 @@ app.post("/login", function (req, res) {
                 req.session.password = userRecord.password;
                 req.session.admin = userRecord.admin;
                 req.session.save(function (err) {});
-
                 res.send({
                     status: "success",
                     msg: "Logged in."
@@ -120,25 +119,30 @@ app.get("/logout", function (req, res) {
     }
 });
 
-function authenticate(email, pwd, callback) {
-    const mysql = require("mysql2");
-    const connection = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "comp2800"
-    });
-    connection.connect();
+function authenticate(res, email, pwd, callback) {
+    console.log("Authenticate 1");
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
+            console.log("Authenticate query callback");
+            console.log("email: ");
+            console.log(email);
+            console.log("pword: ");
+            console.log(pwd);
+            console.log("results: ");
+            console.log(results);
             if (error) {
+                console.log("Authenticate query error");
+                console.log(error);
                 res.redirect("/");
-            }
-            if (results.length > 0) {
-                return callback(results[0]);
             } else {
-                return callback(null);
+                if (results.length > 0) {
+                    console.log("Authenticate query success");
+                    return callback(results[0]);
+                } else {
+                    console.log("Authenticate query but empty result");
+                    return callback(null);
+                }
             }
         }
     );
@@ -146,23 +150,16 @@ function authenticate(email, pwd, callback) {
 
 app.get('/get-users', function (req, res) {
 
-    const mysql = require("mysql2");
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'COMP2800'
-    });
-    connection.connect();
     connection.query('SELECT * FROM bby23_user', function (error, results, fields) {
         if (error) {
             console.log(error);
         }
         console.log('Rows returned are: ', results);
-        res.send({ status: "success", rows: results });
-
+        res.send({
+            status: "success",
+            rows: results
+        });
     });
-    connection.end();
 });
 
 app.post('/add-user', function (req, res) {
@@ -173,14 +170,6 @@ app.post('/add-user', function (req, res) {
 	console.log("Password", req.body.password);
     console.log("Admin", req.body.admin);
 
-	let connection = mysql.createConnection({
-	  host: 'localhost',
-	  user: 'root',
-	  password: '',
-	  database: 'COMP2800'
-	});
-	connection.connect();
-
 	connection.query('INSERT INTO bby23_user (name, email, password, admin) values (?, ?, ?, ?)',
 		  [req.body.name, req.body.email, req.body.password, req.body.admin],
 		  function (error, results, fields) {
@@ -190,21 +179,11 @@ app.post('/add-user', function (req, res) {
 	  res.send({ status: "success", msg: "Record added." });
 
 	});
-	connection.end();
-
 });
 
 app.post('/update-email', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
-	const mysql = require("mysql2");
-	let connection = mysql.createConnection({
-	  host: 'localhost',
-	  user: 'root',
-	  password: '',
-	  database: 'COMP2800'
-	});
-	connection.connect();
 console.log("updated values", req.body.email, req.body.id)
 	connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
 		  [req.body.email, req.body.id],
@@ -215,21 +194,11 @@ console.log("updated values", req.body.email, req.body.id)
 	  res.send({ status: "success", msg: "Recorded update." });
 
 	});
-	connection.end();
-
 });
 
 app.post('/update-name', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
-	const mysql = require("mysql2");
-	let connection = mysql.createConnection({
-	  host: 'localhost',
-	  user: 'root',
-	  password: '',
-	  database: 'COMP2800'
-	});
-	connection.connect();
 console.log("updated values", req.body.name, req.body.id)
 	connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
 		  [req.body.name, req.body.id],
@@ -240,21 +209,13 @@ console.log("updated values", req.body.name, req.body.id)
 	  res.send({ status: "success", msg: "Recorded update." });
 
 	});
-	connection.end();
+
 
 });
 
 app.post('/update-password', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
-	const mysql = require("mysql2");
-	let connection = mysql.createConnection({
-	  host: 'localhost',
-	  user: 'root',
-	  password: '',
-	  database: 'COMP2800'
-	});
-	connection.connect();
 console.log("updated values", req.body.password, req.body.id)
 	connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
 		  [req.body.password, req.body.id],
@@ -265,21 +226,13 @@ console.log("updated values", req.body.password, req.body.id)
 	  res.send({ status: "success", msg: "Recorded update." });
 
 	});
-	connection.end();
+
 
 });
 
 app.post('/update-admin', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
-	const mysql = require("mysql2");
-	let connection = mysql.createConnection({
-	  host: 'localhost',
-	  user: 'root',
-	  password: '',
-	  database: 'COMP2800'
-	});
-	connection.connect();
 console.log("updated values", req.body.admin, req.body.id)
 	connection.query('UPDATE bby23_user SET admin = ? WHERE ID = ?',
 		  [req.body.admin, req.body.id],
@@ -290,22 +243,12 @@ console.log("updated values", req.body.admin, req.body.id)
 	  res.send({ status: "success", msg: "Recorded update." });
 
 	});
-	connection.end();
-
 });
 
 // Deletes users
 app.post('/delete-user', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
-    const mysql = require("mysql2");
-	let connection = mysql.createConnection({
-	  host: 'localhost',
-	  user: 'root',
-	  password: '',
-	  database: 'COMP2800'
-	});
-	connection.connect();
 	connection.query('DELETE FROM bby23_user WHERE ID = ?',
         [req.body.id],
 		  function (error, results, fields) {
@@ -314,7 +257,6 @@ app.post('/delete-user', function (req, res) {
 	  }
 	  res.send({ status: "success", msg: req.body.id + " deleted." });
 	});
-	connection.end();
 });
 
 // RUN SERVER
