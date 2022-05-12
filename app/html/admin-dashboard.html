@@ -2,52 +2,65 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <!-- <link rel="manifest" href="/site.webmanifest"> -->
-    <title>Dashboard :: Acclimate</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <!-- <link rel="manifest" href="/site.webmanifest"> -->
+  <title>Dashboard :: Acclimate</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/admin-style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/admin-style.css">
 </head>
 
 <body>
-    <div class="container">
-        <nav id="navbarPlaceholder"></nav>
-        <div id="alerts">
-            <h2 id="profile_name">PROFILE_NAME</h2>
-            <h3>Recent Alerts</h3>
-            <dl>
-                <dt>Who needs to pay for a sauna with this current heat wave</dt>
-                <dd>-everyonesGrandma @ 12:45PM</dd>
-                <dt>Residents advised to stay indoors today amidst record high heatwave temperatures this afternoon</dt>
-                <dd>- BC Ministry of Health @ 9:10AM</dd>
-                <dt>A tree fell on top of another car on SW Marine drive. </dt>
-                <dd>- Wrongplacewrongtime @3:40PM</dd>
-            </dl>
-        </div>
-        <table id="adminArea">
-            <!-- <h3>Admin Dashboard</h3>
-            <h4>User Options</h4>
-            <button>Add</button>
-            <button>Edit</button>
-            <button>Delete</button> -->
-        </table>
-        <div id="map">
-            <img id="bbymap" src="../images/bbymap2.jpg" alt="burnaby map">
-        </div>
-        <div id="forecast"><img src="../images/forecast.jpeg" id="forecastTable" alt="example forecast"></div>
-        <nav id="footerPlaceholder"></nav>
+  <div class="container">
+    <nav id="navbarPlaceholder"></nav>
+    <div id="alerts">
+      <h2 id="profile_name">PROFILE_NAME</h2>
+      <h3>Recent Alerts</h3>
+      <dl>
+        <dt>Who needs to pay for a sauna with this current heat wave</dt>
+        <dd>-everyonesGrandma @ 12:45PM</dd>
+        <dt>Residents advised to stay indoors today amidst record high heatwave temperatures this afternoon</dt>
+        <dd>- BC Ministry of Health @ 9:10AM</dd>
+        <dt>A tree fell on top of another car on SW Marine drive. </dt>
+        <dd>- Wrongplacewrongtime @3:40PM</dd>
+      </dl>
     </div>
 
-    <script src="../scripts/skeleton.js"></script>
-    <script src="scripts/admin-client.js"></script>
+    <div id="adminDashboard">
+      <table id="adminArea">
+      </table>
+      <form id="addCustomer">
+        <fieldset>
+          <legend>Add a User</legend>
+          <input type="text" placeholder="name" id="name" /><br>
+          <input type="email" placeholder="email" id="email" /><br>
+          <input type="text" placeholder="password" id="password" /><br>
+          <label for="adminstrator">Administrator</label>
+          <input type="radio" placeholder="admin" id="admin" name="admin" value="1" />
+          <label for="yes">Yes</label>
+          <input type="radio" placeholder="admin" id="admin" name="admin" value="0" />
+          <label for="no">No</label>
+          <input type="button" id="submit" value="Submit" />
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="map">
+      <img id="bbymap" src="../images/bbymap2.jpg" alt="burnaby map">
+    </div>
+    <div id="forecast"><img src="../images/forecast.jpeg" id="forecastTable" alt="example forecast"></div>
+    <nav id="footerPlaceholder"></nav>
+  </div>
+
+  <script src="../scripts/skeleton.js"></script>
+  <script src="scripts/admin-client.js"></script>
 
 </body>
 

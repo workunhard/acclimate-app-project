@@ -6,6 +6,7 @@ const is_heroku = process.env.IS_HEROKU || false;
 const {
     JSDOM
 } = require('jsdom');
+const mysql = require('mysql2');
 
 const localDbConfig = {
     host: 'localhost',
@@ -41,6 +42,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// Access login page
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
         res.redirect("/dashboard");
@@ -52,6 +54,7 @@ app.get("/", function (req, res) {
     }
 });
 
+// Access dashboard
 app.get("/dashboard", function (req, res) {
 
     if (req.session.loggedIn && req.session.admin == 1) {
@@ -81,7 +84,7 @@ app.use(express.urlencoded({
 // Log-in
 app.post("/login", function (req, res) {
     res.setHeader("Content-Type", "application/json");
-    let results = authenticate(res, req.body.email, req.body.password,
+    let results = authenticate(req.body.email, req.body.password,
         function (userRecord) {
             if (userRecord == null) {
                 res.send({
@@ -117,9 +120,14 @@ app.get("/logout", function (req, res) {
     }
 });
 
-function authenticate(res, email, pwd, callback) {
+function authenticate(email, pwd, callback) {
     const mysql = require("mysql2");
-    const connection = mysql.createConnection(dbconfig);
+    const connection = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "comp2800"
+    });
     connection.connect();
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
@@ -139,7 +147,12 @@ function authenticate(res, email, pwd, callback) {
 app.get('/get-users', function (req, res) {
 
     const mysql = require("mysql2");
-    const connection = mysql.createConnection(dbconfig);
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'COMP2800'
+    });
     connection.connect();
     connection.query('SELECT * FROM bby23_user', function (error, results, fields) {
         if (error) {
@@ -150,7 +163,34 @@ app.get('/get-users', function (req, res) {
 
     });
     connection.end();
+});
 
+app.post('/add-user', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+	console.log("Name", req.body.name);
+	console.log("Email", req.body.email);
+	console.log("Password", req.body.password);
+    console.log("Admin", req.body.admin);
+
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
+	connection.connect();
+
+	connection.query('INSERT INTO bby23_user (name, email, password, admin) values (?, ?, ?, ?)',
+		  [req.body.name, req.body.email, req.body.password, req.body.admin],
+		  function (error, results, fields) {
+	  if (error) {
+		  console.log(error);
+	  }
+	  res.send({ status: "success", msg: "Record added." });
+
+	});
+	connection.end();
 
 });
 
@@ -158,7 +198,12 @@ app.post('/update-email', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
 	const mysql = require("mysql2");
-    const connection = mysql.createConnection(dbconfig);
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
 	connection.connect();
 console.log("updated values", req.body.email, req.body.id)
 	connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
@@ -167,7 +212,6 @@ console.log("updated values", req.body.email, req.body.id)
 	  if (error) {
 		  console.log(error);
 	  }
-	  //console.log('Rows returned are: ', results);
 	  res.send({ status: "success", msg: "Recorded update." });
 
 	});
@@ -179,7 +223,12 @@ app.post('/update-name', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
 	const mysql = require("mysql2");
-    const connection = mysql.createConnection(dbconfig);
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
 	connection.connect();
 console.log("updated values", req.body.name, req.body.id)
 	connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
@@ -188,7 +237,6 @@ console.log("updated values", req.body.name, req.body.id)
 	  if (error) {
 		  console.log(error);
 	  }
-	  //console.log('Rows returned are: ', results);
 	  res.send({ status: "success", msg: "Recorded update." });
 
 	});
@@ -196,48 +244,80 @@ console.log("updated values", req.body.name, req.body.id)
 
 });
 
+app.post('/update-password', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
 
-// Connect to DBMS and create tables
-async function init() {
-    // const mysql = require("mysql2/promise");
-    // const connection = await mysql.createConnection({
-    //     host: "localhost",
-    //     user: "root",
-    //     password: "",
-    //     multipleStatements: true
-    // });
-    // const createDBAndTables = `CREATE DATABASE IF NOT EXISTS bby23;
-    //     use bby23;
+	const mysql = require("mysql2");
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
+	connection.connect();
+console.log("updated values", req.body.password, req.body.id)
+	connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
+		  [req.body.password, req.body.id],
+		  function (error, results, fields) {
+	  if (error) {
+		  console.log(error);
+	  }
+	  res.send({ status: "success", msg: "Recorded update." });
 
-    //     CREATE TABLE IF NOT EXISTS bby23_user (
-    //         ID int NOT NULL AUTO_INCREMENT,
-    //         name varchar(30),
-    //         email varchar(30),
-    //         password varchar(30),
-    //         admin boolean,
-    //         PRIMARY KEY (ID));`;
-    // await connection.query(createDBAndTables);
+	});
+	connection.end();
 
-    // // Data for user table
-    // const [rows, fields] = await connection.query("SELECT * FROM bby23_user");
-    // if (rows.length == 0) {
-    //     let userRecords = "insert into bby23_user (name, email, password, admin) values ?";
-    //     let recordValues = [
-    //         ["Code", "code@acclimate.com", "abcdefg", true],
-    //         ["Bruce", "bruce_link@bcit.ca", "abc123", false],
-    //         ["John", "john_romero@bcit.ca", "abc123", false]
-    //     ];
-    //     await connection.query(userRecords, [recordValues]);
-    // }
-    console.log("Listening on port " + port + "!");
-}
+});
+
+app.post('/update-admin', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+	const mysql = require("mysql2");
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
+	connection.connect();
+console.log("updated values", req.body.admin, req.body.id)
+	connection.query('UPDATE bby23_user SET admin = ? WHERE ID = ?',
+		  [req.body.admin, req.body.id],
+		  function (error, results, fields) {
+	  if (error) {
+		  console.log(error);
+	  }
+	  res.send({ status: "success", msg: "Recorded update." });
+
+	});
+	connection.end();
+
+});
+
+// Deletes users
+app.post('/delete-user', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+    const mysql = require("mysql2");
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
+	connection.connect();
+	connection.query('DELETE FROM bby23_user WHERE ID = ?',
+        [req.body.id],
+		  function (error, results, fields) {
+	  if (error) {
+		  console.log(error);
+	  }
+	  res.send({ status: "success", msg: req.body.id + " deleted." });
+	});
+	connection.end();
+});
 
 // RUN SERVER
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log('App listening on port ${PORT}');
-    console.log('Press Ctrl+C to quit.');
-})
-// let port = 8000;
-// app.listen(port, init);
-//
+let port = 8000;
+app.listen(port);
+console.log("Listening on port " + port + "!");

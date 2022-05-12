@@ -135,6 +135,10 @@ body {
     border-radius: 10px 10px 10px 10px;
   }
 
+  form {
+    text-align: center;
+  }
+
   #adminArea {
       text-align: center;
   }
@@ -162,7 +166,7 @@ body {
       border-radius: 10px 10px 10px 10px; */
     }
 
-    #adminArea {
+    #adminDashboard {
       grid-column: 1;
       grid-row: 2;
       background-color: blanchedalmond;
@@ -211,7 +215,7 @@ body {
       border-radius: 10px 10px 10px 10px;
     }
 
-    #adminArea {
+    #adminDashboard {
         grid-column: 1;
         grid-row: 3;
         background-color: blanchedalmond;
