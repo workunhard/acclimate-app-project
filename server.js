@@ -29,8 +29,7 @@ if (is_heroku) {
 }
 
 const mysql = require("mysql2");
-const connection = mysql.createConnection(dbconfig);
-connection.connect();
+const connection = mysql.createPool(dbconfig);
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -82,6 +81,7 @@ app.use(express.urlencoded({
 app.post("/login", function (req, res) {
 
     res.setHeader("Content-Type", "application/json");
+    console.log("pre-authenticate");
     let results = authenticate(res, req.body.email, req.body.password,
         function (userRecord) {
             if (userRecord == null) {
@@ -118,17 +118,21 @@ app.get("/logout", function (req, res) {
 });
 
 function authenticate(res, email, pwd, callback) {
-
+    console.log("Authenticate 1");
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
+            console.log("Authenticate query callback");
             if (error) {
+                console.log("Authenticate query error");
                 console.log(error);
                 res.redirect("/");
             } else {
                 if (results.length > 0) {
+                    console.log("Authenticate query success");
                     return callback(results[0]);
                 } else {
+                    console.log("Authenticate query but empty result");
                     return callback(null);
                 }
             }
@@ -147,11 +151,7 @@ app.get('/get-users', function (req, res) {
             status: "success",
             rows: results
         });
-
     });
-    connection.end();
-
-
 });
 
 app.post('/update-email', function (req, res) {
@@ -168,10 +168,7 @@ app.post('/update-email', function (req, res) {
                 status: "success",
                 msg: "Recorded update."
             });
-
         });
-    connection.end();
-
 });
 
 app.post('/update-name', function (req, res) {
@@ -188,10 +185,7 @@ app.post('/update-name', function (req, res) {
                 status: "success",
                 msg: "Recorded update."
             });
-
         });
-    connection.end();
-
 });
 
 // RUN SERVER
