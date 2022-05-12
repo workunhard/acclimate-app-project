@@ -224,6 +224,56 @@ console.log("updated values", req.body.name, req.body.id)
 
 });
 
+app.post('/update-password', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+	const mysql = require("mysql2");
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
+	connection.connect();
+console.log("updated values", req.body.password, req.body.id)
+	connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
+		  [req.body.password, req.body.id],
+		  function (error, results, fields) {
+	  if (error) {
+		  console.log(error);
+	  }
+	  res.send({ status: "success", msg: "Recorded update." });
+
+	});
+	connection.end();
+
+});
+
+app.post('/update-admin', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+	const mysql = require("mysql2");
+	let connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'root',
+	  password: '',
+	  database: 'COMP2800'
+	});
+	connection.connect();
+console.log("updated values", req.body.admin, req.body.id)
+	connection.query('UPDATE bby23_user SET admin = ? WHERE ID = ?',
+		  [req.body.admin, req.body.id],
+		  function (error, results, fields) {
+	  if (error) {
+		  console.log(error);
+	  }
+	  res.send({ status: "success", msg: "Recorded update." });
+
+	});
+	connection.end();
+
+});
+
 // Deletes users
 app.post('/delete-user', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');

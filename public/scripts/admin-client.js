@@ -12,6 +12,8 @@ function getUsers() {
 <th class="id_header"><span>ID</span></th>
 <th class="name_header"><span>Name</span></th>
 <th class="email_header"><span>Email</span></th>
+<th class="password_header"><span>Password</span></th>
+<th class="admin_header">Admin(Yes(1), No(0))</th>
 <th class="delete_header">Delete</th>
 </tr>`;
 
@@ -22,7 +24,9 @@ function getUsers() {
                         str += ("<tr><td class='id'>" + row.ID +
                             "</td><td class='name'><span>" + row.name +
                             "</span></td><td class='email'><span>" +
-                            row.email + "</span></td><td class ='delete'><input type='button' id='delete' value='Delete'></td></tr>");
+                            row.email + "</span></td><td class='password'><span>" + 
+                            row.password + "</span></td><td class='admin'><span>" +
+                            row.admin + "</span></td><td class ='delete'><input type='button' id='delete' value='Delete'></td></tr>");
                     }
                     //console.log(str);
                     document.getElementById("adminArea").innerHTML = str;
@@ -39,6 +43,14 @@ function getUsers() {
                     let deleteRecords = document.querySelectorAll("td[class='delete']");
                     for (let i = 0; i < deleteRecords.length; i++) {
                         deleteRecords[i].addEventListener("click", deleteUser);
+                    }
+                    let userPassword = document.querySelectorAll("td[class='password'] span");
+                    for (let i = 0; i < userPassword.length; i++) {
+                        userPassword[i].addEventListener("click", editCellPassword);
+                    }
+                    let userAdmin = document.querySelectorAll("td[class='admin'] span");
+                    for (let i = 0; i < userAdmin.length; i++) {
+                        userAdmin[i].addEventListener("click", editCellAdmin);
                     }
 
                 } else {
@@ -164,6 +176,109 @@ function editCellName(e) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("id=" + dataToSend.id + "&name=" + dataToSend.name);
 
+        }
+    });
+    parent.innerHTML = "";
+    parent.appendChild(input);
+
+}
+
+function editCellPassword(e) {
+
+    // add a listener for clicking on the field to change email
+    // span's text
+    let spanText = e.target.innerHTML;
+    // span's parent (td)
+    let parent = e.target.parentNode;
+    // create a new input, and add a key listener to it
+    let input = document.createElement("input");
+    input.value = spanText;
+    input.addEventListener("keyup", function (e) {
+        let v = null;
+        // pressed enter
+        if (e.which == 13) {
+            v = input.value;
+            let newSpan = document.createElement("span");
+            // have to wire an event listener to the new element
+            newSpan.innerHTML = v;
+            parent.innerHTML = "";
+            parent.appendChild(newSpan);
+            let dataToSend = {
+                id: parent.parentNode.querySelector(".id").innerHTML,
+                name: parent.parentNode.querySelector(".name").innerHTML,
+                email: parent.parentNode.querySelector(".email").innerHTML,
+                password: v
+            };
+
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (this.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        getUsers();
+                    } else {
+                        console.log(this.status);
+                    }
+                } else {
+                    console.log("ERROR", this.status);
+                }
+            }
+            xhr.open("POST", "/update-password");
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send("id=" + dataToSend.id + "&password=" + dataToSend.password);
+
+        }
+    });
+    parent.innerHTML = "";
+    parent.appendChild(input);
+
+}
+
+
+function editCellAdmin(e) {
+
+    // add a listener for clicking on the field to change email
+    // span's text
+    let spanText = e.target.innerHTML;
+    // span's parent (td)
+    let parent = e.target.parentNode;
+    // create a new input, and add a key listener to it
+    let input = document.createElement("input");
+    input.value = spanText;
+    input.addEventListener("keyup", function (e) {
+        let v = null;
+        // pressed enter
+        if (e.which == 13) {
+            v = input.value;
+            let newSpan = document.createElement("span");
+            // have to wire an event listener to the new element
+            newSpan.innerHTML = v;
+            parent.innerHTML = "";
+            parent.appendChild(newSpan);
+            let dataToSend = {
+                id: parent.parentNode.querySelector(".id").innerHTML,
+                name: parent.parentNode.querySelector(".name").innerHTML,
+                email: parent.parentNode.querySelector(".email").innerHTML,
+                password: parent.parentNode.querySelector(".password").innerHTML,
+                admin: v
+            };
+
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (this.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        getUsers();
+                    } else {
+                        console.log(this.status);
+                    }
+                } else {
+                    console.log("ERROR", this.status);
+                }
+            }
+            xhr.open("POST", "/update-admin");
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send("id=" + dataToSend.id + "&admin=" + dataToSend.admin);
         }
     });
     parent.innerHTML = "";
