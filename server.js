@@ -33,7 +33,7 @@ const connection = mysql.createPool(dbconfig);
 
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, "./app/images/");
+        callback(null, "./app/images/avatars");
     },
     filename: function(req, file, callback) {
         callback(null, "my-img-" + file.originalname.split('/').pop().trim())
@@ -78,7 +78,6 @@ app.get("/dashboard", function (req, res) {
         let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
         profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back " + req.session.name + ".";
-        // profileDOM.window.document.getElementById("userAvatar").src = ;
         res.send(profileDOM.serialize());
     } else {
         res.redirect("/");
@@ -164,14 +163,14 @@ app.get('/profile', function (req, res) {
         let profile = "";
         if (req.session.admin == 1) {
             profile = fs.readFileSync("./app/html/profile.html", "utf8");
-        } else {
-            profile = fs.readFileSync("./app/html/profile.html", "utf8");
-        }
+        } 
         let profileDOM = new JSDOM(profile);
         profileDOM.window.document.getElementById("avatar_name").innerHTML = req.session.name;
         profileDOM.window.document.getElementById("avatar_email").innerHTML = req.session.email;
         profileDOM.window.document.getElementById("avatar_password").innerHTML = req.session.password;
-        profileDOM.window.document.getElementById("userAvatar").src = req.session.name;
+        let id = req.session.id;
+        connection.query
+
 
         res.send(profileDOM.serialize());
         // res.send(profile);
