@@ -1,13 +1,11 @@
 const express = require("express");
 const session = require("express-session");
-
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
 const {
     JSDOM
 } = require('jsdom');
-const mysql = require('mysql2');
 
 const localDbConfig = {
     host: 'localhost',
@@ -29,6 +27,7 @@ if (is_heroku) {
     var dbconfig = localDbConfig;
 }
 
+const mysql = require("mysql2");
 const connection = mysql.createPool(dbconfig);
 
 // static path mappings
@@ -45,19 +44,15 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// Access login page
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
         res.redirect("/dashboard");
     } else {
         let doc = fs.readFileSync("./app/html/login.html", "utf8");
-        res.set("Server", "Code Engine");
-        res.set("X-Powered-By", "Code");
         res.send(doc);
     }
 });
 
-// Access dashboard
 app.get("/dashboard", function (req, res) {
     if (req.session.loggedIn && req.session.admin == 1) {
         let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
@@ -81,7 +76,6 @@ app.use(express.urlencoded({
 
 // Log-in
 app.post("/login", function (req, res) {
-
     res.setHeader("Content-Type", "application/json");
     console.log("pre-authenticate");
     let results = authenticate(res, req.body.email, req.body.password,
@@ -120,27 +114,15 @@ app.get("/logout", function (req, res) {
 });
 
 function authenticate(res, email, pwd, callback) {
-    console.log("Authenticate 1");
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
         function (error, results, fields) {
-            console.log("Authenticate query callback");
-            console.log("email: ");
-            console.log(email);
-            console.log("pword: ");
-            console.log(pwd);
-            console.log("results: ");
-            console.log(results);
             if (error) {
-                console.log("Authenticate query error");
-                console.log(error);
                 res.redirect("/");
             } else {
                 if (results.length > 0) {
-                    console.log("Authenticate query success");
                     return callback(results[0]);
                 } else {
-                    console.log("Authenticate query but empty result");
                     return callback(null);
                 }
             }
@@ -154,7 +136,6 @@ app.get('/get-users', function (req, res) {
         if (error) {
             console.log(error);
         }
-        console.log('Rows returned are: ', results);
         res.send({
             status: "success",
             rows: results
@@ -163,103 +144,115 @@ app.get('/get-users', function (req, res) {
 });
 
 app.post('/add-user', function (req, res) {
-	res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
 
-	console.log("Name", req.body.name);
-	console.log("Email", req.body.email);
-	console.log("Password", req.body.password);
+    console.log("Name", req.body.name);
+    console.log("Email", req.body.email);
+    console.log("Password", req.body.password);
     console.log("Admin", req.body.admin);
 
-	connection.query('INSERT INTO bby23_user (name, email, password, admin) values (?, ?, ?, ?)',
-		  [req.body.name, req.body.email, req.body.password, req.body.admin],
-		  function (error, results, fields) {
-	  if (error) {
-		  console.log(error);
-	  }
-	  res.send({ status: "success", msg: "Record added." });
+    connection.query('INSERT INTO bby23_user (name, email, password, admin) values (?, ?, ?, ?)',
+        [req.body.name, req.body.email, req.body.password, req.body.admin],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Record added."
+            });
 
-	});
+        });
 });
 
 app.post('/update-email', function (req, res) {
-	res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
 
-console.log("updated values", req.body.email, req.body.id)
-	connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
-		  [req.body.email, req.body.id],
-		  function (error, results, fields) {
-	  if (error) {
-		  console.log(error);
-	  }
-	  res.send({ status: "success", msg: "Recorded update." });
+    console.log("updated values", req.body.email, req.body.id)
+    connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
+        [req.body.email, req.body.id],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
 
-	});
+        });
 });
 
 app.post('/update-name', function (req, res) {
-	res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
 
-console.log("updated values", req.body.name, req.body.id)
-	connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
-		  [req.body.name, req.body.id],
-		  function (error, results, fields) {
-	  if (error) {
-		  console.log(error);
-	  }
-	  res.send({ status: "success", msg: "Recorded update." });
-
-	});
-
-
+    console.log("updated values", req.body.name, req.body.id)
+    connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
+        [req.body.name, req.body.id],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
+        });
 });
 
 app.post('/update-password', function (req, res) {
-	res.setHeader('Content-Type', 'application/json');
-
-console.log("updated values", req.body.password, req.body.id)
-	connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
-		  [req.body.password, req.body.id],
-		  function (error, results, fields) {
-	  if (error) {
-		  console.log(error);
-	  }
-	  res.send({ status: "success", msg: "Recorded update." });
-
-	});
-
-
+    res.setHeader('Content-Type', 'application/json');
+    console.log("updated values", req.body.password, req.body.id)
+    connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
+        [req.body.password, req.body.id],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
+        });
 });
 
 app.post('/update-admin', function (req, res) {
-	res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
 
-console.log("updated values", req.body.admin, req.body.id)
-	connection.query('UPDATE bby23_user SET admin = ? WHERE ID = ?',
-		  [req.body.admin, req.body.id],
-		  function (error, results, fields) {
-	  if (error) {
-		  console.log(error);
-	  }
-	  res.send({ status: "success", msg: "Recorded update." });
-
-	});
+    console.log("updated values", req.body.admin, req.body.id)
+    connection.query('UPDATE bby23_user SET admin = ? WHERE ID = ?',
+        [req.body.admin, req.body.id],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
+        });
 });
 
 // Deletes users
 app.post('/delete-user', function (req, res) {
-	res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
 
-	connection.query('DELETE FROM bby23_user WHERE ID = ?',
+    connection.query('DELETE FROM bby23_user WHERE ID = ?',
         [req.body.id],
-		  function (error, results, fields) {
-	  if (error) {
-		  console.log(error);
-	  }
-	  res.send({ status: "success", msg: req.body.id + " deleted." });
-	});
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: req.body.id + " deleted."
+            });
+        });
 });
 
 // RUN SERVER
-let port = 8000;
-app.listen(port);
-console.log("Listening on port " + port + "!");
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+    console.log('Press Ctrl+C to quit.');
+})
