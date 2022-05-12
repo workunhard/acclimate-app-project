@@ -8,12 +8,12 @@ function getUsers() {
                 let data = JSON.parse(this.responseText);
                 if (data.status == "success") {
 
-                    let str = `<tr>
+                    let str = `<caption>Administrator View</caption><tr>
 <th class="id_header"><span>ID</span></th>
 <th class="name_header"><span>Name</span></th>
 <th class="email_header"><span>Email</span></th>
 <th class="password_header"><span>Password</span></th>
-<th class="admin_header">Admin(Yes(1), No(0))</th>
+<th class="admin_header">Admin</th>
 <th class="delete_header">Delete</th>
 </tr>`;
 

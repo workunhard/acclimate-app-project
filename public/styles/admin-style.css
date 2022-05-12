@@ -10,7 +10,6 @@ body {
     text-align: center;
   }
   
-  
   /* Style the navigation menu */
   .navbar {
     overflow: hidden;
@@ -141,6 +140,17 @@ body {
 
   #adminArea {
       text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  table, th, td {
+    border: 1.5px solid black;
+  }
+
+  caption {
+    font-size: 15px;
+    font-weight: bold;
   }
   
   @media only screen and (max-width: 800px) {
@@ -171,6 +181,8 @@ body {
       grid-row: 2;
       background-color: blanchedalmond;
       border-radius: 10px 10px 10px 10px;
+      font-size: 12.5px;
+      overflow-y: auto;
     }
   
     #map {
@@ -198,7 +210,7 @@ body {
   @media only screen and (min-width: 801px) {
     .container{
       display:grid;
-      grid-template-columns: 25% 75%;
+      grid-template-columns: 35% 65%;
       grid-template-rows: 10% 42% 41% 7%;
       height: 100vh;
       padding: 1em;
@@ -213,6 +225,7 @@ body {
       grid-row: 2 / span 1;
       background-color:blanchedalmond;
       border-radius: 10px 10px 10px 10px;
+      overflow-y: auto;
     }
 
     #adminDashboard {
@@ -221,6 +234,9 @@ body {
         background-color: blanchedalmond;
         border-radius: 10px 10px 10px 10px;
         margin-top: 10px;
+        font-size: 12px;
+        overflow-x: auto;
+        overflow-y: auto;
     }
   
     #map {
