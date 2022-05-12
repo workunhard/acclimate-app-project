@@ -57,11 +57,6 @@ ready(function () {
             }
         }, queryString);
     });
-
-    document.querySelector('#userAvatar').addEventListener("click", function (e) {
-        e.preventDefault();
-        
-    })
 });
 
 function ready(callback) {

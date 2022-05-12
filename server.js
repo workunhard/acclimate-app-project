@@ -42,12 +42,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-app.post('/upload-images', upload.array("files"), function (req, res) {
-    console.log(req.files);
-    for (let i = 0; i < req.files.length; i++) {
-        req.files[i].filename = req.files[i].originalname;
-    }
-})
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -166,7 +160,31 @@ function authenticate(res, email, pwd, callback) {
 }
 
 app.get('/profile', function (req, res) {
-    connection.query('SELECT name FROM bby23_img WHERE email')
+    if (req.session.loggedIn) {
+        let profile = "";
+        if (req.session.admin == 1) {
+            profile = fs.readFileSync("./app/html/profile.html", "utf8");
+        } else {
+            profile = fs.readFileSync("./app/html/profile.html", "utf8");
+        }
+        let profileDOM = new JSDOM(profile);
+        profileDOM.window.document.getElementById("avatar_name").innerHTML = req.session.name;
+        profileDOM.window.document.getElementById("avatar_email").innerHTML = req.session.email;
+        profileDOM.window.document.getElementById("avatar_password").innerHTML = req.session.password;
+        profileDOM.window.document.getElementById("userAvatar").src = req.session.name;
+
+        res.send(profileDOM.serialize());
+        // res.send(profile);
+    } else {
+        res.redirect("/");
+    }    
+})
+
+app.post('/upload-images', upload.array("files"), function (req, res) {
+    console.log(req.files);
+    for (let i = 0; i < req.files.length; i++) {
+        req.files[i].filename = req.files[i].originalname;
+    }
 })
 
 app.get('/get-users', function (req, res) {
