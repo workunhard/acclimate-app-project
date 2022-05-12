@@ -17,30 +17,27 @@
     <div id="formPanel">
         <form id='loginForm'>
             <h1 id="formTitle">AccliMate</h1>
-            <input id='email' type='email' required="required" placeholder="Email" value="code@acclimate.com" /><br>
-            <input id='password' type='password' required="required" placeholder="Password" value="abcdefg" />
+            <input id='email' type='email' required="required" placeholder="Email" value="test@acclimate.com" /><br>
+            <input id='password' type='password' required="required" placeholder="Password" value="" />
             <br><br>
             <input type="button" value="Sign-In" id="submit" />
             <p><span id="serverMsg"></span></p>
             <p id="forgotP"><a href="#" onClick='passHint()'>Forgot email/password?</a></p>
             <p id="notMemberP"><a href="#">Don't have an account? Sign Up</a></p>
             <p id="errorMsg">&nbsp;</p>
-            <p id="passHint">&nbsp;</p>
         </form>
     </div>
     <div id="footer">
         Created by BBY-23, COMP 2800<br><br>Spring 2022
     </div>
-
-        <script src="scripts/client.js"></script>
-        <script>
-            function passHint() {
-                var hint = document.getElementById("passHint");
-                var tryThis = document.getElementById("errorMsg");
-                tryThis.innerHTML = "For logons, try:";
-                hint.innerHTML =
-                    "Admin User: code@acclimate.com<br>Pass: abcdefg<br><br>Regular User: bruce_link@bcit.ca<br>Pass: abc123";
-            }
-        </script>
+    <script src="scripts/client.js"></script>
+    <script>
+        function passHint() {
+            var hint = document.getElementById("passHint");
+            var tryThis = document.getElementById("errorMsg");
+            tryThis.innerHTML = "Check the db";
+        }
+    </script>
 </body>
+
 </html>
