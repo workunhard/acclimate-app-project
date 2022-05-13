@@ -31,7 +31,7 @@ const connection = mysql.createPool(dbconfig);
 
 const storage = multer.diskStorage({
 	destination: function (req, file, callback) {
-		callback(null, "./profileimages/avatars");
+		callback(null, "./app/profileimages/avatars");
 	},
 	filename: function (req, file, callback) {
 		callback(null, file.originalname.split("/").pop().trim());
@@ -242,8 +242,6 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
             })
         }
     })
-
-
 
     connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, 1], function (err, results) {
         if (err) {
