@@ -31,7 +31,7 @@ const connection = mysql.createPool(dbconfig);
 
 const storage = multer.diskStorage({
 	destination: function (req, file, callback) {
-		callback(null, "./app/images/avatars");
+		callback(null, "./profileimages/avatars");
 	},
 	filename: function (req, file, callback) {
 		callback(null, file.originalname.split("/").pop().trim());
@@ -46,6 +46,8 @@ app.use("/styles", express.static("public/styles"));
 app.use("/images", express.static("public/images"));
 app.use("/html", express.static("app/html"));
 app.use("/text", express.static("app/text"));
+app.use("/profileimages", express.static("app/profileimages"));
+
 
 app.use(
 	session({
@@ -196,7 +198,8 @@ app.get("/profile", function (req, res) {
 								console.log(err.message);
 							}
 							console.log(results[0].avatar);
-							profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"" + results[0].avatar + "\">";
+							profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"profileimages/avatars/" + results[0].avatar + "\">";
+							// profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"../../" + results[0].avatar + "\">";
 							res.send(profileDOM.serialize());
 							// const rows = JSON.parse(JSON.stringify(results[0]));
 							// const key = Object.values(rows);
@@ -230,7 +233,7 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
         } else {
             const name = results.name;
             console.log(name);
-            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path + req.files[0].filename, 1], function (err, results) {
+            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, 1], function (err, results) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -242,7 +245,7 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
 
 
 
-    connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path, 1], function (err, results) {
+    connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, 1], function (err, results) {
         if (err) {
             console.log(err);
         } else {
