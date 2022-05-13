@@ -180,43 +180,61 @@ app.get("/profile", function (req, res) {
 			req.session.password;
 
 		connection.query(
-			"select avatar from bby23_user WHERE ID = ?",
-			[1],
+			"SELECT ID FROM bby23_user WHERE name = ?",
+			[req.session.name],
 			function (err, results, fields) {
 				if (err) {
-					console.log(err.message);
+					console.log(err);
+				} else {
+					const rows = JSON.parse(JSON.stringify(results[0]));
+					const value = Object.values(rows);
+					connection.query(
+						"select avatar from bby23_user WHERE ID = ?",
+						[value],
+						function (err, results, fields) {
+							if (err) {
+								console.log(err.message);
+							}
+							const rows = JSON.parse(JSON.stringify(results[0]));
+							const key = Object.values(rows);
+							profileDOM.window.document.getElementById(
+								"userAvatar"
+							).src = `${key}`;
+						}
+					);
 				}
-                const rows = JSON.parse(JSON.stringify(results[0]));
-                console.log(Object.values(rows));
-                const key = Object.values(rows);
-				profileDOM.window.document.getElementById("userAvatar").src =
-					key;
 			}
 		);
-            
 		res.send(profileDOM.serialize());
-		// res.send(profile);
 	} else {
 		res.redirect("/");
 	}
 });
 
 app.post("/upload-images", upload.array("files"), function (req, res) {
-    connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results, fields) {
-        if (err) {
-            console.log(err);
-        } else {
-            const rows = JSON.parse(JSON.stringify(results[0]));
-            const value = Object.values(rows);
-            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path, value], function (err, results) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(results);
-                }
-            })
-        }
-    })
+	connection.query(
+		"SELECT ID FROM bby23_user WHERE name = ?",
+		[req.session.name],
+		function (err, results, fields) {
+			if (err) {
+				console.log(err);
+			} else {
+				const rows = JSON.parse(JSON.stringify(results[0]));
+				const value = Object.values(rows);
+				connection.query(
+					"UPDATE bby23_user SET avatar = ? WHERE ID = ?",
+					[req.files[0].filename, value],
+					function (err, results) {
+						if (err) {
+							console.log(err);
+						} else {
+							console.log(results);
+						}
+					}
+				);
+			}
+		}
+	);
 });
 
 app.get("/get-users", function (req, res) {
