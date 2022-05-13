@@ -180,15 +180,17 @@ app.get("/profile", function (req, res) {
 			req.session.password;
 
 		connection.query(
-			"select name from bby23_img where imgID IN (SELECT ID FROM bby23_user WHERE ID)",
-			[req.session.id],
-			function (err, results) {
+			"select avatar from bby23_user WHERE ID = ?",
+			[1],
+			function (err, results, fields) {
 				if (err) {
 					console.log(err.message);
 				}
+                // const answer = results[0].toString();
+                console.log(req.body.id);
 				console.log("Results:" + results);
-				profileDOM.window.document.getElementById("userAvatar").src =
-					results[0].path;
+				// profileDOM.window.document.getElementById("userAvatar").src =
+				// 	results[0].path;
 			}
 		);
             
@@ -200,19 +202,28 @@ app.get("/profile", function (req, res) {
 });
 
 app.post("/upload-images", upload.array("files"), function (req, res) {
-    connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
+    // connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         const name = results.name;
+    //         console.log(name);
+    //         connection.query("INSERT INTO bby23_img (name, userID) values (?,?)", [req.files[0].path + req.files[0].filename, 1], function (err, results) {
+    //             if (err) {
+    //                 console.log(err);
+    //                 connection.query("UPDATE bby23_img SET name = ? WHERE userID = ?")
+    //             } else {
+    //                 console.log(results);
+    //             }
+    //         })
+    //     }
+    // })
+
+    connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path + req.files[0].filename, 1], function (err, results) {
         if (err) {
             console.log(err);
         } else {
-            const name = results[0].name;
-            console.log(name);
-            connection.query("INSERT INTO bby23_img (name, userID) values (?,?)", [req.files[0].filename, 1], function (err, results) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(results);
-                }
-            })
+            console.log(results);
         }
     })
 
