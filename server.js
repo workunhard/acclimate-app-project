@@ -184,6 +184,8 @@ app.post('/upload-images', upload.array("files"), function (req, res) {
     for (let i = 0; i < req.files.length; i++) {
         req.files[i].filename = req.files[i].originalname;
     }
+
+    connection.query('INSERT INTO ')
 })
 
 app.get('/get-users', function (req, res) {
