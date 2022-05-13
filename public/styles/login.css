@@ -37,7 +37,7 @@
         display: grid;
         border: black 1px;
         grid-template-columns: 5% 90% 5%;
-        grid-template-rows: 10% 80% 10%;
+        grid-template-rows: 10% 70% 10% 10%;
         text-align: center;
         align-items: center;
         color: white;
@@ -69,7 +69,7 @@
         border-radius: 10px;
         padding: 12px 15px;
         margin: 8px 0;
-        width: 40%;
+        width: 60%;
     }
 
     #forgotP a:hover {
@@ -115,9 +115,12 @@
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
-        display: block;
+        display: grid;
+        grid-row: 4 / span 1;
+        grid-column: 1 / span 3;
         align-content: center;
         margin: 0;
+        height: 100%;
         padding: 20px;
         color: white;
     }
@@ -161,7 +164,7 @@
         display: grid;
         border: black 1px;
         grid-template-columns: 25% 50% 25%;
-        grid-template-rows: 15% 70% 15%;
+        grid-template-rows: 10% 70% 10% 10%;
         text-align: center;
         align-items: center;
         color: white;
@@ -241,7 +244,10 @@
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
-        display: block;
+        display: grid;
+        height: 100%;
+        grid-row: 4 / span 1;
+        grid-column: 1 / span 3;
         align-content: center;
         margin: 0;
         padding: 20px;
