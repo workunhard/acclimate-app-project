@@ -155,9 +155,9 @@ app.get('/profile', function (req, res) {
         profileDOM.window.document.getElementById("avatar_name").innerHTML = req.session.name;
         profileDOM.window.document.getElementById("avatar_email").innerHTML = req.session.email;
         profileDOM.window.document.getElementById("avatar_password").innerHTML = req.session.password;
-        profileDOM.window.document.getElementsByName('name')[0].value = req.session.name;
-        profileDOM.window.document.getElementsByName('email')[0].value = req.session.email;
-        profileDOM.window.document.getElementsByName('password')[0].value = req.session.password;
+        profileDOM.window.document.getElementsByName('name')[0].placeholder = req.session.name;
+        profileDOM.window.document.getElementsByName('email')[0].placeholder = req.session.email;
+        profileDOM.window.document.getElementsByName('password')[0].placeholder = req.session.password;
 
         connection.query('select name from bby23_img where imgID = (SELECT ID FROM bby23_user)', [req.session.id], function (err, results) {
             if (err) {
