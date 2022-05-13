@@ -1,7 +1,7 @@
 CREATE TABLE bby23_user (
     ID int NOT NULL AUTO_INCREMENT,
     name varchar(30),
-    email varchar(30),
+    email varchar(30) UNIQUE,
     password varchar(30),
     admin boolean,
     PRIMARY KEY (ID)
@@ -18,5 +18,5 @@ CREATE TABLE bby23_img (
     userID int (10),
     PRIMARY KEY (imgID),
     FOREIGN KEY (userID) REFERENCES bby23_user(ID)
-)
+);
             

@@ -192,7 +192,9 @@ app.post('/upload-images', upload.array("files"), function (req, res) {
         req.files[i].filename = req.files[i].originalname;
     }
 
-    connection.query("INSERT INTO `bby23_img` (name,userID) values ('" + req.filename + "','" + req.session.id + "')",
+    
+
+    connection.query("INSERT INTO `bby23_img` (name,userID) values ('" + req.files[0].filename + "','" + "S" + "')",
         function (err, result) {
         if (err) {
             console.log(err);
