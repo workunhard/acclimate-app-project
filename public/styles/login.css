@@ -2,14 +2,6 @@
 
 @media only screen and (max-width: 700px) {
     body {
-        animation: fadeInAnimation ease 1s;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-        margin: 0;
-
-    }
-
-    #background {
         background-image: url('/images/loginbg.svg');
         background-repeat: no-repeat;
         background-size: cover;
@@ -17,7 +9,13 @@
         margin: 0;
         background-position: bottom center, 50%, 50%;
         font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
+    }
 
+    #background {
+        animation: fadeInAnimation ease 1s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        margin: 0;
     }
 
     @keyframes fadeInAnimation {
@@ -130,14 +128,6 @@
 
 @media only screen and (min-width: 701px) {
     body {
-        animation: fadeInAnimation ease 1s;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-        margin: 0;
-
-    }
-
-    #background {
         background-image: url('/images/loginbg.svg');
         background-repeat: no-repeat;
         background-size: cover;
@@ -145,7 +135,13 @@
         margin: 0;
         background-position: bottom center, 50%, 50%;
         font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
+    }
 
+    #background {
+        animation: fadeInAnimation ease 1s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        margin: 0;
     }
 
     @keyframes fadeInAnimation {
