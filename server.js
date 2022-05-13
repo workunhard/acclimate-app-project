@@ -180,11 +180,28 @@ app.get("/profile", function (req, res) {
 			req.session.password;
 
 		connection.query(
-			"select avatar from bby23_user WHERE ID = ?",
-			[1],
+			"SELECT ID FROM bby23_user WHERE name = ?",
+			[req.session.name],
 			function (err, results, fields) {
 				if (err) {
-					console.log(err.message);
+					console.log(err);
+				} else {
+					const rows = JSON.parse(JSON.stringify(results[0]));
+					const value = Object.values(rows);
+					connection.query(
+						"select avatar from bby23_user WHERE ID = ?",
+						[value],
+						function (err, results, fields) {
+							if (err) {
+								console.log(err.message);
+							}
+							const rows = JSON.parse(JSON.stringify(results[0]));
+							const key = Object.values(rows);
+							profileDOM.window.document.getElementById(
+								"userAvatar"
+							).src = `${key}`;
+						}
+					);
 				}
                 // const answer = results[0].toString();
                 // const rows = JSON.parse(JSON.stringify(results[0]));
