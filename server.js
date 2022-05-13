@@ -198,7 +198,7 @@ app.get("/profile", function (req, res) {
 								console.log(err.message);
 							}
 							console.log(results[0].avatar);
-							profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"profileimages/avatars/" + results[0].avatar + "\">";
+							profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img id=\"photo\" src=\"profileimages/avatars/" + results[0].avatar + "\">";
 							// profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"../../" + results[0].avatar + "\">";
 							res.send(profileDOM.serialize());
 							// const rows = JSON.parse(JSON.stringify(results[0]));
