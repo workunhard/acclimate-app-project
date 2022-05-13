@@ -168,10 +168,17 @@ app.get('/profile', function (req, res) {
         profileDOM.window.document.getElementById("avatar_name").innerHTML = req.session.name;
         profileDOM.window.document.getElementById("avatar_email").innerHTML = req.session.email;
         profileDOM.window.document.getElementById("avatar_password").innerHTML = req.session.password;
-        let id = req.session.id;
-        connection.query
+        
+        connection.query('select name from bby23_img where imgID = (SELECT ID FROM bby23_user)', [req.session.id], function (err, results) {
+            if (err) {
+                console.log(err.message);
+                // return;
+            } 
+            console.log("Results:" + results);
+            profileDOM.window.document.getElementById("userAvatar").src = results?.path;
+        });
 
-
+        
         res.send(profileDOM.serialize());
         // res.send(profile);
     } else {
@@ -185,7 +192,14 @@ app.post('/upload-images', upload.array("files"), function (req, res) {
         req.files[i].filename = req.files[i].originalname;
     }
 
-    connection.query('INSERT INTO ')
+    connection.query("INSERT INTO `bby23_img` (name,userID) values ('" + req.filename + "','" + req.session.id + "')",
+        function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result);
+        }
+    });
 })
 
 app.get('/get-users', function (req, res) {
