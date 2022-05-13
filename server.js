@@ -195,22 +195,24 @@ app.get("/profile", function (req, res) {
 							if (err) {
 								console.log(err.message);
 							}
-							const rows = JSON.parse(JSON.stringify(results[0]));
-							const key = Object.values(rows);
-							profileDOM.window.document.getElementById(
-								"userAvatar"
-							).src = `${key}`;
+							console.log(results[0].avatar);
+							profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"" + results[0].avatar + "\">";
+							res.send(profileDOM.serialize());
+							// const rows = JSON.parse(JSON.stringify(results[0]));
+							// const key = Object.values(rows);
+							// profileDOM.window.document.getElementById(
+							// 	"userAvatar"
+							// ).src = `${key}`;
 						}
 					);
 				}
                 // const answer = results[0].toString();
                 // const rows = JSON.parse(JSON.stringify(results[0]));
                 // console.log(rows);
-								console.log(results[0].avatar);
                 // console.log(req.body.id);
 				// console.log("Results:" + rows);
-				profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"" + results[0].avatar + "\">";
-				res.send(profileDOM.serialize());
+				// profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"" + results[0].avatar + "\">";
+				// res.send(profileDOM.serialize());
 			}
 		);
             
