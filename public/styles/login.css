@@ -18,121 +18,13 @@
     }
 
     #formPanel {
-        border: black 1px;
-    }
-
-    #formPanel {
         height: 100vh;
         display: grid;
-        grid-template-columns: 10% 80% 10%;
-        grid-template-rows: 20% 80%;
-        text-align: center;
-        color: white;
-    }
-
-    #formPanel a,
-    a:visited {
-        text-decoration: none;
-        color: black;
-    }
-
-    #formPanel a:hover {
-        text-decoration: none;
-        color: rgb(45, 45, 45);
-    }
-
-    #loginForm {
-        background-color: white;
-        filter: drop-shadow(0px 0px 10px #000000);
-        border-radius: 10%;
-    }
-
-    #logIn {
-        font-size: 20pt;
-    }
-
-    #forgotP a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0em 1em;
-        transition: 0.3s;
-    }
-
-    #notMemberP a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0em 1em;
-        transition: 0.3s;
-    }
-
-    #submit {
-        font-family: 'Radio Canada', sans serif;
-        font-size: 16pt;
-        background-color: white;
-        text-decoration: none;
-        border: 5px solid black;
-        border-radius: 8px;
-        padding: 1em 2em;
-        transition: 0.3s;
-    }
-
-    #submit:hover {
-        color: white;
-        background-color: #52BBE7;
-        border: 5px solid white;
-    }
-
-    #passHint {
-        grid-row: 3 / span 1;
-        grid-column: 2 / span 1;
-        bottom: 0;
-        vertical-align: bottom;
-        color: red;
-    }
-
-    #footer {
-        background-color: #52BBE7;
-        background-size: 100%;
-        text-align: center;
-        display: block;
-        align-content: center;
-        margin:auto;
-        padding: 5%;
-    }
-
-    #errorMsg {
-        color: red;
-    }
-}
-
-@media only screen and (min-width: 701px) {
-    body {
-        background-image: url('/images/loginbg.svg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        display: block;
-        margin: 0;
-        background-position: bottom center, 50%, 50%;
-        font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
-    }
-
-    #formTitle {
-        color: #52BBE7;
-        font-size: 40pt;
-    }
-
-    #formPanel {
         border: black 1px;
-    }
-
-    #formPanel {
-        height: 100vh;
-        display: grid;
-        grid-template-columns: 30% 40% 30%;
-        grid-template-rows: 20% 60% 20%;
+        grid-template-columns: 5% 90% 5%;
+        grid-template-rows: 10% 80% 10%;
         text-align: center;
+        align-items: center;
         color: white;
     }
 
@@ -159,20 +51,33 @@
         font-size: 20pt;
     }
 
+    input {
+        background-color: #caecfb;
+        border: none;
+        padding: 12px 15px;
+        margin: 8px 0;
+        width: 40%;
+    }
+
     #forgotP a:hover {
         color: #52BBE7;
         border: 1px solid #52BBE7;
         border-radius: 3px;
-        padding: 0em 1em;
+        padding: 0.5em 0.5em;
         transition: 0.3s;
     }
 
-    #notMemberP a:hover {
+    #signUp a:hover {
         color: #52BBE7;
         border: 1px solid #52BBE7;
         border-radius: 3px;
-        padding: 0em 1em;
+        padding: 0.5em 0.5em;
         transition: 0.3s;
+    }
+
+    #clickme {
+        color:#52BBE7;
+        font-weight: bold;  
     }
 
     #submit {
@@ -182,8 +87,9 @@
         text-decoration: none;
         border: 5px solid black;
         border-radius: 8px;
-        padding: 1em 2em;
+        padding: 1em 1em;
         transition: 0.3s;
+        text-align: center;
     }
 
     #submit:hover {
@@ -192,12 +98,113 @@
         border: 5px solid white;
     }
 
-    #passHint {
-        grid-row: 3 / span 1;
+    #footer {
+        background-color: #52BBE7;
+        background-size: 100%;
+        text-align: center;
+        display: block;
+        align-content: center;
+        margin: auto;
+        padding: 5%;
+    }
+}
+
+@media only screen and (min-width: 701px) {
+    body {
+        background-image: url('/images/loginbg.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        margin: 0;
+        background-position: bottom center, 50%, 50%;
+        font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
+    }
+
+    #formTitle {
+        color: #52BBE7;
+        font-size: 40pt;
+    }
+
+    #formPanel {
+        height: 100vh;
+        display: grid;
+        border: black 1px;
+        grid-template-columns: 25% 50% 25%;
+        grid-template-rows: 20% 60% 20%;
+        text-align: center;
+        align-items: center;
+        color: white;
+    }
+
+    #formPanel a,
+    a:visited {
+        text-decoration: none;
+        color: black;
+    }
+
+    #formPanel a:hover {
+        text-decoration: none;
+        color: rgb(45, 45, 45);
+    }
+
+    #loginForm {
+        background-color: white;
+        height: 100%;
+        filter: drop-shadow(0px 0px 10px #000000);
+        border-radius: 40px;
+        grid-row: 2 / span 1;
         grid-column: 2 / span 1;
-        bottom: 0;
-        vertical-align: bottom;
-        color: red;
+    }
+
+    #logIn {
+        font-size: 20pt;
+    }
+
+    input {
+        background-color: #caecfb;
+        border: none;
+        padding: 12px 15px;
+        margin: 8px 0;
+        width: 40%;
+    }
+
+    #forgotP a:hover {
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
+        border-radius: 3px;
+        padding: 0.5em 0.5em;
+        transition: 0.3s;
+    }
+
+    #signUp a:hover {
+        color: #52BBE7;
+        border: 1px solid #52BBE7;
+        border-radius: 3px;
+        padding: 0.5em 0.5em;
+        transition: 0.3s;
+    }
+
+    #clickme {
+        color:#52BBE7;
+        font-weight: bold;  
+    }
+
+    #submit {
+        font-family: 'Radio Canada', sans serif;
+        font-size: 16pt;
+        background-color: white;
+        text-decoration: none;
+        border: 5px solid black;
+        border-radius: 8px;
+        padding: 1em 1em;
+        transition: 0.3s;
+        text-align: center;
+    }
+
+    #submit:hover {
+        color: white;
+        background-color: #52BBE7;
+        border: 5px solid white;
     }
 
     #footer {
@@ -206,12 +213,7 @@
         text-align: center;
         display: block;
         align-content: center;
-        margin:auto;
+        margin: auto;
         padding: 5%;
     }
-
-    #errorMsg {
-        color: red;
-    }
-/**/
 }
