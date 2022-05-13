@@ -186,13 +186,11 @@ app.get("/profile", function (req, res) {
 				if (err) {
 					console.log(err.message);
 				}
-                // const answer = results[0].toString();
                 const rows = JSON.parse(JSON.stringify(results[0]));
-                console.log(rows);
-                // console.log(req.body.id);
-				// console.log("Results:" + rows);
+                console.log(Object.values(rows));
+                const key = Object.values(rows);
 				profileDOM.window.document.getElementById("userAvatar").src =
-					rows;
+					key;
 			}
 		);
             
@@ -204,13 +202,13 @@ app.get("/profile", function (req, res) {
 });
 
 app.post("/upload-images", upload.array("files"), function (req, res) {
-    connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
+    connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results, fields) {
         if (err) {
             console.log(err);
         } else {
-            const name = results.name;
-            console.log(name);
-            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path + req.files[0].filename, 1], function (err, results) {
+            const rows = JSON.parse(JSON.stringify(results[0]));
+            const value = Object.values(rows);
+            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path, value], function (err, results) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -219,17 +217,6 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
             })
         }
     })
-
-
-
-    connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path + req.files[0].filename, 1], function (err, results) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(results);
-        }
-    })
-
 });
 
 app.get("/get-users", function (req, res) {
