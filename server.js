@@ -185,14 +185,13 @@ app.get("/profile", function (req, res) {
 			function (err, results) {
 				if (err) {
 					console.log(err.message);
-					// return;
 				}
 				console.log("Results:" + results);
 				profileDOM.window.document.getElementById("userAvatar").src =
 					results[0].path;
 			}
 		);
-
+            
 		res.send(profileDOM.serialize());
 		// res.send(profile);
 	} else {
@@ -201,45 +200,12 @@ app.get("/profile", function (req, res) {
 });
 
 app.post("/upload-images", upload.array("files"), function (req, res) {
-	// console.log("Name: " + req.file.filename);
-    // for(let i = 0; i < req.files.length; i++) {
-    //     req.files[i].filename = req.files[i].originalname;
-    // }
-
-	// req.file = req.file.originalname;
-	
-	// console.log("ID: " + req.body.id);
-
-    // const findUser = `Select ID from bby23_user WHERE ID = ` + req.body.id;
-
-    // const sql = `INSERT INTO bby23_img (name, userID)
-    // VALUES ('` + req.file +
-    //     `', '` + findUser +
-    //     `');`;
-
-
-	// connection.query(
-	// 	"INSERT INTO `bby23_img` (name,userID) values ('" +
-	// 		req.files[0].filename +
-	// 		"','" +
-	// 		"SELECT ID FROM bby23_user WHERE name = ? " +
-	// 		"')",
-	// 	[req.session.name],
-	// 	function (err, result) {
-	// 		if (err) {
-	// 			console.log(err);
-	// 		} else {
-	// 			console.log(result);
-	// 		}
-	// 	}
-	// );
-
     connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
         if (err) {
             console.log(err);
         } else {
-            const name = results.toString();
-            console.log(results[0]);
+            const name = results[0].name;
+            console.log(name);
             connection.query("INSERT INTO bby23_img (name, userID) values (?,?)", [req.files[0].filename, 1], function (err, results) {
                 if (err) {
                     console.log(err);
@@ -250,13 +216,6 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
         }
     })
 
-    // connection.query(sql, function (err, result) {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         // console.log(result);
-    //     }
-    // })
 });
 
 app.get("/get-users", function (req, res) {
