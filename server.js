@@ -35,12 +35,14 @@ const storage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, "./app/images/avatars");
     },
-    filename: function(req, file, callback) {
+    filename: function (req, file, callback) {
         callback(null, "my-img-" + file.originalname.split('/').pop().trim())
     }
 })
 
-const upload = multer({storage: storage});
+const upload = multer({
+    storage: storage
+});
 
 
 // static path mappings
@@ -148,7 +150,7 @@ app.get('/profile', function (req, res) {
         let profile = "";
         if (req.session.admin == 1) {
             profile = fs.readFileSync("./app/html/profile.html", "utf8");
-        } 
+        }
         let profileDOM = new JSDOM(profile);
         profileDOM.window.document.getElementById("avatar_name").innerHTML = req.session.name;
         profileDOM.window.document.getElementById("avatar_email").innerHTML = req.session.email;
@@ -161,17 +163,17 @@ app.get('/profile', function (req, res) {
             if (err) {
                 console.log(err.message);
                 // return;
-            } 
+            }
             console.log("Results:" + results);
             profileDOM.window.document.getElementById("userAvatar").src = results?.path;
         });
 
-        
+
         res.send(profileDOM.serialize());
         // res.send(profile);
     } else {
         res.redirect("/");
-    }    
+    }
 })
 
 app.post('/upload-images', upload.array("files"), function (req, res) {
@@ -180,16 +182,16 @@ app.post('/upload-images', upload.array("files"), function (req, res) {
         req.files[i].filename = req.files[i].originalname;
     }
 
-    
+
 
     connection.query("INSERT INTO `bby23_img` (name,userID) values ('" + req.files[0].filename + "','" + "S" + "')",
         function (err, result) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(result);
-        }
-    });
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(result);
+            }
+        });
 })
 
 app.get('/get-users', function (req, res) {
