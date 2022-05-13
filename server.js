@@ -92,7 +92,6 @@ app.use(express.urlencoded({
 // Log-in
 app.post("/login", function (req, res) {
     res.setHeader("Content-Type", "application/json");
-    console.log("pre-authenticate");
     let results = authenticate(res, req.body.email, req.body.password,
         function (userRecord) {
             if (userRecord == null) {
