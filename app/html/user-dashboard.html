@@ -1,51 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/images/favicon/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/images/favicon/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/images/favicon/favicon-16x16.png"
+		/>
+		<!-- <link rel="manifest" href="/site.webmanifest"> -->
+		<title>Dashboard | Acclimate</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <!-- <link rel="manifest" href="/site.webmanifest"> -->
-    <title>Dashboard | Acclimate</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="../styles/style.css" />
+	</head>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/style.css">
-</head>
+	<body>
+		<div class="container">
+			<nav id="navbarPlaceholder"></nav>
+			<div id="contentContainer">
+				<div id="alerts">
+					<div id="avatar">
+						<img id="userAvatar" src="#" alt="" />
+					</div>
+					<h4 id="profile_name">PROFILE_NAME</h4>
+					<h4>Recent Alerts</h4>
+					<dl>
+						<dt>Who needs to pay for a sauna with this current heat wave</dt>
+						<dd>-everyonesGrandma @ 12:45PM</dd>
+						<dt>
+							Residents advised to stay indoors today amidst record high
+							temperatures
+						</dt>
+						<dd>- BC Ministry of Health @ 9:10AM</dd>
+						<dt>A tree fell on top of another car on SW Marine drive.</dt>
+						<dd>- Wrongplacewrongtime @3:40PM</dd>
+					</dl>
+				</div>
+				<div id="map">
+					<img id="bbymap" src="../images/bbymap2.jpg" alt="burnaby map" />
+				</div>
+				<div id="forecast">
+					<img
+						src="../images/forecast.jpeg"
+						id="forecastTable"
+						alt="example forecast"
+					/>
+				</div>
+			</div>
+			<nav id="footerPlaceholder"></nav>
+		</div>
 
-<body>
-    <div class="container">
-    <nav id="navbarPlaceholder"></nav>
-    <div id ="contentContainer">
-        <div id ="alerts">
-                <div id ="avatar">
-                    <img id = "userAvatar" src = "#" alt = "">
-                </div>
-                <h4 id="profile_name">PROFILE_NAME</h4>
-                <h4>Recent Alerts</h4>
-                <dl>
-                    <dt>Who needs to pay for a sauna with this current heat wave</dt>
-                    <dd>-everyonesGrandma @ 12:45PM</dd>
-                    <dt>Residents advised to stay indoors today amidst record high temperatures</dt>
-                    <dd>- BC Ministry of Health @ 9:10AM</dd>
-                    <dt>A tree fell on top of another car on SW Marine drive. </dt>
-                    <dd>- Wrongplacewrongtime @3:40PM</dd>
-                </dl>
-            </div>
-            <div id ="map">
-                <img id = "bbymap" src = "../images/bbymap2.jpg" alt = "burnaby map">
-            </div>
-            <div id = "forecast"><img src="../images/forecast.jpeg" id="forecastTable" alt="example forecast"></div>
-        </div>
-        <nav id="footerPlaceholder"></nav>
-    </div>
-
-    <script src="../scripts/skeleton.js"></script>
-
-</body>
-
+		<script src="../scripts/skeleton.js"></script>
+	</body>
 </html>

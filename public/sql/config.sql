@@ -19,4 +19,6 @@ CREATE TABLE bby23_img (
     PRIMARY KEY (imgID),
     FOREIGN KEY (userID) REFERENCES bby23_user(ID)
 );
+
+INSERT INTO bby23_img (name, userID) VALUES ("my-img-Untitled.png", 1);
             
