@@ -187,10 +187,12 @@ app.get("/profile", function (req, res) {
 					console.log(err.message);
 				}
                 // const answer = results[0].toString();
-                console.log(req.body.id);
-				console.log("Results:" + results);
-				// profileDOM.window.document.getElementById("userAvatar").src =
-				// 	results[0].path;
+                const rows = JSON.parse(JSON.stringify(results[0]));
+                console.log(rows);
+                // console.log(req.body.id);
+				// console.log("Results:" + rows);
+				profileDOM.window.document.getElementById("userAvatar").src =
+					rows;
 			}
 		);
             
@@ -202,22 +204,23 @@ app.get("/profile", function (req, res) {
 });
 
 app.post("/upload-images", upload.array("files"), function (req, res) {
-    // connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         const name = results.name;
-    //         console.log(name);
-    //         connection.query("INSERT INTO bby23_img (name, userID) values (?,?)", [req.files[0].path + req.files[0].filename, 1], function (err, results) {
-    //             if (err) {
-    //                 console.log(err);
-    //                 connection.query("UPDATE bby23_img SET name = ? WHERE userID = ?")
-    //             } else {
-    //                 console.log(results);
-    //             }
-    //         })
-    //     }
-    // })
+    connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
+        if (err) {
+            console.log(err);
+        } else {
+            const name = results.name;
+            console.log(name);
+            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path + req.files[0].filename, 1], function (err, results) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(results);
+                }
+            })
+        }
+    })
+
+
 
     connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path + req.files[0].filename, 1], function (err, results) {
         if (err) {
