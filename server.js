@@ -187,16 +187,17 @@ app.get("/profile", function (req, res) {
 					console.log(err.message);
 				}
                 // const answer = results[0].toString();
-                const rows = JSON.parse(JSON.stringify(results[0]));
-                console.log(rows);
+                // const rows = JSON.parse(JSON.stringify(results[0]));
+                // console.log(rows);
+								console.log(results[0].avatar);
                 // console.log(req.body.id);
 				// console.log("Results:" + rows);
-				profileDOM.window.document.getElementById("userAvatar").src =
-					rows;
+				profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"" + results[0].avatar + "\">";
+				res.send(profileDOM.serialize());
 			}
 		);
             
-		res.send(profileDOM.serialize());
+		// res.send(profileDOM.serialize());
 		// res.send(profile);
 	} else {
 		res.redirect("/");
@@ -222,7 +223,7 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
 
 
 
-    connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path + req.files[0].filename, 1], function (err, results) {
+    connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].path, 1], function (err, results) {
         if (err) {
             console.log(err);
         } else {
