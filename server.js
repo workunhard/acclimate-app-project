@@ -32,17 +32,15 @@ const mysql = require("mysql2");
 const connection = mysql.createPool(dbconfig);
 
 const storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, "./app/images/avatars");
-    },
-    filename: function (req, file, callback) {
-        callback(null, "my-img-" + file.originalname.split('/').pop().trim())
-    }
-})
-
-const upload = multer({
-    storage: storage
+	destination: function (req, file, callback) {
+		callback(null, "./app/profileimages/avatars");
+	},
+	filename: function (req, file, callback) {
+		callback(null, file.originalname.split("/").pop().trim());
+	},
 });
+
+const upload = multer({ storage: storage });
 
 
 // static path mappings
@@ -143,52 +141,6 @@ function authenticate(res, email, pwd, callback) {
         }
     );
 }
-
-app.get('/profile', function (req, res) {
-    if (req.session.loggedIn) {
-        let profile = "";
-        if (req.session.admin == 1) {
-            profile = fs.readFileSync("./app/html/profile.html", "utf8");
-        }
-        let profileDOM = new JSDOM(profile);
-        profileDOM.window.document.getElementById("avatar_name").innerHTML = req.session.name;
-        profileDOM.window.document.getElementById("avatar_email").innerHTML = req.session.email;
-        profileDOM.window.document.getElementById("avatar_password").innerHTML = req.session.password;
-
-        connection.query('select name from bby23_img where imgID = (SELECT ID FROM bby23_user)', [req.session.id], function (err, results) {
-            if (err) {
-                console.log(err.message);
-                // return;
-            }
-            console.log("Results:" + results);
-            profileDOM.window.document.getElementById("userAvatar").src = results?.path;
-        });
-
-
-        res.send(profileDOM.serialize());
-        // res.send(profile);
-    } else {
-        res.redirect("/");
-    }
-})
-
-app.post('/upload-images', upload.array("files"), function (req, res) {
-    console.log(req.files);
-    for (let i = 0; i < req.files.length; i++) {
-        req.files[i].filename = req.files[i].originalname;
-    }
-
-
-
-    connection.query("INSERT INTO `bby23_img` (name,userID) values ('" + req.files[0].filename + "','" + "S" + "')",
-        function (err, result) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(result);
-            }
-        });
-})
 
 app.get('/get-users', function (req, res) {
 
