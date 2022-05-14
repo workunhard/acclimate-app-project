@@ -31,7 +31,7 @@ if (is_heroku) {
 
 app.engine('html', require('ejs').renderFile);
 const S3_BUCKET = process.env.S3_BUCKET;
-aws.config.region = 'us-east-1';
+aws.config.region = 'us-west-1';
 
 const mysql = require("mysql2");
 const connection = mysql.createPool(dbconfig);
