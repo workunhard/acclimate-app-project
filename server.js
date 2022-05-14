@@ -30,7 +30,7 @@ if (is_heroku) {
 }
 
 app.engine('html', require('ejs').renderFile);
-const S3_BUCKET = process.env.S3_BUCKET;
+
 aws.config.region = 'us-west-1';
 
 const mysql = require("mysql2");
@@ -392,3 +392,5 @@ app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
     console.log('Press Ctrl+C to quit.');
 })
+
+const S3_BUCKET = process.env.S3_BUCKET;
