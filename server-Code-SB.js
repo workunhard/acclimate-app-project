@@ -354,11 +354,6 @@ app.get('/sign-s3', (req, res) => {
   }
 );
 
-app.post('/save-details', (req, res) => {
-    // TODO: Read POSTed form data and do something useful
-  }
-);
-
 app.post("/upload-images", upload.array("files"), function (req, res) {
     connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
         if (err) {

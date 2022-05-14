@@ -41,11 +41,22 @@
 			</form>
 		</div>
 		<div id="userAvatar"></div>
-
-		<nav id="footerPlaceholder"></nav>
 	</div>
 
+	<input type="file" id="file-input">
+	<p id="status">Please select a file</p>
+	<img id="preview" src="../profileimages/avatars/profilepicture.jpeg">
+
+	<form method="POST" action="/save-details">
+		<input type="hidden" id="avatar-url" name="avatar-url" value="/images/default.png">
+		<input type="text" name="username" placeholder="Username"><br>
+		<input type="text" name="full-name" placeholder="Full name"><br><br>
+		<input type="submit" value="Update profile">
+	</form>
+
+
 	<script src="../scripts/skeleton.js"></script>
+	<script src="../scripts/profile.js"></script>
 	<script>
 		const upLoadForm = document.getElementById("upload-images-form");
 		upLoadForm.addEventListener("submit", uploadImages);
