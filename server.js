@@ -49,6 +49,7 @@ app.use("/styles", express.static("public/styles"));
 app.use("/images", express.static("public/images"));
 app.use("/html", express.static("app/html"));
 app.use("/text", express.static("app/text"));
+app.use("/profileimages", express.static("app/profileimages"));
 
 app.use(session({
     secret: "extra text that no one will guess",
