@@ -4,28 +4,26 @@ const multer = require("multer");
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
-const {
-    JSDOM
-} = require('jsdom');
+const { JSDOM } = require("jsdom");
 
 const localDbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'COMP2800'
+	host: "localhost",
+	user: "root",
+	password: "",
+	database: "COMP2800",
 };
 
 const herokuDbConfig = {
-    host: 'qz8si2yulh3i7gl3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-    user: 'i8titfbhmggktzud',
-    password: 't5frs4lz1adk3rmr',
-    database: 'qhfgyfeinmbwri94'
-}
+	host: "qz8si2yulh3i7gl3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+	user: "i8titfbhmggktzud",
+	password: "t5frs4lz1adk3rmr",
+	database: "qhfgyfeinmbwri94",
+};
 
 if (is_heroku) {
-    var dbconfig = herokuDbConfig;
+	var dbconfig = herokuDbConfig;
 } else {
-    var dbconfig = localDbConfig;
+	var dbconfig = localDbConfig;
 }
 
 const mysql = require("mysql2");
@@ -51,13 +49,17 @@ app.use("/styles", express.static("public/styles"));
 app.use("/images", express.static("public/images"));
 app.use("/html", express.static("app/html"));
 app.use("/text", express.static("app/text"));
+app.use("/profileimages", express.static("app/profileimages"));
 
-app.use(session({
-    secret: "extra text that no one will guess",
-    name: "codeSessionID",
-    resave: false,
-    saveUninitialized: true
-}));
+
+app.use(
+	session({
+		secret: "extra text that no one will guess",
+		name: "codeSessionID",
+		resave: false,
+		saveUninitialized: true,
+	})
+);
 
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
@@ -85,9 +87,11 @@ app.get("/dashboard", function (req, res) {
 });
 
 app.use(express.json());
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(
+	express.urlencoded({
+		extended: true,
+	})
+);
 
 // Log-in
 app.post("/login", function (req, res) {
@@ -116,15 +120,15 @@ app.post("/login", function (req, res) {
 });
 
 app.get("/logout", function (req, res) {
-    if (req.session) {
-        req.session.destroy(function (error) {
-            if (error) {
-                res.status(400).send("Unable to log out")
-            } else {
-                res.redirect("/");
-            }
-        });
-    }
+	if (req.session) {
+		req.session.destroy(function (error) {
+			if (error) {
+				res.status(400).send("Unable to log out");
+			} else {
+				res.redirect("/");
+			}
+		});
+	}
 });
 
 function authenticate(res, email, pwd, callback) {
@@ -195,9 +199,11 @@ app.post('/upload-images', upload.array("files"), function (req, res) {
 
 app.get('/get-users', function (req, res) {
 
-    connection.query('SELECT * FROM bby23_user', function (error, results, fields) {
-        if (error) {
-            console.log(error);
+    connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, 1], function (err, results) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(results);
         }
         res.send({
             status: "success",
@@ -316,6 +322,6 @@ app.post('/delete-user', function (req, res) {
 // RUN SERVER
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
-    console.log('Press Ctrl+C to quit.');
-})
+	console.log(`App listening on port ${PORT}`);
+	console.log("Press Ctrl+C to quit.");
+});
