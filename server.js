@@ -265,8 +265,6 @@ app.post('/delete-user', function (req, res) {
 
 app.get("/profile", function (req, res) {
     if (req.session.loggedIn) {
-        
-        
         const profile = fs.readFileSync("./app/html/profile.html", "utf8");
         
         let profileDOM = new JSDOM(profile);
@@ -295,28 +293,12 @@ app.get("/profile", function (req, res) {
                             }
                             console.log(results[0].avatar);
                             profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img id=\"photo\" src=\"profileimages/avatars/" + results[0].avatar + "\">";
-                            // profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"../../" + results[0].avatar + "\">";
                             res.send(profileDOM.serialize());
-                            // const rows = JSON.parse(JSON.stringify(results[0]));
-                            // const key = Object.values(rows);
-                            // profileDOM.window.document.getElementById(
-                            // 	"userAvatar"
-                            // ).src = `${key}`;
                         }
                     );
                 }
-                // const answer = results[0].toString();
-                // const rows = JSON.parse(JSON.stringify(results[0]));
-                // console.log(rows);
-                // console.log(req.body.id);
-                // console.log("Results:" + rows);
-                // profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"" + results[0].avatar + "\">";
-                // res.send(profileDOM.serialize());
             }
         );
-
-        // res.send(profileDOM.serialize());
-        // res.send(profile);
     } else {
         res.redirect("/");
     }
@@ -327,9 +309,9 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            const name = results.name;
-            console.log(name);
-            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, 1], function (err, results) {
+					const rows = JSON.parse(JSON.stringify(results[0]));
+					const key = Object.values(rows);
+            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, key], function (err, results) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -338,15 +320,6 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
             })
         }
     })
-
-    connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, 1], function (err, results) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(results);
-        }
-    })
-
 });
 
 // RUN SERVER
