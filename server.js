@@ -265,10 +265,10 @@ app.post('/delete-user', function (req, res) {
 
 app.get("/profile", function (req, res) {
     if (req.session.loggedIn) {
-        let profile = "";
-        if (req.session.admin == 1) {
-            profile = fs.readFileSync("./app/html/profile.html", "utf8");
-        }
+        
+        
+        const profile = fs.readFileSync("./app/html/profile.html", "utf8");
+        
         let profileDOM = new JSDOM(profile);
         profileDOM.window.document.getElementById("avatar_name").innerHTML =
             req.session.name;
