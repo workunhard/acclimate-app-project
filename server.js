@@ -107,6 +107,9 @@ app.post("/login", function (req, res) {
                 req.session.admin = userRecord.admin;
                 req.session.save(function (err) { });
                 res.send({
+                    name: req.session.name,
+                    email: req.session.email,
+                    password: req.session.password,
                     status: "success",
                     msg: "Logged in."
                 });
@@ -268,12 +271,12 @@ app.get("/profile", function (req, res) {
         const profile = fs.readFileSync("./app/html/profile.html", "utf8");
         
         let profileDOM = new JSDOM(profile);
-        profileDOM.window.document.getElementById("avatar_name").innerHTML =
-            req.session.name;
-        profileDOM.window.document.getElementById("avatar_email").innerHTML =
-            req.session.email;
-        profileDOM.window.document.getElementById("avatar_password").innerHTML =
-            req.session.password;
+        // profileDOM.window.document.getElementById("avatar_name").innerHTML =
+        //     req.session.name;
+        // profileDOM.window.document.getElementById("avatar_email").innerHTML =
+        //     req.session.email;
+        // profileDOM.window.document.getElementById("avatar_password").innerHTML =
+        //     req.session.password;
 
         connection.query(
             "SELECT ID FROM bby23_user WHERE name = ?",
