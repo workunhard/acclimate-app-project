@@ -24,7 +24,7 @@ function getUsers() {
                             data.password + "</span></td></tr>");
                     // }
                     //console.log(str);
-                    document.getElementById("profileInfo").innerHTML = str;
+                    document.getElementById("userInfo").innerHTML = str;
 
                     // select all spans under the email class of td elements
                     let records = document.querySelectorAll("td[class='email'] span");
