@@ -231,7 +231,7 @@ dd {
     grid-row: 1;
     /* background-color: beige; */
     text-align: center;
-    margin-top: 25%;
+    margin-top: 0%;
     border-radius: 10px 10px 10px 10px;
   }
 
@@ -248,7 +248,7 @@ dd {
     /* background-color: cornsilk; */
     text-align: center;
     border-radius: 10px 10px 10px 10px;
-    margin-top: 0%;
+    margin-top: 9%;
   }
 
   #forecastTable {
