@@ -157,7 +157,7 @@ app.get('/get-users', function (req, res) {
 });
 
 app.get('/get-userInfo', function (req, res) {
-    connection.query('SELECT * FROM bby23_user WHERE ID = ?', [],
+    connection.query('SELECT * FROM bby23_user WHERE ID = ?', [req.session.id],
     
     function (error, results, fields) {
         if (error) {
