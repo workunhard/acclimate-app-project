@@ -400,7 +400,7 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
     })
 });
 
-app.post("/timeline", upload.array("files"), function (req, res) {
+app.post("/upload-timeline", upload.array("timeline"), function (req, res) {
 connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
     [req.files[0].filename, "description test", "5/17/22", "11:14AM", req.session.key],
     function (err, results) {

@@ -14,13 +14,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/user-style.css">
 </head>
 
 <body>
     <div class="container">
-    <nav id="navbarPlaceholder"></nav>
-    <div id ="alerts">
+        <nav id="navbarPlaceholder"></nav>
+        <div id="contentBody">
+        <div id="sidebar">
+            <div id="alerts">
             <h4 id="profile_name">PROFILE_NAME</h4>
             <h4>Recent Alerts</h4>
             <dl>
@@ -31,15 +33,26 @@
                 <dt>A tree fell on top of another car on SW Marine drive. </dt>
                 <dd>- Wrongplacewrongtime @3:40PM</dd>
             </dl>
+            </div>
+            <div id="timelinecontainer">
+                <h3>Upload to timeline</h3>
+                <form id="upload-timeline-form">
+                    <input id="timeline-upload" type="file" value="Upload Image"
+                        accept="image/png, image/gif, image/jpeg" multiple="multiple" />
+                    <input id="submit" type="submit" value="Submit" />
+                </form>
+            </div>
         </div>
-        <div id ="map">
-            <img id = "bbymap" src = "../images/bbymap2.jpg" alt = "burnaby map">
+        <div id="map">
+            <img id="bbymap" src="../images/bbymap2.jpg" alt="burnaby map">
         </div>
-        <div id = "forecast"><img src="../images/forecast.jpeg" id="forecastTable" alt="example forecast"></div>
+        <div id="forecast"><img src="../images/forecast.jpeg" id="forecastTable" alt="example forecast"></div>
+        </div>
         <nav id="footerPlaceholder"></nav>
     </div>
 
     <script src="../scripts/skeleton.js"></script>
+    <script src="../scripts/user-dashboard.js"></script>
 
 </body>
 
