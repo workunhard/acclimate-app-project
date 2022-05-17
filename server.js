@@ -5,6 +5,7 @@ const multer = require("multer");
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
+const S3_BUCKET = process.env.S3_BUCKET;
 const {
     JSDOM
 } = require('jsdom');
@@ -32,6 +33,8 @@ if (is_heroku) {
 app.engine('html', require('ejs').renderFile);
 
 aws.config.region = 'us-west-1';
+const awsKeyId = process.env.AWS_ACCESS_KEY_ID;
+const awsKey = process.env.AWS_SECRET_ACESS_KEY;
 
 const mysql = require("mysql2");
 const connection = mysql.createPool(dbconfig);
@@ -332,7 +335,7 @@ app.get('/sign-s3', (req, res) => {
     const fileName = req.query['file-name'];
     const fileType = req.query['file-type'];
     const s3Params = {
-      Bucket: S3_BUCKET,
+      Bucket: "acclimate-avatars",
       Key: fileName,
       Expires: 300,
       ContentType: fileType,
@@ -398,5 +401,3 @@ app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
     console.log('Press Ctrl+C to quit.');
 })
-
-const S3_BUCKET = process.env.S3_BUCKET;
