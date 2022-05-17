@@ -1,4 +1,4 @@
-function getUsers() {
+function getUserInfo() {
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -62,10 +62,10 @@ function getUsers() {
             console.log("ERROR", this.status);
         }
     }
-    xhr.open("GET", "/get-users");
+    xhr.open("GET", "/get-userInfo");
     xhr.send();
 }
-getUsers();
+getUserInfo();
 
 function editCellEmail(e) {
 

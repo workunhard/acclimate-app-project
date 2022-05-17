@@ -107,9 +107,6 @@ app.post("/login", function (req, res) {
                 req.session.admin = userRecord.admin;
                 req.session.save(function (err) { });
                 res.send({
-                    name: req.session.name,
-                    email: req.session.email,
-                    password: req.session.password,
                     status: "success",
                     msg: "Logged in."
                 });
@@ -155,6 +152,23 @@ app.get('/get-users', function (req, res) {
         res.send({
             status: "success",
             rows: results
+        });
+    });
+});
+
+app.get('/get-userInfo', function (req, res) {
+    connection.query('SELECT * FROM bby23_user WHERE ID = ?', [],
+    
+    function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        res.send({
+            status: "success",
+            name: req.session.name,
+            email: req.session.email,
+            password: req.session.password
+            // rows: results
         });
     });
 });
