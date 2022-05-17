@@ -50,7 +50,7 @@ ready(function () {
                 let dataParsed = JSON.parse(data);
                 console.log(dataParsed);
                 if (dataParsed.status == "fail") {
-                    document.getElementById("errorMsg").innerHTML = dataParsed.msg;
+                    document.getElementById("serverMsg").innerHTML = dataParsed.msg;
                 } else {
                     window.location.replace("/dashboard");
                 }

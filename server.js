@@ -105,6 +105,7 @@ app.post("/login", function (req, res) {
                 req.session.name = userRecord.name;
                 req.session.password = userRecord.password;
                 req.session.admin = userRecord.admin;
+                req.session.key = userRecord.ID;
                 req.session.save(function (err) { });
                 res.send({
                     status: "success",
@@ -157,18 +158,18 @@ app.get('/get-users', function (req, res) {
 });
 
 app.get('/get-userInfo', function (req, res) {
-    connection.query('SELECT * FROM bby23_user WHERE ID = ?', [req.session.id],
-    
+    connection.query('SELECT * FROM bby23_user WHERE ID = ?', [req.session.key],
+
     function (error, results, fields) {
         if (error) {
             console.log(error);
         }
         res.send({
             status: "success",
-            name: req.session.name,
-            email: req.session.email,
-            password: req.session.password
-            // rows: results
+            // name: req.session.name,
+            // email: req.session.email,
+            // password: req.session.password,
+            profile: results[0]
         });
     });
 });
@@ -213,6 +214,24 @@ app.post('/update-email', function (req, res) {
         });
 });
 
+app.post('/update-userEmail', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+
+    console.log("updated values", req.body.email, req.session.key)
+    connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
+        [req.body.email, req.session.key],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
+
+        });
+});
+
 app.post('/update-name', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -230,11 +249,44 @@ app.post('/update-name', function (req, res) {
         });
 });
 
+app.post('/update-userName', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+
+    console.log("updated values", req.body.name, req.session.key)
+    connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
+        [req.body.name, req.session.key],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
+        });
+});
+
 app.post('/update-password', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     console.log("updated values", req.body.password, req.body.id)
     connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
         [req.body.password, req.body.id],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
+        });
+});
+
+app.post('/update-userPassword', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    console.log("updated values", req.body.password, req.session.key)
+    connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
+        [req.body.password, req.session.key],
         function (error, results, fields) {
             if (error) {
                 console.log(error);
