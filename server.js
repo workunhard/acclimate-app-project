@@ -17,10 +17,10 @@ const localDbConfig = {
 };
 
 const herokuDbConfig = {
-    host: HEROKU_HOST,
-    user: HEROKU_USER,
-    password: HEROKU_PASS,
-    database: HEROKU_DB
+    host: process.env.HEROKU_HOST,
+    user: process.env.HEROKU_USER,
+    password: process.env.HEROKU_PASS,
+    database: process.env.HEROKU_DB
 }
 
 if (is_heroku) {
