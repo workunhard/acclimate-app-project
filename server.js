@@ -17,10 +17,10 @@ const localDbConfig = {
 };
 
 const herokuDbConfig = {
-    host: 'qz8si2yulh3i7gl3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-    user: 'i8titfbhmggktzud',
-    password: 't5frs4lz1adk3rmr',
-    database: 'qhfgyfeinmbwri94'
+    host: HEROKU_HOST,
+    user: HEROKU_USER,
+    password: HEROKU_PASS,
+    database: HEROKU_DB
 }
 
 if (is_heroku) {
