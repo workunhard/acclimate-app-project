@@ -338,9 +338,12 @@ app.get('/sign-s3', (req, res) => {
       ContentType: fileType,
       ACL: 'public-read'
     };
+
+    console.log("at sign-s3 / getsigned");
   
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
       if(err){
+        console.log("error in getSignedUrl");
         console.log(err);
         return res.end();
       }
@@ -348,9 +351,12 @@ app.get('/sign-s3', (req, res) => {
         signedRequest: data,
         url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
       };
+      console.log("returned data");
+      console.log(returnData);
       res.write(JSON.stringify(returnData));
       res.end();
     });
+    console.log("end of sign-s3");
   }
 );
 
