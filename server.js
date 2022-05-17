@@ -32,16 +32,30 @@ const mysql = require("mysql2");
 const connection = mysql.createPool(dbconfig);
 
 const storage = multer.diskStorage({
-	destination: function (req, file, callback) {
-		callback(null, "./app/profileimages/avatars");
-	},
-	filename: function (req, file, callback) {
-		callback(null, file.originalname.split("/").pop().trim());
-	},
+    destination: function (req, file, callback) {
+        callback(null, "./app/profileimages/avatars");
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.originalname.split("/").pop().trim());
+    },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+    storage: storage
+});
 
+const timeline = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "./app/profileimages/timeline");
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.originalname.split("/").pop().trim());
+    },
+});
+
+const timelineupload = multer({
+    storage: timeline
+});
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -50,6 +64,7 @@ app.use("/images", express.static("public/images"));
 app.use("/html", express.static("app/html"));
 app.use("/text", express.static("app/text"));
 app.use("/profileimages", express.static("app/profileimages"));
+app.use("/timeline", express.static("app/profileimages"));
 
 app.use(session({
     secret: "extra text that no one will guess",
@@ -76,8 +91,22 @@ app.get("/dashboard", function (req, res) {
     } else if (req.session.loggedIn && req.session.admin == 0) {
         let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
-        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
-        res.send(profileDOM.serialize());
+
+        connection.query(
+            "SELECT filename from bby23_timeline WHERE ID = ?",
+            [req.session.key],
+            function (err, results, fields) {
+                if (err) {
+                    console.log(err.message);
+                }
+                profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
+                profileDOM.window.document.getElementById("timeline").innerHTML = "<img id=\"photo\" src=\"profileimages/timeline/" + results[0].filename + "\">";
+                res.send(profileDOM.serialize());
+            }
+        );
+
+        // profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
+        // res.send(profileDOM.serialize());
     } else {
         res.redirect("/");
     }
@@ -106,7 +135,7 @@ app.post("/login", function (req, res) {
                 req.session.password = userRecord.password;
                 req.session.admin = userRecord.admin;
                 req.session.key = userRecord.ID;
-                req.session.save(function (err) { });
+                req.session.save(function (err) {});
                 res.send({
                     status: "success",
                     msg: "Logged in."
@@ -160,18 +189,18 @@ app.get('/get-users', function (req, res) {
 app.get('/get-userInfo', function (req, res) {
     connection.query('SELECT * FROM bby23_user WHERE ID = ?', [req.session.key],
 
-    function (error, results, fields) {
-        if (error) {
-            console.log(error);
-        }
-        res.send({
-            status: "success",
-            // name: req.session.name,
-            // email: req.session.email,
-            // password: req.session.password,
-            profile: results[0]
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                // name: req.session.name,
+                // email: req.session.email,
+                // password: req.session.password,
+                profile: results[0]
+            });
         });
-    });
 });
 
 app.post('/add-user', function (req, res) {
@@ -330,7 +359,7 @@ app.post('/delete-user', function (req, res) {
 app.get("/profile", function (req, res) {
     if (req.session.loggedIn) {
         const profile = fs.readFileSync("./app/html/profile.html", "utf8");
-        
+
         let profileDOM = new JSDOM(profile);
         // profileDOM.window.document.getElementById("avatar_name").innerHTML =
         //     req.session.name;
@@ -372,8 +401,8 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
         if (err) {
             console.log(err);
         } else {
-					const rows = JSON.parse(JSON.stringify(results[0]));
-					const key = Object.values(rows);
+            const rows = JSON.parse(JSON.stringify(results[0]));
+            const key = Object.values(rows);
             connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, key], function (err, results) {
                 if (err) {
                     console.log(err);
@@ -381,6 +410,18 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
                     console.log(results);
                 }
             })
+        }
+    })
+});
+
+app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
+connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
+    [req.files[0].filename, "description test", "5/17/22", "11:14AM", req.session.key],
+    function (err, results) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(results);
         }
     })
 });
