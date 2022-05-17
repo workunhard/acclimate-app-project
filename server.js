@@ -91,8 +91,22 @@ app.get("/dashboard", function (req, res) {
     } else if (req.session.loggedIn && req.session.admin == 0) {
         let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
-        profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
-        res.send(profileDOM.serialize());
+
+        connection.query(
+            "SELECT filename from bby23_timeline WHERE ID = ?",
+            [req.session.key],
+            function (err, results, fields) {
+                if (err) {
+                    console.log(err.message);
+                }
+                profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
+                profileDOM.window.document.getElementById("timeline").innerHTML = "<img id=\"photo\" src=\"profileimages/timeline/" + results[0].filename + "\">";
+                res.send(profileDOM.serialize());
+            }
+        );
+
+        // profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
+        // res.send(profileDOM.serialize());
     } else {
         res.redirect("/");
     }

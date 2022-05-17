@@ -119,6 +119,11 @@ nav {
   text-align: center;
 }
 
+#timeline img {
+  width: 80%;
+  height: auto;
+}
+
 dd {
   font-style: italic;
   font-weight: bold;
@@ -194,11 +199,10 @@ dd {
 
 @media only screen and (min-width: 801px) {
   .container{
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 60px 1000px 60px;
+    grid-template-rows: 60px 800px 60px;
     height: 100vh;
-    padding: 1em;
   }
   #navbarPlaceholder {
     grid-column: 1;
@@ -207,48 +211,49 @@ dd {
 
   #contentBody {
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 46% 54%;
     grid-template-rows: 50% 50%;
     grid-column: 1;
     grid-row: 2;
-    padding-top: 20px;
+    padding-top: 40px;
     padding-bottom: 20px;
   }
 
   #sidebar {
-    grid-column: 1;
+    grid-column: 2;
     grid-row: 1 / span 2;
     background-color:blanchedalmond;
     border-radius: 10px 10px 10px 10px;
   }
 
   #map {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 1;
     /* background-color: beige; */
     text-align: center;
+    margin-top: 25%;
     border-radius: 10px 10px 10px 10px;
   }
 
   #bbymap {
-    width: 80%;
-    height: 100%;
+    width: 95%;
+    height: auto;
     border-radius: 10px 10px 10px 10px;
     border: 1px solid grey;  
   }
 
   #forecast {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 2;
     /* background-color: cornsilk; */
     text-align: center;
     border-radius: 10px 10px 10px 10px;
-    margin-top: 10px;
+    margin-top: 0%;
   }
 
   #forecastTable {
-    width: 80%;
-    height: 100%;
+    width: 95%;
+    height: auto;
     border-radius: 10px 10px 10px 10px;
     border: 1px solid grey;
   }
