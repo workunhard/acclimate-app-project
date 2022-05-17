@@ -199,7 +199,6 @@ app.post('/add-user', function (req, res) {
 app.post('/update-email', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("updated values", req.body.email, req.body.id)
     connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
         [req.body.email, req.body.id],
         function (error, results, fields) {
@@ -217,7 +216,6 @@ app.post('/update-email', function (req, res) {
 app.post('/update-userEmail', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("updated values", req.body.email, req.session.key)
     connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
         [req.body.email, req.session.key],
         function (error, results, fields) {
@@ -235,7 +233,6 @@ app.post('/update-userEmail', function (req, res) {
 app.post('/update-name', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("updated values", req.body.name, req.body.id)
     connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
         [req.body.name, req.body.id],
         function (error, results, fields) {
@@ -252,7 +249,6 @@ app.post('/update-name', function (req, res) {
 app.post('/update-userName', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("updated values", req.body.name, req.session.key)
     connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
         [req.body.name, req.session.key],
         function (error, results, fields) {
@@ -268,7 +264,7 @@ app.post('/update-userName', function (req, res) {
 
 app.post('/update-password', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    console.log("updated values", req.body.password, req.body.id)
+
     connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
         [req.body.password, req.body.id],
         function (error, results, fields) {
@@ -284,7 +280,7 @@ app.post('/update-password', function (req, res) {
 
 app.post('/update-userPassword', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    console.log("updated values", req.body.password, req.session.key)
+
     connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
         [req.body.password, req.session.key],
         function (error, results, fields) {
@@ -301,7 +297,6 @@ app.post('/update-userPassword', function (req, res) {
 app.post('/update-admin', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("updated values", req.body.admin, req.body.id)
     connection.query('UPDATE bby23_user SET admin = ? WHERE ID = ?',
         [req.body.admin, req.body.id],
         function (error, results, fields) {
@@ -360,7 +355,6 @@ app.get("/profile", function (req, res) {
                             if (err) {
                                 console.log(err.message);
                             }
-                            console.log(results[0].avatar);
                             profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img id=\"photo\" src=\"profileimages/avatars/" + results[0].avatar + "\">";
                             res.send(profileDOM.serialize());
                         }
