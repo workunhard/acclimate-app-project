@@ -3,6 +3,7 @@ let watchID = 0;
 function success(position) {
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
+  initMap(latitude,longitude);
 
   console.log("Lat: " + latitude + "Long: " + longitude);
 }
@@ -29,12 +30,10 @@ function initMap(latitude, longitude) {
   reverseGeocoding(geocoder,map,infowindow,)
 } 
 
-function reverseGeocoding(geocoder, map, infowindow, coord) {
-  const input = coord;
-  const latlngStr = input.split(",", 2);
+function reverseGeocoding(geocoder, map, infowindow, latitude, longitude) {
   const latlng = {
-    lat: parseFloat(latlngStr[0]),
-    lng: parseFloat(latlngStr[1])
+    lat: parseFloat(latitude),
+    lng: parseFloat(longitude)
   };
 
   geocoder.geocode({location: latlng})
@@ -57,4 +56,4 @@ function reverseGeocoding(geocoder, map, infowindow, coord) {
 
 }
 
-window.initMap = initMap;
+// window.initMap = initMap;
