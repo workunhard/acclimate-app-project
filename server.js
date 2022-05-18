@@ -7,6 +7,10 @@ const multer = require("multer");
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
+const heroku_host = process.env.HEROKU_HOST;
+const heroku_user = process.env.HEROKU_USER;
+const heroku_pass = process.env.HEROKU_PASS;
+const heroku_db = process.env.HEROKU_DB;
 const S3_BUCKET = "acclimate-avatars";
 const {
     JSDOM
@@ -27,10 +31,10 @@ const localDbConfig = {
 };
 
 const herokuDbConfig = {
-    host: process.env.HEROKU_HOST,
-    user: process.env.HEROKU_USER,
-    password: process.env.HEROKU_PASS,
-    database: process.env.HEROKU_DB
+    host: heroku_host,
+    user: heroku_user,
+    password: heroku_pass,
+    database: heroku_db
 }
 
 if (is_heroku) {
