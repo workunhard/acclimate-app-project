@@ -100,7 +100,11 @@ app.get("/dashboard", function (req, res) {
                     console.log(err.message);
                 }
                 profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
-                profileDOM.window.document.getElementById("timeline").innerHTML = "<img id=\"photo\" src=\"profileimages/timeline/" + results[0].filename + "\">";
+                if (results.length > 0) {
+                    if (results[0].filename != null) {
+                        profileDOM.window.document.getElementById("timeline").innerHTML = "<img id=\"photo\" src=\"profileimages/timeline/" + results[0].filename + "\">";
+                    }
+                }
                 res.send(profileDOM.serialize());
             }
         );
@@ -135,7 +139,7 @@ app.post("/login", function (req, res) {
                 req.session.password = userRecord.password;
                 req.session.admin = userRecord.admin;
                 req.session.key = userRecord.ID;
-                req.session.save(function (err) {});
+                req.session.save(function (err) { });
                 res.send({
                     status: "success",
                     msg: "Logged in."
@@ -384,7 +388,11 @@ app.get("/profile", function (req, res) {
                             if (err) {
                                 console.log(err.message);
                             }
-                            profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img id=\"photo\" src=\"profileimages/avatars/" + results[0].avatar + "\">";
+                            if (results.length > 0) {
+                                if (results[0].avatar != null) {
+                                    profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img id=\"photo\" src=\"profileimages/avatars/" + results[0].avatar + "\">";
+                                }
+                            }
                             res.send(profileDOM.serialize());
                         }
                     );
@@ -415,15 +423,15 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
 });
 
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
-connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-    [req.files[0].filename, "description test", "5/17/22", "11:14AM", req.session.key],
-    function (err, results) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(results);
-        }
-    })
+    connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
+        [req.files[0].filename, "description test", "5/17/22", "11:14AM", req.session.key],
+        function (err, results) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(results);
+            }
+        })
 });
 
 // RUN SERVER
