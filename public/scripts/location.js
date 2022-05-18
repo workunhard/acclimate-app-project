@@ -64,6 +64,13 @@
 // locate you.
 let map, infoWindow;
 
+// To allow the coordinates to be used by the openWeather API.
+let posOutside = {lat: 0, long: 0}; 
+
+
+/**
+ * 
+ */
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -34.397, lng: 150.644 },
@@ -86,7 +93,8 @@ function initMap() {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-
+          posOutside = pos;
+          console.log(posOutside.lat + " " + posOutside.long);
           infoWindow.setPosition(pos);
           infoWindow.setContent("Location found.");
           infoWindow.open(map);
@@ -103,6 +111,13 @@ function initMap() {
   };
 }
 
+
+/**
+ * To handle any errors encountered in the geolocation API. 
+ * @param {*} browserHasGeolocation Whether the user has granted permission for their location to be tracked. 
+ * @param {*} infoWindow The default window displayed on top of the google maps. 
+ * @param {*} pos The positions object containing the latitude and the longitude of the user. 
+ */
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
