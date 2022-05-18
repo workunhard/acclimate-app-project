@@ -112,7 +112,7 @@ app.get("/dashboard", function (req, res) {
                 if (results.length > 0) {
                     let str = "";
                     for (i = results.length - 1; i >= 0; i--) {
-                        str = str + "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><p id = postID>" + results[i].imageID + "</p><br>"
+                        str = str + "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><p id = postID>" + results[i].imageID + "</p><br>" + results[i].description
                     }
                     // if (results[0].filename != null) {
                     profileDOM.window.document.getElementById("timeline").innerHTML = str;
@@ -438,7 +438,7 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
 
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
     connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-        [req.files[0].filename, "description test", "5/17/22", "11:14AM", req.session.key],
+        [req.files[0].filename, req.body.description, "5/17/22", "11:14AM", req.session.key],
         function (err, results) {
             if (err) {
                 console.log(err);

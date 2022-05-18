@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/site.webmanifest"> -->
+    <title>Dashboard | Acclimate</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.1/tinymce.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/user-style.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav id="navbarPlaceholder"></nav>
+        <div id="uploadbox">
+            <h3>Upload to timeline</h3>
+            <textarea id="description"></textarea>
+            <form id="upload-timeline-form">
+                <input id="timeline-upload" type="file" value="Upload Image" accept="image/png, image/gif, image/jpeg"
+                    multiple="multiple" />
+                <input id="submit" type="submit" value="Submit" />
+            </form>
+            <br>
+
+            <nav id="footerPlaceholder"></nav>
+        </div>
+        <script src="../scripts/skeleton.js"></script>
+        <script src="../scripts/upload.js"></script>
+        <script type="text/javascript">
+            tinymce.init({
+                selector: '#description',
+                height: 300,
+                theme: 'modern',
+                plugins: [
+                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen',
+                    'insertdatetime media nonbreaking save table contextmenu directionality',
+                    'emoticons template paste textcolor colorpicker textpattern imagetools'
+                ],
+                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                toolbar2: 'print preview media | forecolor backcolor emoticons',
+                image_advtab: true
+            });
+        </script>
+
+</body>
+
+</html>
