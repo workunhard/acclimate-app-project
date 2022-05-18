@@ -257,12 +257,13 @@
     }
 }
 
-/* Clouds */
+/* CSS Clouds */
 #clouds {
     padding: 100px 0;
     background: none;
     height: 100vh;
     position: fixed;
+    opacity: .8;
   }
   
   .cloud {
@@ -297,13 +298,13 @@
   
   .c1 {
       top: -100px;
-      animation: moveclouds 45s linear infinite;
+      animation: drift 45s linear infinite;
   }
   
   .c2 {
     left: 200px;
     transform: scale(0.6); 
-    animation: moveclouds 40s linear infinite;
+    animation: drift 40s linear infinite;
   }
   
   .c3 {
@@ -311,19 +312,19 @@
     top: -200px;
     transform: scale(0.3);
     opacity: .8;
-    animation: moveclouds 35s linear infinite;
+    animation: drift 35s linear infinite;
   }
   
   .c4 {
     left: 300px;
     transform: scale(0.8);
-    animation: moveclouds 48s linear infinite;
+    animation: drift 48s linear infinite;
   }
   
   .c5 {
     left: -200px;
     transform: scale(0.7);  
-    animation: moveclouds 35s linear infinite;
+    animation: drift 35s linear infinite;
   }
   
   .c6 {
@@ -331,31 +332,31 @@
     top: -200px;
     transform: scale(0.4);
     opacity: 0.8;
-    animation: moveclouds 25s linear infinite;
+    animation: drift 25s linear infinite;
   }
   .c7 {
     left: 850px;
     top: -200px;
     transform: scale(0.4);
     opacity: 0.8;
-    animation: moveclouds 40s linear infinite;
+    animation: drift 40s linear infinite;
   }
   .c8 {
     left: 1500px;
     top: -200px;
     transform: scale(0.8);
     opacity: 0.8;
-    animation: moveclouds 45s linear infinite;
+    animation: drift 45s linear infinite;
   }
   .c9 {
     left: 1300px;
     top: -200px;
     transform: scale(0.6);
     opacity: 0.8;
-    animation: moveclouds 35s linear infinite;
+    animation: drift 35s linear infinite;
   }
   
-  @keyframes moveclouds {
+  @keyframes drift {
       0% {margin-left: 2000px;}
       100% {margin-left: -1000px;}
   }
