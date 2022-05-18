@@ -12,12 +12,12 @@ const {
     JSDOM
 } = require('jsdom');
 
-const sslKey = fs.readFileSync('cert/key.pem', 'utf8');
-const sslCertificate = fs.readFileSync('cert/cert.pem', 'utf8');
-const sslCredentials = { key: sslKey, cert: sslCertificate };
+// const sslKey = fs.readFileSync('cert/key.pem', 'utf8');
+// const sslCertificate = fs.readFileSync('cert/cert.pem', 'utf8');
+// const sslCredentials = { key: sslKey, cert: sslCertificate };
 
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer(sslCredentials, app);
+// const httpServer = http.createServer(app);
+// const httpsServer = https.createServer(sslCredentials, app);
 
 const localDbConfig = {
     host: 'localhost',
