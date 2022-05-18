@@ -14,10 +14,10 @@ const {
 
 const sslKey = fs.readFileSync('cert/key.pem', 'utf8');
 const sslCertificate = fs.readFileSync('cert/cert.pem', 'utf8');
-const sslCredentials = {key: sslKey, cert: sslCertificate};
+const sslCredentials = { key: sslKey, cert: sslCertificate };
 
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(sslCredentials,app);
+const httpsServer = https.createServer(sslCredentials, app);
 
 const localDbConfig = {
     host: 'localhost',
@@ -109,7 +109,7 @@ app.get("/dashboard", function (req, res) {
         let profileDOM = new JSDOM(profile);
         
         connection.query(
-            "SELECT filename from bby23_timeline WHERE ID = ?",
+            "SELECT * from bby23_timeline WHERE ID = ?",
             [req.session.key],
             function (err, results, fields) {
                 if (err) {
@@ -117,9 +117,14 @@ app.get("/dashboard", function (req, res) {
                 }
                 profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
                 if (results.length > 0) {
-                    if (results[0].filename != null) {
-                        profileDOM.window.document.getElementById("timeline").innerHTML = "<img id=\"photo\" src=\"profileimages/timeline/" + results[0].filename + "\">";
+                    let str = "";
+                    for (i = results.length - 1; i >= 0; i--) {
+                        str = str + "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><p id = postID>" + results[i].imageID + "</p><br>"
                     }
+                    // if (results[0].filename != null) {
+                    profileDOM.window.document.getElementById("timeline").innerHTML = str;
+                    // "<img id=\"photo\" src=\"profileimages/timeline/" + results[0].filename + "\">";
+                    // }
                 }
                 res.send(profileDOM.serialize());
             }
