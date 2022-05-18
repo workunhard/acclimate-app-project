@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/styles/style.css" rel="stylesheet" />
     <link href="/styles/login.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png" />
@@ -17,9 +18,11 @@
         <div id="formPanel">
             <form id='loginForm'>
                 <h1 id="formTitle">AccliMate</h1>
-                <input id='email' type='email' required="required" placeholder="Email" value="bruce_link@bcit.ca" /><br>
+                <div id = "inputBox">
+                <input id='email' type='email' required="required" placeholder="Email" value="" /><br>
                 <input id='password' type='password' required="required" placeholder="Password"
-                    value="abc123" /><br><br>
+                    value="" /><br><br>
+                </div>
                 <input type="button" value="Sign-In" id="submit" />
                 <p><span id="serverMsg"></span></p>
                 <p id="forgotP"><a href="#">Forgot email/password? <span id="clickme">Click here</span></a></p>

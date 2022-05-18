@@ -57,6 +57,36 @@ ready(function () {
             }
         }, queryString);
     });
+
+    document.querySelector("#signUp").addEventListener("click", function(e) {
+        e.preventDefault();
+        $('#inputBox').load('/text/signup.html');
+        const button = document.getElementById('submit');
+        button.value = "Sign-Up";
+        button.id = "signupsubmission";
+    });
+
+    document.querySelector("#signupsubmission").addEventListener("click", function (e) {
+        e.preventDefault();
+        let name = document.getElementById("name");
+        let email = document.getElementById("email");
+        let password = document.getElementById("password");
+        let queryString = "name=" + name.value + "&email=" + email.value + "&password=" + password.value;
+
+        ajaxPOST("/add_user", function (data) {
+
+            if (data) {
+                let dataParsed = JSON.parse(data);
+                console.log(dataParsed);
+                if (dataParsed.status == "fail") {
+                    document.getElementById("errorMsg").innerHTML = dataParsed.msg;
+                } else {
+                    window.location.replace("/dashboard");
+                }
+            }
+        }, queryString);
+    });
+    
 });
 
 function ready(callback) {
