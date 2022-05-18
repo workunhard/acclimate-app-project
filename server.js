@@ -113,6 +113,7 @@ app.post("/login", function (req, res) {
                 req.session.name = userRecord.name;
                 req.session.password = userRecord.password;
                 req.session.admin = userRecord.admin;
+                req.session.key = userRecord.ID;
                 req.session.save(function (err) { });
                 res.send({
                     status: "success",
@@ -164,6 +165,23 @@ app.get('/get-users', function (req, res) {
     });
 });
 
+app.get('/get-userInfo', function (req, res) {
+    connection.query('SELECT * FROM bby23_user WHERE ID = ?', [req.session.key],
+
+    function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        res.send({
+            status: "success",
+            // name: req.session.name,
+            // email: req.session.email,
+            // password: req.session.password,
+            profile: results[0]
+        });
+    });
+});
+
 app.post('/add-user', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -189,9 +207,25 @@ app.post('/add-user', function (req, res) {
 app.post('/update-email', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("updated values", req.body.email, req.body.id)
     connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
         [req.body.email, req.body.id],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
+
+        });
+});
+
+app.post('/update-userEmail', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+
+    connection.query('UPDATE bby23_user SET email = ? WHERE ID = ?',
+        [req.body.email, req.session.key],
         function (error, results, fields) {
             if (error) {
                 console.log(error);
@@ -207,7 +241,6 @@ app.post('/update-email', function (req, res) {
 app.post('/update-name', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("updated values", req.body.name, req.body.id)
     connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
         [req.body.name, req.body.id],
         function (error, results, fields) {
@@ -221,11 +254,43 @@ app.post('/update-name', function (req, res) {
         });
 });
 
+app.post('/update-userName', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+
+    connection.query('UPDATE bby23_user SET name = ? WHERE ID = ?',
+        [req.body.name, req.session.key],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
+        });
+});
+
 app.post('/update-password', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    console.log("updated values", req.body.password, req.body.id)
+
     connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
         [req.body.password, req.body.id],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: "Recorded update."
+            });
+        });
+});
+
+app.post('/update-userPassword', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+
+    connection.query('UPDATE bby23_user SET password = ? WHERE ID = ?',
+        [req.body.password, req.session.key],
         function (error, results, fields) {
             if (error) {
                 console.log(error);
@@ -240,7 +305,6 @@ app.post('/update-password', function (req, res) {
 app.post('/update-admin', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("updated values", req.body.admin, req.body.id)
     connection.query('UPDATE bby23_user SET admin = ? WHERE ID = ?',
         [req.body.admin, req.body.id],
         function (error, results, fields) {
@@ -273,17 +337,15 @@ app.post('/delete-user', function (req, res) {
 
 app.get("/profile", function (req, res) {
     if (req.session.loggedIn) {
-        let profile = "";
-        if (req.session.admin == 1) {
-            profile = fs.readFileSync("./app/html/profile.html", "utf8");
-        }
+        const profile = fs.readFileSync("./app/html/profile.html", "utf8");
+        
         let profileDOM = new JSDOM(profile);
-        profileDOM.window.document.getElementById("avatar_name").innerHTML =
-            req.session.name;
-        profileDOM.window.document.getElementById("avatar_email").innerHTML =
-            req.session.email;
-        profileDOM.window.document.getElementById("avatar_password").innerHTML =
-            req.session.password;
+        // profileDOM.window.document.getElementById("avatar_name").innerHTML =
+        //     req.session.name;
+        // profileDOM.window.document.getElementById("avatar_email").innerHTML =
+        //     req.session.email;
+        // profileDOM.window.document.getElementById("avatar_password").innerHTML =
+        //     req.session.password;
 
         connection.query(
             "SELECT ID FROM bby23_user WHERE name = ?",
@@ -301,30 +363,13 @@ app.get("/profile", function (req, res) {
                             if (err) {
                                 console.log(err.message);
                             }
-                            console.log(results[0].avatar);
                             profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img id=\"photo\" src=\"profileimages/avatars/" + results[0].avatar + "\">";
-                            // profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"../../" + results[0].avatar + "\">";
                             res.send(profileDOM.serialize());
-                            // const rows = JSON.parse(JSON.stringify(results[0]));
-                            // const key = Object.values(rows);
-                            // profileDOM.window.document.getElementById(
-                            // 	"userAvatar"
-                            // ).src = `${key}`;
                         }
                     );
                 }
-                // const answer = results[0].toString();
-                // const rows = JSON.parse(JSON.stringify(results[0]));
-                // console.log(rows);
-                // console.log(req.body.id);
-                // console.log("Results:" + rows);
-                // profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img src=\"" + results[0].avatar + "\">";
-                // res.send(profileDOM.serialize());
             }
         );
-
-        // res.send(profileDOM.serialize());
-        // res.send(profile);
     } else {
         res.redirect("/");
     }
@@ -373,9 +418,9 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            const name = results.name;
-            console.log(name);
-            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, 1], function (err, results) {
+					const rows = JSON.parse(JSON.stringify(results[0]));
+					const key = Object.values(rows);
+            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, key], function (err, results) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -384,15 +429,6 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
             })
         }
     })
-
-    connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, 1], function (err, results) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(results);
-        }
-    })
-
 });
 
 // RUN SERVER
