@@ -173,6 +173,7 @@ dd {
     grid-row: 1;
     background-color:blanchedalmond;
     border-radius: 10px 10px 10px 10px;
+    overflow-y: auto;
   }
 
   #map {
@@ -229,6 +230,7 @@ dd {
     grid-row: 1 / span 4;
     background-color:blanchedalmond;
     border-radius: 10px 10px 10px 10px;
+    overflow-y: auto;
   }
 
   #map {
