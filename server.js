@@ -1,4 +1,5 @@
 const express = require("express");
+const aws = require('aws-sdk');
 const session = require("express-session");
 const http = require('http');
 const https = require("https");
@@ -6,6 +7,7 @@ const multer = require("multer");
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
+const S3_BUCKET = "acclimate-avatars";
 const {
     JSDOM
 } = require('jsdom');
@@ -25,10 +27,10 @@ const localDbConfig = {
 };
 
 const herokuDbConfig = {
-    host: 'qz8si2yulh3i7gl3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-    user: 'i8titfbhmggktzud',
-    password: 't5frs4lz1adk3rmr',
-    database: 'qhfgyfeinmbwri94'
+    host: process.env.HEROKU_HOST,
+    user: process.env.HEROKU_USER,
+    password: process.env.HEROKU_PASS,
+    database: process.env.HEROKU_DB
 }
 
 if (is_heroku) {
@@ -37,16 +39,20 @@ if (is_heroku) {
     var dbconfig = localDbConfig;
 }
 
+app.engine('html', require('ejs').renderFile);
+
+aws.config.region = 'us-west-1';
+
 const mysql = require("mysql2");
 const connection = mysql.createPool(dbconfig);
 
 const storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, "./app/profileimages/avatars");
-    },
-    filename: function (req, file, callback) {
-        callback(null, file.originalname.split("/").pop().trim());
-    },
+	destination: function (req, file, callback) {
+		callback(null, "./app/profileimages/avatars");
+	},
+	filename: function (req, file, callback) {
+		callback(null, file.originalname.split("/").pop().trim());
+	},
 });
 
 const upload = multer({
@@ -65,6 +71,7 @@ const timeline = multer.diskStorage({
 const timelineupload = multer({
     storage: timeline
 });
+
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -100,7 +107,7 @@ app.get("/dashboard", function (req, res) {
     } else if (req.session.loggedIn && req.session.admin == 0) {
         let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
-
+        
         connection.query(
             "SELECT filename from bby23_timeline WHERE ID = ?",
             [req.session.key],
@@ -202,18 +209,18 @@ app.get('/get-users', function (req, res) {
 app.get('/get-userInfo', function (req, res) {
     connection.query('SELECT * FROM bby23_user WHERE ID = ?', [req.session.key],
 
-        function (error, results, fields) {
-            if (error) {
-                console.log(error);
-            }
-            res.send({
-                status: "success",
-                // name: req.session.name,
-                // email: req.session.email,
-                // password: req.session.password,
-                profile: results[0]
-            });
+    function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        res.send({
+            status: "success",
+            // name: req.session.name,
+            // email: req.session.email,
+            // password: req.session.password,
+            profile: results[0]
         });
+    });
 });
 
 app.post('/add-user', function (req, res) {
@@ -372,7 +379,7 @@ app.post('/delete-user', function (req, res) {
 app.get("/profile", function (req, res) {
     if (req.session.loggedIn) {
         const profile = fs.readFileSync("./app/html/profile.html", "utf8");
-
+        
         let profileDOM = new JSDOM(profile);
         // profileDOM.window.document.getElementById("avatar_name").innerHTML =
         //     req.session.name;
@@ -396,12 +403,12 @@ app.get("/profile", function (req, res) {
                         function (err, results, fields) {
                             if (err) {
                                 console.log(err.message);
-                            }
+                            }                           
                             if (results.length > 0) {
                                 if (results[0].avatar != null) {
                                     profileDOM.window.document.getElementById("userAvatar").innerHTML = "<img id=\"photo\" src=\"profileimages/avatars/" + results[0].avatar + "\">";
                                 }
-                            }
+                            }  
                             res.send(profileDOM.serialize());
                         }
                     );
@@ -413,13 +420,51 @@ app.get("/profile", function (req, res) {
     }
 });
 
+app.get('/sign-s3', (req, res) => {
+    const s3 = new aws.S3();
+    const fileName = req.query['file-name'];
+    const fileType = req.query['file-type'];
+    const s3Params = {
+      Bucket: "acclimate-avatars",
+      Key: fileName,
+      Expires: 300,
+      ContentType: fileType,
+      ACL: 'public-read'
+    };
+
+    console.log("at sign-s3 / getsigned");
+  
+    s3.getSignedUrl('putObject', s3Params, (err, data) => {
+      if(err){
+        console.log("error in getSignedUrl");
+        console.log(err);
+        return res.end();
+      }
+      const returnData = {
+        signedRequest: data,
+        url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+      };
+      console.log("returned data");
+      console.log(returnData);
+      res.write(JSON.stringify(returnData));
+      res.end();
+    });
+    console.log("end of sign-s3");
+  }
+);
+
+app.post('/save-details', (req, res) => {
+    // TODO: Read POSTed form data and do something useful
+  }
+);
+
 app.post("/upload-images", upload.array("files"), function (req, res) {
     connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
         if (err) {
             console.log(err);
         } else {
-            const rows = JSON.parse(JSON.stringify(results[0]));
-            const key = Object.values(rows);
+					const rows = JSON.parse(JSON.stringify(results[0]));
+					const key = Object.values(rows);
             connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, key], function (err, results) {
                 if (err) {
                     console.log(err);
