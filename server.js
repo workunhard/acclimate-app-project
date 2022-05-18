@@ -494,13 +494,13 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
 });
 
 // RUN SERVER
-// const PORT = process.env.PORT || 8000;
-// app.listen(PORT, () => {
-//     console.log(`App listening on port ${PORT}`);
-//     console.log('Press Ctrl+C to quit.');
-// })
-
-const securePort = 8000;
-httpsServer.listen(securePort, () => {
-	console.log(`App listening on port ${securePort}`);
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+    console.log('Press Ctrl+C to quit.');
 })
+
+// const securePort = 8000;
+// httpsServer.listen(securePort, () => {
+// 	console.log(`App listening on port ${securePort}`);
+// })
