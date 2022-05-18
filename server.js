@@ -5,7 +5,7 @@ const multer = require("multer");
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
-const S3_BUCKET = process.env.S3_BUCKET;
+const S3_HIDDEN_BUCKET = process.env.S3_BUCKET;
 const {
     JSDOM
 } = require('jsdom');
@@ -380,7 +380,7 @@ app.get('/sign-s3', (req, res) => {
     const fileName = req.query['file-name'];
     const fileType = req.query['file-type'];
     const s3Params = {
-      Bucket: "acclimate-avatars",
+      Bucket: S3_HIDDEN_BUCKET,
       Key: fileName,
       Expires: 300,
       ContentType: fileType,
@@ -397,7 +397,7 @@ app.get('/sign-s3', (req, res) => {
       }
       const returnData = {
         signedRequest: data,
-        url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+        url: `https://${S3_HIDDEN_BUCKET}.s3.amazonaws.com/${fileName}`
       };
       console.log("returned data");
       console.log(returnData);
