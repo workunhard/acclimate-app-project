@@ -116,7 +116,7 @@ app.get("/dashboard", function (req, res) {
                     let str = "";
                     for (i = results.length - 1; i >= 0; i--) {
                         str = str + "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" + results[i].description + "<br>" +
-                            results[i].date + " " + results[i].time
+                            results[i].date + " " + results[i].time + "<br>"
                     }
                     // if (results[0].filename != null) {
                     profileDOM.window.document.getElementById("timeline").innerHTML = str;
