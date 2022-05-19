@@ -108,31 +108,31 @@ app.get("/dashboard", function (req, res) {
 		let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
 		let profileDOM = new JSDOM(profile);
 
-        connection.query(
-            "SELECT * from bby23_timeline WHERE ID = ?",
-            [req.session.key],
-            function (err, results, fields) {
-                if (err) {
-                    console.log(err.message);
-                }
-                profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
-                if (results.length > 0) {
-                    let str = "";
-                    for (i = results.length - 1; i >= 0; i--) {
-                        str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
-                            "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td></tr></table><br>" +
-                            "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
-                            results[i].description + "<br>" +
-                            results[i].date + " " + results[i].time + "<br>"
-                    }
-                    // if (results[0].filename != null) {
-                    profileDOM.window.document.getElementById("timeline").innerHTML = str;
-                    // "<img id=\"photo\" src=\"profileimages/timeline/" + results[0].filename + "\">";
-                    // }
-                }
-                res.send(profileDOM.serialize());
-            }
-        );
+		connection.query(
+			"SELECT * from bby23_timeline WHERE ID = ?",
+			[req.session.key],
+			function (err, results, fields) {
+				if (err) {
+					console.log(err.message);
+				}
+				profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
+				if (results.length > 0) {
+					let str = "";
+					for (i = results.length - 1; i >= 0; i--) {
+						str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
+							"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td></tr></table><br>" +
+							"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
+							results[i].description + "<br>" +
+							results[i].date + " " + results[i].time + "<br>"
+					}
+					// if (results[0].filename != null) {
+					profileDOM.window.document.getElementById("timeline").innerHTML = str;
+					// "<img id=\"photo\" src=\"profileimages/timeline/" + results[0].filename + "\">";
+					// }
+				}
+				res.send(profileDOM.serialize());
+			}
+		);
 
 		// profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
 		// res.send(profileDOM.serialize());
@@ -486,43 +486,55 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
 });
 
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+	res.setHeader('Content-Type', 'application/json');
+	var today = new Date();
+	var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-    connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-        [req.files[0].filename, req.body.description, date, time, req.session.key],
-        function (err, results) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(results);
-            }
-        })
+	if (req.files.length > 0) { 
+	connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
+		[req.files[0].filename, req.body.description, date, time, req.session.key],
+		function (err, results) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(results);
+			}
+		})
+} else {
+	connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
+		[null, req.body.description, date, time, req.session.key],
+		function (err, results) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(results);
+			}
+		})
+}
 });
 
 app.post('/delete-post', function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
+	res.setHeader('Content-Type', 'application/json');
 
-    connection.query('DELETE FROM bby23_timeline WHERE imageID = ?',
-        [req.body.imageID],
-        function (error, results, fields) {
-            if (error) {
-                console.log(error);
-            }
-            res.send({
-                status: "success",
-                msg: req.body.id + " deleted."
-            });
-        });
+	connection.query('DELETE FROM bby23_timeline WHERE imageID = ?',
+		[req.body.imageID],
+		function (error, results, fields) {
+			if (error) {
+				console.log(error);
+			}
+			res.send({
+				status: "success",
+				msg: req.body.id + " deleted."
+			});
+		});
 });
 
 // RUN SERVER
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
-    console.log('Press Ctrl+C to quit.');
+	console.log(`App listening on port ${PORT}`);
+	console.log('Press Ctrl+C to quit.');
 })
 
 // const securePort = 8000;
