@@ -21,12 +21,14 @@ function getWeather() {
     })
     .then(data => {
       console.log(data);
+      showWeather(data);
     })
-    .catch(console.err)
+    .catch(console.err);
+
+
 }
 
-function showWeather() {
-  
+function showWeather(data) {
+  $("#forecast").load('/text/weather.html');
+  // let {sunrise, sunset, temp, }
 }
-
-// weather();

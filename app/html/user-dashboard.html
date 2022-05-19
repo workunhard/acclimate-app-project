@@ -2,40 +2,40 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <!-- <link rel="manifest" href="/site.webmanifest"> -->
-    <title>Dashboard | Acclimate</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+	<!-- <link rel="manifest" href="/site.webmanifest"> -->
+	<title>Dashboard | Acclimate</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/user-style.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="../styles/user-style.css">
 </head>
 
 <body>
-    <div class="container">
-        <nav id="navbarPlaceholder"></nav>
-        <div id="contentBody">
-            <div id="sidebar">
-                <div id="alerts">
-                    <h2 id="profile_name">PROFILE_NAME</h2>
-                    <div id="timelinecontainer">
-                        <h3>Upload to timeline</h3>
-                        <form id="upload-timeline-form">
-                            <input id="timeline-upload" type="file" value="Upload Image"
-                                accept="image/png, image/gif, image/jpeg" multiple="multiple" />
-                            <input id="submit" type="submit" value="Submit" />
-                        </form>
-                        <br>
-                        <div id="timeline"></div>
-                        <br>
-                    </div>
-                    <!-- <h4>Recent Alerts</h4>
+	<div class="container">
+		<nav id="navbarPlaceholder"></nav>
+		<div id="contentBody">
+			<div id="sidebar">
+				<div id="alerts">
+					<h2 id="profile_name">PROFILE_NAME</h2>
+					<div id="timelinecontainer">
+						<h3>Upload to timeline</h3>
+						<form id="upload-timeline-form">
+							<input id="timeline-upload" type="file" value="Upload Image" accept="image/png, image/gif, image/jpeg"
+								multiple="multiple" />
+							<input id="submit" type="submit" value="Submit" />
+						</form>
+						<br>
+						<div id="timeline"></div>
+						<br>
+					</div>
+					<!-- <h4>Recent Alerts</h4>
                     <dl>
                         <dt>Who needs to pay for a sauna with this current heat wave</dt>
                         <dd>-everyonesGrandma @ 12:45PM</dd>
@@ -43,21 +43,26 @@
                         <dd>- BC Ministry of Health @ 9:10AM</dd>
                         <dt>A tree fell on top of another car on SW Marine drive. </dt>
                         <dd>- Wrongplacewrongtime @3:40PM</dd> -->
-                    </dl>
-                </div>
-            </div>
-            <div id="map">
-                <img id="bbymap" src="../images/bbymap2.jpg" alt="burnaby map">
-            </div>
-            <div id="forecast">
-                <img src="../images/forecast.jpeg" id="forecastTable" alt="example forecast">
-            </div>
-        </div>
-        <nav id="footerPlaceholder"></nav>
-    </div>
+					</dl>
+				</div>
+			</div>
+			<div id="map">
 
-    <script src="../scripts/skeleton.js"></script>
-    <script src="../scripts/user-dashboard.js"></script>
+			</div>
+			<div id="forecast">
+				<div id="currentDay"></div>
+				<div id="futureDays"></div>
+			</div>
+		</div>
+		<nav id="footerPlaceholder"></nav>
+	</div>
+
+	<script src="../scripts/skeleton.js"></script>
+	<script src="../scripts/user-dashboard.js"></script>
+	<script src="scripts/location.js"></script>
+	<script src="scripts/weather.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-isvrs8orgQc5a3KAUWQ&callback=initMap">
+	</script>
 
 </body>
 
