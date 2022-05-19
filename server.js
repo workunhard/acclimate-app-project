@@ -12,7 +12,10 @@ const {
 
 const sslKey = fs.readFileSync('cert/key.pem', 'utf8');
 const sslCertificate = fs.readFileSync('cert/cert.pem', 'utf8');
-const sslCredentials = { key: sslKey, cert: sslCertificate };
+const sslCredentials = {
+    key: sslKey,
+    cert: sslCertificate
+};
 
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(sslCredentials, app);
@@ -112,8 +115,8 @@ app.get("/dashboard", function (req, res) {
                 if (results.length > 0) {
                     let str = "";
                     for (i = results.length - 1; i >= 0; i--) {
-                        str = str + "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" + results[i].description + "<br>"
-                        + results[i].date + "<br>" + results[i].time
+                        str = str + "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" + results[i].description + "<br>" +
+                            results[i].date + " " + results[i].time
                     }
                     // if (results[0].filename != null) {
                     profileDOM.window.document.getElementById("timeline").innerHTML = str;
@@ -154,7 +157,7 @@ app.post("/login", function (req, res) {
                 req.session.password = userRecord.password;
                 req.session.admin = userRecord.admin;
                 req.session.key = userRecord.ID;
-                req.session.save(function (err) { });
+                req.session.save(function (err) {});
                 res.send({
                     status: "success",
                     msg: "Logged in."
@@ -441,9 +444,10 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
     res.setHeader('Content-Type', 'application/json');
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
     connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-        [req.files[0].filename, req.body.description, date, "11:14AM", req.session.key],
+        [req.files[0].filename, req.body.description, date, time, req.session.key],
         function (err, results) {
             if (err) {
                 console.log(err);
