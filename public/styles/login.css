@@ -22,6 +22,7 @@
         0% {
             opacity: 0;
         }
+
         100% {
             opacity: 1;
         }
@@ -255,6 +256,7 @@
         margin: 0;
         padding: 20px;
         color: white;
+        position: relative;
     }
 }
 
@@ -265,99 +267,145 @@
     height: 100vh;
     position: fixed;
     opacity: .8;
-  }
-  
-  .cloud {
+}
+
+.cloud {
     width: 200px;
     height: 60px;
     background-color: #F8FDFE;
     border-radius: 200px;
     position: relative;
-  }
-  
-  .cloud:before, .cloud:after {
+}
+
+.cloud:before,
+.cloud:after {
     content: '';
     position: absolute;
     background-color: #F8FDFE;
     width: 100px;
-    height:100px;
+    height: 100px;
     top: -45px;
     border-radius: 100px;
     transform: rotate(30deg);
-  }
-  
-  .cloud:after {
+}
+
+.cloud:after {
     width: 70px;
     height: 70px;
     top: -30px;
     right: 25px;
-  }
-  
-  .cloud:before {
+}
+
+.cloud:before {
     left: 25px;
-  }
-  
-  .c1 {
-      top: -100px;
-      animation: drift 45s linear infinite;
-  }
-  
-  .c2 {
+}
+
+.c1 {
+    top: -100px;
+    animation: drift 45s linear infinite;
+}
+
+.c2 {
     left: 200px;
-    transform: scale(0.6); 
+    transform: scale(0.6);
     animation: drift 40s linear infinite;
-  }
-  
-  .c3 {
+}
+
+.c3 {
     left: -250px;
     top: -200px;
     transform: scale(0.3);
     opacity: .8;
     animation: drift 35s linear infinite;
-  }
-  
-  .c4 {
+}
+
+.c4 {
     left: 300px;
     transform: scale(0.8);
     animation: drift 48s linear infinite;
-  }
-  
-  .c5 {
+}
+
+.c5 {
     left: -200px;
-    transform: scale(0.7);  
+    transform: scale(0.7);
     animation: drift 35s linear infinite;
-  }
-  
-  .c6 {
+}
+
+.c6 {
     left: 470px;
     top: -200px;
     transform: scale(0.4);
     opacity: 0.8;
     animation: drift 25s linear infinite;
-  }
-  .c7 {
+}
+
+.c7 {
     left: 850px;
     top: -200px;
     transform: scale(0.4);
     opacity: 0.8;
     animation: drift 40s linear infinite;
-  }
-  .c8 {
+}
+
+.c8 {
     left: 1500px;
     top: -200px;
     transform: scale(0.8);
     opacity: 0.8;
     animation: drift 45s linear infinite;
-  }
-  .c9 {
+}
+
+.c9 {
     left: 1300px;
     top: -200px;
     transform: scale(0.6);
     opacity: 0.8;
     animation: drift 35s linear infinite;
-  }
-  
-  @keyframes drift {
-      0% {margin-left: 2000px;}
-      100% {margin-left: -1000px;}
-  }
+}
+
+@keyframes drift {
+    0% {
+        margin-left: 2000px;
+    }
+
+    100% {
+        margin-left: -2000px;
+    }
+}
+
+/* CSS rain */
+
+#rain {
+    display: none;
+}
+
+.drop {
+    background: -webkit-gradient(linear, 0% 0%, 2% 100%, from(rgb(203, 212, 213)), to(rgba(1, 55, 192, 0.74)));
+    background: -moz-linear-gradient(top, rgba(207, 228, 231, 0.607) 0%, rgba(12, 162, 192, 0.76) 100%);
+    width: 1px;
+    height: 70px;
+    bottom: 100px;
+    display: block;
+    position: absolute;
+    -webkit-animation: fall .63s linear infinite;
+    -moz-animation: fall .63s linear infinite;
+    animation: fall .63s linear infinite;
+}
+
+@-webkit-keyframes fall {
+    to {
+        margin-top: 900px;
+    }
+}
+
+@-moz-keyframes fall {
+    to {
+        margin-top: 900px;
+    }
+}
+
+@keyframes fall {
+    to {
+        margin-top: 900px;
+    }
+}
