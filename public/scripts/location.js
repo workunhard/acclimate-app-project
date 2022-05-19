@@ -62,10 +62,12 @@
 // prompted by your browser. If you see the error "The Geolocation service
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
+
+
 let map, infoWindow;
 
 // To allow the coordinates to be used by the openWeather API.
-let posOutside = {lat: 0, long: 0}; 
+let posOutside = {lat: 0, lng:0}; 
 
 
 /**
@@ -74,16 +76,11 @@ let posOutside = {lat: 0, long: 0};
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -34.397, lng: 150.644 },
-    zoom: 11,
+    zoom: 13,
   });
   infoWindow = new google.maps.InfoWindow();
 
-  const locationButton = document.createElement("button");
 
-  locationButton.textContent = "Pan to Current Location";
-  locationButton.classList.add("custom-map-control-button");
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-  // window.addEventListener("DOMContentLoaded", 
   window.onload = () => {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -93,8 +90,9 @@ function initMap() {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          posOutside = pos;
-          console.log(posOutside.lat + " " + posOutside.long);
+          posOutside = structuredClone(pos);
+          getWeather();
+          console.log(posOutside.lat + "  " + posOutside.lng);
           infoWindow.setPosition(pos);
           infoWindow.setContent("Location found.");
           infoWindow.open(map);
@@ -129,3 +127,4 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 window.initMap = initMap;
+
