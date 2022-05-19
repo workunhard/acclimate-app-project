@@ -29,6 +29,18 @@ function getWeather() {
 }
 
 function showWeather(data) {
-  $("#forecast").load('/text/weather.html');
-  // let {sunrise, sunset, temp, }
+  // $("#forecast").load('/text/weather.html');
+  let {sunrise, sunset, temp, feels_like, humidity, windSpeed} = data.current;
+  const currentDay = document.getElementById('currentDay');
+
+  currentDay.innerHTML = 
+    `<div id = "box">
+      <img class = "weatherImg" src = "#" alt = "#">
+      <div id = "dayTemp">${temp}</div>
+      <div id = "feelsLike">${feels_like}</div>
+      <div id = "humidity">${humidity}</div>
+      <div id = "sunrise">${(sunrise * 1000).format('HH:mm a')}</div>
+      <div id = "sunset">${(sunset * 1000).format('HH:mm a')}</div>
+      <div id = "wind">${windSpeed}</div>
+    </div>`;
 }
