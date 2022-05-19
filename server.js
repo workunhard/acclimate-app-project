@@ -120,7 +120,8 @@ app.get("/dashboard", function (req, res) {
 					let str = "";
 					for (i = results.length - 1; i >= 0; i--) {
 						str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
-							"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td></tr></table><br>" +
+							"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" + 
+                            "<td class='editPost'><input type='button' id='editPost' value='Edit Post'></td></tr></table><br>" +
 							"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
 							results[i].description + "<br>" +
 							results[i].date + " " + results[i].time + "<br>"
