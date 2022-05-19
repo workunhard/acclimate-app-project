@@ -112,7 +112,7 @@ app.get("/dashboard", function (req, res) {
                 if (results.length > 0) {
                     let str = "";
                     for (i = results.length - 1; i >= 0; i--) {
-                        str = str + "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><p id = postID>" + results[i].imageID + "</p><br>" + results[i].description
+                        str = str + "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" + results[i].description + "<br>"
                     }
                     // if (results[0].filename != null) {
                     profileDOM.window.document.getElementById("timeline").innerHTML = str;
@@ -437,6 +437,8 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
 });
 
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    
     connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
         [req.files[0].filename, req.body.description, "5/17/22", "11:14AM", req.session.key],
         function (err, results) {
@@ -449,13 +451,13 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
 });
 
 // RUN SERVER
-// const PORT = process.env.PORT || 8000;
-// app.listen(PORT, () => {
-//     console.log(`App listening on port ${PORT}`);
-//     console.log('Press Ctrl+C to quit.');
-// })
-
-const securePort = 8000;
-httpsServer.listen(securePort, () => {
-	console.log(`App listening on port ${securePort}`);
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+    console.log('Press Ctrl+C to quit.');
 })
+
+// const securePort = 8000;
+// httpsServer.listen(securePort, () => {
+// 	console.log(`App listening on port ${securePort}`);
+// })

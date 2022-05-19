@@ -1,54 +1,51 @@
-const upLoadForm = document.getElementById("upload-timeline-form");
-upLoadForm.addEventListener("submit", uploadTimeline);
+tinymce.init({
+  selector: '#description',
+  height: 300,
+  setup: function (editor) {
+      editor.on('init', function () {
+          this.setContent('<p>Add content via on init!</p>');
+          console.log(tinyMCE.activeEditor.getContent());
+      });
+  },
+  theme: 'modern',
+  plugins: [
+      'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      'searchreplace wordcount visualblocks visualchars code fullscreen',
+      'insertdatetime media nonbreaking save table contextmenu directionality',
+      'emoticons template paste textcolor colorpicker textpattern imagetools'
+  ],
+  toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+  toolbar2: 'print preview media | forecolor backcolor emoticons',
+  image_advtab: true
+});
+
+
+document.getElementById("submit").addEventListener("click", uploadTimeline);
+// const upLoadForm = document.getElementById("upload-timeline-form");
+// upLoadForm.addEventListener("submit", uploadTimeline, getDescription);
 
 function uploadTimeline(e) {
   e.preventDefault();
 
+  let text = tinyMCE.activeEditor.getContent();
   const imageUpload = document.querySelector('#timeline-upload');
-  const formData = new FormData();
+  let formData = new FormData();
 
   for (let i = 0; i < imageUpload.files.length; i++) {
     // put the images from the input into the form data
     formData.append("timeline", imageUpload.files[i]);
   }
+
+  formData.append("description", text);
+
   const options = {
     method: 'POST',
-    body: formData,
+    body: formData
   };
+
   fetch("/upload-timeline", options).then(function (res) {
     console.log(res);
   }).catch(function (err) {
     ("Error:", err)
   });
-}
-
-function getDescription(e) {
-  e.preventDefault();
-
-  const imageUpload = document.querySelector('#timeline-upload');
-  var myContent = tinymce.get("description").getContent();
-
-  let formData = {
-    description: myContent,
-  }
-
-  const xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    if (this.readyState == XMLHttpRequest.DONE) {
-
-      // 200 means everthing worked
-      if (xhr.status === 200) {
-        getUsers();
-      } else {
-        console.log(this.status);
-      }
-
-    } else {
-      console.log("ERROR", this.status);
-    }
-  }
-  xhr.open("POST", "/upload-timeline");
-  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.send("description=" + formData.description);
 }
