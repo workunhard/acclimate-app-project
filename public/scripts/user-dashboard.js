@@ -43,7 +43,6 @@ for (let i = 0; i < editPosts.length; i++) {
     editPosts[i].addEventListener("click", editPost);
 }
 
-function editPost(e) {
-    e.preventDefault();
+function editPost() {
     window.location.replace("/edit-post");
 }

@@ -121,7 +121,7 @@ app.get("/dashboard", function (req, res) {
 					for (i = results.length - 1; i >= 0; i--) {
 						str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
 							"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" + 
-                            "<td class='editPost'><input type='button' id='editPost' value='Edit Post'></td></tr></table><br>" +
+              "<td class='editPost'><input type='button' id='editPost' value='Edit Post'></td></tr></table><br>" +
 							"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
 							results[i].description + "<br>" +
 							results[i].date + " " + results[i].time + "<br>"
@@ -139,6 +139,16 @@ app.get("/dashboard", function (req, res) {
 		// res.send(profileDOM.serialize());
 	} else {
 		res.redirect("/");
+	}
+});
+
+app.get("/edit-post", function (req, res) {
+	if (req.session.loggedIn) {
+		let doc = fs.readFileSync("./app/html/edit-post.html", "utf8");
+		res.send(doc);
+	} else {
+		let doc = fs.readFileSync("./app/html/login.html", "utf8");
+		res.send(doc);
 	}
 });
 
