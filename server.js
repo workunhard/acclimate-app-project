@@ -1,8 +1,8 @@
 const express = require("express");
 const aws = require('aws-sdk');
 const session = require("express-session");
-const http = require('http');
-const https = require("https");
+// const http = require('http');
+// const https = require("https");
 const multer = require("multer");
 const app = express();
 const fs = require("fs");
@@ -12,12 +12,12 @@ const {
     JSDOM
 } = require('jsdom');
 
-const sslKey = fs.readFileSync('cert/key.pem', 'utf8');
-const sslCertificate = fs.readFileSync('cert/cert.pem', 'utf8');
-const sslCredentials = { key: sslKey, cert: sslCertificate };
+// const sslKey = fs.readFileSync('cert/key.pem', 'utf8');
+// const sslCertificate = fs.readFileSync('cert/cert.pem', 'utf8');
+// const sslCredentials = { key: sslKey, cert: sslCertificate };
 
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer(sslCredentials, app);
+// const httpServer = http.createServer(app);
+// const httpsServer = https.createServer(sslCredentials, app);
 
 const localDbConfig = {
     host: 'localhost',
@@ -493,14 +493,14 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
         })
 });
 
-// RUN SERVER
-// const PORT = process.env.PORT || 8000;
-// app.listen(PORT, () => {
-//     console.log(`App listening on port ${PORT}`);
-//     console.log('Press Ctrl+C to quit.');
-// })
-
-const securePort = 8000;
-httpsServer.listen(securePort, () => {
-	console.log(`App listening on port ${securePort}`);
+RUN SERVER
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+    console.log('Press Ctrl+C to quit.');
 })
+
+// const securePort = 8000;
+// httpsServer.listen(securePort, () => {
+// 	console.log(`App listening on port ${securePort}`);
+// })
