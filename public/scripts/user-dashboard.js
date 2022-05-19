@@ -1,6 +1,6 @@
 let deletePosts = document.querySelectorAll("td[class='deletePost']");
 for (let i = 0; i < deletePosts.length; i++) {
-    deleteRecords[i].addEventListener("click", deletePost);
+    deletePosts[i].addEventListener("click", deletePost);
 }
 
 function deletePost(e) {
