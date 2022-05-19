@@ -439,9 +439,11 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
 
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
     connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-        [req.files[0].filename, req.body.description, "5/17/22", "11:14AM", req.session.key],
+        [req.files[0].filename, req.body.description, date, "11:14AM", req.session.key],
         function (err, results) {
             if (err) {
                 console.log(err);
