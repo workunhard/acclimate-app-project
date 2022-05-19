@@ -21,12 +21,13 @@ function getUsers() {
                     for (let i = 0; i < data.rows.length; i++) {
                         let row = data.rows[i];
                         //console.log("row", row);
-                        str += ("<tr><td class='id'>" + row.ID +
-                            "</td><td class='name'><span>" + row.name +
-                            "</span></td><td class='email'><span>" +
-                            row.email + "</span></td><td class='password'><span>" + 
+                        str += ("<tr><td class='id'>" +
+                            row.ID + "</td><td class='name'><span>" +
+                            row.name + "</span></td><td class='email'><span>" +
+                            row.email + "</span></td><td class='password'><span>" +
                             row.password + "</span></td><td class='admin'><span>" +
-                            row.admin + "</span></td><td class ='delete'><input type='button' id='delete' value='Delete'></td></tr>");
+                            row.admin + 
+                            "</span></td><td class ='delete'><input type='button' id='delete' value='Delete'></td></tr>");
                     }
                     //console.log(str);
                     document.getElementById("adminArea").innerHTML = str;

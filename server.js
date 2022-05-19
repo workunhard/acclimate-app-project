@@ -115,7 +115,10 @@ app.get("/dashboard", function (req, res) {
                 if (results.length > 0) {
                     let str = "";
                     for (i = results.length - 1; i >= 0; i--) {
-                        str = str + "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" + results[i].description + "<br>" +
+                        str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
+                            "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td></tr></table><br>" +
+                            "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
+                            results[i].description + "<br>" +
                             results[i].date + " " + results[i].time + "<br>"
                     }
                     // if (results[0].filename != null) {
@@ -157,7 +160,7 @@ app.post("/login", function (req, res) {
                 req.session.password = userRecord.password;
                 req.session.admin = userRecord.admin;
                 req.session.key = userRecord.ID;
-                req.session.save(function (err) {});
+                req.session.save(function (err) { });
                 res.send({
                     status: "success",
                     msg: "Logged in."
@@ -455,6 +458,22 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
                 console.log(results);
             }
         })
+});
+
+app.post('/delete-post', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+
+    connection.query('DELETE FROM bby23_timeline WHERE imageID = ?',
+        [req.body.imageID],
+        function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                status: "success",
+                msg: req.body.id + " deleted."
+            });
+        });
 });
 
 // RUN SERVER
