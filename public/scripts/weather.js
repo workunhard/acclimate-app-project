@@ -31,7 +31,7 @@ function getWeather() {
 function showWeather(data) {
   // $("#forecast").load('/text/weather.html');
   // let {temp, feels_like, humidity, wind_speed } = data.current;
-  const currentDay = document.getElementById('currentDay');
+  const currentDay = document.getElementById('forecast');
 
   currentDay.innerHTML = data.daily.map((day, idx) => {
     if (idx <= 6) {
@@ -39,16 +39,14 @@ function showWeather(data) {
       let sr = new Date(day.sunrise * 1000).toLocaleTimeString();
       let ss = new Date(day.sunset * 1000).toLocaleTimeString();
       return (
-        `<div id = "box">
-        <div id = "day">${dt}</div>
+        `<div class = "box">
+        <div class = "day">${dt}</div>
         <img class = "weatherImg" src = "http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt = "http://openweathermap.org/img/wn/${
           day.weather[0].description}">
-        <div id = "dayTemp">${day.temp.day}&deg;C</div>
-        <div id = "feelsLike">${day.feels_like.day}&deg;C</div>
-        <div id = "humidity">${day.humidity}%</div>
-        <div id = "sunrise">${sr}</div>
-        <div id = "sunset">${ss}</div>
-        <div id = "wind">${day.wind_speed} m/s</div>
+        <div class = "dayTemp">${day.temp.day}&deg;C</div>
+        <div class = "feelsLike">${day.feels_like.day}&deg;C</div>
+        <div class = "humidity">${day.humidity}%</div>
+
       </div>`);
     }
   }).join(' ');
@@ -57,7 +55,9 @@ function showWeather(data) {
   //   <div id = "dayTemp">${temp}</div>
   //   <div id = "feelsLike">${feels_like}</div>
   //   <div id = "humidity">${humidity}</div>
-
+  // <div class = "sunrise">${sr}</div>
+  // <div class = "sunset">${ss}</div>
+  // <div class = "wind">${day.wind_speed} m/s</div>
   //   <div id = "wind">${wind_speed}</div>
   // </div>`;
 }
