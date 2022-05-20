@@ -8,7 +8,7 @@ function getWeather() {
   const key = '01a2ba83bf76f2ed62c6a9cc680e3c6f';
   const lang = 'en';
   const units = 'metric';
-  let url = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${key}&units=${units}&lang=${lang}`;
+  let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${key}&units=${units}&lang=${lang}`;
 
 
   fetch(url)
