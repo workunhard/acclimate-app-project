@@ -121,7 +121,8 @@ app.get("/dashboard", function (req, res) {
 					for (i = results.length - 1; i >= 0; i--) {
 						str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
 							"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" + 
-              "<td class='editPost'><input type='button' id='editPost' value='Edit Post'></td></tr></table><br>" +
+              "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" + 
+							"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
 							"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
 							results[i].description + "<br>" +
 							results[i].date + " " + results[i].time + "<br>"
@@ -523,6 +524,23 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
 			}
 		})
 }
+});
+
+app.post("/update-image", timelineupload.array("timeline"), function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+	var today = new Date();
+	var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+	connection.query("UPDATE bby23_timeline SET filename = ?, date = ?, time = ? WHERE imageID = ?",
+		[req.files[0].filename, date, time, req.body.imageID],
+		function (err, results) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(results);
+			}
+		})
 });
 
 app.post('/delete-post', function (req, res) {
