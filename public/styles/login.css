@@ -41,7 +41,7 @@
         grid-template-rows: 10% 70% 10% 10%;
         text-align: center;
         align-items: center;
-        color: white;
+        color: rgb(222, 19, 19);
     }
 
     #formPanel a,
@@ -170,7 +170,7 @@
         grid-template-rows: 10% 70% 10% 10%;
         text-align: center;
         align-items: center;
-        color: white;
+        color: rgb(242, 7, 7);
     }
 
     #formPanel a,

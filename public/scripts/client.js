@@ -37,11 +37,15 @@ ready(function () {
 		xhr.send(params);
 	}
 
+	
 	document.querySelector("#submit").addEventListener("click", function (e) {
 		e.preventDefault();
 		let email = document.getElementById("email");
 		let password = document.getElementById("password");
-		let queryString = "email=" + email.value + "&password=" + password.value;
+		let emailEntry = email ? email.value : null;
+		let passwordEntry = password ? password.value : null;
+		
+		let queryString = "email=" + emailEntry + "&password=" + passwordEntry;
 
 		ajaxPOST("/login", function (data) {
 
@@ -57,6 +61,7 @@ ready(function () {
 		}, queryString);
 	});
 
+
 	document.querySelector("#signUp").addEventListener("click", function (e) {
 		e.preventDefault();
 		$('#inputBox').load('/text/signup.html');
@@ -66,25 +71,39 @@ ready(function () {
 
 		document.querySelector("#signupsubmission").addEventListener("click", function (e) {
 			e.preventDefault();
-			let name = document.getElementById("name");
-			let email = document.getElementById("email");
-			let password = document.getElementById("password");
-			let queryString = "name=" + name.value + "&email=" + email.value + "&password=" + password.value + "&admin=" + 0;
-			
-			ajaxPOST("/add-user", function (data) {
+			let name = document.getElementById("nameSignup");
+			let email = document.getElementById("emailSignup");
+			let password = document.getElementById("passwordSignup");
+			let cpassword = document.getElementById("cpasswordSignup");
+			let queryString = "name=" + name.value + "&email=" + email.value + "&password=" + password.value + "&cpassword=" + cpassword.value + "&admin=" + 0;
+
+			ajaxPOST("/create-user", function (data) {
 
 				if (data) {
 					let dataParsed = JSON.parse(data);
 					console.log(dataParsed);
 					if (dataParsed.status == "fail") {
-						document.getElementById("errorMsg").innerHTML = dataParsed.msg;
+						document.getElementById("serverMsg").innerHTML = dataParsed.msg;
+						return;
 					} else {
-						window.location.replace("/dashboard");
+						ajaxPOST("/login", function (data) {
+							if (data) {
+								let dataParsed = JSON.parse(data);
+								console.log(dataParsed);
+								if (dataParsed.status == "fail") {
+									document.getElementById("serverMsg").innerHTML = dataParsed.msg;
+								} else {
+									window.location.replace("/dashboard");
+								}
+							}
+						}, queryString);
 					}
 				}
 			}, queryString);
 		});
 	});
+
+	
 
 });
 

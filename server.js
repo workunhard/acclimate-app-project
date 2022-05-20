@@ -618,10 +618,91 @@ app.post('/delete-post', function (req, res) {
 		});
 });
 
+const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const validPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
-function validateUserCreation() {
-	
+
+function validateUserEmail(req) {
+	let email = req.body.email;
+	if (email.match(validEmailRegex) && email != "") {
+		return [email, null];
+	} else {
+		return [false, "Please enter valid email"];
+	}
 }
+
+function validateUserName(req) {
+	let name = req.body.name;
+	if (name != "") {
+		return[name, null];
+	} else {
+		return [false, "Please enter a valid name"];
+	}
+}
+
+function validateUserPassword(req) {
+	let password = req.body.password;
+	let cpassword = req.body.cpassword;
+	if (password != cpassword) {
+		return [false, "Both passwords must be the same"]
+	}
+	if (password.match(validPasswordRegex) && password != "") {
+		return[password, null];
+	} else {
+		return [false, "Please enter a valid password"];
+	}
+}
+
+
+function userValidation(req) {
+
+	var email = validateUserEmail(req);
+	if (!email[0]) {
+		return email;
+	}
+	var name = validateUserName(req);
+	if (!name[0]) {
+		return name;
+	}
+	var password = validateUserPassword(req);
+	if (!password[0]) {
+		return password;
+	} else {
+		return [true, null];
+	}
+
+
+}
+
+app.post("/create-user", function(req, res) {
+	var validation = userValidation(req);
+	var result = validation[0];
+	var message = validation[1];
+	if (result) {
+		connection.query('INSERT INTO bby23_user (name, email, password, admin) values (?, ?, ?, ?)',
+		[req.body.name, req.body.email, req.body.password, 0], function (error, results, fields) {
+			if (error) {
+				if (error.code == 'ER_DUP_ENTRY') {
+					message = "The user already exists";
+				} else {
+					console.log(error);
+					message = "Error";
+				}
+				res.send({
+					status: "fail",
+					msg: "Error: " + message
+				})
+			} else {
+				console.log(req.body);
+			}
+		})
+	} else {
+			res.send({
+				status: "fail",
+				msg: "Invalid Input: " + message
+			})
+	}
+})
 
 // RUN SERVER
 const PORT = process.env.PORT || 8000;
