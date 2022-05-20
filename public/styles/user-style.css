@@ -170,7 +170,7 @@ dd {
   align-items: last baseline;
   justify-content: space-between;
   overflow-y: hidden;
-  font-size: 12px;
+  font-size: 11px;
   padding-left: 5px;
   /* z-index: -1; */
 }
@@ -178,8 +178,8 @@ dd {
 .box {
   background-color: black;
   border-radius: 10px;
-  padding: 5px;
-  margin: 5px;
+  padding: 9px;
+  margin: 6px;
 }
 
 
@@ -207,7 +207,7 @@ dd {
   #contentBody {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: max-content;
+    grid-template-rows: 1fr 2fr 1fr;
     grid-column: 1;
     grid-row: 2;
     padding-top: 20px;

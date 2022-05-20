@@ -70,7 +70,7 @@ ready(function () {
 			let email = document.getElementById("email");
 			let password = document.getElementById("password");
 			let queryString = "name=" + name.value + "&email=" + email.value + "&password=" + password.value + "&admin=" + 0;
-
+			
 			ajaxPOST("/add-user", function (data) {
 
 				if (data) {

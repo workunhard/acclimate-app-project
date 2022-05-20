@@ -618,6 +618,11 @@ app.post('/delete-post', function (req, res) {
 		});
 });
 
+
+function validateUserCreation() {
+	
+}
+
 // RUN SERVER
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

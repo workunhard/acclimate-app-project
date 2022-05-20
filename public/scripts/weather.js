@@ -43,9 +43,9 @@ function showWeather(data) {
         <div class = "day">${dt}</div>
         <img class = "weatherImg" src = "http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt = "http://openweathermap.org/img/wn/${
           day.weather[0].description}">
-        <div class = "dayTemp">${day.temp.day}&deg;C</div>
-        <div class = "feelsLike">${day.feels_like.day}&deg;C</div>
-        <div class = "humidity">${day.humidity}%</div>
+        <div class = "dayTemp">Temp: ${day.temp.day}&deg;C</div>
+        <div class = "feelsLike">Feels Like: ${day.feels_like.day}&deg;C</div>
+        <div class = "humidity">Humidity: ${day.humidity}%</div>
 
       </div>`);
     }

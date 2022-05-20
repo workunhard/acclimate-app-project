@@ -125,6 +125,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   );
   infoWindow.open(map);
 }
-initMap();
+// initMap();
 // window.initMap = initMap;
 
