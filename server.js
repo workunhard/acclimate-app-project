@@ -619,7 +619,7 @@ app.post('/delete-post', function (req, res) {
 });
 
 const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const validPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+const validPasswordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
 
 
 function validateUserEmail(req) {
@@ -694,6 +694,7 @@ app.post("/create-user", function(req, res) {
 				})
 			} else {
 				console.log(req.body);
+				connection.query('SELECT * FROM bby23_user ')
 			}
 		})
 	} else {

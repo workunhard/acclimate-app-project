@@ -86,17 +86,7 @@ ready(function () {
 						document.getElementById("serverMsg").innerHTML = dataParsed.msg;
 						return;
 					} else {
-						ajaxPOST("/login", function (data) {
-							if (data) {
-								let dataParsed = JSON.parse(data);
-								console.log(dataParsed);
-								if (dataParsed.status == "fail") {
-									document.getElementById("serverMsg").innerHTML = dataParsed.msg;
-								} else {
-									window.location.replace("/dashboard");
-								}
-							}
-						}, queryString);
+						window.location.replace("/");
 					}
 				}
 			}, queryString);
