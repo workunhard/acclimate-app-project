@@ -27,7 +27,7 @@ document.getElementById("submit").addEventListener("click", uploadTimeline);
 function uploadTimeline(e) {
   e.preventDefault();
 
-  let text = tinyMCE.activeEditor.getContent();
+  let text = tinyMCE.activeEditor.getContent({ format: "text" });
   const imageUpload = document.querySelector('#timeline-upload');
   let formData = new FormData();
 

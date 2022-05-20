@@ -125,23 +125,25 @@ app.get("/dashboard", function (req, res) {
 
 						if (results[i].filename != null) {
 
-							str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
+							str = str +
+								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
+								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
 								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
 								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
-								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
-								results[i].description + "<br>" +
+								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
+								"</td><td class='description'><span>"+ results[i].description + "</span></td></tr></table><br>" +
 								results[i].date + " " + results[i].time + "<br>"
 
 						} else {
 
 							str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-								"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
 								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
 								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
-								results[i].description + "<br>" +
+								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
+								"</td><td class='description'><span>"+ results[i].description + "</span></td></tr></table><br>" +
 								results[i].date + " " + results[i].time + "<br>"
 						}
 
@@ -389,6 +391,22 @@ app.post('/update-admin', function (req, res) {
 
 	connection.query('UPDATE bby23_user SET admin = ? WHERE ID = ?',
 		[req.body.admin, req.body.id],
+		function (error, results, fields) {
+			if (error) {
+				console.log(error);
+			}
+			res.send({
+				status: "success",
+				msg: "Recorded update."
+			});
+		});
+});
+
+app.post('/update-description', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+	connection.query('UPDATE bby23_timeline SET description = ? WHERE imageID = ?',
+		[req.body.description, req.body.imageID],
 		function (error, results, fields) {
 			if (error) {
 				console.log(error);
