@@ -52,14 +52,7 @@ function showWeather(data) {
       </div>`);
     }
   }).join(' ');
-  // `<div id = "box">
-  //   <img class = "weatherImg" src = "#" alt = "#">
-  //   <div id = "dayTemp">${temp}</div>
-  //   <div id = "feelsLike">${feels_like}</div>
-  //   <div id = "humidity">${humidity}</div>
 
-  //   <div id = "wind">${wind_speed}</div>
-  // </div>`;
 }
 
 
