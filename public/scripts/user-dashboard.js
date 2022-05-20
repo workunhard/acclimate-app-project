@@ -156,7 +156,7 @@ function updateImage(e) {
 window.onload = function () {
     if (!window.location.hash) {
         window.location = window.location + '#loaded';
-        document.location.reload();
+        window.location.reload();
     }
 }
 

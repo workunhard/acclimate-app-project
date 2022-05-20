@@ -81,7 +81,7 @@ function initMap() {
   infoWindow = new google.maps.InfoWindow();
 
 
-  window.onload = () => {
+  // window.onload = () => {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -106,7 +106,7 @@ function initMap() {
       // Browser doesn't support Geolocation
       handleLocationError(false, infoWindow, map.getCenter());
     }
-  };
+  // };
 }
 
 
@@ -125,6 +125,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   );
   infoWindow.open(map);
 }
-
-window.initMap = initMap;
+initMap();
+// window.initMap = initMap;
 
