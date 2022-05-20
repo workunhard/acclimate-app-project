@@ -96,11 +96,12 @@
     }
 
     #submit {
+        color: #52BBE7;
         font-family: 'Radio Canada', sans serif;
         font-size: 16pt;
         background-color: white;
         text-decoration: none;
-        border: 5px solid black;
+        border: 5px solid #52BBE7;
         border-radius: 14px;
         padding: 1em 1em;
         transition: 0.3s;
@@ -118,13 +119,14 @@
         background-size: 100%;
         text-align: center;
         display: grid;
+        height: 100%;
         grid-row: 4 / span 1;
         grid-column: 1 / span 3;
         align-content: center;
         margin: 0;
-        height: 100%;
         padding: 20px;
         color: white;
+        position: relative;
     }
 }
 
@@ -378,6 +380,12 @@
 }
 
 /* CSS rain */
+
+#easteregg {
+    background-color: #52BBE7;
+    color: white;
+    border: none;
+}
 
 #rain {
     display: none;
