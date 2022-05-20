@@ -127,6 +127,7 @@ app.get("/dashboard", function (req, res) {
 						if (results[i].filename != null) {
 
 							str = str +
+								results[i].date + " " + results[i].time +
 								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
 								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
@@ -134,18 +135,18 @@ app.get("/dashboard", function (req, res) {
 								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
 								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-								"</td><td class='description'><span>"+ results[i].description + "</span></td></tr></table><br>" +
-								results[i].date + " " + results[i].time + "<br>"
+								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table><br>" 
 
 						} else {
 
-							str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
+							str = str +
+								results[i].date + " " + results[i].time +
+								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
 								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-								"</td><td class='description'><span>"+ results[i].description + "</span></td></tr></table><br>" +
-								results[i].date + " " + results[i].time + "<br>"
+								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table><br>" 
 						}
 
 
@@ -634,7 +635,7 @@ function validateUserEmail(req) {
 function validateUserName(req) {
 	let name = req.body.name;
 	if (name != "") {
-		return[name, null];
+		return [name, null];
 	} else {
 		return [false, "Please enter a valid name"];
 	}
@@ -647,7 +648,7 @@ function validateUserPassword(req) {
 		return [false, "Both passwords must be the same"]
 	}
 	if (password.match(validPasswordRegex) && password != "") {
-		return[password, null];
+		return [password, null];
 	} else {
 		return [false, "Please enter a valid password"];
 	}
@@ -674,41 +675,41 @@ function userValidation(req) {
 
 }
 
-app.post("/create-user", function(req, res) {
+app.post("/create-user", function (req, res) {
 	var validation = userValidation(req);
 	var result = validation[0];
 	var message = validation[1];
 	if (result) {
 		connection.query('INSERT INTO bby23_user (name, email, password, admin) values (?, ?, ?, ?)',
-		[req.body.name, req.body.email, req.body.password, 0], function (error, results, fields) {
-			if (error) {
-				if (error.code == 'ER_DUP_ENTRY') {
-					message = "The user already exists";
-				} else {
-					console.log(error);
-					message = "Error";
-				}
-				res.send({
-					status: "fail",
-					msg: "Error: " + message
-				})
-			} else {
-				console.log(req.body);
-				connection.query('SELECT * FROM bby23_user WHERE email = ?', [req.body.email], function (error, results, fields) {
-					if (error) {
-						console.log(error);
-						res.send({ status: "fail", msg: "User creation: " + error});
+			[req.body.name, req.body.email, req.body.password, 0], function (error, results, fields) {
+				if (error) {
+					if (error.code == 'ER_DUP_ENTRY') {
+						message = "The user already exists";
 					} else {
-						res.send({ status: "success", msg: "User created: " + results[0]})
+						console.log(error);
+						message = "Error";
 					}
-				})
-			}
-		})
-	} else {
-			res.send({
-				status: "fail",
-				msg: "Invalid Input: " + message
+					res.send({
+						status: "fail",
+						msg: "Error: " + message
+					})
+				} else {
+					console.log(req.body);
+					connection.query('SELECT * FROM bby23_user WHERE email = ?', [req.body.email], function (error, results, fields) {
+						if (error) {
+							console.log(error);
+							res.send({ status: "fail", msg: "User creation: " + error });
+						} else {
+							res.send({ status: "success", msg: "User created: " + results[0] })
+						}
+					})
+				}
 			})
+	} else {
+		res.send({
+			status: "fail",
+			msg: "Invalid Input: " + message
+		})
 	}
 })
 
