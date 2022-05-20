@@ -96,11 +96,12 @@
     }
 
     #submit {
+        color: #52BBE7;
         font-family: 'Radio Canada', sans serif;
         font-size: 16pt;
         background-color: white;
         text-decoration: none;
-        border: 5px solid black;
+        border: 5px solid #52BBE7;
         border-radius: 14px;
         padding: 1em 1em;
         transition: 0.3s;
