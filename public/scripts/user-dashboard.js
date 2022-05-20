@@ -1,11 +1,11 @@
-let deletePosts = document.querySelectorAll("td[class='deletePost']");
-for (let i = 0; i < deletePosts.length; i++) {
-    deletePosts[i].addEventListener("click", deletePost);
+let posts = document.querySelectorAll("td[class='deletePost']");
+for (let i = 0; i < posts.length; i++) {
+    posts[i].addEventListener("click", deletePost);
 }
 
-function refreshTimeline() {
-        document.location.reload();
-}
+// function refreshTimeline() {
+//         document.location.reload();
+// }
 
 function deletePost(e) {
 
@@ -32,9 +32,40 @@ function deletePost(e) {
     xhr.send("imageID=" + formData.imageID);
 }
 
-let image = document.querySelectorAll("td[class='confirmImage']");
-for (let i = 0; i < image.length; i++) {
-    image[i].addEventListener("click", updateImage);
+let deleteImages = document.querySelectorAll("td[class='deleteImage']");
+for (let i = 0; i < deleteImages.length; i++) {
+    deleteImages[i].addEventListener("click", deleteImage);
+}
+
+function deleteImage(e) {
+
+    e.preventDefault();
+    let parent = e.target.parentNode;
+
+    let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
+
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (this.readyState == XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                document.location.reload();
+            } else {
+                console.log(this.status);
+            }
+        } else {
+            console.log("ERROR", this.status);
+        }
+    }
+    xhr.open("POST", "/delete-image");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send("imageID=" + formData.imageID);
+}
+
+
+let confirmImages = document.querySelectorAll("td[class='confirmImage']");
+for (let i = 0; i < confirmImages.length; i++) {
+    confirmImages[i].addEventListener("click", updateImage);
 }
 
 function updateImage(e) {

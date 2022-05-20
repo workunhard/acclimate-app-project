@@ -44,6 +44,7 @@ app.engine('html', require('ejs').renderFile);
 aws.config.region = 'us-west-1';
 
 const mysql = require("mysql2");
+const { resolveNaptr } = require("dns");
 const connection = mysql.createPool(dbconfig);
 
 const storage = multer.diskStorage({
@@ -118,14 +119,33 @@ app.get("/dashboard", function (req, res) {
 				profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
 				if (results.length > 0) {
 					let str = "";
+
 					for (i = results.length - 1; i >= 0; i--) {
-						str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
-							"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" + 
-              "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" + 
-							"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
-							"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
-							results[i].description + "<br>" +
-							results[i].date + " " + results[i].time + "<br>"
+
+
+						if (results[i].filename != null) {
+
+							str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
+								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+								"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
+								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
+								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
+								results[i].description + "<br>" +
+								results[i].date + " " + results[i].time + "<br>"
+
+						} else {
+
+							str = str + "<table><tr><td class='imageID'>" + results[i].imageID +
+								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+								"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
+								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
+								results[i].description + "<br>" +
+								results[i].date + " " + results[i].time + "<br>"
+						}
+
+
 					}
 					// if (results[0].filename != null) {
 					profileDOM.window.document.getElementById("timeline").innerHTML = str;
@@ -503,27 +523,27 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
 	var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-	if (req.files.length > 0) { 
-	connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-		[req.files[0].filename, req.body.description, date, time, req.session.key],
-		function (err, results) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log(results);
-			}
-		})
-} else {
-	connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-		[null, req.body.description, date, time, req.session.key],
-		function (err, results) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log(results);
-			}
-		})
-}
+	if (req.files.length > 0) {
+		connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
+			[req.files[0].filename, req.body.description, date, time, req.session.key],
+			function (err, results) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(results);
+				}
+			})
+	} else {
+		connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
+			[null, req.body.description, date, time, req.session.key],
+			function (err, results) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(results);
+				}
+			})
+	}
 });
 
 app.post("/update-image", timelineupload.array("timeline"), function (req, res) {
@@ -539,6 +559,26 @@ app.post("/update-image", timelineupload.array("timeline"), function (req, res) 
 				console.log(err);
 			} else {
 				console.log(results);
+			}
+		})
+});
+
+app.post("/delete-image", function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+	// var today = new Date();
+	// var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+	// var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+	connection.query("UPDATE bby23_timeline SET filename = null WHERE imageID = ?",
+		[req.body.imageID],
+		function (err, results) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send({
+					status: "success",
+					msg: req.body.imageID + " deleted.",
+				})
 			}
 		})
 });
