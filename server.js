@@ -694,7 +694,14 @@ app.post("/create-user", function(req, res) {
 				})
 			} else {
 				console.log(req.body);
-				connection.query('SELECT * FROM bby23_user ')
+				connection.query('SELECT * FROM bby23_user WHERE email = ?', [req.body.email], function (error, results, fields) {
+					if (error) {
+						console.log(error);
+						res.send({ status: "fail", msg: "User creation: " + error});
+					} else {
+						res.send({ status: "success", msg: "User created: " + results[0]})
+					}
+				})
 			}
 		})
 	} else {
