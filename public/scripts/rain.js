@@ -17,7 +17,7 @@ createRain();
 
 function toggleRain() {
     var rain = document.getElementById("rain");
-    if (!rain.style.display || box.style.display == "none") {
+    if (!rain.style.display || rain.style.display == "none") {
         rain.style.display = "block";
     } else {
         rain.style.display = "none";
