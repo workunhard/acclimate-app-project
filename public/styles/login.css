@@ -260,6 +260,10 @@
     }
 }
 
+#serverMsg {
+    color: red;
+}
+
 /* CSS Clouds */
 #clouds {
     padding: 100px 0;
