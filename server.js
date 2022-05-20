@@ -1,6 +1,7 @@
 const express = require("express");
 const aws = require('aws-sdk');
 const session = require("express-session");
+const sanitizeHtml = require('sanitize-html');
 // const http = require('http');
 // const https = require("https");
 const multer = require("multer");
@@ -165,15 +166,15 @@ app.get("/dashboard", function (req, res) {
 	}
 });
 
-app.get("/edit-post", function (req, res) {
-	if (req.session.loggedIn) {
-		let doc = fs.readFileSync("./app/html/edit-post.html", "utf8");
-		res.send(doc);
-	} else {
-		let doc = fs.readFileSync("./app/html/login.html", "utf8");
-		res.send(doc);
-	}
-});
+// app.get("/edit-post", function (req, res) {
+// 	if (req.session.loggedIn) {
+// 		let doc = fs.readFileSync("./app/html/edit-post.html", "utf8");
+// 		res.send(doc);
+// 	} else {
+// 		let doc = fs.readFileSync("./app/html/login.html", "utf8");
+// 		res.send(doc);
+// 	}
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -404,7 +405,7 @@ app.post('/update-admin', function (req, res) {
 
 app.post('/update-description', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
-
+	req.body.description = sanitizeHtml(req.body.description);
 	connection.query('UPDATE bby23_timeline SET description = ? WHERE imageID = ?',
 		[req.body.description, req.body.imageID],
 		function (error, results, fields) {
@@ -540,7 +541,7 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
 	var today = new Date();
 	var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
+	req.body.description = sanitizeHtml(req.body.description);
 	if (req.files.length > 0) {
 		connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
 			[req.files[0].filename, req.body.description, date, time, req.session.key],
