@@ -21,8 +21,6 @@ tinymce.init({
 
 
 document.getElementById("submit").addEventListener("click", uploadTimeline);
-// const upLoadForm = document.getElementById("upload-timeline-form");
-// upLoadForm.addEventListener("submit", uploadTimeline, getDescription);
 
 function uploadTimeline(e) {
   e.preventDefault();
@@ -34,7 +32,6 @@ function uploadTimeline(e) {
   if (imageUpload.files.length > 0) {
 
     for (let i = 0; i < imageUpload.files.length; i++) {
-      // put the images from the input into the form data
       formData.append("timeline", imageUpload.files[i]);
     }
   }

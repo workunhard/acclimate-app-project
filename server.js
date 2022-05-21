@@ -151,31 +151,15 @@ app.get("/dashboard", function (req, res) {
 
 
 					}
-					// if (results[0].filename != null) {
 					profileDOM.window.document.getElementById("timeline").innerHTML = str;
-					// "<img id=\"photo\" src=\"profileimages/timeline/" + results[0].filename + "\">";
-					// }
 				}
 				res.send(profileDOM.serialize());
 			}
 		);
-
-		// profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
-		// res.send(profileDOM.serialize());
 	} else {
 		res.redirect("/");
 	}
 });
-
-// app.get("/edit-post", function (req, res) {
-// 	if (req.session.loggedIn) {
-// 		let doc = fs.readFileSync("./app/html/edit-post.html", "utf8");
-// 		res.send(doc);
-// 	} else {
-// 		let doc = fs.readFileSync("./app/html/login.html", "utf8");
-// 		res.send(doc);
-// 	}
-// });
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -260,9 +244,6 @@ app.get('/get-userInfo', function (req, res) {
 			}
 			res.send({
 				status: "success",
-				// name: req.session.name,
-				// email: req.session.email,
-				// password: req.session.password,
 				profile: results[0]
 			});
 		});
@@ -442,12 +423,6 @@ app.get("/profile", function (req, res) {
 		const profile = fs.readFileSync("./app/html/profile.html", "utf8");
 
 		let profileDOM = new JSDOM(profile);
-		// profileDOM.window.document.getElementById("avatar_name").innerHTML =
-		//     req.session.name;
-		// profileDOM.window.document.getElementById("avatar_email").innerHTML =
-		//     req.session.email;
-		// profileDOM.window.document.getElementById("avatar_password").innerHTML =
-		//     req.session.password;
 
 		connection.query(
 			"SELECT ID FROM bby23_user WHERE name = ?",
@@ -515,7 +490,6 @@ app.get('/sign-s3', (req, res) => {
 );
 
 app.post('/save-details', (req, res) => {
-	// TODO: Read POSTed form data and do something useful
 }
 );
 
@@ -543,9 +517,12 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
 	var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 	req.body.description = sanitizeHtml(req.body.description);
+
+
+
 	if (req.files.length > 0) {
 		connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-			[req.files[0].filename, req.body.description, date, time, req.session.key],
+			[`${req.files[0].filename}`, req.body.description, date, time, req.session.key],
 			function (err, results) {
 				if (err) {
 					console.log(err);
@@ -585,9 +562,6 @@ app.post("/update-image", timelineupload.array("timeline"), function (req, res) 
 
 app.post("/delete-image", function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
-	// var today = new Date();
-	// var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-	// var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
 	connection.query("UPDATE bby23_timeline SET filename = null WHERE imageID = ?",
 		[req.body.imageID],
