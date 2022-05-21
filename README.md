@@ -46,16 +46,16 @@ Top level of project folder:
         /user-dashboard.html    # 'User' landing page after successful log-in
         /template.html          # template for future html pages
 
-├── node_modules             # required node modules
+├── node_modules                # required node modules
 
-├── public                   # Folder for images, scripts, and stylesheets
-    ├── /images              # Subolder for images
+├── public                      # Folder for images, scripts, and stylesheets
+    ├── /images                 # Subolder for images
         /bbymap.jpg
         /bbymap2.jpg
         /forecast.jpeg
         /loginbg.svg
         /smiley.jpg
-        ├── /favicon         # Subfolder for favicons
+        ├── /favicon            # Subfolder for favicons
             /android-chrome-192x192.png
             /android-chrome-512x512.png
             /apple-touch-icon.png
@@ -63,17 +63,17 @@ Top level of project folder:
             /favicon-32x32.png
             /favicon.ico
             /site.webmanifest   
-    ├── /scripts             # Subfolder for scripts
+    ├── /scripts                # Subfolder for scripts
         /client.js
         /skeleton.js
-    ├── /styles              # Subfolder for styles
+    ├── /styles                 # Subfolder for styles
         /admin-style.css
         /login.css
         /style.css
 
-├── .gitignore               # Git ignore file
+├── .gitignore                  # Git ignore file
 
-├── index.js                 # script to initialize web app (node index.js from CLI)
+├── index.js                    # script to initialize web app (node index.js from CLI)
 
 ├── package-lock.json
 
