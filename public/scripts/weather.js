@@ -1,6 +1,3 @@
-
-
-
 function getWeather() {
   const lat = posOutside.lat;
   const long = posOutside.lng;
@@ -50,17 +47,5 @@ function showWeather(data) {
       </div>`);
     }
   }).join(' ');
-  // `<div id = "box">
-  //   <img class = "weatherImg" src = "#" alt = "#">
-  //   <div id = "dayTemp">${temp}</div>
-  //   <div id = "feelsLike">${feels_like}</div>
-  //   <div id = "humidity">${humidity}</div>
-  // <div class = "sunrise">${sr}</div>
-  // <div class = "sunset">${ss}</div>
-  // <div class = "wind">${day.wind_speed} m/s</div>
-  //   <div id = "wind">${wind_speed}</div>
-  // </div>`;
+
 }
-
-
-{/*  */}
