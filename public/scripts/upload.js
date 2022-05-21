@@ -1,0 +1,53 @@
+tinymce.init({
+  selector: '#description',
+  height: 300,
+  setup: function (editor) {
+    editor.on('init', function () {
+      this.setContent('<p>Add content via on init!</p>');
+      console.log(tinyMCE.activeEditor.getContent());
+    });
+  },
+  theme: 'modern',
+  plugins: [
+    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+    'searchreplace wordcount visualblocks visualchars code fullscreen',
+    'insertdatetime media nonbreaking save table contextmenu directionality',
+    'emoticons template paste textcolor colorpicker textpattern imagetools'
+  ],
+  toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+  toolbar2: 'print preview media | forecolor backcolor emoticons',
+  image_advtab: true
+});
+
+
+document.getElementById("submit").addEventListener("click", uploadTimeline);
+
+function uploadTimeline(e) {
+  e.preventDefault();
+
+  let text = tinyMCE.activeEditor.getContent({ format: "text" });
+  const imageUpload = document.querySelector('#timeline-upload');
+  let formData = new FormData();
+
+  if (imageUpload.files.length > 0) {
+
+    for (let i = 0; i < imageUpload.files.length; i++) {
+      formData.append("timeline", imageUpload.files[i]);
+    }
+  }
+
+  formData.append("description", text);
+
+  const options = {
+    method: 'POST',
+    body: formData
+  };
+
+  fetch("/upload-timeline", options).then(function (res) {
+    console.log(res);
+  }).catch(function (err) {
+    ("Error:", err)
+  });
+  window.location.href ="/dashboard";
+}
+
