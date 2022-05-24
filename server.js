@@ -733,12 +733,12 @@ app.post("/create-user", function (req, res) {
 	}
 })
 
-// RUN SERVER
-// const PORT = process.env.PORT || 8000;
-// app.listen(PORT, () => {
-// 	console.log(`App listening on port ${PORT}`);
-// 	console.log('Press Ctrl+C to quit.');
-// })
+RUN SERVER
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+	console.log(`App listening on port ${PORT}`);
+	console.log('Press Ctrl+C to quit.');
+})
 
 const securePort = 8080;
 httpsServer.listen(securePort, () => {
