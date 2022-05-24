@@ -14,7 +14,7 @@ INSERT INTO bby23_user (name, email, password, admin, avatar) VALUES ("John", "j
 
 CREATE TABLE bby23_timeline (
     imageID int NOT NULL AUTO_INCREMENT,
-    filename varchar(30),
+    filename varchar(60),
     description varchar(140),
     date varchar(30),
     time varchar(30),

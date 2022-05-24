@@ -38,7 +38,7 @@ function showWeather(data) {
       return (
         `<div class = "box">
         <div class = "day">${dt}</div>
-        <img class = "weatherImg" src = "http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt = "http://openweathermap.org/img/wn/${
+        <img class = "weatherImg" src = "https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt = "https://openweathermap.org/img/wn/${
           day.weather[0].description}">
         <div class = "dayTemp">Temp: ${day.temp.day}&deg;C</div>
         <div class = "feelsLike">Feels Like: ${day.feels_like.day}&deg;C</div>
