@@ -733,7 +733,7 @@ app.post("/create-user", function (req, res) {
 	}
 })
 
-RUN SERVER
+// RUN SERVER
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
 	console.log(`App listening on port ${PORT}`);
