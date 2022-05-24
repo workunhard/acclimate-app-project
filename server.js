@@ -104,8 +104,54 @@ app.get("/dashboard", function (req, res) {
 	if (req.session.loggedIn && req.session.admin == 1) {
 		let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
 		let profileDOM = new JSDOM(profile);
-		profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
-		res.send(profileDOM.serialize());
+
+		connection.query(
+			"SELECT * from bby23_timeline WHERE ID = ?",
+			[req.session.key],
+			function (err, results, fields) {
+				if (err) {
+					console.log(err.message);
+				}
+				profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
+				if (results.length > 0) {
+					let str = "";
+
+					for (i = results.length - 1; i >= 0; i--) {
+
+
+						if (results[i].filename != null) {
+
+							str = str +
+								results[i].date + " " + results[i].time + "<br>" +
+								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
+								"<table><tr><td class='imageID'>" + results[i].imageID +
+								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+								"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
+								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
+								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
+								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table><br>" 
+
+						} else {
+
+							str = str +
+								results[i].date + " " + results[i].time +
+								"<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
+								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
+								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
+								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table><br>" 
+						}
+
+
+					}
+					profileDOM.window.document.getElementById("timeline").innerHTML = str;
+				}
+				res.send(profileDOM.serialize());
+			}
+		);
+
 	} else if (req.session.loggedIn && req.session.admin == 0) {
 		let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
 		let profileDOM = new JSDOM(profile);
@@ -127,7 +173,7 @@ app.get("/dashboard", function (req, res) {
 						if (results[i].filename != null) {
 
 							str = str +
-								results[i].date + " " + results[i].time +
+								results[i].date + " " + results[i].time + "<br>" +
 								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
 								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
@@ -140,7 +186,7 @@ app.get("/dashboard", function (req, res) {
 						} else {
 
 							str = str +
-								results[i].date + " " + results[i].time +
+								results[i].date + " " + results[i].time + "<br>" +
 								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
