@@ -48,6 +48,9 @@ function uploadTimeline(e) {
   }).catch(function (err) {
     ("Error:", err)
   });
-  window.location.href ="/dashboard";
+  setTimeout(function () {
+    window.location.href ="/dashboard";
+  }, 3000);
+  
 }
 
