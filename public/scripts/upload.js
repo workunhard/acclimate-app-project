@@ -26,7 +26,7 @@ function uploadTimeline(e) {
   e.preventDefault();
 
   let text = tinyMCE.activeEditor.getContent({ format: "text" });
-  const imageUpload = document.querySelector('#timeline-upload');
+  const imageUpload = document.querySelector('#file-input');
   let formData = new FormData();
 
   if (imageUpload.files.length > 0) {
