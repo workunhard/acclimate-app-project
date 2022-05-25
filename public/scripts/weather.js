@@ -1,6 +1,7 @@
-function getWeather() {
-  const lat = posOutside.lat;
-  const long = posOutside.lng;
+function getWeather(latlng) {
+  const lat = latlng.lat;
+  const long = latlng.lng;
+  console.log(lat + " " + long);
 
   const key = '01a2ba83bf76f2ed62c6a9cc680e3c6f';
   const lang = 'en';
