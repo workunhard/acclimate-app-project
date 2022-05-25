@@ -3,7 +3,7 @@ tinymce.init({
   height: 300,
   setup: function (editor) {
     editor.on('init', function () {
-      this.setContent('<p>Add content via on init!</p>');
+      this.setContent('<p>Write a caption..</p>');
       console.log(tinyMCE.activeEditor.getContent());
     });
   },
@@ -26,7 +26,7 @@ function uploadTimeline(e) {
   e.preventDefault();
 
   let text = tinyMCE.activeEditor.getContent({ format: "text" });
-  const imageUpload = document.querySelector('#timeline-upload');
+  const imageUpload = document.querySelector('#file-input');
   let formData = new FormData();
 
   if (imageUpload.files.length > 0) {

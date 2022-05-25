@@ -20,53 +20,52 @@
 <body>
   <div class="container">
     <nav id="navbarPlaceholder"></nav>
-    <div id="alerts">
-      <h2 id="profile_name">PROFILE_NAME</h2>
-      <h3>Recent Alerts</h3>
-      <dl>
-        <dt>Who needs to pay for a sauna with this current heat wave</dt>
-        <dd>-everyonesGrandma @ 12:45PM</dd>
-        <dt>Residents advised to stay indoors today amidst record high heatwave temperatures this afternoon</dt>
-        <dd>- BC Ministry of Health @ 9:10AM</dd>
-        <dt>A tree fell on top of another car on SW Marine drive. </dt>
-        <dd>- Wrongplacewrongtime @3:40PM</dd>
-      </dl>
-    </div>
+    <div id="contentBody">
+      <div id="sidebar">
+        <div id="alerts">
+          <h2 id="profile_name">PROFILE_NAME</h2>
 
-    <div id="adminDashboard">
-      <table id="adminArea">
-      </table>
-      <form id="addCustomer">
-        <fieldset>
-          <legend>Add a User</legend>
-          <input type="text" placeholder="name" id="name" /><br>
-          <input type="email" placeholder="email" id="email" /><br>
-          <input type="text" placeholder="password" id="password" /><br>
-          <label for="administrator">Administrator</label>
-          <input type="radio" placeholder="admin" id="admin" name="admin" value="1" />
-          <label for="yes">Yes</label>
-          <input type="radio" placeholder="admin" id="admin" name="admin" value="0" />
-          <label for="no">No</label>
-          <input type="button" id="submit" value="Submit"/>
-        </fieldset>
-      </form>
-    </div>
+        <div id="adminDashboard">
+          <table id="adminArea">
+          </table>
+          <form id="addCustomer">
+            <fieldset>
+              <legend>Add a User</legend>
+              <input type="text" placeholder="name" id="name" /><br>
+              <input type="email" placeholder="email" id="email" /><br>
+              <input type="text" placeholder="password" id="password" /><br>
+              <label for="administrator">Administrator</label>
+              <input type="radio" placeholder="admin" id="admin" name="admin" value="1" />
+              <label for="yes">Yes</label>
+              <input type="radio" placeholder="admin" id="admin" name="admin" value="0" />
+              <label for="no">No</label>
+              <input type="button" id="submit" value="Submit" />
+            </fieldset>
+          </form>
+        </div>
+        <div id="timelinecontainer">
+          <br>
+          <div id="timeline"></div>
+          <br>
+        </div>
+        </div>
+      </div>
 
-    <div id="map">
-      
-    </div>
-    <div id="forecast">
-      
+      <div id="map">
+
+      </div>
+      <div id="forecast">
+
+      </div>
     </div>
     <nav id="footerPlaceholder"></nav>
   </div>
 
   <script src="../scripts/skeleton.js"></script>
-  <script src="scripts/admin-client.js"></script>
+  <script src="scripts/admin-dashboard.js"></script>
   <script src="scripts/location.js"></script>
-  <script  src="scripts/weather.js"></script>
-  <script 
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-isvrs8orgQc5a3KAUWQ&callback=initMap">
+  <script src="scripts/weather.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-isvrs8orgQc5a3KAUWQ&callback=initMap">
   </script>
 
 

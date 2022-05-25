@@ -15,7 +15,7 @@ window.initLocation = function initLocation() {
             let dataParsed = JSON.parse(data);
             console.log(dataParsed);
             if (dataParsed.status == "fail") {
-              console.log("Errrrrrrrr");
+              console.log("Location Error");
             }
           }
         }, queryString);
@@ -31,15 +31,9 @@ window.initLocation = function initLocation() {
   }
 }
 
-
 document.head.appendChild(script);
 
-
 let map, infoWindow;
-
-// To allow the coordinates to be used by the openWeather API.
-
-
 
 /**
  * 
@@ -70,34 +64,6 @@ function initMap() {
       console.log("error");
     }
   })
-  // window.onload = () => {
-  // Try HTML5 geolocation.
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         const pos = {
-  //           lat: position.coords.latitude,
-  //           lng: position.coords.longitude,
-  //         };
-  //         posOutside = structuredClone(pos);
-  //         // getWeather();
-  //         console.log(posOutside.lat + "  " + posOutside.lng);
-  //         infoWindow.setPosition(pos);
-  //         infoWindow.setContent("Location found.");
-  //         infoWindow.open(map);
-  //         map.setCenter(pos);
-  //       },
-  //       () => {
-  //         handleLocationError(true, infoWindow, map.getCenter());
-  //       }
-  //     );
-  //   } else {
-  //     // Browser doesn't support Geolocation
-  //     handleLocationError(false, infoWindow, map.getCenter());
-  //   }
-  // // };
-
-
 }
 
 

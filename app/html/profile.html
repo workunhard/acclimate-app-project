@@ -23,7 +23,7 @@
 
 		<div id="profileInfo">
 			<table id="userInfo">
-				
+
 			</table>
 			<!-- <p>Name:
 				<text id="avatar_name">
@@ -50,6 +50,7 @@
 
 	<script src="../scripts/skeleton.js"></script>
 	<script src="../scripts/user-profile.js"></script>
+	<!-- <script src="../scripts/s3upload.js"></script> -->
 	<script>
 		const upLoadForm = document.getElementById("upload-images-form");
 		upLoadForm.addEventListener("submit", uploadImages);
@@ -73,6 +74,13 @@
 			}).catch(function (err) {
 				("Error:", err)
 			});
+			window.location.replace("/profile");
+		}
+		window.onload = function () {
+			if (!window.location.hash) {
+				window.location = window.location + '#loaded';
+				window.location.reload();
+			}
 		}
 	</script>
 </body>
