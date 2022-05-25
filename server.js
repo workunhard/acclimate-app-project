@@ -240,11 +240,33 @@ function authenticate(res, email, pwd, callback) {
 // 	}
 // }
 
-app.post('/send-location', function (req, res) {
+app.post('/location', function (req, res) {
 	// console.log("yo what's good");
-	console.log(req);
+	if (req.session && req.body.lat && req.body.lng) {
+		req.session.lat = req.body.lat;
+		req.session.lng = req.body.lng;
+		res.send({
+			status: "success",
+		});
+	};
+
+	console.log(req.body.lat);
 	// req.session.lat;
 });
+
+
+app.get('/coords', function (req, res) {
+	if (req.session.lat && req.session.lng) {
+		res.send({
+			lat: req.session.lat,
+			lng: req.session.lng,
+		})
+	} else {
+		res.send({
+			status: "fail"
+		})
+	}
+})
 
 
 
