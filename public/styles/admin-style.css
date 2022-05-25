@@ -266,6 +266,7 @@ caption {
     background-color: beige;
     text-align: center;
     border-radius: 10px 10px 10px 10px;
+    height: 100%;
   }
 
   #forecast {
@@ -307,6 +308,7 @@ caption {
     grid-row: 2;
     margin-top: 0%;
     margin-bottom: 0%;
+    gap: 10px;
   }
 
   #sidebar {
@@ -319,7 +321,7 @@ caption {
 
   #map {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 1 / span 2;
     /* background-color: beige; */
     text-align: center;
     margin-top: 0%;
@@ -335,7 +337,7 @@ caption {
 
   #forecast {
     grid-column: 1;
-    grid-row: 3;
+    grid-row: 3 / span 2;
     /* background-color: cornsilk; */
     text-align: center;
     border-radius: 10px 10px 10px 10px;

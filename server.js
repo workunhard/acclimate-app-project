@@ -531,11 +531,11 @@ app.get("/profile", function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-                    const rows = JSON.parse(JSON.stringify(results[0]));
-                    const value = Object.values(rows);
+                    // const rows = JSON.parse(JSON.stringify(results[0]));
+                    // const value = Object.values(rows);
                     connection.query(
                         "select avatar from bby23_user WHERE ID = ?",
-                        [value],
+                        [req.session.key],
                         function (err, results, fields) {
                             if (err) {
                                 console.log(err.message);
@@ -627,9 +627,9 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            const rows = JSON.parse(JSON.stringify(results[0]));
-            const key = Object.values(rows);
-            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, key], function (err, results) {
+            // const rows = JSON.parse(JSON.stringify(results[0]));
+            // const key = Object.values(rows);
+            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, req.session.key], function (err, results) {
                 if (err) {
                     console.log(err);
                 } else {
