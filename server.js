@@ -131,7 +131,7 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br><br><br>"
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 
                         } else {
 
@@ -142,7 +142,7 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br><br><br>"
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
                         }
 
 
@@ -183,7 +183,7 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br><br><br>"
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 
                         } else {
 
@@ -194,7 +194,7 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br><br><br>"
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
                         }
 
 

@@ -199,7 +199,7 @@ dd {
   .container{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 60px max-content 60px;
+    grid-template-rows: 60px 800px 60px;
     /* grid-template-rows: 10% 27% 27% 29% 7%; */
     height: 100vh;
     padding: 0.5em;
@@ -213,17 +213,17 @@ dd {
 
   #contentBody {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3.5fr 1.5fr;
     grid-column: 1;
     grid-row: 2;
     padding-top: 20px;
-    padding-bottom: 70px;
+    padding-bottom: 0px;
     grid-gap: 5px;
   }
 
   #sidebar {
-    grid-column: 1;
+    grid-column: 1 / span 2;
     grid-row: 1;
     /* background-color:blanchedalmond; */
     border-radius: 10px 10px 10px 10px;
@@ -236,11 +236,12 @@ dd {
     background-color: beige;
     text-align: center;
     border-radius: 10px 10px 10px 10px;
+    height: 100%;
   }
 
   #forecast {
-    grid-column: 1;
-    grid-row: 3;
+    grid-column: 2;
+    grid-row: 2;
     background-color: cornsilk;
     text-align: center;
     border-radius: 10px 10px 10px 10px;
