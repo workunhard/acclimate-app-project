@@ -123,8 +123,7 @@ app.get("/dashboard", function (req, res) {
 
                             str = str +
                                 results[i].date + " " + results[i].time + "<br>" +
-                                // "<img id=\"photo\" src=\"profileimages/timeline/" 
-                                "<img id =\"photo\" src=\"https://acclimate-avatars.s3.us-west-1.amazonaws.com/"
+                                "<img id=\"photo\" src=\"profileimages/timeline/" 
                                 + results[i].filename + "\"><br>" +
                                 "<table><tr><td class='imageID'>" + results[i].imageID +
                                 "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
@@ -176,8 +175,7 @@ app.get("/dashboard", function (req, res) {
 
                             str = str +
                                 results[i].date + " " + results[i].time + "<br>" +
-                                // "<img id=\"photo\" src=\"profileimages/timeline/" 
-                                "<img id =\"photo\" src=\"https://acclimate-avatars.s3.us-west-1.amazonaws.com/"
+                                "<img id=\"photo\" src=\"profileimages/timeline/" 
                                 + results[i].filename + "\"><br>" +
                                 "<table><tr><td class='imageID'>" + results[i].imageID +
                                 "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
@@ -506,38 +504,38 @@ app.get("/profile", function (req, res) {
     }
 });
 
-app.get('/sign-s3', (req, res) => {
-    const s3 = new aws.S3();
-    const fileName = req.query['file-name'];
-    const fileType = req.query['file-type'];
-    const s3Params = {
-        Bucket: "acclimate-avatars",
-        Key: fileName,
-        Expires: 300,
-        ContentType: fileType,
-        ACL: 'public-read'
-    };
+// app.get('/sign-s3', (req, res) => {
+//     const s3 = new aws.S3();
+//     const fileName = req.query['file-name'];
+//     const fileType = req.query['file-type'];
+//     const s3Params = {
+//         Bucket: "acclimate-avatars",
+//         Key: fileName,
+//         Expires: 300,
+//         ContentType: fileType,
+//         ACL: 'public-read'
+//     };
 
-    console.log("at sign-s3 / getsigned");
+//     console.log("at sign-s3 / getsigned");
 
-    s3.getSignedUrl('putObject', s3Params, (err, data) => {
-        if (err) {
-            console.log("error in getSignedUrl");
-            console.log(err);
-            return res.end();
-        }
-        const returnData = {
-            signedRequest: data,
-            url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-        };
-        console.log("returned data");
-        console.log(returnData);
-        res.write(JSON.stringify(returnData));
-        res.end();
-    });
-    console.log("end of sign-s3");
-}
-);
+//     s3.getSignedUrl('putObject', s3Params, (err, data) => {
+//         if (err) {
+//             console.log("error in getSignedUrl");
+//             console.log(err);
+//             return res.end();
+//         }
+//         const returnData = {
+//             signedRequest: data,
+//             url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+//         };
+//         console.log("returned data");
+//         console.log(returnData);
+//         res.write(JSON.stringify(returnData));
+//         res.end();
+//     });
+//     console.log("end of sign-s3");
+// }
+// );
 
 // app.post('/save-details', (req, res) => {
 //     res.setHeader('Content-Type', 'application/json');
