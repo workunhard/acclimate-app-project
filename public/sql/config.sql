@@ -17,6 +17,8 @@ CREATE TABLE bby23_timeline (
     filename varchar(60),
     description varchar(140),
     date varchar(30),
+    lat DEC(10, 10),
+    lng DEC(10, 10),
     time varchar(30),
     ID int,
     FOREIGN KEY(ID) REFERENCES bby23_user(ID),
