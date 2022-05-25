@@ -242,9 +242,14 @@ function authenticate(res, email, pwd, callback) {
 
 app.post('/location', function (req, res) {
 	// console.log("yo what's good");
-	if (req.session && req.body.lat && req.body.lng) {
+	if (req.session) {
 		req.session.lat = req.body.lat;
 		req.session.lng = req.body.lng;
+		req.session.save(function (err) {
+			if (err) {
+				console.log(err);
+			}
+		});
 		res.send({
 			status: "success",
 		});
@@ -256,8 +261,10 @@ app.post('/location', function (req, res) {
 
 
 app.get('/coords', function (req, res) {
-	if (req.session.lat && req.session.lng) {
+	if (req.session) {
+		console.log(req.session.lat);
 		res.send({
+			status: "success",
 			lat: req.session.lat,
 			lng: req.session.lng,
 		})

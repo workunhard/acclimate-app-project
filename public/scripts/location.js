@@ -1,8 +1,11 @@
 var script = document.createElement('script');
 script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-isvrs8orgQc5a3KAUWQ&callback=initLocation';
 script.async = true;
+script.defer = true;
 
-window.initLocation = function initLocation () {
+window.initLocation = function initLocation() {
+
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -13,7 +16,7 @@ window.initLocation = function initLocation () {
             console.log(dataParsed);
             if (dataParsed.status == "fail") {
               console.log("Errrrrrrrr");
-            } 
+            }
           }
         }, queryString);
         initMap();
@@ -27,6 +30,8 @@ window.initLocation = function initLocation () {
     handleLocationError(false, infoWindow, map.getCenter());
   }
 }
+
+
 document.head.appendChild(script);
 
 
@@ -47,7 +52,7 @@ function initMap() {
   });
   infoWindow = new google.maps.InfoWindow();
 
-  ajaxGET("/coords", function(data) {
+  ajaxGET("/coords", function (data) {
     if (data) {
       let dataParsed = JSON.parse(data);
       const pos = {
@@ -66,7 +71,7 @@ function initMap() {
     }
   })
   // window.onload = () => {
-    // Try HTML5 geolocation.
+  // Try HTML5 geolocation.
   //   if (navigator.geolocation) {
   //     navigator.geolocation.getCurrentPosition(
   //       (position) => {
