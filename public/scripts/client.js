@@ -95,12 +95,33 @@ ready(function () {
 
 	
 
+}, async function getLocation(callback) {
+	let no = await callback();
+	if (navigator.geoLocation) {
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+				let userCords = "lat=" + position.coords.latitude + "&lng=" + position.coords.longitude;
+				ajaxPOST('/get-location', function (data) {
+					if (data) {
+						let dataParsed = JSON.parse(data);
+						console.log(dataParsed);
+						if (dataParsed.status == "fail") {
+							console.log("Error");
+						} 
+					}
+				}, userCords);
+			}, () => {console.log("Error");}
+		)
+	} else {
+		console.log("Don't have geolocation");
+	}
 });
 
-function ready(callback) {
+function ready(callback, location) {
 	if (document.readyState != "loading") {
-		callback();
+		// callback();
+		location(callback);
 	} else {
-		document.addEventListener("DOMContentLoaded", callback);
+		document.addEventListener("DOMContentLoaded", location(callback));
 	}
 }

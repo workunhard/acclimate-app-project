@@ -91,6 +91,10 @@ app.use(session({
 	saveUninitialized: true
 }));
 
+
+
+// app.use("/", getLocation);
+
 app.get("/", function (req, res) {
 	if (req.session.loggedIn) {
 		res.redirect("/dashboard");
@@ -185,6 +189,7 @@ app.post("/login", function (req, res) {
 				req.session.admin = userRecord.admin;
 				req.session.key = userRecord.ID;
 				req.session.save(function (err) { });
+				// console.log(req.session.lat);
 				res.send({
 					status: "success",
 					msg: "Logged in."
@@ -221,6 +226,28 @@ function authenticate(res, email, pwd, callback) {
 		}
 	);
 }
+
+// function getLocation(req, res) {
+// 	if (navigator.geoLocation) {
+// 		navigator.geolocation.getCurrentPosition(
+// 			(position) => {
+// 				req.lat = position.coords.latitude;
+// 				req.lng = position.coords.longitude;
+// 			}, () => {console.log("Error");}
+// 		)
+// 	} else {
+// 		console.log("Don't have geolocation");
+// 	}
+// }
+
+app.post('/send-location', function (req, res) {
+	// console.log("yo what's good");
+	console.log(req);
+	// req.session.lat;
+});
+
+
+
 
 app.get('/get-users', function (req, res) {
 
