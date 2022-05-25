@@ -127,9 +127,22 @@ nav {
   text-align: center;
 }
 
+#card {
+  border-radius: 10px 10px 10px 10px;
+  background-color:lightslategrey;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  width: 95%;
+  margin-left: 3%;
+}
+
+#sidebar {
+  background-color:whitesmoke;
+}
+
 #timeline img {
   width: 80%;
   height: auto;
+  border-radius: 10px 10px 10px 10px;
 }
 
 dd {
@@ -242,7 +255,7 @@ caption {
   #sidebar {
     grid-column: 1;
     grid-row: 1;
-    background-color:blanchedalmond;
+    /* background-color:blanchedalmond; */
     border-radius: 10px 10px 10px 10px;
     overflow-y: auto;
   }
@@ -299,7 +312,7 @@ caption {
   #sidebar {
     grid-column: 2;
     grid-row: 1 / span 4;
-    background-color:blanchedalmond;
+    /* background-color:blanchedalmond; */
     border-radius: 10px 10px 10px 10px;
     overflow-y: auto;
   }

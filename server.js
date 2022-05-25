@@ -121,7 +121,7 @@ app.get("/dashboard", function (req, res) {
 
                         if (results[i].filename != null) {
 
-                            str = str +
+                            str = str + "<div id=\"card\">" +
                                 results[i].date + " " + results[i].time + "<br>" +
                                 "<img id=\"photo\" src=\"profileimages/timeline/" 
                                 + results[i].filename + "\"><br>" +
@@ -129,20 +129,20 @@ app.get("/dashboard", function (req, res) {
                                 "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
                                 "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
                                 "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-                                "<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
+                                "<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table><br>"
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br><br><br>"
 
                         } else {
 
-                            str = str +
+                            str = str + "<div id=\"card\">" +
                                 results[i].date + " " + results[i].time +
                                 "<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
                                 "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
                                 "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-                                "<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
+                                "<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table><br>"
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br><br><br>"
                         }
 
 
@@ -173,7 +173,7 @@ app.get("/dashboard", function (req, res) {
 
                         if (results[i].filename != null) {
 
-                            str = str +
+                            str = str + "<div id=\"card\">" +
                                 results[i].date + " " + results[i].time + "<br>" +
                                 "<img id=\"photo\" src=\"profileimages/timeline/" 
                                 + results[i].filename + "\"><br>" +
@@ -181,20 +181,20 @@ app.get("/dashboard", function (req, res) {
                                 "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
                                 "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
                                 "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-                                "<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
+                                "<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table><br>"
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br><br><br>"
 
                         } else {
 
-                            str = str +
+                            str = str + "<div id=\"card\">" +
                                 results[i].date + " " + results[i].time + "<br>" +
                                 "<table><tr><td class='imageID'>" + results[i].imageID +
                                 "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
                                 "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-                                "<td class='confirmImage'><input id='confirm' type='button' value='Confirm image'></td></tr></table><br>" +
+                                "<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table><br>"
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br><br><br>"
                         }
 
 
