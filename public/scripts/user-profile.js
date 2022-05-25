@@ -88,7 +88,6 @@ function editCellEmail(e) {
             parent.innerHTML = "";
             parent.appendChild(newSpan);
             let dataToSend = {
-                name: parent.parentNode.querySelector(".name").innerHTML,
                 email: v
             };
 
@@ -148,7 +147,6 @@ function editCellName(e) {
             parent.appendChild(newSpan);
             let dataToSend = {
                 name: v,
-                email: parent.parentNode.querySelector(".email").innerHTML
             };
 
             const xhr = new XMLHttpRequest();
@@ -196,8 +194,6 @@ function editCellPassword(e) {
             parent.innerHTML = "";
             parent.appendChild(newSpan);
             let dataToSend = {
-                name: parent.parentNode.querySelector(".name").innerHTML,
-                email: parent.parentNode.querySelector(".email").innerHTML,
                 password: v
             };
 

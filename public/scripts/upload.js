@@ -3,7 +3,7 @@ tinymce.init({
   height: 300,
   setup: function (editor) {
     editor.on('init', function () {
-      this.setContent('<p>Add content via on init!</p>');
+      this.setContent('<p>Write a caption..</p>');
       console.log(tinyMCE.activeEditor.getContent());
     });
   },
