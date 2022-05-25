@@ -9,7 +9,7 @@ function getUserInfo() {
                 let user = data.profile;
                 if (data.status == "success") {
 
-                    let str = `<caption>User Profile View</caption>
+                    let str = `<caption>Profile Info</caption>
                         <tr>
                             <th class="name_header"><span>Name</span></th>
                             <td class='name'><span>${user.name}</span></td>
