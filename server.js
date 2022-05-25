@@ -105,6 +105,17 @@ app.get("/", function (req, res) {
 });
 
 app.get("/dashboard", function (req, res) {
+    connection.query(
+        "SELECT name from bby23_user WHERE ID = ?",
+        [req.session.key],
+        function(err, results) {
+            if (err) { 
+                console.log(err.message);
+            }
+            req.session.name = results[0].name;
+        }
+    )
+
     if (req.session.loggedIn && req.session.admin == 1) {
         let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
@@ -151,6 +162,7 @@ app.get("/dashboard", function (req, res) {
 
 
                     }
+                    
                     profileDOM.window.document.getElementById("timeline").innerHTML = str;
                 }
                 res.send(profileDOM.serialize());
