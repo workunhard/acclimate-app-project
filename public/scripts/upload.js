@@ -1,6 +1,12 @@
 tinymce.init({
   selector: '#description',
   height: 300,
+  setup: function (editor) {
+    editor.on('init', function () {
+      this.setContent('<p>Write a caption..</p>');
+      console.log(tinyMCE.activeEditor.getContent());
+    });
+  },
   theme: 'modern',
   plugins: [
     'advlist autolink lists link image charmap print preview hr anchor pagebreak',

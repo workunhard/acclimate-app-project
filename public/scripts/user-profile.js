@@ -6,24 +6,22 @@ function getUserInfo() {
             if (xhr.status === 200) {
 
                 let data = JSON.parse(this.responseText);
+                let user = data.profile;
                 if (data.status == "success") {
 
-                    let str = `<caption>User Profile View</caption><tr>
-<th class="name_header"><span>Name</span></th>
-<th class="email_header"><span>Email</span></th>
-<th class="password_header"><span>Password</span></th>
-</tr>`;
-
-
-                    // for (let i = 0; i < data.rows.length; i++) {
-                        let user = data.profile;
-                        //console.log("row", row);
-                        str += ("<tr><td class='name'><span>" + user.name +
-                            "</span></td><td class='email'><span>" +
-                            user.email + "</span></td><td class='password'><span>" + 
-                            user.password + "</span></td></tr>");
-                    // }
-                    //console.log(str);
+                    let str = `<caption>User Profile View</caption>
+                        <tr>
+                            <th class="name_header"><span>Name</span></th>
+                            <td class='name'><span>${user.name}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="email_header"><span>Email</span></th>
+                            <td class='email'><span>${user.email}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="password_header"><span>Password</span></th>
+                            <td class='password'><span>${user.password}</span></td>
+                        </tr>`;
                     document.getElementById("userInfo").innerHTML = str;
 
                     // select all spans under the email class of td elements
@@ -88,7 +86,6 @@ function editCellEmail(e) {
             parent.innerHTML = "";
             parent.appendChild(newSpan);
             let dataToSend = {
-                name: parent.parentNode.querySelector(".name").innerHTML,
                 email: v
             };
 
@@ -147,8 +144,7 @@ function editCellName(e) {
             parent.innerHTML = "";
             parent.appendChild(newSpan);
             let dataToSend = {
-                name: v,
-                email: parent.parentNode.querySelector(".email").innerHTML
+                name: v
             };
 
             const xhr = new XMLHttpRequest();
@@ -196,8 +192,6 @@ function editCellPassword(e) {
             parent.innerHTML = "";
             parent.appendChild(newSpan);
             let dataToSend = {
-                name: parent.parentNode.querySelector(".name").innerHTML,
-                email: parent.parentNode.querySelector(".email").innerHTML,
                 password: v
             };
 
