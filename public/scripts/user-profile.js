@@ -160,10 +160,10 @@ function editCellName(e) {
                 }
             }
             xhr.open("POST", "/update-userName");
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('X-RequeSsted-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send("id=" + dataToSend.id + "&name=" + dataToSend.name);
-
+            // xhr.send("id=" + dataToSend.id + "&name=" + dataToSend.name);
+            xhr.send("&name=" + dataToSend.name);
         }
     });
     parent.innerHTML = "";
