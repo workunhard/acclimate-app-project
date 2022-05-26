@@ -86,7 +86,7 @@ function initMap() {
             // The HTML template to be injected into the info window.
 
 
-            var content = content + "<div id=\"card\">" +
+            var content = "<div id=\"card\">" +
             `<h3>Posted by @${results?.name} on ${results?.date} at ${results?.time}</h3>` +
             "<table><tr><td class='imageIDdescription'>" + results?.imageID + "</td></tr>" +
             "<tr class='description'><td class='description'><span>" + results?.description + "</span></td></tr></table>" +
