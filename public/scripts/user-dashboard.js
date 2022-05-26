@@ -3,13 +3,11 @@ for (let i = 0; i < posts.length; i++) {
     posts[i].addEventListener("click", deletePost);
 }
 
-// function refreshTimeline() {
-//         document.location.reload();
-// }
-
 function deletePost(e) {
-
     e.preventDefault();
+    
+    var result = window.confirm("Are you sure?")
+    if (result==true) {
     let parent = e.target.parentNode;
 
     let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
@@ -32,6 +30,33 @@ function deletePost(e) {
     xhr.send("imageID=" + formData.imageID);
     window.location.replace("/dashboard");
 }
+}
+
+// function deletePost(e) {
+    
+//     e.preventDefault();
+//     let parent = e.target.parentNode;
+
+//     let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
+
+//     const xhr = new XMLHttpRequest();
+//     xhr.onload = function () {
+//         if (this.readyState == XMLHttpRequest.DONE) {
+//             if (xhr.status === 200) {
+//                 document.location.reload();
+//             } else {
+//                 console.log(this.status);
+//             }
+//         } else {
+//             console.log("ERROR", this.status);
+//         }
+//     }
+//     xhr.open("POST", "/delete-post");
+//     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//     xhr.send("imageID=" + formData.imageID);
+//     window.location.replace("/dashboard");
+// }
 
 let text = document.querySelectorAll("td[class='description'] span");
 for (let i = 0; i < text.length; i++) {
@@ -97,8 +122,10 @@ for (let i = 0; i < deleteImages.length; i++) {
 }
 
 function deleteImage(e) {
-
     e.preventDefault();
+
+    var result = window.confirm("Are you sure?")
+    if (result==true) {
     let parent = e.target.parentNode;
 
     let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
@@ -119,6 +146,7 @@ function deleteImage(e) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("imageID=" + formData.imageID);
     window.location.replace("/dashboard");
+}
 }
 
 
