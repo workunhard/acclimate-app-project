@@ -733,10 +733,19 @@ app.post('/delete-post', function (req, res) {
         });
 });
 
+
+// To allow validation of both email and passwords and ensure proper syntax.
 const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+// Seven characters in total, at least one special character and at least one number. 
 const validPasswordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
 
 
+/**
+ * To validate User email.
+ * @param {*} req the request object in HTTP requests, extracts the email.
+ * @returns an array that informs of the result and in case of failure provides an associated message.
+ */
 function validateUserEmail(req) {
     let email = req.body.email;
     if (email.match(validEmailRegex) && email != "") {
@@ -746,6 +755,11 @@ function validateUserEmail(req) {
     }
 }
 
+/**
+ * To validate User name.
+ * @param {*} req the request object in HTTP requests, extracts the name.
+ * @returns an array that informs of the result and in case of failure provides an associated message.
+ */
 function validateUserName(req) {
     let name = req.body.name;
     if (name != "") {
@@ -755,6 +769,12 @@ function validateUserName(req) {
     }
 }
 
+
+/**
+ * To validate User password.
+ * @param {*} req the request object in HTTP requests, extracts the password.
+ * @returns an array that informs of the result and in case of failure provides an associated message.
+ */
 function validateUserPassword(req) {
     let password = req.body.password;
     let cpassword = req.body.cpassword;
@@ -768,7 +788,11 @@ function validateUserPassword(req) {
     }
 }
 
-
+/**
+ * Validates all of the user input one by one by consolidating all of the validation functions.
+ * @param {*} req the request object in HTTP requests.
+ * @returns an array that informs the user of the validation result, if validation fails then provides the reason as well.
+ */
 function userValidation(req) {
 
     var email = validateUserEmail(req);
@@ -789,6 +813,9 @@ function userValidation(req) {
 
 }
 
+/**
+ * Creates a new user upon signup and uses the validation functions before making an SQL query.
+ */
 app.post("/create-user", function (req, res) {
     var validation = userValidation(req);
     var result = validation[0];
