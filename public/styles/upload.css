@@ -84,14 +84,6 @@ nav {
   width: 100%;
 }
 
-.imageID {
-  display: none;
-}
-
-.imageIDdescription {
-  display: none;
-}
-
 .homeIcon {
   color: white;
   position: absolute;
@@ -123,177 +115,9 @@ nav {
   color: red;
 }
 
-#alerts {
-  text-align: center;
-}
-
-#card {
-  border-radius: 10px 10px 10px 10px;
-  background-color:lightslategrey;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  width: 95%;
-  margin-left: 3%;
-}
-
-#sidebar {
-  background-color:whitesmoke;
-}
-
-#timeline img {
-  width: 80%;
-  height: auto;
-  border-radius: 10px 10px 10px 10px;
-}
-
-#deletePost {
-  color: #52BBE7;
-  font-family: 'Radio Canada', sans serif;
-  font-size: 8pt;
-  background-color: white;
-  text-decoration: none;
-  border: 2px solid #52BBE7;
-  border-radius: 14px;
-  padding: 0.5em;
-  transition: 0.3s;
-  text-align: center;
-  cursor: pointer;
-}
-
-#deletePost:hover {
-  color: white;
-  background-color: #52BBE7;
-  border: 2px solid rgba(248, 253, 252, 0.8);
-}
-
-#deleteImage {
-  color: #52BBE7;
-  font-family: 'Radio Canada', sans serif;
-  font-size: 8pt;
-  background-color: white;
-  text-decoration: none;
-  border: 2px solid #52BBE7;
-  border-radius: 14px;
-  padding: 0.5em;
-  transition: 0.3s;
-  text-align: center;
-  cursor: pointer;
-}
-
-#deleteImage:hover {
-  color: white;
-  background-color: #52BBE7;
-  border: 2px solid rgba(248, 253, 252, 0.8);
-}
-
-input[type="file"] {
-  display: none;
-}
-
-.image-label {
-  color: #52BBE7;
-  font-family: 'Radio Canada', sans serif;
-  font-size: 8pt;
-  background-color: white;
-  text-decoration: none;
-  border: 2px solid #52BBE7;
-  border-radius: 14px;
-  padding: 0.5em;
-  transition: 0.3s;
-  text-align: center;
-  cursor: pointer;
-}
-
-.image-label:hover {
-    color: white;
-  background-color: #52BBE7;
-  border: 2px solid rgba(248, 253, 252, 0.8);
-}
-
-#confirm {
-  color: #52BBE7;
-  font-family: 'Radio Canada', sans serif;
-  font-size: 8pt;
-  background-color: white;
-  text-decoration: none;
-  border: 2px solid #52BBE7;
-  border-radius: 14px;
-  padding: 0.5em;
-  transition: 0.3s;
-  text-align: center;
-  cursor: pointer;
-}
-
-#confirm:hover {
-  color: white;
-  background-color: #52BBE7;
-  border: 2px solid rgba(248, 253, 252, 0.8);
-}
-
 dd {
   font-style: italic;
   font-weight: bold;
-}
-
-#bbymap {
-  width: 95%;
-  height: 100%;
-  border-radius: 10px 10px 10px 10px;
-}
-
-#forecastTable {
-  width: 95%;
-  height: 100%;
-  border-radius: 10px 10px 10px 10px;
-}
-
-form {
-  text-align: center;
-}
-
-#adminArea {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1.5px solid black;
-}
-
-#adminArea th {
-  border: 1.5px solid black;
-}
-
-#adminArea td {
-  border: 1.5px solid black;
-}
-
-caption {
-  font-size: 15px;
-  font-weight: bold;
-}
-
-/* .box {
-  display: grid;
-  font-size: 12px;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr;
-}
-
-.weatherImg {
-  grid-column: 1; */
-
-#forecast {
-  background: rgba(99, 99, 214, 0.8);
-  padding: 5px;
-  /* position: fixed; */
-  bottom: 0;
-  display: flex;
-  color: white;
-  /* width: 100%; */
-  align-items: last baseline;
-  justify-content: space-between;
-  overflow-y: hidden;
-  font-size: 11px;
-  padding-left: 5px;
-  /* z-index: -1; */
 }
 
 .box {
@@ -303,21 +127,72 @@ caption {
   margin: 6px;
 }
 
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
 
+.file-upload {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 12pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
 
+input[type="file"] {
+  display: none;
+}
 
+.file-upload:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
 
+#submit {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 12pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  /* transition: 0.3s; */
+  text-align: center;
+  margin-left: 50px;
+  cursor: pointer;
+}
 
+#submit:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
 
-@media only screen and (max-width: 800px) {
+/* @media only screen and (max-width: 800px) { */
   .container{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 60px 800px 60px;
-    /* grid-template-rows: 10% 27% 27% 29% 7%; */
     height: 100vh;
     padding: 0.5em;
     grid-gap: 5px;
+    /* overflow-y: hidden; */
   }
 
   #navbarPlaceholder {
@@ -325,10 +200,8 @@ caption {
     grid-row: 1;
   }
 
-  #contentBody {
+  #uploadbox {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 3.5fr 1.5fr;
     grid-column: 1;
     grid-row: 2;
     padding-top: 20px;
@@ -336,38 +209,13 @@ caption {
     grid-gap: 5px;
   }
 
-  #sidebar {
-    grid-column: 1 / span 2;
-    grid-row: 1;
-    /* background-color:blanchedalmond; */
-    border-radius: 10px 10px 10px 10px;
-    overflow-y: auto;
-  }
-
-  #map {
-    grid-column: 1;
-    grid-row: 2;
-    background-color: beige;
-    text-align: center;
-    border-radius: 10px 10px 10px 10px;
-    height: 100%;
-  }
-
-  #forecast {
-    grid-column: 2;
-    grid-row: 2;
-    background-color: cornsilk;
-    text-align: center;
-    border-radius: 10px 10px 10px 10px;
-  }
-
   #footerPlaceholder {
     grid-column: 1;
     grid-row: 5;
   }
-}
+/* } */
 
-@media only screen and (min-width: 801px) {
+/* @media only screen and (min-width: 801px) {
   .container{
     display: grid;
     grid-template-columns: 1fr;
@@ -398,7 +246,6 @@ caption {
   #sidebar {
     grid-column: 2;
     grid-row: 1 / span 4;
-    /* background-color:blanchedalmond; */
     border-radius: 10px 10px 10px 10px;
     overflow-y: auto;
   }
@@ -406,7 +253,6 @@ caption {
   #map {
     grid-column: 1;
     grid-row: 1 / span 2;
-    /* background-color: beige; */
     text-align: center;
     margin-top: 0%;
     border-radius: 10px 10px 10px 10px;
@@ -422,7 +268,6 @@ caption {
   #forecast {
     grid-column: 1;
     grid-row: 3 / span 2;
-    /* background-color: cornsilk; */
     text-align: center;
     border-radius: 10px 10px 10px 10px;
     margin-top: 10px;
@@ -434,4 +279,4 @@ caption {
     border-radius: 10px 10px 10px 10px;
     border: 1px solid grey;
   }
-}
+} */

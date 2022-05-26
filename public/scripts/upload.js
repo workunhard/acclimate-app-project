@@ -1,6 +1,6 @@
 tinymce.init({
   selector: '#description',
-  height: 300,
+  height: 200,
   setup: function (editor) {
     editor.on('init', function () {
       this.setContent('<p>Write a caption..</p>');
@@ -9,6 +9,7 @@ tinymce.init({
   },
   theme: 'modern',
   plugins: [
+    'code', 'lists',
     'advlist autolink lists link image charmap print preview hr anchor pagebreak',
     'searchreplace wordcount visualblocks visualchars code fullscreen',
     'insertdatetime media nonbreaking save table contextmenu directionality',
@@ -19,6 +20,13 @@ tinymce.init({
   image_advtab: true
 });
 
+document.getElementById("uploadbox").addEventListener("click", cleanUp);
+// document.getElementById("mceu_41.mce-edit-area.mce-container.mce-panel.mce-stack-layout-item").addEventListener("click", cleanUp);
+function cleanUp() {
+  tinymce.activeEditor.setContent('');
+  document.getElementById("uploadbox").removeEventListener("click", cleanUp);
+  // document.getElementById("mceu_41.mce-edit-area.mce-container.mce-panel.mce-stack-layout-item").removeEventListener("click", cleanUp);
+}
 
 document.getElementById("submit").addEventListener("click", uploadTimeline);
 

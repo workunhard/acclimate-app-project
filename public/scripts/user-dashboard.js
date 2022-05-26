@@ -3,34 +3,35 @@ for (let i = 0; i < posts.length; i++) {
     posts[i].addEventListener("click", deletePost);
 }
 
-// function refreshTimeline() {
-//         document.location.reload();
-// }
-
 function deletePost(e) {
-
     e.preventDefault();
-    let parent = e.target.parentNode;
 
-    let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
+    var result = window.confirm("Are you sure?")
+    if (result == true) {
+        let parent = e.target.parentNode;
 
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        if (this.readyState == XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                document.location.reload();
-            } else {
-                console.log(this.status);
-            }
-        } else {
-            console.log("ERROR", this.status);
+        let formData = {
+            imageID: parent.parentNode.querySelector(".imageID").innerHTML
         }
+
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+            if (this.readyState == XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    document.location.reload();
+                } else {
+                    console.log(this.status);
+                }
+            } else {
+                console.log("ERROR", this.status);
+            }
+        }
+        xhr.open("POST", "/delete-post");
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send("imageID=" + formData.imageID);
+        window.location.replace("/dashboard");
     }
-    xhr.open("POST", "/delete-post");
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send("imageID=" + formData.imageID);
-    window.location.replace("/dashboard");
 }
 
 let text = document.querySelectorAll("td[class='description'] span");
@@ -52,7 +53,7 @@ function editDescription(e) {
         if (e.which == 13) {
             str = "Enter description here";
             if (input.value === null || input.value.match(/^[\s\n\r]*$/) !== null) {
-            // if (input.value.trim().length === 0) {
+                // if (input.value.trim().length === 0) {
                 v = str;
             } else {
                 v = input.value;
@@ -72,8 +73,7 @@ function editDescription(e) {
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
                 if (this.readyState == XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                    } else {
+                    if (xhr.status === 200) {} else {
                         console.log(this.status);
                     }
                 } else {
@@ -97,28 +97,32 @@ for (let i = 0; i < deleteImages.length; i++) {
 }
 
 function deleteImage(e) {
-
     e.preventDefault();
-    let parent = e.target.parentNode;
 
-    let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
+    var result = window.confirm("Are you sure?")
+    if (result == true) {
+        let parent = e.target.parentNode;
 
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        if (this.readyState == XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-            } else {
-                console.log(this.status);
-            }
-        } else {
-            console.log("ERROR", this.status);
+        let formData = {
+            imageID: parent.parentNode.querySelector(".imageID").innerHTML
         }
+
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+            if (this.readyState == XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {} else {
+                    console.log(this.status);
+                }
+            } else {
+                console.log("ERROR", this.status);
+            }
+        }
+        xhr.open("POST", "/delete-image");
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send("imageID=" + formData.imageID);
+        window.location.replace("/dashboard");
     }
-    xhr.open("POST", "/delete-image");
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send("imageID=" + formData.imageID);
-    window.location.replace("/dashboard");
 }
 
 
@@ -168,5 +172,3 @@ window.onload = function () {
 // function editPost() {
 //     window.location.replace("/edit-post");
 // }
-
-

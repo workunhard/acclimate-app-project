@@ -135,6 +135,12 @@ nav {
   margin-left: 3%;
 }
 
+#card table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 #sidebar {
   background-color:whitesmoke;
 }
@@ -144,6 +150,92 @@ nav {
   height: auto;
   border-radius: 10px 10px 10px 10px;
 }
+
+#deletePost {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 8pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+#deletePost:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+#deleteImage {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 8pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+#deleteImage:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.image-label {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 8pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+.image-label:hover {
+    color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+#confirm {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 8pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+#confirm:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+
 
 dd {
   font-style: italic;

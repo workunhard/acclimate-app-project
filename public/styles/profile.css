@@ -49,6 +49,30 @@ nav {
   text-align: center;
 }
 
+#upload-label {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 12pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+#upload-label:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+input[type="file"] {
+  display: none;
+}
+
 #submit {
   color: #52BBE7;
   font-family: 'Radio Canada', sans serif;
@@ -60,6 +84,7 @@ nav {
   padding: 0.5em;
   transition: 0.3s;
   text-align: center;
+  cursor: pointer;
 }
 
 #submit:hover {
