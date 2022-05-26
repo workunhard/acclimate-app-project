@@ -143,8 +143,8 @@ app.get("/dashboard", function (req, res) {
 								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
-								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-								"<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
+								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
 								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 
@@ -155,7 +155,7 @@ app.get("/dashboard", function (req, res) {
 								"<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-								"<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
+								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
 								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 						}
@@ -196,8 +196,8 @@ app.get("/dashboard", function (req, res) {
 								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
-								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-								"<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
+								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
 								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 
@@ -208,7 +208,7 @@ app.get("/dashboard", function (req, res) {
 								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-								"<td class='confirmImage'><input id='confirm' type='button' value='Update image'></td></tr></table><br>" +
+								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
 								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 						}
