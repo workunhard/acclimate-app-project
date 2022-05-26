@@ -13,7 +13,6 @@ window.initLocation = function initLocation() {
         ajaxPOST("/location", function (data) {
           if (data) {
             let dataParsed = JSON.parse(data);
-            console.log(dataParsed);
             if (dataParsed.status == "fail") {
               console.log("Location Error");
             }
@@ -39,30 +38,69 @@ let map, infoWindow;
  * 
  */
 function initMap() {
-  // let location = await initLocation();
+
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -34.397, lng: 150.644 },
     zoom: 13,
   });
-  infoWindow = new google.maps.InfoWindow();
 
   ajaxGET("/coords", function (data) {
     if (data) {
       let dataParsed = JSON.parse(data);
-      const pos = {
+      let pos = {
         lat: parseFloat(dataParsed.lat),
         lng: parseFloat(dataParsed.lng),
       }
-      // const coordinates = new google.maps.LatLng(pos.lat, pos.lng);
-      // console.log(coordinates);
+
       getWeather(pos);
-      infoWindow.setPosition(pos);
-      infoWindow.setContent("Location found.");
-      infoWindow.open(map);
+
       map.setCenter(pos);
+      ajaxGET("/timeline", function (data) {
+        if (data) {
+          let dataParsed = JSON.parse(data);
+          dataParsed.rows.forEach(results => {
+            var title = results.description;
+            var pos = new google.maps.LatLng(results.lat, results.lng);
+            var content = "<div id=\"card\">" +
+            results.date + " " + results?.time + "<br>" +
+            "<img id=\"photo\" src=\"profileimages/timeline/"
+            + results?.filename + "\"><br>" +
+            "<table><tr><td class='imageID'>" + results?.imageID +
+            "</td></tr></table><br>" +
+            "<table><tr><td class='imageIDdescription'>" + results?.imageID +
+            "</td><td class='description'><span>" + results?.description + "</span></td></tr></table></div><br>"
+            createMarker(pos, map, title, content);
+
+          });
+          if (dataParsed.status == "fail") {
+            console.log("Location error");
+          }
+        }
+      })
     } else {
       console.log("error");
     }
+  })
+}
+
+
+function createMarker(location, map, title, content) {
+  var marker = new google.maps.Marker({
+    position: location,
+    title: title,
+    map: map,
+  })
+  var infoWindow = new google.maps.InfoWindow({
+    content: content,
+    maxWidth: 800,
+  })
+
+  marker.addListener("click", () => {
+    infoWindow.open({
+      anchor: marker,
+      map,
+      shouldFocus: false,
+    })
   })
 }
 

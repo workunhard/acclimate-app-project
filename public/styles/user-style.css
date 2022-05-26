@@ -195,6 +195,10 @@ dd {
   margin: 6px;
 }
 
+.gm-style img {
+  max-width: 80%;
+}
+
 @media only screen and (max-width: 800px) {
   .container{
     display: grid;
