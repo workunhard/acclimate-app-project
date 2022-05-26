@@ -19,6 +19,10 @@ tinymce.init({
   image_advtab: true
 });
 
+document.getElementById("mceu_41").addEventListener("click", cleanUp);
+function cleanUp() {
+  tinymce.activeEditor.setContent('');
+}
 
 document.getElementById("submit").addEventListener("click", uploadTimeline);
 

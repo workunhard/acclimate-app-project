@@ -37,7 +37,7 @@ nav {
   display: block;
   position: absolute;
   top: 8px;
-} 
+}
 
 /* nav menu hamburger icon */
 .navbar a.menu {
@@ -58,7 +58,7 @@ nav {
 
 /* nav menu logo */
 .logo {
-  background-color:#52BBE7;
+  background-color: #52BBE7;
   color: white;
 }
 
@@ -104,34 +104,70 @@ nav {
  * customize material design icon sizes 
  *-------------------------------------
  */
- .material-icons.md-18 { font-size: 18px; }
- .material-icons.md-24 { font-size: 24px; }
- .material-icons.md-36 { font-size: 36px; }
- .material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
 
 @media only screen and (min-width: 801px) {
-    .container{
-      display:grid;
-      grid-template-columns: 100%;
-      grid-template-rows: 10% 83% 7%;
-      height: 100vh;
-      padding: 1em;
-    }
+  .container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 83% 7%;
+    height: 100vh;
+    padding: 1em;
+  }
 
-    #navbarPlaceholder {
-        grid-row: 1;
-    }
+  #navbarPlaceholder {
+    grid-row: 1;
+  }
 
-    #bob {
-        grid-row:2;
-        text-align: center;
-        margin-top: 20%;
-        margin-bottom: 20%;
-    }
+  #bob {
+    grid-row: 2;
+    text-align: center;
+    margin-top: 20%;
+    margin-bottom: 20%;
+  }
 
-    #footerPlaceholder {
-        grid-row:3;
-    }
+  #footerPlaceholder {
+    grid-row: 3;
+  }
+}
 
 
+@media only screen and (max-width: 800px) {
+  .container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 83% 7%;
+    height: 100vh;
+    padding: 0.5em;
+    grid-gap: 5px;
+  }
+
+  #navbarPlaceholder {
+    grid-row: 1;
+  }
+
+  #bob {
+    grid-row: 2;
+    text-align: center;
+    margin-top: 20%;
+    margin-bottom: 20%;
+  }
+
+  #footerPlaceholder {
+    grid-row: 3;
+  }
 }
