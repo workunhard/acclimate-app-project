@@ -651,18 +651,24 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
     })
 });
 
+function numberFixedPositions(x) {
+	return Number.parseFloat(x).toFixed(5);
+}
+
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     req.body.description = sanitizeHtml(req.body.description);
+    var lat = numberFixedPositions(req.session.lat);
+    var lng = numberFixedPositions(req.session.lng);
 
 
 
     if (req.files.length > 0) {
-        connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-            [`${req.files[0].filename}`, req.body.description, date, time, req.session.key],
+        connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [`${req.files[0].filename}`, req.body.description, date, time, req.session.key, lat, lng],
             function (err, results) {
                 if (err) {
                     console.log(err);
@@ -671,8 +677,8 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
                 }
             })
     } else {
-        connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-            [null, req.body.description, date, time, req.session.key],
+        connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [null, req.body.description, date, time, req.session.key, lat, lng],
             function (err, results) {
                 if (err) {
                     console.log(err);
