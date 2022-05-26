@@ -53,12 +53,20 @@
 			</div>
 		</div>
 		<nav id="footerPlaceholder"></nav>
+		<div class="loader-wrapper">
+			<span class="loader"><span class="loader-inner"></span></span>
+	</div>
 	</div>
 
 	<script src="../scripts/skeleton.js"></script>
 	<script src="../scripts/user-dashboard.js"></script>
 	<script async src="scripts/location.js"></script>
 	<script async defer src="scripts/weather.js"></script>
+	<script>
+		$(window).on("load", function () {
+				$(".loader-wrapper").fadeOut("slow");
+		});
+</script>
 
 </body>
 

@@ -30,14 +30,30 @@
                 </label>
                 <input id="file-input" type="file" value="Upload Image" accept="image/png, image/gif, image/jpeg"
                     multiple="multiple" />
-                <input id="submit" type="submit" value="Submit" />
+                <input id="submit" type="submit" value="Submit" onclick="loader()" />
             </form>
             <br>
         </div>
         <nav id="footerPlaceholder"></nav>
+        <div id="loadAnimation">
+        <div class="loader-wrapper">
+            <span class="loader"><span class="loader-inner"></span></span>
+        </div>
+        </div>
+
         <script src="../scripts/skeleton.js"></script>
         <script src="../scripts/upload.js"></script>
         <script src="../scripts/s3upload.js"></script>
+        <script>
+            function loader() {
+                document.getElementById("loadAnimation").innerHTML='<div class=\"loader-wrapper\"><span class=\"loader\"><span class=\"loader-inner\"></span></span></div>'
+            }
+        </script>
+        <script>
+            $(window).on("load", function () {
+                $(".loader-wrapper").fadeOut("slow");
+            });
+        </script>
 
 </body>
 
