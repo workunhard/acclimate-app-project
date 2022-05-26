@@ -8,6 +8,7 @@ body {
 
 nav {
   text-align: center;
+  z-index: 10;
 }
 
 
@@ -389,6 +390,7 @@ dd {
     text-align: center;
     border-radius: 10px 10px 10px 10px;
     height: 100%;
+    overflow-y: hidden;
   }
 
   #forecast {
@@ -428,7 +430,7 @@ dd {
     grid-template-rows: 0.5fr 1fr 1fr 0.5fr;
     grid-column: 1;
     grid-row: 2;
-    margin-top: 0%;
+    margin-top: 1.5%;
     margin-bottom: 0%;
     gap: 10px;
   }
