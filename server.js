@@ -106,7 +106,7 @@ app.get("/", function (req, res) {
 
 app.get("/dashboard", function (req, res) {
 	connection.query(
-		"SELECT name from bby23_user WHERE ID = ?",
+		"SELECT * from bby23_user WHERE ID = ?",
 		[req.session.key],
 		function (err, results) {
 			if (err) {
