@@ -152,6 +152,10 @@ body {
     font-size: 15px;
     font-weight: bold;
   }
+
+  #rain h3 {
+    display:none;
+  }
   
   @media only screen and (max-width: 800px) {
     .container{

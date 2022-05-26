@@ -3,7 +3,6 @@ script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-is
 script.async = true;
 script.defer = true;
 
-
 /**
  * Makes a call to the Geolocation API to find user's coordinates.
  */

@@ -90,7 +90,7 @@
         transition: 0.3s;
     }
 
-    #clickme {
+    .clickme {
         color: #52BBE7;
         font-weight: bold;
     }
@@ -114,7 +114,7 @@
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    #footer {
+    .loginFooter {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
@@ -221,7 +221,7 @@
         transition: 0.3s;
     }
 
-    #clickme {
+    .clickme {
         color: #52BBE7;
         font-weight: bold;
     }
@@ -246,7 +246,7 @@
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    #footer {
+    .loginFooter {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
