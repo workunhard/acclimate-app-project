@@ -37,6 +37,30 @@ ready(function () {
 		xhr.send(params);
 	}
 
+	document.addEventListener("keyup", function (e) {
+		if (e.which == 13) {
+		let email = document.getElementById("email");
+		let password = document.getElementById("password");
+		let emailEntry = email ? email.value : null;
+		let passwordEntry = password ? password.value : null;
+		
+		let queryString = "email=" + emailEntry + "&password=" + passwordEntry;
+
+		ajaxPOST("/login", function (data) {
+
+			if (data) {
+				let dataParsed = JSON.parse(data);
+				console.log(dataParsed);
+				if (dataParsed.status == "fail") {
+					document.getElementById("serverMsg").innerHTML = dataParsed.msg;
+				} else {
+					window.location.replace("/dashboard");
+				}
+			}
+			
+		}, queryString);
+}});
+
 	
 	document.querySelector("#submit").addEventListener("click", function (e) {
 		e.preventDefault();
@@ -60,7 +84,6 @@ ready(function () {
 			}
 		}, queryString);
 	});
-
 
 	document.querySelector("#signUp").addEventListener("click", function (e) {
 		e.preventDefault();
