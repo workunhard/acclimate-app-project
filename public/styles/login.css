@@ -18,6 +18,10 @@
         margin: 0;
     }
 
+    #rain h2 {
+        display: none;
+    }
+
     @keyframes fadeInAnimation {
         0% {
             opacity: 0;
@@ -90,7 +94,7 @@
         transition: 0.3s;
     }
 
-    #clickme {
+    .clickme {
         color: #52BBE7;
         font-weight: bold;
     }
@@ -114,7 +118,7 @@
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    #footer {
+    .footer {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
@@ -147,6 +151,10 @@
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
         margin: 0;
+    }
+
+    #rain h2 {
+        display: none;
     }
 
     @keyframes fadeInAnimation {
@@ -246,7 +254,7 @@
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    #footer {
+    .footer {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;

@@ -660,7 +660,7 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
         } else {
             // const rows = JSON.parse(JSON.stringify(results[0]));
             // const key = Object.values(rows);
-            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, req.session.key], function (err, results) {
+            connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0]?.filename, req.session.key], function (err, results) {
                 if (err) {
                     console.log(err);
                 } else {

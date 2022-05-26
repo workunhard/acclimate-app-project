@@ -35,9 +35,9 @@
               <input type="email" placeholder="email" id="email" /><br>
               <input type="text" placeholder="password" id="password" /><br>
               <label for="administrator">Administrator</label>
-              <input type="radio" placeholder="admin" id="admin" name="admin" value="1" />
+              <input type="radio" id="admin" name="admin" value="1" />
               <label for="yes">Yes</label>
-              <input type="radio" placeholder="admin" id="admin" name="admin" value="0" />
+              <input type="radio" id="admin" name="admin" value="0" />
               <label for="no">No</label>
               <input type="button" id="submit" value="Submit" />
             </fieldset>
@@ -59,6 +59,9 @@
       </div>
     </div>
     <nav id="footerPlaceholder"></nav>
+    <div class="loader-wrapper">
+			<span class="loader"><span class="loader-inner"></span></span>
+		</div>
   </div>
 
   <script src="../scripts/skeleton.js"></script>
@@ -66,6 +69,11 @@
   <script src="scripts/location.js"></script>
   <script src="scripts/weather.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-isvrs8orgQc5a3KAUWQ&callback=initMap">
+  </script>
+  	<script>
+      $(window).on("load", function () {
+          $(".loader-wrapper").fadeOut("slow");
+      });
   </script>
 
 

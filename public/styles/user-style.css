@@ -8,6 +8,7 @@ body {
 
 nav {
   text-align: center;
+  z-index: 10;
 }
 
 
@@ -304,6 +305,49 @@ dd {
   max-width: 80%;
 }
 
+.loader-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #242f3f;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  animation: loader 2s infinite ease;
+}
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+  0% { transform: rotate(0deg);}
+  25% { transform: rotate(180deg);}
+  50% { transform: rotate(180deg);}
+  75% { transform: rotate(360deg);}
+  100% { transform: rotate(360deg);}
+}
+
+@keyframes loader-inner {
+  0% { height: 0%;}
+  25% { height: 0%;}
+  50% { height: 100%;}
+  75% { height: 100%;}
+  100% { height: 0%;}
+}
+
 @media only screen and (max-width: 800px) {
   .container{
     display: grid;
@@ -346,6 +390,7 @@ dd {
     text-align: center;
     border-radius: 10px 10px 10px 10px;
     height: 100%;
+    overflow-y: hidden;
   }
 
   #forecast {
@@ -385,7 +430,7 @@ dd {
     grid-template-rows: 0.5fr 1fr 1fr 0.5fr;
     grid-column: 1;
     grid-row: 2;
-    margin-top: 0%;
+    margin-top: 1.5%;
     margin-bottom: 0%;
     gap: 10px;
   }
@@ -409,7 +454,6 @@ dd {
 
   #bbymap {
     max-width: 95%;
-    max-height: auto;
     border-radius: 10px 10px 10px 10px;
     border: 1px solid grey;  
   }
@@ -425,7 +469,6 @@ dd {
 
   #forecastTable {
     max-width: 95%;
-    max-height: auto;
     border-radius: 10px 10px 10px 10px;
     border: 1px solid grey;
   }
