@@ -20,9 +20,12 @@ tinymce.init({
   image_advtab: true
 });
 
-document.getElementById("mceu_41").addEventListener("click", cleanUp);
+document.getElementById("description_ifr").addEventListener("click", cleanUp);
+// document.getElementById("mceu_41.mce-edit-area.mce-container.mce-panel.mce-stack-layout-item").addEventListener("click", cleanUp);
 function cleanUp() {
   tinymce.activeEditor.setContent('');
+  document.getElementById("dexcription_ifr").removeEventListener("click", cleanUp);
+  // document.getElementById("mceu_41.mce-edit-area.mce-container.mce-panel.mce-stack-layout-item").removeEventListener("click", cleanUp);
 }
 
 document.getElementById("submit").addEventListener("click", uploadTimeline);
