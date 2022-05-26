@@ -324,7 +324,7 @@ app.post('/location', function (req, res) {
 
 app.get('/timeline', function (req, res) {
 	connection.query(
-		"SELECT * from bby23_timeline", function (err, results, fields) {
+		"SELECT p.*, n.name from bby23_timeline AS p JOIN bby23_user AS n ON p.ID = n.ID ", function (err, results, fields) {
 			if (err) {
 				console.log(err.message);
 			}

@@ -24,6 +24,7 @@
         <div id="alerts">
           <h2 id="profile_name">PROFILE_NAME</h2>
 
+<<<<<<< HEAD
           <div id="adminDashboard">
             <table id="adminArea">
             </table>
@@ -47,6 +48,31 @@
             <div id="timeline"></div>
             <br>
           </div>
+=======
+        <div id="adminDashboard">
+          <table id="adminArea">
+          </table>
+          <form id="addCustomer">
+            <fieldset>
+              <legend>Add a User</legend>
+              <input type="text" placeholder="name" id="name" /><br>
+              <input type="email" placeholder="email" id="email" /><br>
+              <input type="text" placeholder="password" id="password" /><br>
+              <label for="administrator">Administrator</label>
+              <input type="radio" id="admin" name="admin" value="1" />
+              <label for="yes">Yes</label>
+              <input type="radio" id="admin" name="admin" value="0" />
+              <label for="no">No</label>
+              <input type="button" id="submit" value="Submit" />
+            </fieldset>
+          </form>
+        </div>
+        <div id="timelinecontainer">
+          <br>
+          <div id="timeline"></div>
+          <br>
+        </div>
+>>>>>>> c0339c423fa5808aed3fda2ea7cc9d3a85d6a82a
         </div>
       </div>
 
@@ -59,8 +85,13 @@
     </div>
     <nav id="footerPlaceholder"></nav>
     <div class="loader-wrapper">
+<<<<<<< HEAD
       <span class="loader"><span class="loader-inner"></span></span>
     </div>
+=======
+			<span class="loader"><span class="loader-inner"></span></span>
+		</div>
+>>>>>>> c0339c423fa5808aed3fda2ea7cc9d3a85d6a82a
   </div>
 
   <script src="../scripts/skeleton.js"></script>
@@ -69,10 +100,17 @@
   <script src="scripts/weather.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-isvrs8orgQc5a3KAUWQ&callback=initMap">
   </script>
+<<<<<<< HEAD
   <script>
     $(window).on("load", function () {
       $(".loader-wrapper").fadeOut("slow");
     });
+=======
+  	<script>
+      $(window).on("load", function () {
+          $(".loader-wrapper").fadeOut("slow");
+      });
+>>>>>>> c0339c423fa5808aed3fda2ea7cc9d3a85d6a82a
   </script>
 
 

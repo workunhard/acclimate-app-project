@@ -18,6 +18,10 @@
         margin: 0;
     }
 
+    #rain h2 {
+        display: none;
+    }
+
     @keyframes fadeInAnimation {
         0% {
             opacity: 0;
@@ -147,6 +151,10 @@
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
         margin: 0;
+    }
+
+    #rain h2 {
+        display: none;
     }
 
     @keyframes fadeInAnimation {
