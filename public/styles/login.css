@@ -118,7 +118,7 @@
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    .loginFooter {
+    #loginFooter {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
@@ -254,7 +254,7 @@
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    .loginFooter {
+    #loginFooter {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
