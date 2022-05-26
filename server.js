@@ -137,7 +137,7 @@ app.get("/dashboard", function (req, res) {
 						if (results[i].filename != null) {
 
                             str = str + "<div id=\"card\">" +
-                            `<h3>Posted by on ${results[i].date} at ${results[i].time}</h3>` +
+                            `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
                             "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td></tr>" +
                             "<tr class='description'><td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
                             "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
@@ -162,13 +162,22 @@ app.get("/dashboard", function (req, res) {
 						} else {
 
 							str = str + "<div id=\"card\">" +
-								results[i].date + " " + results[i].time +
+                                `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
 								"<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
 								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
+								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>" 
+
+                                // str = str + "<div id=\"card\">" +
+								// results[i].date + " " + results[i].time +
+								// "<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
+								// "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+								// "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+								// "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
+								// "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
+								// "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 						}
 
 
@@ -201,7 +210,7 @@ app.get("/dashboard", function (req, res) {
 						if (results[i].filename != null) {
 
 							str = str + "<div id=\"card\">" +
-                                `<h3>Posted by on ${results[i].date} at ${results[i].time}</h3>` +
+                                `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td></tr>" +
 								"<tr class='description'><td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
 								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
@@ -215,13 +224,13 @@ app.get("/dashboard", function (req, res) {
 						} else {
 
 							str = str + "<div id=\"card\">" +
-                                `<h3>on ${results[i].date} at ${results[i].time}</h3>` +
+                                `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
 								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
 								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
+								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>" 
 						}
 
 
