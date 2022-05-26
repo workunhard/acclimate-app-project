@@ -20,7 +20,6 @@ function getUsers() {
 
                     for (let i = 0; i < data.rows.length; i++) {
                         let row = data.rows[i];
-                        //console.log("row", row);
                         str += ("<tr><td class='id'>" +
                             row.ID + "</td><td class='name'><span>" +
                             row.name + "</span></td><td class='email'><span>" +
@@ -29,10 +28,8 @@ function getUsers() {
                             row.admin +
                             "</span></td><td class ='delete'><input type='button' id='delete' value='Delete'></td></tr>");
                     }
-                    //console.log(str);
                     document.getElementById("adminArea").innerHTML = str;
 
-                    // select all spans under the email class of td elements
                     let records = document.querySelectorAll("td[class='email'] span");
                     for (let j = 0; j < records.length; j++) {
                         records[j].addEventListener("click", editCellEmail);
@@ -60,7 +57,6 @@ function getUsers() {
 
             } else {
 
-                // not a 200, could be anything (404, 500, etc.)
                 console.log(this.status);
 
             }
@@ -75,22 +71,17 @@ function getUsers() {
 getUsers();
 
 function editCellEmail(e) {
-
-    // add a listener for clicking on the field to change email
-    // span's text
     let spanText = e.target.innerHTML;
-    // span's parent (td)
     let parent = e.target.parentNode;
-    // create a new input, and add a key listener to it
     let input = document.createElement("input");
     input.value = spanText;
     input.addEventListener("keyup", function (e) {
         let v = null;
-        // pressed enter
+
         if (e.which == 13) {
             v = input.value;
             let newSpan = document.createElement("span");
-            // have to wire an event listener to the new element
+
             newSpan.innerHTML = v;
             parent.innerHTML = "";
             parent.appendChild(newSpan);
@@ -100,16 +91,16 @@ function editCellEmail(e) {
                 email: v
             };
 
-            // now send
+
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
                 if (this.readyState == XMLHttpRequest.DONE) {
-                    // 200 means everthing worked
+
                     if (xhr.status === 200) {
-                        // document.getElementById("status").innerHTML = "Record updated.";
+
                         getUsers();
                     } else {
-                        // not a 200, could be anything (404, 500, etc.)
+
                         console.log(this.status);
                     }
                 } else {
