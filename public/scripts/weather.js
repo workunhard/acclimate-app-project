@@ -8,10 +8,10 @@ function getWeather(latlng) {
   const long = latlng.lng;
 
   // const key = '01a2ba83bf76f2ed62c6a9cc680e3c6f';
-  const key = '099bb0344218b812a4dc05fb0dc27e26';
+  const key = '6ce8f403d3cbee49efdb370cafcc65c3';
   const lang = 'en';
   const units = 'metric';
-  let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${key}&units=${units}&lang=${lang}`;
+  let url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${long}&appid=${key}&units=${units}&lang=${lang}`;
 
   /**
    * The fetch request to request the user's locational weather data which can then be displayed to the user.
