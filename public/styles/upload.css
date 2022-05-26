@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+body {
+  height: 100%;
+  font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
+  overflow-y: scroll;
+}
+
+nav {
+  text-align: center;
+}
+
+
+/* Style the navigation menu */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  width: 100%;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.navbar #navLinks {
+  display: none;
+}
+
+/* nav menu links */
+.navbar a {
+  color: white;
+  padding: 12px 18px;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+}
+
+/* nav menu profile icon */
+.navbar a.profile {
+  display: block;
+  position: absolute;
+  top: 8px;
+} 
+
+/* nav menu hamburger icon */
+.navbar a.menu {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 8px;
+}
+
+/* when hovering above nav menu */
+.navbar a:hover {
+  color: black;
+}
+
+.footerPlaceholder a:hover {
+  color: black;
+}
+
+/* nav menu logo */
+.logo {
+  background-color:#52BBE7;
+  color: white;
+}
+
+/* nav menu logo text */
+#logoText {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#footerPlaceholder {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #52BBE7;
+  box-shadow: 0px 20px 30px 10px;
+}
+
+#navbarPlaceholder {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.homeIcon {
+  color: white;
+  position: absolute;
+  left: 100px;
+}
+
+.camera {
+  color: white;
+}
+
+.search {
+  color: white;
+  position: absolute;
+  right: 100px;
+}
+
+/*-------------------------------------
+ * customize material design icon sizes 
+ *-------------------------------------
+ */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Dashboard Stuff */
+
+.profile_name {
+  color: red;
+}
+
+dd {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.box {
+  background-color: black;
+  border-radius: 10px;
+  padding: 9px;
+  margin: 6px;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.file-upload {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 12pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#submit {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 12pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  /* transition: 0.3s; */
+  text-align: center;
+  margin-left: 50px;
+}
+
+/* @media only screen and (max-width: 800px) { */
+  .container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px 800px 60px;
+    height: 100vh;
+    padding: 0.5em;
+    grid-gap: 5px;
+    /* overflow-y: hidden; */
+  }
+
+  #navbarPlaceholder {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #uploadbox {
+    display: grid;
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    grid-gap: 5px;
+  }
+
+  #footerPlaceholder {
+    grid-column: 1;
+    grid-row: 5;
+  }
+/* } */
+
+/* @media only screen and (min-width: 801px) {
+  .container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 12% 78% 10%;
+    height: 100vh;
+  }
+  #navbarPlaceholder {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #footerPlaceholder {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  #contentBody {
+    display: grid;
+    grid-template-columns: 46% 54%;
+    grid-template-rows: 0.5fr 1fr 1fr 0.5fr;
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    gap: 10px;
+  }
+
+  #sidebar {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    border-radius: 10px 10px 10px 10px;
+    overflow-y: auto;
+  }
+
+  #map {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    text-align: center;
+    margin-top: 0%;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  #bbymap {
+    max-width: 95%;
+    max-height: auto;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid grey;  
+  }
+
+  #forecast {
+    grid-column: 1;
+    grid-row: 3 / span 2;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+    margin-top: 10px;
+  }
+
+  #forecastTable {
+    max-width: 95%;
+    max-height: auto;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid grey;
+  }
+} */

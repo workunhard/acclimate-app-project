@@ -1,6 +1,6 @@
 tinymce.init({
   selector: '#description',
-  height: 300,
+  height: 200,
   setup: function (editor) {
     editor.on('init', function () {
       this.setContent('<p>Write a caption..</p>');
@@ -9,6 +9,7 @@ tinymce.init({
   },
   theme: 'modern',
   plugins: [
+    'code', 'lists',
     'advlist autolink lists link image charmap print preview hr anchor pagebreak',
     'searchreplace wordcount visualblocks visualchars code fullscreen',
     'insertdatetime media nonbreaking save table contextmenu directionality',
