@@ -286,21 +286,8 @@ function authenticate(res, email, pwd, callback) {
     );
 }
 
-// function getLocation(req, res) {
-// 	if (navigator.geoLocation) {
-// 		navigator.geolocation.getCurrentPosition(
-// 			(position) => {
-// 				req.lat = position.coords.latitude;
-// 				req.lng = position.coords.longitude;
-// 			}, () => {console.log("Error");}
-// 		)
-// 	} else {
-// 		console.log("Don't have geolocation");
-// 	}
-// }
 
 app.post('/location', function (req, res) {
-	// console.log("yo what's good");
 	if (req.session) {
 		req.session.lat = req.body.lat;
 		req.session.lng = req.body.lng;
@@ -331,7 +318,6 @@ app.get('/timeline', function (req, res) {
 
 app.get('/coords', function (req, res) {
 	if (req.session) {
-		console.log(req.session.lat);
 		res.send({
 			status: "success",
 			lat: req.session.lat,
