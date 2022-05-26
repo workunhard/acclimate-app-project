@@ -163,12 +163,3 @@ window.onload = function () {
         window.location.reload();
     }
 }
-
-// let editPosts = document.querySelectorAll("td[class='editPost']");
-// for (let i = 0; i < editPosts.length; i++) {
-//     editPosts[i].addEventListener("click", editPost);
-// }
-
-// function editPost() {
-//     window.location.replace("/edit-post");
-// }
