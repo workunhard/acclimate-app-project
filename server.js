@@ -286,21 +286,8 @@ function authenticate(res, email, pwd, callback) {
     );
 }
 
-// function getLocation(req, res) {
-// 	if (navigator.geoLocation) {
-// 		navigator.geolocation.getCurrentPosition(
-// 			(position) => {
-// 				req.lat = position.coords.latitude;
-// 				req.lng = position.coords.longitude;
-// 			}, () => {console.log("Error");}
-// 		)
-// 	} else {
-// 		console.log("Don't have geolocation");
-// 	}
-// }
 
 app.post('/location', function (req, res) {
-	// console.log("yo what's good");
 	if (req.session) {
 		req.session.lat = req.body.lat;
 		req.session.lng = req.body.lng;
@@ -315,10 +302,22 @@ app.post('/location', function (req, res) {
 	};
 });
 
+app.get('/timeline', function (req, res) {
+	connection.query(
+		"SELECT * from bby23_timeline", function (err, results, fields) {
+			if (err) {
+				console.log(err.message);
+			}
+			res.send({
+				status: "success",
+				rows: results
+			});
+		});
+});
+
 
 app.get('/coords', function (req, res) {
 	if (req.session) {
-		console.log(req.session.lat);
 		res.send({
 			status: "success",
 			lat: req.session.lat,
@@ -652,18 +651,24 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
     })
 });
 
+function numberFixedPositions(x) {
+	return Number.parseFloat(x).toFixed(5);
+}
+
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     req.body.description = sanitizeHtml(req.body.description);
+    var lat = numberFixedPositions(req.session.lat);
+    var lng = numberFixedPositions(req.session.lng);
 
 
 
     if (req.files.length > 0) {
-        connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-            [`${req.files[0].filename}`, req.body.description, date, time, req.session.key],
+        connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [`${req.files[0].filename}`, req.body.description, date, time, req.session.key, lat, lng],
             function (err, results) {
                 if (err) {
                     console.log(err);
@@ -672,8 +677,8 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
                 }
             })
     } else {
-        connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-            [null, req.body.description, date, time, req.session.key],
+        connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [null, req.body.description, date, time, req.session.key, lat, lng],
             function (err, results) {
                 if (err) {
                     console.log(err);
@@ -734,10 +739,19 @@ app.post('/delete-post', function (req, res) {
         });
 });
 
+
+// To allow validation of both email and passwords and ensure proper syntax.
 const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+// Seven characters in total, at least one special character and at least one number. 
 const validPasswordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
 
 
+/**
+ * To validate User email.
+ * @param {*} req the request object in HTTP requests, extracts the email.
+ * @returns an array that informs of the result and in case of failure provides an associated message.
+ */
 function validateUserEmail(req) {
     let email = req.body.email;
     if (email.match(validEmailRegex) && email != "") {
@@ -747,6 +761,11 @@ function validateUserEmail(req) {
     }
 }
 
+/**
+ * To validate User name.
+ * @param {*} req the request object in HTTP requests, extracts the name.
+ * @returns an array that informs of the result and in case of failure provides an associated message.
+ */
 function validateUserName(req) {
     let name = req.body.name;
     if (name != "") {
@@ -756,6 +775,12 @@ function validateUserName(req) {
     }
 }
 
+
+/**
+ * To validate User password.
+ * @param {*} req the request object in HTTP requests, extracts the password.
+ * @returns an array that informs of the result and in case of failure provides an associated message.
+ */
 function validateUserPassword(req) {
     let password = req.body.password;
     let cpassword = req.body.cpassword;
@@ -769,7 +794,11 @@ function validateUserPassword(req) {
     }
 }
 
-
+/**
+ * Validates all of the user input one by one by consolidating all of the validation functions.
+ * @param {*} req the request object in HTTP requests.
+ * @returns an array that informs the user of the validation result, if validation fails then provides the reason as well.
+ */
 function userValidation(req) {
 
     var email = validateUserEmail(req);
@@ -790,6 +819,9 @@ function userValidation(req) {
 
 }
 
+/**
+ * Creates a new user upon signup and uses the validation functions before making an SQL query.
+ */
 app.post("/create-user", function (req, res) {
     var validation = userValidation(req);
     var result = validation[0];
