@@ -8,6 +8,9 @@ script.defer = true;
  * Makes a call to the Geolocation API to find user's coordinates.
  */
 window.initLocation = function initLocation() {
+  var geoOptions = {
+    maximumAge: 5*60*1000,
+  }
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -24,7 +27,7 @@ window.initLocation = function initLocation() {
       },
       () => {
         handleLocationError(true, infoWindow, map.getCenter());
-      });
+      }, geoOptions);
   } else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
@@ -80,18 +83,24 @@ function initMap() {
           dataParsed.rows.forEach(results => {
             var title = results.description;
             var pos = new google.maps.LatLng(results.lat, results.lng);
-
+            console.log(results);
             // The HTML template to be injected into the info window.
+
+
             var content = "<div id=\"card\">" +
-            results.date + " " + results?.time + "<br>" +
-            "<img id=\"photo\" src=\"profileimages/timeline/"
-            + results?.filename + "\"><br>" +
+            `<h3>Posted by @${results?.name} on ${results?.date} at ${results?.time}</h3>` +
+            "<table><tr><td class='imageIDdescription'>" + results?.imageID + "</td></tr>" +
+            "<tr class='description'><td class='description'><span>" + results?.description + "</span></td></tr></table>" +
+            `${results?.filename ? ("<img id=\"photo\" src=\"profileimages/timeline/" + `${results.filename}` + "\"><br>") : ''}` + 
+            "<br>" +
             "<table><tr><td class='imageID'>" + results?.imageID +
-            "</td></tr></table><br>" +
-            "<table><tr><td class='imageIDdescription'>" + results?.imageID +
-            "</td><td class='description'><span>" + results?.description + "</span></td></tr></table></div><br>"
+            "</td>" +
+            "</tr></table><br>" +
+            "</div><br>";
             createMarker(pos, map, title, content);
           });
+
+            
           if (dataParsed.status == "fail") {
             console.log("Location error");
           }
@@ -125,8 +134,9 @@ function createMarker(location, map, title, content) {
     infoWindow.open({
       anchor: marker,
       map,
-      shouldFocus: false,
+      shouldFocus: true,
     })
+    
   })
 }
 
