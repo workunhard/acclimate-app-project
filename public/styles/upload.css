@@ -150,10 +150,17 @@ textarea {
   padding: 0.5em;
   transition: 0.3s;
   text-align: center;
+  cursor: pointer;
 }
 
 input[type="file"] {
   display: none;
+}
+
+.file-upload:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
 }
 
 #submit {
@@ -168,6 +175,13 @@ input[type="file"] {
   /* transition: 0.3s; */
   text-align: center;
   margin-left: 50px;
+  cursor: pointer;
+}
+
+#submit:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
 }
 
 /* @media only screen and (max-width: 800px) { */
