@@ -1,6 +1,5 @@
 /**
- * Function which loads the navbar and footer into the elements with the id "navbarPlaceholder" 
- * and "footerPlaceholder".
+ * Dynamically loads the navbar and footer into every web page for consistency of user experience.
  */
 function loadSkeleton(){
     console.log($('#navbarPlaceholder').load('/text/nav.html'));
@@ -9,7 +8,7 @@ function loadSkeleton(){
 loadSkeleton();  
 
 /**
- * Function which allows the hamburger menu to be expanded to display the navbar links.
+ * Expands the hamburger menu options or hides them depending on current state.
  */
 function expand() {
   var nav = document.getElementById("navLinks");
