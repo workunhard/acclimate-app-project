@@ -1,3 +1,7 @@
+
+/**
+ * The function to receive the information of all users as a table.
+ */
 function getUsers() {
 
     const xhr = new XMLHttpRequest();
@@ -70,6 +74,10 @@ function getUsers() {
 }
 getUsers();
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellEmail(e) {
     let spanText = e.target.innerHTML;
     let parent = e.target.parentNode;
@@ -122,6 +130,10 @@ function editCellEmail(e) {
 
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellName(e) {
 
     let spanText = e.target.innerHTML;
@@ -168,6 +180,10 @@ function editCellName(e) {
     parent.appendChild(input);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellPassword(e) {
 
     let spanText = e.target.innerHTML;
@@ -216,7 +232,10 @@ function editCellPassword(e) {
 
 }
 
-
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellAdmin(e) {
 
     let spanText = e.target.innerHTML;
@@ -300,6 +319,10 @@ document.getElementById("submit").addEventListener("click", function (e) {
 }
 });
 
+/**
+ * 
+ * @param {*} e 
+ */
 function deleteUser(e) {
     e.preventDefault();
     var result = window.confirm("Are you sure?");
@@ -332,7 +355,10 @@ for (let i = 0; i < posts.length; i++) {
     posts[i].addEventListener("click", deletePost);
 }
 
-
+/**
+ * 
+ * @param {*} e 
+ */
 function deletePost(e) {
     e.preventDefault();
     var result = window.confirm("Are you sure?");
@@ -367,6 +393,10 @@ for (let i = 0; i < text.length; i++) {
     text[i].addEventListener("click", editDescription);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editDescription(e) {
 
     let spanText = e.target.innerHTML;
@@ -401,7 +431,7 @@ function editDescription(e) {
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
                 if (this.readyState == XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {} else {
+                    if (xhr.status === 200) { } else {
                         console.log(this.status);
                     }
                 } else {
@@ -424,6 +454,10 @@ for (let i = 0; i < deleteImages.length; i++) {
     deleteImages[i].addEventListener("click", deleteImage);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function deleteImage(e) {
 
     e.preventDefault();
@@ -438,7 +472,7 @@ function deleteImage(e) {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (this.readyState == XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {} else {
+            if (xhr.status === 200) { } else {
                 console.log(this.status);
             }
         } else {
@@ -458,6 +492,10 @@ for (let i = 0; i < confirmImages.length; i++) {
     confirmImages[i].addEventListener("click", updateImage);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function updateImage(e) {
     e.preventDefault();
     var result = window.confirm("Are you sure?");

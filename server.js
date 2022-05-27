@@ -677,6 +677,11 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
     });
 });
 
+/**
+ * Truncates the user longitude and latitude so that it may be used.
+ * @param {*} x the number to be truncated. 
+ * @returns the truncated number. 
+ */
 function numberFixedPositions(x) {
     return Number.parseFloat(x).toFixed(5);
 }
@@ -905,6 +910,7 @@ app.post("/create-user", function (req, res) {
         });
     }
 });
+
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

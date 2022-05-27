@@ -1,5 +1,9 @@
 ready(function () {
-
+	/**
+	 * 
+	 * @param {*} url 
+	 * @param {*} callback 
+	 */
 	function ajaxGET(url, callback) {
 
 		const xhr = new XMLHttpRequest();
@@ -15,6 +19,12 @@ ready(function () {
 		xhr.send();
 	}
 
+	/**
+	 * 
+	 * @param {*} url 
+	 * @param {*} callback 
+	 * @param {*} data 
+	 */
 	function ajaxPOST(url, callback, data) {
 
 		let params = typeof data == 'string' ? data : Object.keys(data).map(
@@ -41,6 +51,10 @@ ready(function () {
 }
 );
 
+/**
+ * 
+ * @param {*} callback 
+ */
 function ready(callback) {
 	if (document.readyState != "loading") {
 		callback();

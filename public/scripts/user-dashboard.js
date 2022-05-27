@@ -3,6 +3,10 @@ for (let i = 0; i < posts.length; i++) {
     posts[i].addEventListener("click", deletePost);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function deletePost(e) {
     e.preventDefault();
 
@@ -45,6 +49,10 @@ for (let i = 0; i < text.length; i++) {
     text[i].addEventListener("click", editDescription);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editDescription(e) {
 
     let spanText = e.target.innerHTML;
@@ -110,6 +118,10 @@ for (let i = 0; i < deleteImages.length; i++) {
     deleteImages[i].addEventListener("click", deleteImage);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function deleteImage(e) {
     e.preventDefault();
 
@@ -151,6 +163,10 @@ for (let i = 0; i < confirmImages.length; i++) {
     confirmImages[i].addEventListener("click", updateImage);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function updateImage(e) {
     e.preventDefault();
 

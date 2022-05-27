@@ -10,7 +10,6 @@ nav {
   text-align: center;
 }
 
-
 /* Style the navigation menu */
 .navbar {
   overflow: hidden;
@@ -101,10 +100,7 @@ nav {
 }
 
 
-/*-------------------------------------
- * customize material design icon sizes 
- *-------------------------------------
- */
+/* Material Icons */
 .material-icons.md-18 {
   font-size: 18px;
 }
@@ -121,7 +117,7 @@ nav {
   font-size: 48px;
 }
 
-/* Dashboard Stuff */
+/* Dashboard */
 .profile_name {
   color: red;
 }
