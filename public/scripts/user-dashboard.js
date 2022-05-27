@@ -31,6 +31,12 @@ function deletePost(e) {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send("imageID=" + formData.imageID);
         window.location.replace("/dashboard");
+        window.onload = function () {
+            if (!window.location.hash) {
+                window.location = window.location + '#loaded';
+                window.location.reload();
+            }
+        };
     }
 }
 
@@ -83,6 +89,12 @@ function editDescription(e) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("&description=" + dataToSend.description + "&imageID=" + dataToSend.imageID);
             window.location.replace("/dashboard");
+            window.onload = function () {
+                if (!window.location.hash) {
+                    window.location = window.location + '#loaded';
+                    window.location.reload();
+                }
+            };
         }
     });
     parent.innerHTML = "";
@@ -120,6 +132,12 @@ function deleteImage(e) {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send("imageID=" + formData.imageID);
         window.location.replace("/dashboard");
+        window.onload = function () {
+            if (!window.location.hash) {
+                window.location = window.location + '#loaded';
+                window.location.reload();
+            }
+        };
     }
 }
 
@@ -152,11 +170,17 @@ function updateImage(e) {
         ("Error:", err);
     });
     window.location.replace("/dashboard");
+    window.onload = function () {
+        if (!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+        }
+    };
 }
 
-window.onload = function () {
-    if (!window.location.hash) {
-        window.location = window.location + '#loaded';
-        window.location.reload();
-    }
-};
+// window.onload = function () {
+//     if (!window.location.hash) {
+//         window.location = window.location + '#loaded';
+//         window.location.reload();
+//     }
+// };
