@@ -87,6 +87,8 @@ function editCellEmail(e) {
         let v = null;
 
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
 
@@ -121,6 +123,7 @@ function editCellEmail(e) {
             xhr.send("id=" + dataToSend.id + "&email=" + dataToSend.email);
 
         }
+    }
     });
     parent.innerHTML = "";
     parent.appendChild(input);
@@ -140,6 +143,8 @@ function editCellName(e) {
     input.addEventListener("keyup", function (e) {
         let v = null;
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
             newSpan.innerHTML = v;
@@ -169,6 +174,7 @@ function editCellName(e) {
             xhr.send("id=" + dataToSend.id + "&name=" + dataToSend.name);
 
         }
+    }
     });
     parent.innerHTML = "";
     parent.appendChild(input);
@@ -188,6 +194,8 @@ function editCellPassword(e) {
         let v = null;
 
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
             newSpan.innerHTML = v;
@@ -217,7 +225,7 @@ function editCellPassword(e) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("id=" + dataToSend.id + "&password=" + dataToSend.password);
 
-        }
+        }}
     });
     parent.innerHTML = "";
     parent.appendChild(input);
@@ -237,6 +245,8 @@ function editCellAdmin(e) {
     input.addEventListener("keyup", function (e) {
         let v = null;
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
             newSpan.innerHTML = v;
@@ -266,7 +276,7 @@ function editCellAdmin(e) {
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("id=" + dataToSend.id + "&admin=" + dataToSend.admin);
-        }
+        }}
     });
     parent.innerHTML = "";
     parent.appendChild(input);
@@ -277,6 +287,8 @@ function editCellAdmin(e) {
 document.getElementById("submit").addEventListener("click", function (e) {
     e.preventDefault();
 
+    var result = window.confirm("Are you sure?");
+            if (result == true) {
     let formData = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
@@ -304,6 +316,7 @@ document.getElementById("submit").addEventListener("click", function (e) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("name=" + formData.name + "&email=" + formData.email + "&password=" + formData.password + "&admin=" + formData.admin);
     window.location.replace("/dashboard");
+}
 });
 
 /**
@@ -311,8 +324,9 @@ document.getElementById("submit").addEventListener("click", function (e) {
  * @param {*} e 
  */
 function deleteUser(e) {
-
     e.preventDefault();
+    var result = window.confirm("Are you sure?");
+            if (result == true) {
     let parent = e.target.parentNode;
     let formData = {
         id: parent.parentNode.querySelector(".id").innerHTML
@@ -334,7 +348,7 @@ function deleteUser(e) {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("id=" + formData.id);
-}
+}}
 
 let posts = document.querySelectorAll("td[class='deletePost']");
 for (let i = 0; i < posts.length; i++) {
@@ -346,8 +360,9 @@ for (let i = 0; i < posts.length; i++) {
  * @param {*} e 
  */
 function deletePost(e) {
-
     e.preventDefault();
+    var result = window.confirm("Are you sure?");
+    if (result == true) {
     let parent = e.target.parentNode;
 
     let formData = {
@@ -371,7 +386,7 @@ function deletePost(e) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("imageID=" + formData.imageID);
     window.location.replace("/dashboard");
-}
+}}
 
 let text = document.querySelectorAll("td[class='description'] span");
 for (let i = 0; i < text.length; i++) {
@@ -394,6 +409,8 @@ function editDescription(e) {
         let v = null;
 
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             str = "Enter description here";
             if (input.value === null || input.value.match(/^[\s\n\r]*$/) !== null) {
                 v = str;
@@ -426,7 +443,7 @@ function editDescription(e) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("&description=" + dataToSend.description + "&imageID=" + dataToSend.imageID);
             window.location.replace("/dashboard");
-        }
+        }}
     });
     parent.innerHTML = "";
     parent.appendChild(input);
@@ -444,6 +461,8 @@ for (let i = 0; i < deleteImages.length; i++) {
 function deleteImage(e) {
 
     e.preventDefault();
+    var result = window.confirm("Are you sure?");
+    if (result == true) {
     let parent = e.target.parentNode;
 
     let formData = {
@@ -465,7 +484,7 @@ function deleteImage(e) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("imageID=" + formData.imageID);
     window.location.replace("/dashboard");
-}
+}}
 
 
 let confirmImages = document.querySelectorAll("td[class='confirmImage']");
@@ -479,6 +498,8 @@ for (let i = 0; i < confirmImages.length; i++) {
  */
 function updateImage(e) {
     e.preventDefault();
+    var result = window.confirm("Are you sure?");
+    if (result == true) {
     let parent = e.target.parentNode;
 
     const imageUpload = document.querySelector('#image-upload');
@@ -500,7 +521,7 @@ function updateImage(e) {
         ("Error:", err);
     });
     window.location.replace("/dashboard");
-}
+}}
 
 window.onload = function () {
     if (!window.location.hash) {
