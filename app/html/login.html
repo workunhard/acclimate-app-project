@@ -52,7 +52,11 @@
 						<div id="register" class="comm">
 							<input id="rname" type="name" required="required" placeholder="Name" value="" /><br>
 							<input id="remail" type="email" required="required" placeholder="Email" value="" /><br>
-							<input id="rpassword" type="password" required="required" placeholder="Password" value="" /><br>
+							<div id="passwordBox">
+								<input id="rpassword" type="password" required="required" placeholder="Password" value="" /><br>
+								<span class="tooltip"
+									data-tooltip="Passwords must contain 1 uppercase, 1 lowercase, 1 digit, 1 special character and be at least 10 charcters.">?</span>
+							</div>
 							<input id="rcpassword" type="password" required="required" placeholder="Confirm Password" value="" /><br>
 							<div><span id="serverMsgReg"></span></div>
 							<input type="submit" value="Sign-Up" id="signup" />
