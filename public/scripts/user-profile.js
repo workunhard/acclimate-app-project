@@ -1,3 +1,8 @@
+/**
+ * Pulls relevant user info (name, email and password) and inserts them into profile.html to display
+ * for the user to view or edit. Event listeners are added to each field which have edit functions
+ * assigned to them.
+ */
 function getUserInfo() {
 
     const xhr = new XMLHttpRequest();
