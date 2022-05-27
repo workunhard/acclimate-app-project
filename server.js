@@ -776,9 +776,6 @@ const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-
 
 // Password validation using regex. 
 const stringLength = /^.{10,}$/; // Must be at least 10 characters.
-const upperCase = /^(?=.*[A-Z])$/;  // Must have at least 1 uppercase characters.
-const lowerCase = /^(?=.*[a-z])$/;  // Must have at least 1 lowercase characters.
-const number = /^(?=.*[0-9])$/;     // Must have at least 1 digit.
 const specialCharacter = /^(.*\W)$/; // Must have at least 1 special character.
 
 

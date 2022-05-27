@@ -1,8 +1,8 @@
 ready(function () {
 	/**
-	 * 
-	 * @param {*} url 
-	 * @param {*} callback 
+	 * Creates an HTTP GET request using AJAX and XHR.
+	 * @param {*} url the link on which the request is to be made
+	 * @param {*} callback method to call in case the request is successful. 
 	 */
 	function ajaxGET(url, callback) {
 
@@ -20,15 +20,17 @@ ready(function () {
 	}
 
 	/**
-	 * 
-	 * @param {*} url 
-	 * @param {*} callback 
-	 * @param {*} data 
+	 * Creates an HTTP POST request using AJAX and XHR.
+	 * @param {*} url the link on which the POST request is to be made.
+	 * @param {*} callback mehtod to call in case the request is successfull.
+	 * @param {*} data the data being sent in the POST request. 
 	 */
 	function ajaxPOST(url, callback, data) {
 
 		let params = typeof data == 'string' ? data : Object.keys(data).map(
-			function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]); }
+			function (k) {
+				return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+			}
 		).join('&');
 		console.log("params in ajaxPOST", params);
 
@@ -48,11 +50,10 @@ ready(function () {
 
 
 	// });
-}
-);
+});
 
 /**
- * 
+ * The function to allow 
  * @param {*} callback 
  */
 function ready(callback) {
