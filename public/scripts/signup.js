@@ -52,7 +52,7 @@ document.addEventListener("keyup", function (e) {
 });
 
 
-document.querySelector("#signin").addEventListener("click", function (e) {
+document.querySelector("#submit1").addEventListener("click", function (e) {
   e.preventDefault();
   console.log("Login Attempt");
 
@@ -78,7 +78,7 @@ document.querySelector("#signin").addEventListener("click", function (e) {
 });
 
 
-document.querySelector("#signup").addEventListener("click", function (e) {
+document.querySelector("#submit2").addEventListener("click", function (e) {
   e.preventDefault();
   console.log("Sign up");
 

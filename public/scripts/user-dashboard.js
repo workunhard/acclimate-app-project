@@ -192,9 +192,14 @@ function updateImage(e) {
     }).catch(function (err) {
         ("Error:", err);
     });
+    loader();
     setTimeout(function () {
         window.location.href = "/dashboard";
       }, 3000);
-
 }
+}
+
+function loader() {
+    document.getElementById("loadAnimation").innerHTML =
+        '<div class=\"loader-wrapper\"><span class=\"loader\"><span class=\"loader-inner\"></span></span></div>'
 }

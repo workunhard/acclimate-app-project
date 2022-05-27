@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400&display=swap');
 
+/* Mobile View */
 @media only screen and (max-width: 700px) {
     body {
         background-image: url('/images/loginbg.svg');
@@ -78,22 +79,6 @@
         width: 60%;
     }
 
-    #forgotP a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0.5em 0.5em;
-        transition: 0.3s;
-    }
-
-    #signUp a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0.5em 0.5em;
-        transition: 0.3s;
-    }
-
     .clickme {
         color: #52BBE7;
         font-weight: bold;
@@ -129,9 +114,11 @@
         color: white;
         grid-row: 4;
         grid-column: 1 / span 3;
+        vertical-align: middle;
     }
 }
 
+/* Desktop View */
 @media only screen and (min-width: 701px) {
     body {
         background-image: url('/images/loginbg.svg');
@@ -210,28 +197,12 @@
         width: 60%;
     }
 
-    #forgotP a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0.5em 0.5em;
-        transition: 0.3s;
-    }
-
-    #signUp a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0.5em 0.5em;
-        transition: 0.3s;
-    }
-
     .clickme {
         color: #52BBE7;
         font-weight: bold;
     }
 
-    #submit {
+    #submit1, #submit2 {
         color: #52BBE7;
         font-weight: bold;
         font-family: 'Radio Canada', sans serif;
@@ -245,7 +216,7 @@
         text-align: center;
     }
 
-    #submit:hover {
+    #submit1:hover, #submit2:hover {
         color: white;
         background-color: #52BBE7;
         border: 5px solid rgba(248, 253, 252, 0.8);
@@ -262,15 +233,14 @@
         color: white;
         grid-row: 4;
         grid-column: 1 / span 3;
+        vertical-align: middle;
     }
 }
 
 /* Testing */
-
 #container {
     width: 300px;
     margin: 0 auto;
-    /* margin-top: 150px; */
 }
 
 #tabs {
@@ -279,21 +249,17 @@
 
 .tabs {
     display: flex;
-    width: 50%;
+    width: 100%;
+    text-align: center;
     background-color: rgba(11, 177, 224, 0.82);
     padding: 10px;
-    /* float: left; */
-    text-align: center;
     vertical-align: middle;
-    border: 2px solid #ffffff;
-    border-bottom: 0px;
     position: relative;
     font-size: 1.3em;
     color: #ffffff;
 }
 
-.tabs:hover,
-p {
+.tabs:hover, p {
     cursor: pointer;
 }
 
@@ -312,10 +278,13 @@ p {
 .comm {
     position: absolute;
     visibility: hidden;
+    width: 300px;
 }
 
 #login {
+    margin: 0 auto;
     visibility: visible;
+    width: 300px;
 }
 
 h3 {
@@ -336,18 +305,12 @@ h3 {
     margin-top: 30px;
 }
 
-p {
-    /* padding: 10px 15px; */
-    font-size: 1.3em;
-    color: #ffffff;
-}
-
-/* Testing */
-
 .tooltip{
     position: relative;
-    background: rgba(0,0,0,0.3);
+    background: white;
+    color: #52BBE7;
     padding: 5px 12px;
+    border: 2px solid #52BBE7;
     border-radius: 100%;
     font-size: 20px;
     cursor: help;
@@ -383,7 +346,6 @@ p {
 }
 
 /* Hover states */
-
 .tooltip:hover::before, .tooltip:hover::after{
     opacity: 1;
 }

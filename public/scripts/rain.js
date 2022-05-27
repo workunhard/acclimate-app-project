@@ -1,3 +1,6 @@
+// Easter Egg Script: Making it Rain (CSS)
+
+// Set the number of raindrops to generate
 var numDrops = 700;
 
 /**

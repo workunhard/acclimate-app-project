@@ -140,7 +140,7 @@ app.get("/dashboard", function (req, res) {
                                 "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
                                 "<table><tr><td class='imageID'>" + results[i].imageID +
                                 "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-                                "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
+                                "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only' onclick=\"loader()\"></td>" +
                                 "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
                                 "</div><br>";
@@ -213,7 +213,7 @@ app.get("/dashboard", function (req, res) {
                                 "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
                                 "<table><tr><td class='imageID'>" + results[i].imageID +
                                 "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-                                "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
+                                "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only' onclick=\"loader()\"></td>" +
                                 "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
                                 "</div><br>";
