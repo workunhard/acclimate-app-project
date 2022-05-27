@@ -388,7 +388,6 @@ dd {
   #sidebar {
     grid-column: 1 / span 2;
     grid-row: 1;
-
     border-radius: 10px 10px 10px 10px;
     overflow-y: auto;
   }

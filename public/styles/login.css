@@ -118,20 +118,22 @@
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    #loginFooter {
+    .loginFooter {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
-        display: grid;
         height: 100%;
-        grid-row: 4 / span 1;
-        grid-column: 1 / span 3;
         align-content: center;
         margin: 0;
         padding: 20px;
         color: white;
-        position: relative;
     }
+
+    /* #easteregg {
+        background-color: #52BBE7;
+        color: white;
+        border: none;
+    } */
 }
 
 @media only screen and (min-width: 701px) {
@@ -143,7 +145,6 @@
         margin: 0;
         background-position: bottom center, 50%, 50%;
         font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
-        overflow: hidden;
     }
 
     #background {
@@ -254,20 +255,22 @@
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    #loginFooter {
+    .loginFooter {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
-        display: grid;
         height: 100%;
-        grid-row: 4 / span 1;
-        grid-column: 1 / span 3;
         align-content: center;
         margin: 0;
         padding: 20px;
         color: white;
-        position: relative;
     }
+
+    /* #easteregg {
+        background-color: #52BBE7;
+        color: white;
+        border: none;
+    } */
 }
 
 /* Testing */
@@ -492,7 +495,7 @@ p {
 
 /* CSS rain */
 
-.easteregg {
+#easteregg {
     background-color: #52BBE7;
     color: white;
     border: none;
@@ -517,18 +520,18 @@ p {
 
 @-webkit-keyframes fall {
     to {
-        margin-top: 900px;
+        margin-top: 100%;
     }
 }
 
 @-moz-keyframes fall {
     to {
-        margin-top: 900px;
+        margin-top: 100%;
     }
 }
 
 @keyframes fall {
     to {
-        margin-top: 900px;
+        margin-top: 100%;
     }
 }
