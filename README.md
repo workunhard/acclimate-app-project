@@ -45,7 +45,8 @@ Top level of project folder:
         /admin_dashboard.html   # 'Admin' landing page after successful log-in
         /user-dashboard.html    # 'User' landing page after successful log-in
         /template.html          # template for future html pages
-
+    ├── /profileimages          # contains user submitted images
+    
 ├── node_modules                # required node modules
 
 ├── public                      # Folder for images, scripts, and stylesheets
@@ -66,16 +67,31 @@ Top level of project folder:
     ├── /scripts                # Subfolder for scripts
         /client.js
         /skeleton.js
+        /admin-dashboard.js
+        /location.js
+        /rain.js
+        /upload-profile-pic.js
+        /upload.js
+        /user-dashboard.js
+        /user-profile.js
+        /weather.js
     ├── /styles                 # Subfolder for styles
         /admin-style.css
+        /construction.css
         /login.css
+        /profile.css
         /style.css
-
+        /upload.css
+        /user-style.css
+    ├── /sql                    # Subfolder for sql 
+        /config.sql
 ├── .gitignore                  # Git ignore file
 
-├── index.js                    # script to initialize web app (node index.js from CLI)
+├── server.js                    # script to initialize web app (node server.js from CLI)
 
 ├── package-lock.json
+
+├── Procfile
 
 ├──package.json
 

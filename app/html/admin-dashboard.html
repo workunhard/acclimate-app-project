@@ -24,29 +24,29 @@
         <div id="alerts">
           <h2 id="profile_name">PROFILE_NAME</h2>
 
-        <div id="adminDashboard">
-          <table id="adminArea">
-          </table>
-          <form id="addCustomer">
-            <fieldset>
-              <legend>Add a User</legend>
-              <input type="text" placeholder="name" id="name" /><br>
-              <input type="email" placeholder="email" id="email" /><br>
-              <input type="text" placeholder="password" id="password" /><br>
-              <label for="administrator">Administrator</label>
-              <input type="radio" id="admin" name="admin" value="1" />
-              <label for="yes">Yes</label>
-              <input type="radio" id="admin" name="admin" value="0" />
-              <label for="no">No</label>
-              <input type="button" id="submit" value="Submit" />
-            </fieldset>
-          </form>
-        </div>
-        <div id="timelinecontainer">
-          <br>
-          <div id="timeline"></div>
-          <br>
-        </div>
+          <div id="adminDashboard">
+            <table id="adminArea">
+            </table>
+            <form id="addCustomer">
+              <fieldset>
+                <legend>Add a User</legend>
+                <input type="text" placeholder="name" id="name" /><br>
+                <input type="email" placeholder="email" id="email" /><br>
+                <input type="text" placeholder="password" id="password" /><br>
+                <label for="submit">Administrator</label>
+                <input type="radio" id="adminYes" name="admin" value="1" />
+                <label for="adminYes">Yes</label>
+                <input type="radio" id="adminNo" name="admin" value="0" />
+                <label for="adminNo">No</label>
+                <input type="button" id="submit" value="Submit" />
+              </fieldset>
+            </form>
+          </div>
+          <div id="timelinecontainer">
+            <br>
+            <div id="timeline"></div>
+            <br>
+          </div>
         </div>
       </div>
 
@@ -59,8 +59,8 @@
     </div>
     <nav id="footerPlaceholder"></nav>
     <div class="loader-wrapper">
-			<span class="loader"><span class="loader-inner"></span></span>
-		</div>
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
   </div>
 
   <script src="../scripts/skeleton.js"></script>
@@ -69,14 +69,11 @@
   <script src="scripts/weather.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-isvrs8orgQc5a3KAUWQ&callback=initMap">
   </script>
-  	<script>
-      $(window).on("load", function () {
-          $(".loader-wrapper").fadeOut("slow");
-      });
+  <script>
+    $(window).on("load", function () {
+      $(".loader-wrapper").fadeOut("slow");
+    });
   </script>
-
-
-
 </body>
 
 </html>

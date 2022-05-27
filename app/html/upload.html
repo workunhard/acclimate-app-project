@@ -27,8 +27,7 @@
                 <label for="file-input" class="file-upload">
                     Select image for upload
                 </label>
-                <input id="file-input" type="file" accept="image/png, image/gif, image/jpeg"
-                    multiple="multiple" />
+                <input id="file-input" type="file" accept="image/png, image/gif, image/jpeg" multiple="multiple" />
                 <input id="submit" type="submit" value="Submit" onclick="loader()" />
             </form>
             <br>
@@ -43,7 +42,6 @@
 
     <script src="../scripts/skeleton.js"></script>
     <script src="../scripts/upload.js"></script>
-    <script src="../scripts/s3upload.js"></script>
     <script>
         function loader() {
             document.getElementById("loadAnimation").innerHTML =
@@ -55,7 +53,6 @@
             $(".loader-wrapper").fadeOut("slow");
         });
     </script>
-
 </body>
 
 </html>

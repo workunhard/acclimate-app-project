@@ -24,7 +24,6 @@ function getUserInfo() {
                         </tr>`;
                     document.getElementById("userInfo").innerHTML = str;
 
-                    // select all spans under the email class of td elements
                     let records = document.querySelectorAll("td[class='email'] span");
                     for (let j = 0; j < records.length; j++) {
                         records[j].addEventListener("click", editCellEmail);
@@ -33,25 +32,18 @@ function getUserInfo() {
                     for (let k = 0; k < userRecords.length; k++) {
                         userRecords[k].addEventListener("click", editCellName);
                     }
-                    // let deleteRecords = document.querySelectorAll("td[class='delete']");
-                    // for (let i = 0; i < deleteRecords.length; i++) {
-                    //     deleteRecords[i].addEventListener("click", deleteUser);
-                    // }
+
                     let userPassword = document.querySelectorAll("td[class='password'] span");
                     for (let i = 0; i < userPassword.length; i++) {
                         userPassword[i].addEventListener("click", editCellPassword);
                     }
-                    // let userAdmin = document.querySelectorAll("td[class='admin'] span");
-                    // for (let i = 0; i < userAdmin.length; i++) {
-                    //     userAdmin[i].addEventListener("click", editCellAdmin);
-                    // }
+
 
                 } else {
                     console.log("Error!");
                 }
             } else {
 
-                // not a 200, could be anything (404, 500, etc.)
                 console.log(this.status);
 
             }
@@ -67,21 +59,16 @@ getUserInfo();
 
 function editCellEmail(e) {
 
-    // add a listener for clicking on the field to change email
-    // span's text
+
     let spanText = e.target.innerHTML;
-    // span's parent (td)
     let parent = e.target.parentNode;
-    // create a new input, and add a key listener to it
     let input = document.createElement("input");
     input.value = spanText;
     input.addEventListener("keyup", function (e) {
         let v = null;
-        // pressed enter
         if (e.which == 13) {
             v = input.value;
             let newSpan = document.createElement("span");
-            // have to wire an event listener to the new element
             newSpan.innerHTML = v;
             parent.innerHTML = "";
             parent.appendChild(newSpan);
@@ -89,20 +76,16 @@ function editCellEmail(e) {
                 email: v
             };
 
-            // now send
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
                 if (this.readyState == XMLHttpRequest.DONE) {
 
-                    // 200 means everthing worked
                     if (xhr.status === 200) {
-                        // document.getElementById("status").innerHTML = "Record updated.";
                         getUserInfo();
 
 
                     } else {
 
-                        // not a 200, could be anything (404, 500, etc.)
                         console.log(this.status);
 
                     }
@@ -125,21 +108,15 @@ function editCellEmail(e) {
 
 function editCellName(e) {
 
-    // add a listener for clicking on the field to change email
-    // span's text
     let spanText = e.target.innerHTML;
-    // span's parent (td)
     let parent = e.target.parentNode;
-    // create a new input, and add a key listener to it
     let input = document.createElement("input");
     input.value = spanText;
     input.addEventListener("keyup", function (e) {
         let v = null;
-        // pressed enter
         if (e.which == 13) {
             v = input.value;
             let newSpan = document.createElement("span");
-            // have to wire an event listener to the new element
             newSpan.innerHTML = v;
             parent.innerHTML = "";
             parent.appendChild(newSpan);
@@ -162,7 +139,6 @@ function editCellName(e) {
             xhr.open("POST", "/update-userName");
             xhr.setRequestHeader('X-RequeSsted-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            // xhr.send("id=" + dataToSend.id + "&name=" + dataToSend.name);
             xhr.send("&name=" + dataToSend.name);
         }
     });
@@ -173,21 +149,15 @@ function editCellName(e) {
 
 function editCellPassword(e) {
 
-    // add a listener for clicking on the field to change email
-    // span's text
     let spanText = e.target.innerHTML;
-    // span's parent (td)
     let parent = e.target.parentNode;
-    // create a new input, and add a key listener to it
     let input = document.createElement("input");
     input.value = spanText;
     input.addEventListener("keyup", function (e) {
         let v = null;
-        // pressed enter
         if (e.which == 13) {
             v = input.value;
             let newSpan = document.createElement("span");
-            // have to wire an event listener to the new element
             newSpan.innerHTML = v;
             parent.innerHTML = "";
             parent.appendChild(newSpan);

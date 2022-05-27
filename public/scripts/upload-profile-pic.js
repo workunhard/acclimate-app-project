@@ -8,7 +8,6 @@ function uploadImages(e) {
     const formData = new FormData();
 
     for (let i = 0; i < imageUpload.files.length; i++) {
-        // put the images from the input into the form data
         formData.append("files", imageUpload.files[i]);
     }
     const options = {
@@ -18,7 +17,7 @@ function uploadImages(e) {
     fetch("/upload-images", options).then(function (res) {
         console.log(res);
     }).catch(function (err) {
-        ("Error:", err)
+        ("Error:", err);
     });
     setTimeout(function () {
         window.location.reload();
@@ -29,4 +28,4 @@ window.onload = function () {
         window.location = window.location + '#loaded';
         window.location.reload();
     }
-}
+};

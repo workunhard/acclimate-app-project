@@ -6,13 +6,13 @@ for (let i = 0; i < posts.length; i++) {
 function deletePost(e) {
     e.preventDefault();
 
-    var result = window.confirm("Are you sure?")
+    var result = window.confirm("Are you sure?");
     if (result == true) {
         let parent = e.target.parentNode;
 
         let formData = {
             imageID: parent.parentNode.querySelector(".imageID").innerHTML
-        }
+        };
 
         const xhr = new XMLHttpRequest();
         xhr.onload = function () {
@@ -25,7 +25,7 @@ function deletePost(e) {
             } else {
                 console.log("ERROR", this.status);
             }
-        }
+        };
         xhr.open("POST", "/delete-post");
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -53,7 +53,6 @@ function editDescription(e) {
         if (e.which == 13) {
             str = "Enter description here";
             if (input.value === null || input.value.match(/^[\s\n\r]*$/) !== null) {
-                // if (input.value.trim().length === 0) {
                 v = str;
             } else {
                 v = input.value;
@@ -68,7 +67,6 @@ function editDescription(e) {
                 imageID: parent.parentNode.querySelector(".imageIDdescription").innerHTML,
                 description: v
             };
-            // let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
 
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
@@ -79,7 +77,7 @@ function editDescription(e) {
                 } else {
                     console.log("ERROR", this.status);
                 }
-            }
+            };
             xhr.open("POST", "/update-description");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -99,13 +97,13 @@ for (let i = 0; i < deleteImages.length; i++) {
 function deleteImage(e) {
     e.preventDefault();
 
-    var result = window.confirm("Are you sure?")
+    var result = window.confirm("Are you sure?");
     if (result == true) {
         let parent = e.target.parentNode;
 
         let formData = {
             imageID: parent.parentNode.querySelector(".imageID").innerHTML
-        }
+        };
 
         const xhr = new XMLHttpRequest();
         xhr.onload = function () {
@@ -116,7 +114,7 @@ function deleteImage(e) {
             } else {
                 console.log("ERROR", this.status);
             }
-        }
+        };
         xhr.open("POST", "/delete-image");
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -139,11 +137,10 @@ function updateImage(e) {
     let formData = new FormData();
 
     for (let i = 0; i < imageUpload.files.length; i++) {
-        // put the images from the input into the form data
         formData.append("timeline", imageUpload.files[i]);
     }
 
-    formData.append("imageID", parent.parentNode.querySelector(".imageID").innerHTML)
+    formData.append("imageID", parent.parentNode.querySelector(".imageID").innerHTML);
     const options = {
         method: 'POST',
         body: formData
@@ -152,7 +149,7 @@ function updateImage(e) {
     fetch("/update-image", options).then(function (res) {
         console.log(res);
     }).catch(function (err) {
-        ("Error:", err)
+        ("Error:", err);
     });
     window.location.replace("/dashboard");
 }
@@ -162,4 +159,4 @@ window.onload = function () {
         window.location = window.location + '#loaded';
         window.location.reload();
     }
-}
+};

@@ -3,13 +3,11 @@ script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-is
 script.async = true;
 script.defer = true;
 
-/**
- * Makes a call to the Geolocation API to find user's coordinates.
- */
+/**Makes a call to the Geolocation API to find user's coordinates. */
 window.initLocation = function initLocation() {
   var geoOptions = {
     maximumAge: 5*60*1000,
-  }
+  };
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -31,8 +29,7 @@ window.initLocation = function initLocation() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
-}
-
+};
 // Appends the current script file to the appropriate HTML page. 
 document.head.appendChild(script);
 
@@ -64,7 +61,7 @@ function initMap() {
       let pos = {
         lat: parseFloat(dataParsed.lat),
         lng: parseFloat(dataParsed.lng),
-      }
+      };
       // Sends the coordinates to the OpenWeather API so that the weather data may be populated.
       getWeather(pos);
 
@@ -79,7 +76,7 @@ function initMap() {
 
           // Gets the timeline posts and creates a marker for each result received. 
 
-          dataParsed.rows.forEach(results => {
+          dataParsed.rows.forEach(function (results) {
             var title = results.description;
             var pos = new google.maps.LatLng(results.lat, results.lng);
             console.log(results);
@@ -104,11 +101,11 @@ function initMap() {
             console.log("Location error");
           }
         }
-      })
+      });
     } else {
       console.log("error");
     }
-  })
+  });
 }
 
 /**
@@ -123,20 +120,20 @@ function createMarker(location, map, title, content) {
     position: location,
     title: title,
     map: map,
-  })
+  });
   var infoWindow = new google.maps.InfoWindow({
     content: content,
     maxWidth: 800,
-  })
+  });
 
   marker.addListener("click", () => {
     infoWindow.open({
       anchor: marker,
       map,
       shouldFocus: true,
-    })
+    });
     
-  })
+  });
 }
 
 
@@ -149,7 +146,7 @@ function createMarker(location, map, title, content) {
 function ajaxPOST(url, callback, data) {
 
   let params = typeof data == 'string' ? data : Object.keys(data).map(
-    function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+    function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]); }
   ).join('&');
 
   const xhr = new XMLHttpRequest();
@@ -159,7 +156,7 @@ function ajaxPOST(url, callback, data) {
     } else {
       console.log(this.status);
     }
-  }
+  };
   xhr.open("POST", url);
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -181,7 +178,7 @@ function ajaxGET(url, callback) {
     } else {
       console.log(this.status);
     }
-  }
+  };
   xhr.open("GET", url);
   xhr.send();
 }
@@ -196,8 +193,7 @@ function ajaxGET(url, callback) {
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
-    browserHasGeolocation
-      ? "Error: The Geolocation service failed."
+    browserHasGeolocation ? "Error: The Geolocation service failed."
       : "Error: Your browser doesn't support geolocation."
   );
   infoWindow.open(map);

@@ -32,7 +32,7 @@ const herokuDbConfig = {
     user: process.env.HEROKU_USER,
     password: process.env.HEROKU_PASS,
     database: process.env.HEROKU_DB
-}
+};
 
 if (is_heroku) {
     var dbconfig = herokuDbConfig;
@@ -92,9 +92,6 @@ app.use(session({
 }));
 
 
-
-// app.use("/", getLocation);
-
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
         res.redirect("/dashboard");
@@ -114,7 +111,7 @@ app.get("/dashboard", function (req, res) {
 			}
 			req.session.name = results[0]?.name;
 		}
-	)
+	);
 
 	if (req.session.loggedIn && req.session.admin == 1) {
 		let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
@@ -138,15 +135,15 @@ app.get("/dashboard", function (req, res) {
 
                             str = str + "<div id=\"card\">" +
                             `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
-                            "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td></tr>" +
-                            "<tr class='description'><td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
+                            "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td>" +
+                            "<td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
                             "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
                             "<table><tr><td class='imageID'>" + results[i].imageID +
                             "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
                             "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
                             "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                             "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-                            "</div><br>"
+                            "</div><br>";
 							// str = str + "<div id=\"card\">" +
 							// 	results[i].date + " " + results[i].time + "<br>" +
 							// 	"<img id=\"photo\" src=\"profileimages/timeline/"
@@ -168,7 +165,7 @@ app.get("/dashboard", function (req, res) {
 								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
 								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>" 
+								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>";
 
                                 // str = str + "<div id=\"card\">" +
 								// results[i].date + " " + results[i].time +
@@ -211,15 +208,15 @@ app.get("/dashboard", function (req, res) {
 
 							str = str + "<div id=\"card\">" +
                                 `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
-                                "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td></tr>" +
-								"<tr class='description'><td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
+                                "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td>" +
+								"<td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
 								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
 								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
 								"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
 								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
 								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-								"</div><br>"
+								"</div><br>";
 
 						} else {
 
@@ -230,7 +227,7 @@ app.get("/dashboard", function (req, res) {
 								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
 								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
 								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>" 
+								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>"; 
 						}
 
 
@@ -281,7 +278,7 @@ app.get("/logout", function (req, res) {
     if (req.session) {
         req.session.destroy(function (error) {
             if (error) {
-                res.status(400).send("Unable to log out")
+                res.status(400).send("Unable to log out");
             } else {
                 res.redirect("/");
             }
@@ -319,7 +316,7 @@ app.post('/location', function (req, res) {
 		res.send({
 			status: "success",
 		});
-	};
+	}
 });
 
 app.get('/timeline', function (req, res) {
@@ -342,13 +339,13 @@ app.get('/coords', function (req, res) {
 			status: "success",
 			lat: req.session.lat,
 			lng: req.session.lng,
-		})
+		});
 	} else {
 		res.send({
 			status: "fail"
-		})
+		});
 	}
-})
+});
 
 
 
@@ -666,9 +663,9 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
                 } else {
                     console.log(results);
                 }
-            })
+            });
         }
-    })
+    });
 });
 
 function numberFixedPositions(x) {
@@ -695,7 +692,7 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
                 } else {
                     console.log(results);
                 }
-            })
+            });
     } else {
         connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)",
             [null, req.body.description, date, time, req.session.key, lat, lng],
@@ -705,7 +702,7 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
                 } else {
                     console.log(results);
                 }
-            })
+            });
     }
 });
 
@@ -723,7 +720,7 @@ app.post("/update-image", timelineupload.array("timeline"), function (req, res) 
             } else {
                 console.log(results);
             }
-        })
+        });
 });
 
 app.post("/delete-image", function (req, res) {
@@ -738,9 +735,9 @@ app.post("/delete-image", function (req, res) {
                 res.send({
                     status: "success",
                     msg: req.body.imageID + " deleted.",
-                })
+                });
             }
-        })
+        });
 });
 
 app.post('/delete-post', function (req, res) {
@@ -805,7 +802,7 @@ function validateUserPassword(req) {
     let password = req.body.password;
     let cpassword = req.body.cpassword;
     if (password != cpassword) {
-        return [false, "Both passwords must be the same"]
+        return [false, "Both passwords must be the same"];
     }
     if (password.match(validPasswordRegex) && password != "") {
         return [password, null];
@@ -859,7 +856,7 @@ app.post("/create-user", function (req, res) {
                     res.send({
                         status: "fail",
                         msg: "Error: " + message
-                    })
+                    });
                 } else {
                     console.log(req.body);
                     connection.query('SELECT * FROM bby23_user WHERE email = ?', [req.body.email], function (error, results, fields) {
@@ -867,27 +864,27 @@ app.post("/create-user", function (req, res) {
                             console.log(error);
                             res.send({ status: "fail", msg: "User creation: " + error });
                         } else {
-                            res.send({ status: "success", msg: "User created: " + results[0] })
+                            res.send({ status: "success", msg: "User created: " + results[0] });
                         }
-                    })
+                    });
                 }
-            })
+            });
     } else {
         res.send({
             status: "fail",
             msg: "Invalid Input: " + message
-        })
+        });
     }
-})
+});
 
 // RUN SERVER
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
     console.log('Press Ctrl+C to quit.');
-})
+});
 
 const securePort = 8080;
 httpsServer.listen(securePort, () => {
     console.log(`App listening on port ${securePort}`);
-})
+});
