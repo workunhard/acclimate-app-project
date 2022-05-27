@@ -769,8 +769,12 @@ app.post('/delete-post', function (req, res) {
 // To allow validation of both email and passwords and ensure proper syntax.
 const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-// Seven characters in total, at least one special character and at least one number. 
-const validPasswordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+// Password validation using regex. 
+const stringLength = /^(?=.{10,}$)$/; // Must be at least 10 characters.
+const upperCase = /^(?=.*[A-Z])$/;  // Must have at least 1 uppercase characters.
+const lowerCase = /^(?=.*[a-z])$/;  // Must have at least 1 lowercase characters.
+const number = /^(?=.*[0-9])$/;     // Must have at least 1 digit.
+const specialCharacter = /^(?=.*\W)$/; // Must have at least 1 special character.
 
 
 /**
@@ -801,24 +805,40 @@ function validateUserName(req) {
     }
 }
 
-
 /**
  * To validate User password.
  * @param {*} req the request object in HTTP requests, extracts the password.
  * @returns an array that informs of the result and in case of failure provides an associated message.
  */
-function validateUserPassword(req) {
+function validatePasswordRequirements(req) {
     let password = req.body.password;
     let cpassword = req.body.cpassword;
+    if (password == "") {
+        return [false, "Password must not be empty"];
+    }
+    if (!password.match(stringLength)) {
+        return [false, "Password must be at least 10 characters"];
+    }
+    if (!password.match(upperCase)) {
+        return [false, "Password must have at least 1 upper case character"];
+    }
+    if (!password.match(lowerCase)) {
+        return [false, "Password must have at least 1 upper case character"];
+    }
+    if (!password.match(number)) {
+        return [false, "Password must have at least one digit"];
+    }
+    if (!password.match(specialCharacter)) {
+        return [false, "Password must have at least one special character"];
+    }
     if (password != cpassword) {
         return [false, "Both passwords must be the same"];
     }
-    if (password.match(validPasswordRegex) && password != "") {
+    else {
         return [password, null];
-    } else {
-        return [false, "Please enter a valid password"];
     }
 }
+
 
 /**
  * Validates all of the user input one by one by consolidating all of the validation functions.
@@ -835,7 +855,7 @@ function userValidation(req) {
     if (!name[0]) {
         return name;
     }
-    var password = validateUserPassword(req);
+    var password = validatePasswordRequirements(req);
     if (!password[0]) {
         return password;
     } else {

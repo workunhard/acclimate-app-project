@@ -42,25 +42,25 @@
 
 					<div id="cont">
 						<div id="login" class="comm">
-							<h3>Sign in</h3>
 							<input id="email" type="email" required="required" placeholder="Email" value="" /><br>
-							<input id="password" type="password" required="required" placeholder="Password" value="" /><br><br>
-							<input type="submit" value="Sign-In" id="signin" onclick="login()"/>
+							<input id="password" type="password" required="required" placeholder="Password" value="" /><br>
+							<input type="submit" value="Sign-In" id="signin" />
+							<div><span id="serverMsg"></span></div>
 							<p id="forgotP"><a href="#">Forgot email/password? <span class="clickme">Click here</span></a></p>
 						</div>
 
 						<div id="register" class="comm">
-							<h3>Sign Up</h3>
 							<input id="rname" type="name" required="required" placeholder="Name" value="" /><br>
 							<input id="remail" type="email" required="required" placeholder="Email" value="" /><br>
 							<input id="rpassword" type="password" required="required" placeholder="Password" value="" /><br>
 							<input id="rcpassword" type="password" required="required" placeholder="Confirm Password" value="" /><br>
-							<input type="submit" value="Sign-Up" id="signup" onclick="register()"/>
+							<div><span id="serverMsgReg"></span></div>
+							<input type="submit" value="Sign-Up" id="signup" />
 						</div>
 					</div>
 				</div>
 
-				<p><span id="serverMsg"></span></p>
+
 				<!-- <p id="signUp"><a href="#">Don't have an account? <span class="clickme">Sign Up</span></a></p> -->
 			</form>
 
