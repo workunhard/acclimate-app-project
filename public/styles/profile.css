@@ -20,7 +20,6 @@ caption {
   width: 120px;
 }
 
-
 .name,
 .email,
 .password {
@@ -385,6 +384,4 @@ dd {
     grid-column: 1;
     grid-row: 5;
   }
-
-
 }

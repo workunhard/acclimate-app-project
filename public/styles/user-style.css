@@ -434,10 +434,10 @@ dd {
     grid-column: 1;
     grid-row: 3;
   }
-  
+
   .loader-wrapper {
-      height: 100vh;
-      position: absolute;
+    height: 100vh;
+    position: absolute;
   }
 
   #contentBody {
