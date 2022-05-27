@@ -770,11 +770,11 @@ app.post('/delete-post', function (req, res) {
 const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 // Password validation using regex. 
-const stringLength = /^(?=.{10,}$)$/; // Must be at least 10 characters.
+const stringLength = /^.{10,}$/; // Must be at least 10 characters.
 const upperCase = /^(?=.*[A-Z])$/;  // Must have at least 1 uppercase characters.
 const lowerCase = /^(?=.*[a-z])$/;  // Must have at least 1 lowercase characters.
 const number = /^(?=.*[0-9])$/;     // Must have at least 1 digit.
-const specialCharacter = /^(?=.*\W)$/; // Must have at least 1 special character.
+const specialCharacter = /^(.*\W)$/; // Must have at least 1 special character.
 
 
 /**
@@ -816,23 +816,23 @@ function validatePasswordRequirements(req) {
     if (password == "") {
         return [false, "Password must not be empty"];
     }
+    if (password != cpassword) {
+        return [false, "Both passwords must be the same"];
+    }
     if (!password.match(stringLength)) {
         return [false, "Password must be at least 10 characters"];
     }
-    if (!password.match(upperCase)) {
+    if (!password.match(/[A-Z]/g)) {
         return [false, "Password must have at least 1 upper case character"];
     }
-    if (!password.match(lowerCase)) {
-        return [false, "Password must have at least 1 upper case character"];
+    if (!password.match(/[a-g]/g)) {
+        return [false, "Password must have at least 1 lower case character"];
     }
-    if (!password.match(number)) {
+    if (!password.match(/[0-9]/g)) {
         return [false, "Password must have at least one digit"];
     }
     if (!password.match(specialCharacter)) {
         return [false, "Password must have at least one special character"];
-    }
-    if (password != cpassword) {
-        return [false, "Both passwords must be the same"];
     }
     else {
         return [password, null];

@@ -97,7 +97,7 @@ document.querySelector("#signup").addEventListener("click", function (e) {
         document.getElementById("serverMsgReg").innerHTML = dataParsed.msg;
         return;
       } else {
-        // window.location.replace("/");
+        window.location.replace("/dashboard");
       }
     }
   }, queryString);
