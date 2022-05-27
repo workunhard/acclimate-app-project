@@ -333,6 +333,7 @@ caption {
   animation: loader-inner 2s infinite ease-in;
 }
 
+/* Loading Screen Animation */
 @keyframes loader {
   0% {
     transform: rotate(0deg);

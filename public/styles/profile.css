@@ -11,9 +11,7 @@ nav {
   z-index: 10;
 }
 
-.userInfo td,
-th,
-caption {
+.userInfo td, th, caption {
   text-align: left;
   color: #52BBE7;
   font-weight: bold;
@@ -97,8 +95,7 @@ input[type="file"] {
   border: 2px solid rgba(248, 253, 252, 0.8);
 }
 
-
-/* Style the navigation menu */
+/* Nav bar */
 .navbar {
   overflow: hidden;
   background-color: #333;
@@ -187,10 +184,7 @@ input[type="file"] {
   right: 100px;
 }
 
-/*-------------------------------------
- * customize material design icon sizes 
- *-------------------------------------
- */
+/* Material Icons */
 .material-icons.md-18 {
   font-size: 18px;
 }
@@ -207,8 +201,7 @@ input[type="file"] {
   font-size: 48px;
 }
 
-/* Dashboard Stuff */
-
+/* Dashboard */
 .profile_name {
   color: red;
 }
@@ -263,6 +256,7 @@ dd {
   animation: loader-inner 2s infinite ease-in;
 }
 
+/* Loading Screen Animation */
 @keyframes loader {
   0% {
     transform: rotate(0deg);
@@ -307,6 +301,7 @@ dd {
   }
 }
 
+/* Mobile View */
 @media only screen and (max-width: 800px) {
   .container {
     display: grid;
@@ -346,6 +341,7 @@ dd {
   }
 }
 
+/* Desktop View */
 @media only screen and (min-width: 801px) {
   .container {
     display: grid;
