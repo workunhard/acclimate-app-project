@@ -56,7 +56,10 @@ function editDescription(e) {
     input.addEventListener("keyup", function (e) {
         let v = null;
 
+
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+    if (result == true) {
             str = "Enter description here";
             if (input.value === null || input.value.match(/^[\s\n\r]*$/) !== null) {
                 v = str;
@@ -96,6 +99,7 @@ function editDescription(e) {
                 }
             };
         }
+    }
     });
     parent.innerHTML = "";
     parent.appendChild(input);
@@ -149,6 +153,9 @@ for (let i = 0; i < confirmImages.length; i++) {
 
 function updateImage(e) {
     e.preventDefault();
+
+    var result = window.confirm("Are you sure?");
+    if (result == true) {
     let parent = e.target.parentNode;
 
     const imageUpload = document.querySelector('#image-upload');
@@ -169,18 +176,9 @@ function updateImage(e) {
     }).catch(function (err) {
         ("Error:", err);
     });
-    window.location.replace("/dashboard");
-    window.onload = function () {
-        if (!window.location.hash) {
-            window.location = window.location + '#loaded';
-            window.location.reload();
-        }
-    };
-}
+    setTimeout(function () {
+        window.location.href = "/dashboard";
+      }, 3000);
 
-// window.onload = function () {
-//     if (!window.location.hash) {
-//         window.location = window.location + '#loaded';
-//         window.location.reload();
-//     }
-// };
+}
+}

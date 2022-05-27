@@ -3,7 +3,9 @@ upLoadForm.addEventListener("submit", uploadImages);
 
 function uploadImages(e) {
     e.preventDefault();
-
+    
+    var result = window.confirm("Are you sure?");
+            if (result == true) {
     const imageUpload = document.querySelector('#image-upload');
     const formData = new FormData();
 
@@ -28,4 +30,5 @@ window.onload = function () {
         window.location = window.location + '#loaded';
         window.location.reload();
     }
+}
 };

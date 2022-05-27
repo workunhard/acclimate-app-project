@@ -59,7 +59,6 @@ getUserInfo();
 
 function editCellEmail(e) {
 
-
     let spanText = e.target.innerHTML;
     let parent = e.target.parentNode;
     let input = document.createElement("input");
@@ -67,6 +66,8 @@ function editCellEmail(e) {
     input.addEventListener("keyup", function (e) {
         let v = null;
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
             newSpan.innerHTML = v;
@@ -99,15 +100,14 @@ function editCellEmail(e) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("id=" + dataToSend.id + "&email=" + dataToSend.email);
 
-        }
+        }}
     });
     parent.innerHTML = "";
     parent.appendChild(input);
-
+    
 }
 
 function editCellName(e) {
-
     let spanText = e.target.innerHTML;
     let parent = e.target.parentNode;
     let input = document.createElement("input");
@@ -115,6 +115,8 @@ function editCellName(e) {
     input.addEventListener("keyup", function (e) {
         let v = null;
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
             newSpan.innerHTML = v;
@@ -140,11 +142,11 @@ function editCellName(e) {
             xhr.setRequestHeader('X-RequeSsted-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("&name=" + dataToSend.name);
-        }
+        }}
     });
     parent.innerHTML = "";
     parent.appendChild(input);
-
+    
 }
 
 function editCellPassword(e) {
@@ -156,6 +158,8 @@ function editCellPassword(e) {
     input.addEventListener("keyup", function (e) {
         let v = null;
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
             newSpan.innerHTML = v;
@@ -183,6 +187,7 @@ function editCellPassword(e) {
             xhr.send("id=" + dataToSend.id + "&password=" + dataToSend.password);
 
         }
+    }
     });
     parent.innerHTML = "";
     parent.appendChild(input);
