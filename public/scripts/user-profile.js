@@ -1,7 +1,11 @@
 /**
+<<<<<<< HEAD
  * Pulls relevant user info (name, email and password) and inserts them into profile.html to display
  * for the user to view or edit. Event listeners are added to each field which have edit functions
  * assigned to them.
+=======
+ * 
+>>>>>>> eafeabcdd6b46bac140a1b579e461c8314503d56
  */
 function getUserInfo() {
 
@@ -62,6 +66,10 @@ function getUserInfo() {
 }
 getUserInfo();
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellEmail(e) {
 
     let spanText = e.target.innerHTML;
@@ -73,45 +81,49 @@ function editCellEmail(e) {
         if (e.which == 13) {
             var result = window.confirm("Are you sure?");
             if (result == true) {
-            v = input.value;
-            let newSpan = document.createElement("span");
-            newSpan.innerHTML = v;
-            parent.innerHTML = "";
-            parent.appendChild(newSpan);
-            let dataToSend = {
-                email: v
-            };
+                v = input.value;
+                let newSpan = document.createElement("span");
+                newSpan.innerHTML = v;
+                parent.innerHTML = "";
+                parent.appendChild(newSpan);
+                let dataToSend = {
+                    email: v
+                };
 
-            const xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-                if (this.readyState == XMLHttpRequest.DONE) {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (this.readyState == XMLHttpRequest.DONE) {
 
-                    if (xhr.status === 200) {
-                        getUserInfo();
+                        if (xhr.status === 200) {
+                            getUserInfo();
 
+
+                        } else {
+
+                            console.log(this.status);
+
+                        }
 
                     } else {
-
-                        console.log(this.status);
-
+                        console.log("ERROR", this.status);
                     }
-
-                } else {
-                    console.log("ERROR", this.status);
                 }
-            }
-            xhr.open("POST", "/update-userEmail");
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send("id=" + dataToSend.id + "&email=" + dataToSend.email);
+                xhr.open("POST", "/update-userEmail");
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("id=" + dataToSend.id + "&email=" + dataToSend.email);
 
-        }}
+            }
+        }
     });
     parent.innerHTML = "";
     parent.appendChild(input);
-    
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellName(e) {
     let spanText = e.target.innerHTML;
     let parent = e.target.parentNode;
@@ -122,38 +134,42 @@ function editCellName(e) {
         if (e.which == 13) {
             var result = window.confirm("Are you sure?");
             if (result == true) {
-            v = input.value;
-            let newSpan = document.createElement("span");
-            newSpan.innerHTML = v;
-            parent.innerHTML = "";
-            parent.appendChild(newSpan);
-            let dataToSend = {
-                name: v
-            };
+                v = input.value;
+                let newSpan = document.createElement("span");
+                newSpan.innerHTML = v;
+                parent.innerHTML = "";
+                parent.appendChild(newSpan);
+                let dataToSend = {
+                    name: v
+                };
 
-            const xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-                if (this.readyState == XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        getUserInfo();
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (this.readyState == XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            getUserInfo();
+                        } else {
+                            console.log(this.status);
+                        }
                     } else {
-                        console.log(this.status);
+                        console.log("ERROR", this.status);
                     }
-                } else {
-                    console.log("ERROR", this.status);
                 }
+                xhr.open("POST", "/update-userName");
+                xhr.setRequestHeader('X-RequeSsted-With', 'XMLHttpRequest');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("&name=" + dataToSend.name);
             }
-            xhr.open("POST", "/update-userName");
-            xhr.setRequestHeader('X-RequeSsted-With', 'XMLHttpRequest');
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send("&name=" + dataToSend.name);
-        }}
+        }
     });
     parent.innerHTML = "";
     parent.appendChild(input);
-    
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellPassword(e) {
 
     let spanText = e.target.innerHTML;
@@ -165,34 +181,34 @@ function editCellPassword(e) {
         if (e.which == 13) {
             var result = window.confirm("Are you sure?");
             if (result == true) {
-            v = input.value;
-            let newSpan = document.createElement("span");
-            newSpan.innerHTML = v;
-            parent.innerHTML = "";
-            parent.appendChild(newSpan);
-            let dataToSend = {
-                password: v
-            };
+                v = input.value;
+                let newSpan = document.createElement("span");
+                newSpan.innerHTML = v;
+                parent.innerHTML = "";
+                parent.appendChild(newSpan);
+                let dataToSend = {
+                    password: v
+                };
 
-            const xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-                if (this.readyState == XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        getUserInfo();
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (this.readyState == XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            getUserInfo();
+                        } else {
+                            console.log(this.status);
+                        }
                     } else {
-                        console.log(this.status);
+                        console.log("ERROR", this.status);
                     }
-                } else {
-                    console.log("ERROR", this.status);
                 }
-            }
-            xhr.open("POST", "/update-userPassword");
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send("id=" + dataToSend.id + "&password=" + dataToSend.password);
+                xhr.open("POST", "/update-userPassword");
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("id=" + dataToSend.id + "&password=" + dataToSend.password);
 
+            }
         }
-    }
     });
     parent.innerHTML = "";
     parent.appendChild(input);

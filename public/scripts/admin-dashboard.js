@@ -1,3 +1,7 @@
+
+/**
+ * The function to receive the information of all users as a table.
+ */
 function getUsers() {
 
     const xhr = new XMLHttpRequest();
@@ -70,6 +74,10 @@ function getUsers() {
 }
 getUsers();
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellEmail(e) {
     let spanText = e.target.innerHTML;
     let parent = e.target.parentNode;
@@ -79,6 +87,8 @@ function editCellEmail(e) {
         let v = null;
 
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
 
@@ -113,12 +123,17 @@ function editCellEmail(e) {
             xhr.send("id=" + dataToSend.id + "&email=" + dataToSend.email);
 
         }
+    }
     });
     parent.innerHTML = "";
     parent.appendChild(input);
 
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellName(e) {
 
     let spanText = e.target.innerHTML;
@@ -128,6 +143,8 @@ function editCellName(e) {
     input.addEventListener("keyup", function (e) {
         let v = null;
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
             newSpan.innerHTML = v;
@@ -157,11 +174,16 @@ function editCellName(e) {
             xhr.send("id=" + dataToSend.id + "&name=" + dataToSend.name);
 
         }
+    }
     });
     parent.innerHTML = "";
     parent.appendChild(input);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellPassword(e) {
 
     let spanText = e.target.innerHTML;
@@ -172,6 +194,8 @@ function editCellPassword(e) {
         let v = null;
 
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
             newSpan.innerHTML = v;
@@ -201,14 +225,17 @@ function editCellPassword(e) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("id=" + dataToSend.id + "&password=" + dataToSend.password);
 
-        }
+        }}
     });
     parent.innerHTML = "";
     parent.appendChild(input);
 
 }
 
-
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellAdmin(e) {
 
     let spanText = e.target.innerHTML;
@@ -218,6 +245,8 @@ function editCellAdmin(e) {
     input.addEventListener("keyup", function (e) {
         let v = null;
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             v = input.value;
             let newSpan = document.createElement("span");
             newSpan.innerHTML = v;
@@ -247,7 +276,7 @@ function editCellAdmin(e) {
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("id=" + dataToSend.id + "&admin=" + dataToSend.admin);
-        }
+        }}
     });
     parent.innerHTML = "";
     parent.appendChild(input);
@@ -258,6 +287,8 @@ function editCellAdmin(e) {
 document.getElementById("submit").addEventListener("click", function (e) {
     e.preventDefault();
 
+    var result = window.confirm("Are you sure?");
+            if (result == true) {
     let formData = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
@@ -285,11 +316,17 @@ document.getElementById("submit").addEventListener("click", function (e) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("name=" + formData.name + "&email=" + formData.email + "&password=" + formData.password + "&admin=" + formData.admin);
     window.location.replace("/dashboard");
+}
 });
 
+/**
+ * 
+ * @param {*} e 
+ */
 function deleteUser(e) {
-
     e.preventDefault();
+    var result = window.confirm("Are you sure?");
+            if (result == true) {
     let parent = e.target.parentNode;
     let formData = {
         id: parent.parentNode.querySelector(".id").innerHTML
@@ -311,17 +348,21 @@ function deleteUser(e) {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("id=" + formData.id);
-}
+}}
 
 let posts = document.querySelectorAll("td[class='deletePost']");
 for (let i = 0; i < posts.length; i++) {
     posts[i].addEventListener("click", deletePost);
 }
 
-
+/**
+ * 
+ * @param {*} e 
+ */
 function deletePost(e) {
-
     e.preventDefault();
+    var result = window.confirm("Are you sure?");
+    if (result == true) {
     let parent = e.target.parentNode;
 
     let formData = {
@@ -345,13 +386,17 @@ function deletePost(e) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("imageID=" + formData.imageID);
     window.location.replace("/dashboard");
-}
+}}
 
 let text = document.querySelectorAll("td[class='description'] span");
 for (let i = 0; i < text.length; i++) {
     text[i].addEventListener("click", editDescription);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editDescription(e) {
 
     let spanText = e.target.innerHTML;
@@ -364,6 +409,8 @@ function editDescription(e) {
         let v = null;
 
         if (e.which == 13) {
+            var result = window.confirm("Are you sure?");
+            if (result == true) {
             str = "Enter description here";
             if (input.value === null || input.value.match(/^[\s\n\r]*$/) !== null) {
                 v = str;
@@ -384,7 +431,7 @@ function editDescription(e) {
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
                 if (this.readyState == XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {} else {
+                    if (xhr.status === 200) { } else {
                         console.log(this.status);
                     }
                 } else {
@@ -396,7 +443,7 @@ function editDescription(e) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("&description=" + dataToSend.description + "&imageID=" + dataToSend.imageID);
             window.location.replace("/dashboard");
-        }
+        }}
     });
     parent.innerHTML = "";
     parent.appendChild(input);
@@ -407,9 +454,15 @@ for (let i = 0; i < deleteImages.length; i++) {
     deleteImages[i].addEventListener("click", deleteImage);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function deleteImage(e) {
 
     e.preventDefault();
+    var result = window.confirm("Are you sure?");
+    if (result == true) {
     let parent = e.target.parentNode;
 
     let formData = {
@@ -419,7 +472,7 @@ function deleteImage(e) {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (this.readyState == XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {} else {
+            if (xhr.status === 200) { } else {
                 console.log(this.status);
             }
         } else {
@@ -431,7 +484,7 @@ function deleteImage(e) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("imageID=" + formData.imageID);
     window.location.replace("/dashboard");
-}
+}}
 
 
 let confirmImages = document.querySelectorAll("td[class='confirmImage']");
@@ -439,8 +492,14 @@ for (let i = 0; i < confirmImages.length; i++) {
     confirmImages[i].addEventListener("click", updateImage);
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function updateImage(e) {
     e.preventDefault();
+    var result = window.confirm("Are you sure?");
+    if (result == true) {
     let parent = e.target.parentNode;
 
     const imageUpload = document.querySelector('#image-upload');
@@ -462,7 +521,7 @@ function updateImage(e) {
         ("Error:", err);
     });
     window.location.replace("/dashboard");
-}
+}}
 
 window.onload = function () {
     if (!window.location.hash) {

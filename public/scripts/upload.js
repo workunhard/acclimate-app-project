@@ -22,6 +22,9 @@ tinymce.init({
 
 document.getElementById("uploadbox").addEventListener("click", cleanUp);
 
+/**
+ * 
+ */
 function cleanUp() {
   tinymce.activeEditor.setContent('');
   document.getElementById("uploadbox").removeEventListener("click", cleanUp);
@@ -29,6 +32,10 @@ function cleanUp() {
 
 document.getElementById("submit").addEventListener("click", uploadTimeline);
 
+/**
+ * 
+ * @param {*} e 
+ */
 function uploadTimeline(e) {
   e.preventDefault();
 

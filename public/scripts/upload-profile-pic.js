@@ -1,6 +1,10 @@
 const upLoadForm = document.getElementById("upload-images-form");
 upLoadForm.addEventListener("submit", uploadImages);
 
+/**
+ * 
+ * @param {*} e 
+ */
 function uploadImages(e) {
     e.preventDefault();
     
