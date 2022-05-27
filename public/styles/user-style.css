@@ -11,20 +11,16 @@ nav {
   z-index: 10;
 }
 
-
-/* Style the navigation menu */
 .navbar {
   overflow: hidden;
   background-color: #333;
   width: 100%;
 }
 
-/* Hide the links inside the navigation menu (except for logo/home) */
 .navbar #navLinks {
   display: none;
 }
 
-/* nav menu links */
 .navbar a {
   color: white;
   padding: 12px 18px;
@@ -33,14 +29,12 @@ nav {
   display: block;
 }
 
-/* nav menu profile icon */
 .navbar a.profile {
   display: block;
   position: absolute;
   top: 8px;
-} 
+}
 
-/* nav menu hamburger icon */
 .navbar a.menu {
   display: block;
   position: absolute;
@@ -48,7 +42,6 @@ nav {
   top: 8px;
 }
 
-/* when hovering above nav menu */
 .navbar a:hover {
   color: black;
 }
@@ -57,13 +50,11 @@ nav {
   color: black;
 }
 
-/* nav menu logo */
 .logo {
-  background-color:#52BBE7;
+  background-color: #52BBE7;
   color: white;
 }
 
-/* nav menu logo text */
 #logoText {
   font-size: 20px;
   font-weight: bold;
@@ -109,16 +100,21 @@ nav {
   right: 100px;
 }
 
-/*-------------------------------------
- * customize material design icon sizes 
- *-------------------------------------
- */
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
 
-/* Dashboard Stuff */
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
 
 .profile_name {
   color: red;
@@ -130,7 +126,7 @@ nav {
 
 #card {
   border-radius: 10px 10px 10px 10px;
-  background-color:white;
+  background-color: white;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   width: 95%;
   margin-left: 3%;
@@ -155,7 +151,7 @@ nav {
 }
 
 #sidebar {
-  background-color:white;
+  background-color: white;
 }
 
 #timeline img {
@@ -223,7 +219,7 @@ input[type="file"] {
 }
 
 .image-label:hover {
-    color: white;
+  color: white;
   background-color: #52BBE7;
   border: 2px solid rgba(248, 253, 252, 0.8);
 }
@@ -248,8 +244,6 @@ input[type="file"] {
   border: 2px solid rgba(248, 253, 252, 0.8);
 }
 
-
-
 dd {
   font-style: italic;
   font-weight: bold;
@@ -267,30 +261,17 @@ dd {
   border-radius: 10px 10px 10px 10px;
 }
 
-/* .box {
-  display: grid;
-  font-size: 12px;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr;
-}
-
-.weatherImg {
-  grid-column: 1; */
-
 #forecast {
   background: rgba(99, 99, 214, 0.8);
   padding: 5px;
-  /* position: fixed; */
   bottom: 0;
   display: flex;
   color: white;
-  /* width: 100%; */
   align-items: last baseline;
   justify-content: space-between;
   overflow-y: hidden;
   font-size: 11px;
   padding-left: 5px;
-  /* z-index: -1; */
 }
 
 .box {
@@ -312,10 +293,11 @@ dd {
   top: 0;
   left: 0;
   background-color: #242f3f;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .loader {
   display: inline-block;
   width: 30px;
@@ -324,6 +306,7 @@ dd {
   border: 4px solid #Fff;
   animation: loader 2s infinite ease;
 }
+
 .loader-inner {
   vertical-align: top;
   display: inline-block;
@@ -333,27 +316,54 @@ dd {
 }
 
 @keyframes loader {
-  0% { transform: rotate(0deg);}
-  25% { transform: rotate(180deg);}
-  50% { transform: rotate(180deg);}
-  75% { transform: rotate(360deg);}
-  100% { transform: rotate(360deg);}
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes loader-inner {
-  0% { height: 0%;}
-  25% { height: 0%;}
-  50% { height: 100%;}
-  75% { height: 100%;}
-  100% { height: 0%;}
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
 }
 
 @media only screen and (max-width: 800px) {
-  .container{
+  .container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 60px 800px 60px;
-    /* grid-template-rows: 10% 27% 27% 29% 7%; */
     height: 100vh;
     padding: 0.5em;
     grid-gap: 5px;
@@ -366,8 +376,8 @@ dd {
 
   #contentBody {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 3.5fr 1.5fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4fr 1.5fr 2fr;
     grid-column: 1;
     grid-row: 2;
     padding-top: 20px;
@@ -378,7 +388,7 @@ dd {
   #sidebar {
     grid-column: 1 / span 2;
     grid-row: 1;
-    /* background-color:blanchedalmond; */
+
     border-radius: 10px 10px 10px 10px;
     overflow-y: auto;
   }
@@ -386,7 +396,7 @@ dd {
   #map {
     grid-column: 1;
     grid-row: 2;
-    background-color: beige;
+    background-color: #52BBE7;
     text-align: center;
     border-radius: 10px 10px 10px 10px;
     height: 100%;
@@ -394,9 +404,9 @@ dd {
   }
 
   #forecast {
-    grid-column: 2;
-    grid-row: 2;
-    background-color: cornsilk;
+    grid-column: 1;
+    grid-row: 3;
+    background-color: #52BBE7;
     text-align: center;
     border-radius: 10px 10px 10px 10px;
   }
@@ -408,12 +418,13 @@ dd {
 }
 
 @media only screen and (min-width: 801px) {
-  .container{
+  .container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 12% 78% 10%;
     height: 100vh;
   }
+
   #navbarPlaceholder {
     grid-column: 1;
     grid-row: 1;
@@ -438,7 +449,6 @@ dd {
   #sidebar {
     grid-column: 2;
     grid-row: 1 / span 4;
-    /* background-color:blanchedalmond; */
     border-radius: 10px 10px 10px 10px;
     overflow-y: auto;
   }
@@ -446,7 +456,6 @@ dd {
   #map {
     grid-column: 1;
     grid-row: 1 / span 2;
-    /* background-color: beige; */
     text-align: center;
     margin-top: 0%;
     border-radius: 10px 10px 10px 10px;
@@ -455,13 +464,12 @@ dd {
   #bbymap {
     max-width: 95%;
     border-radius: 10px 10px 10px 10px;
-    border: 1px solid grey;  
+    border: 1px solid grey;
   }
 
   #forecast {
     grid-column: 1;
     grid-row: 3 / span 2;
-    /* background-color: cornsilk; */
     text-align: center;
     border-radius: 10px 10px 10px 10px;
     margin-top: 10px;
