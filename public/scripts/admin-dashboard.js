@@ -1,6 +1,9 @@
 
 /**
- * The function to receive the information of all users as a table.
+ * This function makes a request to the DB to get all user information stored and populate it 
+ * into a table for the administrator to view every user's ID, name, email, password and if 
+ * they are classified as an admin or regular user. Also attaches event listeners for their
+ * respective edit functions for each field.
  */
 function getUsers() {
 
@@ -20,7 +23,6 @@ function getUsers() {
 <th class="admin_header">Admin</th>
 <th class="delete_header">Delete</th>
 </tr>`;
-
 
                     for (let i = 0; i < data.rows.length; i++) {
                         let row = data.rows[i];
@@ -58,13 +60,9 @@ function getUsers() {
                 } else {
                     console.log("Error!");
                 }
-
             } else {
-
                 console.log(this.status);
-
             }
-
         } else {
             console.log("ERROR", this.status);
         }
@@ -75,7 +73,8 @@ function getUsers() {
 getUsers();
 
 /**
- * 
+ * Edits a user's emails while keeping track of the id and username of that user on the same row so that information 
+ * is not lost. sends the updated email information to the server to update.
  * @param {*} e 
  */
 function editCellEmail(e) {
@@ -131,7 +130,7 @@ function editCellEmail(e) {
 }
 
 /**
- * 
+ * Edits a user's name and sends the updated user's name to the server to update into the database.
  * @param {*} e 
  */
 function editCellName(e) {
@@ -181,7 +180,7 @@ function editCellName(e) {
 }
 
 /**
- * 
+ * Updates a user's password and sends this information to the database for update.
  * @param {*} e 
  */
 function editCellPassword(e) {
@@ -233,7 +232,8 @@ function editCellPassword(e) {
 }
 
 /**
- * 
+ * Edits and updates the user's permissions to set them as as administrator user(1) or
+ * a regular user(0). Sends this information back to the database for update after.
  * @param {*} e 
  */
 function editCellAdmin(e) {
@@ -283,7 +283,9 @@ function editCellAdmin(e) {
 
 }
 
-//Add user
+/**
+ * Adds a user to the database after clicking on the submit button.
+ */
 document.getElementById("submit").addEventListener("click", function (e) {
     e.preventDefault();
 
@@ -320,7 +322,7 @@ document.getElementById("submit").addEventListener("click", function (e) {
 });
 
 /**
- * 
+ * Deletes a user from the database.
  * @param {*} e 
  */
 function deleteUser(e) {
@@ -356,7 +358,7 @@ for (let i = 0; i < posts.length; i++) {
 }
 
 /**
- * 
+ * Deletes a timeline post.
  * @param {*} e 
  */
 function deletePost(e) {
@@ -400,7 +402,7 @@ for (let i = 0; i < text.length; i++) {
 }
 
 /**
- * 
+ * Edits the post's description.
  * @param {*} e 
  */
 function editDescription(e) {
@@ -467,7 +469,7 @@ for (let i = 0; i < deleteImages.length; i++) {
 }
 
 /**
- * 
+ * Deletes the image associated with the post keeping everything else in tact.
  * @param {*} e 
  */
 function deleteImage(e) {
@@ -511,7 +513,7 @@ for (let i = 0; i < confirmImages.length; i++) {
 }
 
 /**
- * 
+ * Allows the user to change the image associated with a particular user's post.
  * @param {*} e 
  */
 function updateImage(e) {
