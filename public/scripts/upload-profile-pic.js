@@ -1,9 +1,13 @@
+/**
+ * Adds an event listener to the submit input of the form with the id
+ * "upload-images-form" to invoke the uploadImages function on click.
+ */
 const upLoadForm = document.getElementById("upload-images-form");
 upLoadForm.addEventListener("submit", uploadImages);
 
 /**
- * 
- * @param {*} e 
+ * Function which will take the uploaded file and send it to the /upload-images server path
+ * to be stored into the database.
  */
 function uploadImages(e) {
     e.preventDefault();

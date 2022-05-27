@@ -1,11 +1,7 @@
 /**
-<<<<<<< HEAD
  * Pulls relevant user info (name, email and password) and inserts them into profile.html to display
  * for the user to view or edit. Event listeners are added to each field which have edit functions
  * assigned to them.
-=======
- * 
->>>>>>> eafeabcdd6b46bac140a1b579e461c8314503d56
  */
 function getUserInfo() {
 
@@ -67,8 +63,8 @@ function getUserInfo() {
 getUserInfo();
 
 /**
- * 
- * @param {*} e 
+ * Creates a new input element at the email field where the user clicks into allowing them to
+ * make changes which are saved and sent over to the server along with their id.
  */
 function editCellEmail(e) {
 
@@ -121,8 +117,8 @@ function editCellEmail(e) {
 }
 
 /**
- * 
- * @param {*} e 
+ * Creates a new input element at the name field where the user clicks into allowing them to
+ * make changes which are saved and sent over to the server along with their id.
  */
 function editCellName(e) {
     let spanText = e.target.innerHTML;
@@ -167,8 +163,8 @@ function editCellName(e) {
 }
 
 /**
- * 
- * @param {*} e 
+ * Creates a new input element at the password field where the user clicks into allowing them to
+ * make changes which are saved and sent over to the server along with their id.
  */
 function editCellPassword(e) {
 

@@ -1,11 +1,16 @@
+/**
+ * Selects all .deletePost elements and adds an on click
+ * event listener which will invoke the deletePost function.
+ */
 let posts = document.querySelectorAll("td[class='deletePost']");
 for (let i = 0; i < posts.length; i++) {
     posts[i].addEventListener("click", deletePost);
 }
 
 /**
- * 
- * @param {*} e 
+ * Allows the user to delete the post specified and brings up a
+ * confirmation window to confirm the delete. The id of the post is sent
+ * server side to instruct the database to delete the specified post.
  */
 function deletePost(e) {
     e.preventDefault();
@@ -44,14 +49,19 @@ function deletePost(e) {
     }
 }
 
+/**
+ * Selects all .description elements and adds an on click
+ * event listener which will invoke the editDescription function.
+ */
 let text = document.querySelectorAll("td[class='description'] span");
 for (let i = 0; i < text.length; i++) {
     text[i].addEventListener("click", editDescription);
 }
 
 /**
- * 
- * @param {*} e 
+ * Allows the user to edit the description of a post specified and brings up a
+ * confirmation window to confirm the change. The id and text of the post is sent
+ * server side to instruct the database to modify the description with the specific id.
  */
 function editDescription(e) {
 
@@ -113,14 +123,19 @@ function editDescription(e) {
     parent.appendChild(input);
 }
 
+/**
+ * Selects all .deleteImage elements and adds an on click
+ * event listener which will invoke the deleteImage function.
+ */
 let deleteImages = document.querySelectorAll("td[class='deleteImage']");
 for (let i = 0; i < deleteImages.length; i++) {
     deleteImages[i].addEventListener("click", deleteImage);
 }
 
 /**
- * 
- * @param {*} e 
+ * Allows the user to delete the image of a post and brings up a
+ * confirmation window to confirm the delete. The id of the post is sent
+ * server side to instruct the database to remove the image given the id.
  */
 function deleteImage(e) {
     e.preventDefault();
@@ -157,15 +172,19 @@ function deleteImage(e) {
     }
 }
 
-
+/**
+ * Selects all .confirmImage elements and adds an on click
+ * event listener which will invoke the updateImage function.
+ */
 let confirmImages = document.querySelectorAll("td[class='confirmImage']");
 for (let i = 0; i < confirmImages.length; i++) {
     confirmImages[i].addEventListener("click", updateImage);
 }
 
 /**
- * 
- * @param {*} e 
+ * Allows the user to update the image of a post and brings up a
+ * confirmation window to confirm the update. The id of the post is sent
+ * server side to instruct the database to update the image given the id.
  */
 function updateImage(e) {
     e.preventDefault();
@@ -198,6 +217,9 @@ function updateImage(e) {
       }, 3000);
 }}
 
+/**
+ * Function that inserts a loading animation into an element with the id "loadAnimation".
+ */
 function loader() {
     document.getElementById("loadAnimation").innerHTML =
         '<div class=\"loader-wrapper\"><span class=\"loader\"><span class=\"loader-inner\"></span></span></div>'
