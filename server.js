@@ -144,17 +144,6 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
                                 "</div><br>";
-                            // str = str + "<div id=\"card\">" +
-                            // 	results[i].date + " " + results[i].time + "<br>" +
-                            // 	"<img id=\"photo\" src=\"profileimages/timeline/"
-                            // 	+ results[i].filename + "\"><br>" +
-                            // 	"<table><tr><td class='imageID'>" + results[i].imageID +
-                            // 	"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-                            // 	"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
-                            // 	"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-                            // 	"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-                            // 	"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                            // 	"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 
                         } else {
 
@@ -166,15 +155,6 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
                                 "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>";
-
-                            // str = str + "<div id=\"card\">" +
-                            // results[i].date + " " + results[i].time +
-                            // "<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
-                            // "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-                            // "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-                            // "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-                            // "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                            // "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
                         }
 
 
@@ -592,72 +572,6 @@ app.get("/profile", function (req, res) {
         res.redirect("/");
     }
 });
-
-// app.get('/sign-s3', (req, res) => {
-//     const s3 = new aws.S3();
-//     const fileName = req.query['file-name'];
-//     const fileType = req.query['file-type'];
-//     const s3Params = {
-//         Bucket: "acclimate-avatars",
-//         Key: fileName,
-//         Expires: 300,
-//         ContentType: fileType,
-//         ACL: 'public-read'
-//     };
-
-//     console.log("at sign-s3 / getsigned");
-
-//     s3.getSignedUrl('putObject', s3Params, (err, data) => {
-//         if (err) {
-//             console.log("error in getSignedUrl");
-//             console.log(err);
-//             return res.end();
-//         }
-//         const returnData = {
-//             signedRequest: data,
-//             url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-//         };
-//         console.log("returned data");
-//         console.log(returnData);
-//         res.write(JSON.stringify(returnData));
-//         res.end();
-//     });
-//     console.log("end of sign-s3");
-// }
-// );
-
-// app.post('/save-details', (req, res) => {
-//     res.setHeader('Content-Type', 'application/json');
-//     var today = new Date();
-//     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-//     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-//     req.body.description = sanitizeHtml(req.body.description);
-
-
-
-//     if (req.files.length > 0) {
-//         connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-//             [`${req.files[0].filename}`, req.body.description, date, time, req.session.key],
-//             function (err, results) {
-//                 if (err) {
-//                     console.log(err);
-//                 } else {
-//                     console.log(results);
-//                 }
-//             })
-//     } else {
-//         connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-//             [null, req.body.description, date, time, req.session.key],
-//             function (err, results) {
-//                 if (err) {
-//                     console.log(err);
-//                 } else {
-//                     console.log(results);
-//                 }
-//             })
-//     }
-// }
-// );
 
 app.post("/upload-images", upload.array("files"), function (req, res) {
     connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
