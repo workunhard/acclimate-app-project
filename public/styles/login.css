@@ -145,7 +145,6 @@
         margin: 0;
         background-position: bottom center, 50%, 50%;
         font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
-        overflow: hidden;
     }
 
     #background {
