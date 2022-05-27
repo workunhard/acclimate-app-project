@@ -122,15 +122,11 @@
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
-        display: grid;
         height: 100%;
-        grid-row: 4 / span 1;
-        grid-column: 1 / span 3;
         align-content: center;
         margin: 0;
         padding: 20px;
         color: white;
-        position: relative;
     }
 }
 
@@ -414,18 +410,18 @@
 
 @-webkit-keyframes fall {
     to {
-        margin-top: 900px;
+        margin-top: 100%;
     }
 }
 
 @-moz-keyframes fall {
     to {
-        margin-top: 900px;
+        margin-top: 100%;
     }
 }
 
 @keyframes fall {
     to {
-        margin-top: 900px;
+        margin-top: 100%;
     }
 }
