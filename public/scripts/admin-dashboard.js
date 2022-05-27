@@ -386,6 +386,12 @@ function deletePost(e) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("imageID=" + formData.imageID);
     window.location.replace("/dashboard");
+    window.onload = function () {
+        if (!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+        }
+    };
 }}
 
 let text = document.querySelectorAll("td[class='description'] span");
@@ -443,6 +449,12 @@ function editDescription(e) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("&description=" + dataToSend.description + "&imageID=" + dataToSend.imageID);
             window.location.replace("/dashboard");
+            window.onload = function () {
+                if (!window.location.hash) {
+                    window.location = window.location + '#loaded';
+                    window.location.reload();
+                }
+            };
         }}
     });
     parent.innerHTML = "";
@@ -484,6 +496,12 @@ function deleteImage(e) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("imageID=" + formData.imageID);
     window.location.replace("/dashboard");
+    window.onload = function () {
+        if (!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+        }
+    };
 }}
 
 
@@ -520,12 +538,13 @@ function updateImage(e) {
     }).catch(function (err) {
         ("Error:", err);
     });
-    window.location.replace("/dashboard");
+    loader();
+    setTimeout(function () {
+        window.location.href = "/dashboard";
+      }, 3000);
 }}
 
-window.onload = function () {
-    if (!window.location.hash) {
-        window.location = window.location + '#loaded';
-        window.location.reload();
-    }
-};
+function loader() {
+    document.getElementById("loadAnimation").innerHTML =
+        '<div class=\"loader-wrapper\"><span class=\"loader\"><span class=\"loader-inner\"></span></span></div>'
+}

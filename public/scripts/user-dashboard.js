@@ -196,8 +196,7 @@ function updateImage(e) {
     setTimeout(function () {
         window.location.href = "/dashboard";
       }, 3000);
-}
-}
+}}
 
 function loader() {
     document.getElementById("loadAnimation").innerHTML =
