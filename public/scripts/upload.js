@@ -54,7 +54,7 @@ function uploadTimeline(e) {
   fetch("/upload-timeline", options).then(function (res) {
     console.log(res);
   }).catch(function (err) {
-    ("Error:", err)
+    ("Error:", err);
   });
   setTimeout(function () {
     window.location.href ="/dashboard";

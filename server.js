@@ -92,9 +92,6 @@ app.use(session({
 }));
 
 
-
-// app.use("/", getLocation);
-
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
         res.redirect("/dashboard");

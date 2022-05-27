@@ -64,7 +64,7 @@ function getUsers() {
         } else {
             console.log("ERROR", this.status);
         }
-    }
+    };
     xhr.open("GET", "/get-users");
     xhr.send();
 }
@@ -106,7 +106,7 @@ function editCellEmail(e) {
                 } else {
                     console.log("ERROR", this.status);
                 }
-            }
+            };
             xhr.open("POST", "/update-email");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -156,7 +156,7 @@ function editCellName(e) {
                 } else {
                     console.log("ERROR", this.status);
                 }
-            }
+            };
             xhr.open("POST", "/update-name");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -206,7 +206,7 @@ function editCellPassword(e) {
                 } else {
                     console.log("ERROR", this.status);
                 }
-            }
+            };
             xhr.open("POST", "/update-password");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -259,7 +259,7 @@ function editCellAdmin(e) {
                 } else {
                     console.log("ERROR", this.status);
                 }
-            }
+            };
             xhr.open("POST", "/update-admin");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -280,7 +280,7 @@ document.getElementById("submit").addEventListener("click", function (e) {
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
         admin: document.querySelector('input[name="admin"]:checked').value
-    }
+    };
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
@@ -299,19 +299,19 @@ document.getElementById("submit").addEventListener("click", function (e) {
         } else {
             console.log("ERROR", this.status);
         }
-    }
+    };
     xhr.open("POST", "/add-user");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("name=" + formData.name + "&email=" + formData.email + "&password=" + formData.password + "&admin=" + formData.admin);
 
-})
+});
 
 function deleteUser(e) {
 
     e.preventDefault();
     let parent = e.target.parentNode;
-    let formData = { id: parent.parentNode.querySelector(".id").innerHTML }
+    let formData = { id: parent.parentNode.querySelector(".id").innerHTML };
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -324,7 +324,7 @@ function deleteUser(e) {
         } else {
             console.log("ERROR", this.status);
         }
-    }
+    };
     xhr.open("POST", "/delete-user");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -345,7 +345,7 @@ function deletePost(e) {
     e.preventDefault();
     let parent = e.target.parentNode;
 
-    let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
+    let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML };
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -358,7 +358,7 @@ function deletePost(e) {
         } else {
             console.log("ERROR", this.status);
         }
-    }
+    };
     xhr.open("POST", "/delete-post");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -412,7 +412,7 @@ function editDescription(e) {
                 } else {
                     console.log("ERROR", this.status);
                 }
-            }
+            };
             xhr.open("POST", "/update-description");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -434,7 +434,7 @@ function deleteImage(e) {
     e.preventDefault();
     let parent = e.target.parentNode;
 
-    let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
+    let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML };
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -446,7 +446,7 @@ function deleteImage(e) {
         } else {
             console.log("ERROR", this.status);
         }
-    }
+    };
     xhr.open("POST", "/delete-image");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -472,7 +472,7 @@ function updateImage(e) {
         formData.append("timeline", imageUpload.files[i]);
     }
 
-    formData.append("imageID", parent.parentNode.querySelector(".imageID").innerHTML)
+    formData.append("imageID", parent.parentNode.querySelector(".imageID").innerHTML);
     const options = {
         method: 'POST',
         body: formData
@@ -481,7 +481,7 @@ function updateImage(e) {
     fetch("/update-image", options).then(function (res) {
         console.log(res);
     }).catch(function (err) {
-        ("Error:", err)
+        ("Error:", err);
     });
     window.location.replace("/dashboard");
 }
@@ -491,5 +491,5 @@ window.onload = function () {
         window.location = window.location + '#loaded';
         window.location.reload();
     }
-}
+};
 
