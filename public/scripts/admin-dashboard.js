@@ -284,7 +284,7 @@ document.getElementById("submit").addEventListener("click", function (e) {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("name=" + formData.name + "&email=" + formData.email + "&password=" + formData.password + "&admin=" + formData.admin);
-
+    window.location.replace("/dashboard");
 });
 
 function deleteUser(e) {
