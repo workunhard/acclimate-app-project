@@ -102,144 +102,144 @@ app.get("/", function (req, res) {
 });
 
 app.get("/dashboard", function (req, res) {
-	connection.query(
-		"SELECT * from bby23_user WHERE ID = ?",
-		[req.session.key],
-		function (err, results) {
-			if (err) {
-				console.log(err.message);
-			}
-			req.session.name = results[0]?.name;
-		}
-	);
+    connection.query(
+        "SELECT * from bby23_user WHERE ID = ?",
+        [req.session.key],
+        function (err, results) {
+            if (err) {
+                console.log(err.message);
+            }
+            req.session.name = results[0]?.name;
+        }
+    );
 
-	if (req.session.loggedIn && req.session.admin == 1) {
-		let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
-		let profileDOM = new JSDOM(profile);
+    if (req.session.loggedIn && req.session.admin == 1) {
+        let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
+        let profileDOM = new JSDOM(profile);
 
-		connection.query(
-			"SELECT * from bby23_timeline WHERE ID = ?",
-			[req.session.key],
-			function (err, results, fields) {
-				if (err) {
-					console.log(err.message);
-				}
-				profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
-				if (results.length > 0) {
-					let str = "";
+        connection.query(
+            "SELECT * from bby23_timeline WHERE ID = ?",
+            [req.session.key],
+            function (err, results, fields) {
+                if (err) {
+                    console.log(err.message);
+                }
+                profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
+                if (results.length > 0) {
+                    let str = "";
 
-					for (i = results.length - 1; i >= 0; i--) {
+                    for (i = results.length - 1; i >= 0; i--) {
 
 
-						if (results[i].filename != null) {
+                        if (results[i].filename != null) {
 
                             str = str + "<div id=\"card\">" +
-                            `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
-                            "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td>" +
-                            "<td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
-                            "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
-                            "<table><tr><td class='imageID'>" + results[i].imageID +
-                            "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-                            "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
-                            "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-                            "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-                            "</div><br>";
-							// str = str + "<div id=\"card\">" +
-							// 	results[i].date + " " + results[i].time + "<br>" +
-							// 	"<img id=\"photo\" src=\"profileimages/timeline/"
-							// 	+ results[i].filename + "\"><br>" +
-							// 	"<table><tr><td class='imageID'>" + results[i].imageID +
-							// 	"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-							// 	"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
-							// 	"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-							// 	"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-							// 	"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-							// 	"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
-
-						} else {
-
-							str = str + "<div id=\"card\">" +
-                                `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
-								"<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
-								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>";
-
-                                // str = str + "<div id=\"card\">" +
-								// results[i].date + " " + results[i].time +
-								// "<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
-								// "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-								// "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-								// "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-								// "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-								// "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
-						}
-
-
-					}
-
-					profileDOM.window.document.getElementById("timeline").innerHTML = str;
-				}
-				res.send(profileDOM.serialize());
-			}
-		);
-
-	} else if (req.session.loggedIn && req.session.admin == 0) {
-		let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
-		let profileDOM = new JSDOM(profile);
-
-		connection.query(
-			"SELECT * from bby23_timeline WHERE ID = ?",
-			[req.session.key],
-			function (err, results, fields) {
-				if (err) {
-					console.log(err.message);
-				}
-				profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
-				if (results.length > 0) {
-					let str = "";
-
-					for (i = results.length - 1; i >= 0; i--) {
-
-
-						if (results[i].filename != null) {
-
-							str = str + "<div id=\"card\">" +
                                 `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td>" +
-								"<td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
-								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
-								"<table><tr><td class='imageID'>" + results[i].imageID +
-								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-								"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
-								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-								"</div><br>";
+                                "<td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
+                                "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
+                                "<table><tr><td class='imageID'>" + results[i].imageID +
+                                "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+                                "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
+                                "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+                                "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
+                                "</div><br>";
+                            // str = str + "<div id=\"card\">" +
+                            // 	results[i].date + " " + results[i].time + "<br>" +
+                            // 	"<img id=\"photo\" src=\"profileimages/timeline/"
+                            // 	+ results[i].filename + "\"><br>" +
+                            // 	"<table><tr><td class='imageID'>" + results[i].imageID +
+                            // 	"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+                            // 	"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
+                            // 	"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+                            // 	"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
+                            // 	"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
+                            // 	"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 
-						} else {
+                        } else {
 
-							str = str + "<div id=\"card\">" +
+                            str = str + "<div id=\"card\">" +
                                 `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
-								"<table><tr><td class='imageID'>" + results[i].imageID +
-								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-								"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-								"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-								"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-								"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>"; 
-						}
+                                "<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
+                                "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+                                "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+                                "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
+                                "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>";
+
+                            // str = str + "<div id=\"card\">" +
+                            // results[i].date + " " + results[i].time +
+                            // "<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
+                            // "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+                            // "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+                            // "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
+                            // "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
+                            // "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
+                        }
 
 
-					}
-					profileDOM.window.document.getElementById("timeline").innerHTML = str;
-				}
-				res.send(profileDOM.serialize());
-			}
-		);
-	} else {
-		res.redirect("/");
-	}
+                    }
+
+                    profileDOM.window.document.getElementById("timeline").innerHTML = str;
+                }
+                res.send(profileDOM.serialize());
+            }
+        );
+
+    } else if (req.session.loggedIn && req.session.admin == 0) {
+        let profile = fs.readFileSync("./app/html/user-dashboard.html", "utf8");
+        let profileDOM = new JSDOM(profile);
+
+        connection.query(
+            "SELECT * from bby23_timeline WHERE ID = ?",
+            [req.session.key],
+            function (err, results, fields) {
+                if (err) {
+                    console.log(err.message);
+                }
+                profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
+                if (results.length > 0) {
+                    let str = "";
+
+                    for (i = results.length - 1; i >= 0; i--) {
+
+
+                        if (results[i].filename != null) {
+
+                            str = str + "<div id=\"card\">" +
+                                `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
+                                "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td>" +
+                                "<td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
+                                "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
+                                "<table><tr><td class='imageID'>" + results[i].imageID +
+                                "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+                                "<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
+                                "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+                                "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
+                                "</div><br>";
+
+                        } else {
+
+                            str = str + "<div id=\"card\">" +
+                                `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
+                                "<table><tr><td class='imageID'>" + results[i].imageID +
+                                "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
+                                "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
+                                "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
+                                "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
+                                "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>";
+                        }
+
+
+                    }
+                    profileDOM.window.document.getElementById("timeline").innerHTML = str;
+                }
+                res.send(profileDOM.serialize());
+            }
+        );
+    } else {
+        res.redirect("/");
+    }
 });
 
 app.use(express.json());
@@ -305,46 +305,46 @@ function authenticate(res, email, pwd, callback) {
 
 
 app.post('/location', function (req, res) {
-	if (req.session) {
-		req.session.lat = req.body.lat;
-		req.session.lng = req.body.lng;
-		req.session.save(function (err) {
-			if (err) {
-				console.log(err);
-			}
-		});
-		res.send({
-			status: "success",
-		});
-	}
+    if (req.session) {
+        req.session.lat = req.body.lat;
+        req.session.lng = req.body.lng;
+        req.session.save(function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+        res.send({
+            status: "success",
+        });
+    }
 });
 
 app.get('/timeline', function (req, res) {
-	connection.query(
-		"SELECT p.*, n.name from bby23_timeline AS p JOIN bby23_user AS n ON p.ID = n.ID ", function (err, results, fields) {
-			if (err) {
-				console.log(err.message);
-			}
-			res.send({
-				status: "success",
-				rows: results
-			});
-		});
+    connection.query(
+        "SELECT p.*, n.name from bby23_timeline AS p JOIN bby23_user AS n ON p.ID = n.ID ", function (err, results, fields) {
+            if (err) {
+                console.log(err.message);
+            }
+            res.send({
+                status: "success",
+                rows: results
+            });
+        });
 });
 
 
 app.get('/coords', function (req, res) {
-	if (req.session) {
-		res.send({
-			status: "success",
-			lat: req.session.lat,
-			lng: req.session.lng,
-		});
-	} else {
-		res.send({
-			status: "fail"
-		});
-	}
+    if (req.session) {
+        res.send({
+            status: "success",
+            lat: req.session.lat,
+            lng: req.session.lng,
+        });
+    } else {
+        res.send({
+            status: "fail"
+        });
+    }
 });
 
 
@@ -532,17 +532,26 @@ app.post('/update-description', function (req, res) {
 // Deletes users
 app.post('/delete-user', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-
-    connection.query('DELETE FROM bby23_user WHERE ID = ?',
+    connection.query('DELETE FROM bby23_timeline WHERE ID = ?',
         [req.body.id],
         function (error, results, fields) {
             if (error) {
                 console.log(error);
+            } else {
+
+                connection.query('DELETE FROM bby23_user WHERE ID = ?',
+                    [req.body.id],
+                    function (error, results, fields) {
+                        if (error) {
+                            console.log(error);
+                        }
+                        res.send({
+                            status: "success",
+                            msg: req.body.id + " deleted."
+                        });
+                    });
+
             }
-            res.send({
-                status: "success",
-                msg: req.body.id + " deleted."
-            });
         });
 });
 
@@ -669,7 +678,7 @@ app.post("/upload-images", upload.array("files"), function (req, res) {
 });
 
 function numberFixedPositions(x) {
-	return Number.parseFloat(x).toFixed(5);
+    return Number.parseFloat(x).toFixed(5);
 }
 
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
