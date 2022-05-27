@@ -28,9 +28,8 @@
 		<div id="smallcontainer">
 			<form id="upload-images-form">
 				<label for='image-upload' id='upload-label'>Upload image</label>
-				<input id="image-upload" type="file" accept="image/png, image/gif, image/jpeg"
-					multiple="multiple" />
-				<input id="submit" type="submit" value="Update Profile Pic" onclick="loader()"/>
+				<input id="image-upload" type="file" accept="image/png, image/gif, image/jpeg" multiple="multiple" />
+				<input id="submit" type="submit" value="Update Profile Pic" onclick="loader()" />
 			</form>
 		</div>
 		<div id="userAvatar"></div>
@@ -38,9 +37,9 @@
 		<nav id="footerPlaceholder"></nav>
 		<div id="loadAnimation">
 			<div class="loader-wrapper">
-					<span class="loader"><span class="loader-inner"></span></span>
+				<span class="loader"><span class="loader-inner"></span></span>
 			</div>
-	</div>
+		</div>
 	</div>
 
 	<script src="../scripts/skeleton.js"></script>
@@ -48,15 +47,15 @@
 	<script src="../scripts/upload-profile-pic.js"></script>
 	<script>
 		function loader() {
-				document.getElementById("loadAnimation").innerHTML =
-						'<div class=\"loader-wrapper\"><span class=\"loader\"><span class=\"loader-inner\"></span></span></div>'
+			document.getElementById("loadAnimation").innerHTML =
+				'<div class=\"loader-wrapper\"><span class=\"loader\"><span class=\"loader-inner\"></span></span></div>'
 		}
-</script>
-<script>
+	</script>
+	<script>
 		$(window).on("load", function () {
-				$(".loader-wrapper").fadeOut("slow");
+			$(".loader-wrapper").fadeOut("slow");
 		});
-</script>
+	</script>
 </body>
 
 </html>

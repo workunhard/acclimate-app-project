@@ -121,21 +121,15 @@ function editCellEmail(e) {
 
 function editCellName(e) {
 
-    // add a listener for clicking on the field to change email
-    // span's text
     let spanText = e.target.innerHTML;
-    // span's parent (td)
     let parent = e.target.parentNode;
-    // create a new input, and add a key listener to it
     let input = document.createElement("input");
     input.value = spanText;
     input.addEventListener("keyup", function (e) {
         let v = null;
-        // pressed enter
         if (e.which == 13) {
             v = input.value;
             let newSpan = document.createElement("span");
-            // have to wire an event listener to the new element
             newSpan.innerHTML = v;
             parent.innerHTML = "";
             parent.appendChild(newSpan);
@@ -170,21 +164,16 @@ function editCellName(e) {
 
 function editCellPassword(e) {
 
-    // add a listener for clicking on the field to change email
-    // span's text
     let spanText = e.target.innerHTML;
-    // span's parent (td)
     let parent = e.target.parentNode;
-    // create a new input, and add a key listener to it
     let input = document.createElement("input");
     input.value = spanText;
     input.addEventListener("keyup", function (e) {
         let v = null;
-        // pressed enter
+
         if (e.which == 13) {
             v = input.value;
             let newSpan = document.createElement("span");
-            // have to wire an event listener to the new element
             newSpan.innerHTML = v;
             parent.innerHTML = "";
             parent.appendChild(newSpan);
@@ -222,21 +211,15 @@ function editCellPassword(e) {
 
 function editCellAdmin(e) {
 
-    // add a listener for clicking on the field to change email
-    // span's text
     let spanText = e.target.innerHTML;
-    // span's parent (td)
     let parent = e.target.parentNode;
-    // create a new input, and add a key listener to it
     let input = document.createElement("input");
     input.value = spanText;
     input.addEventListener("keyup", function (e) {
         let v = null;
-        // pressed enter
         if (e.which == 13) {
             v = input.value;
             let newSpan = document.createElement("span");
-            // have to wire an event listener to the new element
             newSpan.innerHTML = v;
             parent.innerHTML = "";
             parent.appendChild(newSpan);
@@ -288,14 +271,11 @@ document.getElementById("submit").addEventListener("click", function (e) {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (this.readyState == XMLHttpRequest.DONE) {
-
-            // 200 means everthing worked
             if (xhr.status === 200) {
                 getUsers();
             } else {
                 console.log(this.status);
             }
-
         } else {
             console.log("ERROR", this.status);
         }
@@ -311,7 +291,9 @@ function deleteUser(e) {
 
     e.preventDefault();
     let parent = e.target.parentNode;
-    let formData = { id: parent.parentNode.querySelector(".id").innerHTML };
+    let formData = {
+        id: parent.parentNode.querySelector(".id").innerHTML
+    };
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -336,16 +318,15 @@ for (let i = 0; i < posts.length; i++) {
     posts[i].addEventListener("click", deletePost);
 }
 
-// function refreshTimeline() {
-//         document.location.reload();
-// }
 
 function deletePost(e) {
 
     e.preventDefault();
     let parent = e.target.parentNode;
 
-    let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML };
+    let formData = {
+        imageID: parent.parentNode.querySelector(".imageID").innerHTML
+    };
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -385,7 +366,6 @@ function editDescription(e) {
         if (e.which == 13) {
             str = "Enter description here";
             if (input.value === null || input.value.match(/^[\s\n\r]*$/) !== null) {
-            // if (input.value.trim().length === 0) {
                 v = str;
             } else {
                 v = input.value;
@@ -400,13 +380,11 @@ function editDescription(e) {
                 imageID: parent.parentNode.querySelector(".imageIDdescription").innerHTML,
                 description: v
             };
-            // let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
 
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
                 if (this.readyState == XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                    } else {
+                    if (xhr.status === 200) {} else {
                         console.log(this.status);
                     }
                 } else {
@@ -434,13 +412,14 @@ function deleteImage(e) {
     e.preventDefault();
     let parent = e.target.parentNode;
 
-    let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML };
+    let formData = {
+        imageID: parent.parentNode.querySelector(".imageID").innerHTML
+    };
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (this.readyState == XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-            } else {
+            if (xhr.status === 200) {} else {
                 console.log(this.status);
             }
         } else {
@@ -468,7 +447,6 @@ function updateImage(e) {
     let formData = new FormData();
 
     for (let i = 0; i < imageUpload.files.length; i++) {
-        // put the images from the input into the form data
         formData.append("timeline", imageUpload.files[i]);
     }
 
@@ -492,4 +470,3 @@ window.onload = function () {
         window.location.reload();
     }
 };
-

@@ -8,7 +8,6 @@ function uploadImages(e) {
     const formData = new FormData();
 
     for (let i = 0; i < imageUpload.files.length; i++) {
-        // put the images from the input into the form data
         formData.append("files", imageUpload.files[i]);
     }
     const options = {

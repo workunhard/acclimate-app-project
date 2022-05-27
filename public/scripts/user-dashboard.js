@@ -53,7 +53,6 @@ function editDescription(e) {
         if (e.which == 13) {
             str = "Enter description here";
             if (input.value === null || input.value.match(/^[\s\n\r]*$/) !== null) {
-                // if (input.value.trim().length === 0) {
                 v = str;
             } else {
                 v = input.value;
@@ -68,7 +67,6 @@ function editDescription(e) {
                 imageID: parent.parentNode.querySelector(".imageIDdescription").innerHTML,
                 description: v
             };
-            // let formData = { imageID: parent.parentNode.querySelector(".imageID").innerHTML }
 
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
@@ -139,7 +137,6 @@ function updateImage(e) {
     let formData = new FormData();
 
     for (let i = 0; i < imageUpload.files.length; i++) {
-        // put the images from the input into the form data
         formData.append("timeline", imageUpload.files[i]);
     }
 

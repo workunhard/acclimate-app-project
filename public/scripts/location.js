@@ -3,9 +3,7 @@ script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-is
 script.async = true;
 script.defer = true;
 
-/**
- * Makes a call to the Geolocation API to find user's coordinates.
- */
+/**Makes a call to the Geolocation API to find user's coordinates. */
 window.initLocation = function initLocation() {
   var geoOptions = {
     maximumAge: 5*60*1000,
@@ -32,7 +30,6 @@ window.initLocation = function initLocation() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
 };
-
 // Appends the current script file to the appropriate HTML page. 
 document.head.appendChild(script);
 

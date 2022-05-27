@@ -37,7 +37,7 @@ nav {
   display: block;
   position: absolute;
   top: 8px;
-} 
+}
 
 /* nav menu hamburger icon */
 .navbar a.menu {
@@ -58,7 +58,7 @@ nav {
 
 /* nav menu logo */
 .logo {
-  background-color:#52BBE7;
+  background-color: #52BBE7;
   color: white;
 }
 
@@ -105,13 +105,23 @@ nav {
  * customize material design icon sizes 
  *-------------------------------------
  */
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
 
 /* Dashboard Stuff */
-
 .profile_name {
   color: red;
 }
@@ -138,8 +148,8 @@ dd {
 }
 
 @media only screen and (max-width: 800px) {
-  .container{
-    display:grid;
+  .container {
+    display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 10% 27% 27% 29% 7%;
     height: 100vh;
@@ -155,7 +165,7 @@ dd {
   #alerts {
     grid-column: 1;
     grid-row: 2;
-    background-color:blanchedalmond;
+    background-color: blanchedalmond;
     border-radius: 10px 10px 10px 10px;
   }
 
@@ -182,13 +192,14 @@ dd {
 }
 
 @media only screen and (min-width: 801px) {
-  .container{
-    display:grid;
+  .container {
+    display: grid;
     grid-template-columns: 25% 75%;
     grid-template-rows: 10% 42% 41% 7%;
     height: 100vh;
     padding: 1em;
   }
+
   #navbarPlaceholder {
     grid-column: 1 / span 2;
     grid-row: 1;
@@ -196,15 +207,15 @@ dd {
 
   #alerts {
     grid-column: 1;
-    grid-row: 2 / span 2;;
-    background-color:blanchedalmond;
+    grid-row: 2 / span 2;
+    ;
+    background-color: blanchedalmond;
     border-radius: 10px 10px 10px 10px;
   }
 
   #map {
     grid-column: 2;
     grid-row: 2;
-    /* background-color: beige; */
     text-align: center;
     border-radius: 10px 10px 10px 10px;
   }
@@ -212,7 +223,6 @@ dd {
   #forecast {
     grid-column: 2;
     grid-row: 3;
-    /* background-color: cornsilk; */
     text-align: center;
     border-radius: 10px 10px 10px 10px;
     margin-top: 10px;
@@ -228,9 +238,9 @@ dd {
     height: 100%;
     border-radius: 10px 10px 10px 10px;
     border: 1px solid grey;
-    
+
   }
-  
+
   #forecastTable {
     width: 70%;
     height: 100%;

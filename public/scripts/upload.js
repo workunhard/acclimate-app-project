@@ -21,11 +21,10 @@ tinymce.init({
 });
 
 document.getElementById("uploadbox").addEventListener("click", cleanUp);
-// document.getElementById("mceu_41.mce-edit-area.mce-container.mce-panel.mce-stack-layout-item").addEventListener("click", cleanUp);
+
 function cleanUp() {
   tinymce.activeEditor.setContent('');
   document.getElementById("uploadbox").removeEventListener("click", cleanUp);
-  // document.getElementById("mceu_41.mce-edit-area.mce-container.mce-panel.mce-stack-layout-item").removeEventListener("click", cleanUp);
 }
 
 document.getElementById("submit").addEventListener("click", uploadTimeline);
@@ -33,7 +32,9 @@ document.getElementById("submit").addEventListener("click", uploadTimeline);
 function uploadTimeline(e) {
   e.preventDefault();
 
-  let text = tinyMCE.activeEditor.getContent({ format: "text" });
+  let text = tinyMCE.activeEditor.getContent({
+    format: "text"
+  });
   const imageUpload = document.querySelector('#file-input');
   let formData = new FormData();
 
@@ -57,8 +58,7 @@ function uploadTimeline(e) {
     ("Error:", err);
   });
   setTimeout(function () {
-    window.location.href ="/dashboard";
+    window.location.href = "/dashboard";
   }, 3000);
-  
-}
 
+}
