@@ -5,7 +5,6 @@ ready(function () {
 		const xhr = new XMLHttpRequest();
 		xhr.onload = function () {
 			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-				//console.log('responseText:' + xhr.responseText);
 				callback(this.responseText);
 
 			} else {
