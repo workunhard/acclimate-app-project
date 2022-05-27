@@ -135,8 +135,8 @@ app.get("/dashboard", function (req, res) {
 
                             str = str + "<div id=\"card\">" +
                             `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
-                            "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td></tr>" +
-                            "<tr class='description'><td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
+                            "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td>" +
+                            "<td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
                             "<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
                             "<table><tr><td class='imageID'>" + results[i].imageID +
                             "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
@@ -208,8 +208,8 @@ app.get("/dashboard", function (req, res) {
 
 							str = str + "<div id=\"card\">" +
                                 `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
-                                "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td></tr>" +
-								"<tr class='description'><td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
+                                "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td>" +
+								"<td class='description'><span>" + results[i].description + "</span></td></tr></table>" +
 								"<img id=\"photo\" src=\"profileimages/timeline/" + results[i].filename + "\"><br>" +
 								"<table><tr><td class='imageID'>" + results[i].imageID +
 								"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
