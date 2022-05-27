@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 function getUserInfo() {
 
     const xhr = new XMLHttpRequest();
@@ -57,6 +60,10 @@ function getUserInfo() {
 }
 getUserInfo();
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellEmail(e) {
 
     let spanText = e.target.innerHTML;
@@ -107,6 +114,10 @@ function editCellEmail(e) {
     
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellName(e) {
     let spanText = e.target.innerHTML;
     let parent = e.target.parentNode;
@@ -149,6 +160,10 @@ function editCellName(e) {
     
 }
 
+/**
+ * 
+ * @param {*} e 
+ */
 function editCellPassword(e) {
 
     let spanText = e.target.innerHTML;

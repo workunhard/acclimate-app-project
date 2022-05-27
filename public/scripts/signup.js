@@ -103,6 +103,11 @@ document.querySelector("#signup").addEventListener("click", function (e) {
   }, queryString);
 });
 
+/**
+ * 
+ * @param {*} url 
+ * @param {*} callback 
+ */
 function ajaxGET(url, callback) {
 
   const xhr = new XMLHttpRequest();
@@ -118,6 +123,12 @@ function ajaxGET(url, callback) {
   xhr.send();
 }
 
+/**
+ * 
+ * @param {*} url 
+ * @param {*} callback 
+ * @param {*} data 
+ */
 function ajaxPOST(url, callback, data) {
 
   let params = typeof data == 'string' ? data : Object.keys(data).map(
