@@ -127,13 +127,9 @@
         margin: 0;
         padding: 20px;
         color: white;
+        grid-row: 4;
+        grid-column: 1 / span 3;
     }
-
-    /* #easteregg {
-        background-color: #52BBE7;
-        color: white;
-        border: none;
-    } */
 }
 
 @media only screen and (min-width: 701px) {
@@ -262,15 +258,11 @@
         height: 100%;
         align-content: center;
         margin: 0;
-        padding: 20px;
+        padding: 10px;
         color: white;
+        grid-row: 4;
+        grid-column: 1 / span 3;
     }
-
-    /* #easteregg {
-        background-color: #52BBE7;
-        color: white;
-        border: none;
-    } */
 }
 
 /* Testing */
@@ -313,20 +305,11 @@ p {
     background-color: rgb(12, 132, 189);
 }
 
-#cont {
-    /* width: 100%; */
-    /* height: 300px; */
-    /* background-color: rgba(11, 177, 224, 0.82); */
-    /* border: 2px solid #ffffff; */
-    /* border-radius: 10%; */
-}
-
 input {
     display: inline;
     width: 250px;
     margin: 3% 5%;
     padding: 10px;
-    /* font-size: 1.3em; */
     color: rgba(11, 177, 224, 0.82);
     outline: 2px solid #ffffff;
 }
@@ -545,12 +528,6 @@ p {
 }
 
 /* CSS rain */
-
-#easteregg {
-    background-color: #52BBE7;
-    color: white;
-    border: none;
-}
 
 #rain {
     display: none;
