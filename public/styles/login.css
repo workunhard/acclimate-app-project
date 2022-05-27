@@ -207,7 +207,7 @@
         border-radius: 14px;
         padding: 12px 15px;
         margin: 8px 0;
-        width: 40%;
+        width: 60%;
     }
 
     #forgotP a:hover {
@@ -303,20 +303,6 @@ p {
 
 #lt {
     background-color: rgb(12, 132, 189);
-}
-
-input {
-    display: inline;
-    width: 250px;
-    margin: 3% 5%;
-    padding: 10px;
-    color: rgba(11, 177, 224, 0.82);
-    outline: 2px solid #ffffff;
-}
-
-input[type="submit"] {
-    width: 272px;
-    color: #6e6e6e;
 }
 
 #clear {
@@ -524,42 +510,5 @@ p {
 
     100% {
         margin-left: -2000px;
-    }
-}
-
-/* CSS rain */
-
-#rain {
-    display: none;
-}
-
-.drop {
-    background: -webkit-gradient(linear, 0% 0%, 2% 100%, from(rgb(203, 212, 213)), to(rgba(1, 55, 192, 0.74)));
-    background: -moz-linear-gradient(top, rgba(207, 228, 231, 0.607) 0%, rgba(12, 162, 192, 0.76) 100%);
-    width: 1px;
-    height: 70px;
-    bottom: 100px;
-    display: block;
-    position: absolute;
-    -webkit-animation: fall .63s linear infinite;
-    -moz-animation: fall .63s linear infinite;
-    animation: fall .63s linear infinite;
-}
-
-@-webkit-keyframes fall {
-    to {
-        margin-top: 100%;
-    }
-}
-
-@-moz-keyframes fall {
-    to {
-        margin-top: 100%;
-    }
-}
-
-@keyframes fall {
-    to {
-        margin-top: 100%;
     }
 }
