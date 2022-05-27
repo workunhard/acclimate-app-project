@@ -62,8 +62,10 @@ ready(function () {
 	});
 
 
-	document.querySelector("#submit").addEventListener("click", function (e) {
+	document.querySelector("#signin").addEventListener("click", function (e) {
 		e.preventDefault();
+		console.log("Login Attempt");
+
 		let email = document.getElementById("email");
 		let password = document.getElementById("password");
 		let emailEntry = email ? email.value : null;
@@ -87,13 +89,15 @@ ready(function () {
 
 	document.querySelector("#signUp").addEventListener("click", function (e) {
 		e.preventDefault();
+		console.log("Sign up");
 		$('#inputBox').load('/text/signup.html');
-		const button = document.getElementById('submit');
-		button.value = "Sign-Up";
+		const button = document.getElementById('signup');
+		// button.value = "Sign-Up";
 		button.id = "signupsubmission";
 
-		document.querySelector("#signupsubmission").addEventListener("click", function (e) {
-			e.preventDefault();
+		// document.querySelector("#signupsubmission").addEventListener("click", function (e) {
+		// 	e.preventDefault();
+		// 	console.log("Sign up submission");
 			let name = document.getElementById("nameSignup");
 			let email = document.getElementById("emailSignup");
 			let password = document.getElementById("passwordSignup");
@@ -109,12 +113,12 @@ ready(function () {
 						document.getElementById("serverMsg").innerHTML = dataParsed.msg;
 						return;
 					} else {
-						window.location.replace("/");
+						// window.location.replace("/");
 					}
 				}
 			}, queryString);
 		});
-	});
+	// });
 }
 );
 
