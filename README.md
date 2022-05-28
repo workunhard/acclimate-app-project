@@ -73,7 +73,6 @@ Milestone #5:
 Top level of project folder:
 
 ├── apps
-
     ├── /html
         /login.html             # Site root; log-in page
         /admin_dashboard.html   # 'Admin' landing page after successful log-in
@@ -92,14 +91,11 @@ Top level of project folder:
         /footer.html            
         /nav.html  
         /weather.html
-
 ├── /cert                       # contains self signed SSL certificate
     /cert.pem  
     /csr.pem
     /key.pem
-
 ├── node_modules                # required node modules
-
 ├── public                      # Folder for images, scripts, and stylesheets
     ├── /images                 # Subolder for image assets
         /bbymap.jpg
@@ -135,19 +131,11 @@ Top level of project folder:
         /profile.css
         /upload.css
         /user-style.css
-
 ├── .gitignore                  # Git ignore file
-
 ├── Procfile                    # Necessary for Heroku deploys
-
 ├── server.js                   # script to initialize web app (node index.js from CLI)
-
 ├── package-lock.json
-
 ├──package.json
-
 ├── Procfile
-
 ├── README.md
-
 ├── readme.txt                  # .txt version of the readme for COMP 2537 submissions
