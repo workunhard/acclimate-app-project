@@ -431,6 +431,9 @@ app.post('/update-name', function (req, res) {
         });
 });
 
+/**
+ * To allow the user to update their name. 
+ */
 app.post('/update-userName', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -447,6 +450,9 @@ app.post('/update-userName', function (req, res) {
         });
 });
 
+/**
+ * To allow the admin to update the user's password.
+ */
 app.post('/update-password', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -463,6 +469,9 @@ app.post('/update-password', function (req, res) {
         });
 });
 
+/**
+ * To allow the user to update their password.
+ */
 app.post('/update-userPassword', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -479,6 +488,9 @@ app.post('/update-userPassword', function (req, res) {
         });
 });
 
+/**
+ * To allow the admin to update the user.
+ */
 app.post('/update-admin', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -495,6 +507,9 @@ app.post('/update-admin', function (req, res) {
         });
 });
 
+/**
+ * To allow the user to update the description of any of their posts.
+ */
 app.post('/update-description', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     req.body.description = sanitizeHtml(req.body.description);
