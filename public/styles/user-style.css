@@ -315,6 +315,7 @@ dd {
   animation: loader-inner 2s infinite ease-in;
 }
 
+/* Loading animation */
 @keyframes loader {
   0% {
     transform: rotate(0deg);
@@ -359,6 +360,10 @@ dd {
   }
 }
 
+/*-------------------------------------
+ * Media query for mobile view
+ *-------------------------------------
+ */
 @media only screen and (max-width: 800px) {
   .container {
     display: grid;
@@ -416,6 +421,10 @@ dd {
   }
 }
 
+/*-------------------------------------
+ * Media query for desktop view
+ *-------------------------------------
+ */
 @media only screen and (min-width: 801px) {
   .container {
     display: grid;
