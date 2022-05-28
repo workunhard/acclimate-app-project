@@ -151,6 +151,9 @@ Top level of project folder:
 
 ├── readme.txt                  # .txt version of the readme for COMP 2537 submissions
 
+
+```
+
 ## Get Started:
 
     Node.js
@@ -176,4 +179,3 @@ If using a local database:
     Run the command node server.js from the main folder
     You can now access the app at http://localhost:8000 or at https://127.0.0.1:8080
 
-```
