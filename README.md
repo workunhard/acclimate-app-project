@@ -5,7 +5,7 @@
 - [Milestones](#Milestones)
 - [Contents](#content)
 
-## General Info
+## Project Description
 
 This browser-based web application exists to let users:
 - report/verify weather conditions in their area
@@ -15,7 +15,7 @@ This browser-based web application exists to let users:
 
 This COMP 2800 App Project is being developed by Andrew Chu, Jason Lee, Code Workun, and Waleed Ur Rehman
 
-## Technologies
+## Project Technologies
 
 Technologies used for this project include:
 
@@ -30,6 +30,16 @@ Technologies used for this project include:
 - TinyMCE
 - OpenWeather API
 - Google Maps Platform
+- Geolocation API
+- mysql2
+- Multer
+- Express
+- Express-Session
+- Sanitize HTML
+- HTTP
+- HTTPs
+- fs
+- jsdom
 
 ## Milestones
 
@@ -68,7 +78,7 @@ Milestone #5:
 - Comprehensive testing of web app's core features
 
 
-## Contents
+## Files
 
 Top level of project folder:
 ```
@@ -150,4 +160,19 @@ Top level of project folder:
 ├── README.md
 
 ├── readme.txt                  # .txt version of the readme for COMP 2537 submissions
+
 ```
+
+## Features
+- Install npm and the following modules (express, express-session, sanitize-html, http, https, multer, fs, jsdom)
+- Type node server in terminal to run app
+- Sign up for an account
+- Log in with user credentials
+- Accept location services so Google Maps API and Openweather API will load your weather and map information
+- Post updates for other users to see on the map
+
+## Contact
+Andrew Chu, andrewchu06@gmail.com
+Jason Lee, jasontlee91@gmail.com
+Code Workun, workun.code@gmail.com
+Waleed UrRehman, urrehman.waleed@gmail.com
