@@ -28,6 +28,7 @@ const localDbConfig = {
     database: 'COMP2800'
 };
 
+// Heroku Connection Settings
 const herokuDbConfig = {
     host: process.env.HEROKU_HOST,
     user: process.env.HEROKU_USER,
@@ -119,7 +120,7 @@ app.get("/dashboard", function (req, res) {
     if (req.session.loggedIn && req.session.admin == 1) {
         let profile = fs.readFileSync("./app/html/admin-dashboard.html", "utf8");
         let profileDOM = new JSDOM(profile);
-
+        
         connection.query(
             "SELECT * from bby23_timeline WHERE ID = ?",
             [req.session.key],
@@ -130,12 +131,8 @@ app.get("/dashboard", function (req, res) {
                 profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
                 if (results.length > 0) {
                     let str = "";
-
                     for (i = results.length - 1; i >= 0; i--) {
-
-
                         if (results[i].filename != null) {
-
                             str = str + "<div id=\"card\">" +
                                 `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td>" +
@@ -147,9 +144,7 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
                                 "</div><br>";
-
                         } else {
-
                             str = str + "<div id=\"card\">" +
                                 `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
                                 "<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
@@ -159,10 +154,7 @@ app.get("/dashboard", function (req, res) {
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
                                 "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>";
                         }
-
-
                     }
-
                     profileDOM.window.document.getElementById("timeline").innerHTML = str;
                 }
                 res.send(profileDOM.serialize());
@@ -183,12 +175,8 @@ app.get("/dashboard", function (req, res) {
                 profileDOM.window.document.getElementById("profile_name").innerHTML = "Welcome back, " + req.session.name;
                 if (results.length > 0) {
                     let str = "";
-
                     for (i = results.length - 1; i >= 0; i--) {
-
-
                         if (results[i].filename != null) {
-
                             str = str + "<div id=\"card\">" +
                                 `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID + "</td>" +
@@ -200,9 +188,7 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
                                 "</div><br>";
-
                         } else {
-
                             str = str + "<div id=\"card\">" +
                                 `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
                                 "<table><tr><td class='imageID'>" + results[i].imageID +
@@ -212,8 +198,6 @@ app.get("/dashboard", function (req, res) {
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
                                 "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>";
                         }
-
-
                     }
                     profileDOM.window.document.getElementById("timeline").innerHTML = str;
                 }
@@ -270,6 +254,13 @@ app.get("/logout", function (req, res) {
     }
 });
 
+/**
+ * To authenticate any user login attempt. 
+ * @param {*} res the HTTP response object.
+ * @param {*} email entered by the user.
+ * @param {*} pwd entered by the user.
+ * @param {*} callback the function to be called in any case. 
+ */
 function authenticate(res, email, pwd, callback) {
     connection.query(
         "SELECT * FROM bby23_user WHERE email = ? AND password = ?", [email, pwd],
@@ -287,7 +278,10 @@ function authenticate(res, email, pwd, callback) {
     );
 }
 
-
+/**
+ * To allow the user's location (longitude, latitude) to be stored in the session, so they can
+ * be used to geotag any user post. 
+ */
 app.post('/location', function (req, res) {
     if (req.session) {
         req.session.lat = req.body.lat;
@@ -303,6 +297,10 @@ app.post('/location', function (req, res) {
     }
 });
 
+/**
+ * To allow the Google Maps to get any and all posts so that they may be mapped on the Google Maps
+ * with markers.
+ */
 app.get('/timeline', function (req, res) {
     connection.query(
         "SELECT p.*, n.name from bby23_timeline AS p JOIN bby23_user AS n ON p.ID = n.ID ", function (err, results, fields) {
@@ -316,7 +314,9 @@ app.get('/timeline', function (req, res) {
         });
 });
 
-
+/**
+ * To allow the API to get the user's coordinates, which are stored in the session. 
+ */
 app.get('/coords', function (req, res) {
     if (req.session) {
         res.send({
@@ -333,7 +333,9 @@ app.get('/coords', function (req, res) {
 
 
 
-
+/**
+ * To allow the admin to get all of the users' info. 
+ */
 app.get('/get-users', function (req, res) {
 
     connection.query('SELECT * FROM bby23_user', function (error, results, fields) {
@@ -347,6 +349,9 @@ app.get('/get-users', function (req, res) {
     });
 });
 
+/**
+ * To allow the user the get their profile info. 
+ */
 app.get('/get-userInfo', function (req, res) {
     connection.query('SELECT * FROM bby23_user WHERE ID = ?', [req.session.key],
 
@@ -361,13 +366,11 @@ app.get('/get-userInfo', function (req, res) {
         });
 });
 
+/**
+ * To allow the admin to add any user's.  
+ */
 app.post('/add-user', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-
-    console.log("Name", req.body.name);
-    console.log("Email", req.body.email);
-    console.log("Password", req.body.password);
-    console.log("Admin", req.body.admin);
 
     connection.query('INSERT INTO bby23_user (name, email, password, admin) values (?, ?, ?, ?)',
         [req.body.name, req.body.email, req.body.password, req.body.admin],
@@ -383,6 +386,9 @@ app.post('/add-user', function (req, res) {
         });
 });
 
+/**
+ * To allow the admin to update user's email.
+ */
 app.post('/update-email', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -400,6 +406,9 @@ app.post('/update-email', function (req, res) {
         });
 });
 
+/**
+ * To allow the user to update their email.
+ */
 app.post('/update-userEmail', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -417,6 +426,9 @@ app.post('/update-userEmail', function (req, res) {
         });
 });
 
+/**
+ * To allow the admin to update the user's name.
+ */
 app.post('/update-name', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -860,12 +872,7 @@ app.post("/create-user", function (req, res) {
 
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
-});
+app.listen(PORT);
 
 const securePort = 8080;
-httpsServer.listen(securePort, () => {
-    console.log(`App listening on port ${securePort} (https)`);
-    console.log('Press Ctrl+C to quit.');
-});
+httpsServer.listen(securePort);
