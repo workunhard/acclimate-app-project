@@ -1,3 +1,6 @@
+/**
+ * Initializes the Tiny MCE into the textarea element with the id "description".
+ */
 tinymce.init({
   selector: '#description',
   height: 200,
@@ -20,21 +23,29 @@ tinymce.init({
   image_advtab: true
 });
 
+/**
+ * Adds an event listener to the element with the id "uploadbox" which will invoke the cleanUp function
+ * when clicked.
+ */
 document.getElementById("uploadbox").addEventListener("click", cleanUp);
 
 /**
- * 
+ * Function which clears the text area when the element with the id "uploadbox" is clicked.
  */
 function cleanUp() {
   tinymce.activeEditor.setContent('');
   document.getElementById("uploadbox").removeEventListener("click", cleanUp);
 }
 
+/**
+ * Adds an event listener to the input element with the id "submit" which will invoke the 
+ * uploadTimeline function when clicked.
+ */
 document.getElementById("submit").addEventListener("click", uploadTimeline);
 
 /**
- * 
- * @param {*} e 
+ * Function that sends the uploaded image along with the text inside the tiny mce to the server
+ * which will instruct the database to store the sent data.
  */
 function uploadTimeline(e) {
   e.preventDefault();
@@ -67,5 +78,4 @@ function uploadTimeline(e) {
   setTimeout(function () {
     window.location.href = "/dashboard";
   }, 3000);
-
 }

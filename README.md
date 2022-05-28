@@ -73,6 +73,7 @@ Milestone #5:
 Top level of project folder:
 
 ├── apps
+
     ├── /html
         /login.html             # Site root; log-in page
         /admin_dashboard.html   # 'Admin' landing page after successful log-in
@@ -81,11 +82,21 @@ Top level of project folder:
         /profile.html           # User profile page
         /upload.html            # Page for uploading a text/photo post to the Timeline component
         /edit-post.html         # Page for editing previously uploaded text/photo posts
-        /construction.html      # Placeholder for incomplete html pages
-        
+        /construction.html      # Placeholder for incomplete html pages    
+
      ├── /profileimages
         ├── /avatars            # stores images uploaded as profile pictures by users
-        ├── /timeline           # stores images uploaded to Timeline component by users
+        ├── /timeline           # stores images uploaded to Timeline component by users    
+
+    ├── /text                   # contains HTML templates for the application.
+        /footer.html            
+        /nav.html  
+        /weather.html
+
+├── /cert                       # contains self signed SSL certificate
+    /cert.pem  
+    /csr.pem
+    /key.pem
 
 ├── node_modules                # required node modules
 
@@ -105,8 +116,6 @@ Top level of project folder:
             /favicon.ico
             /site.webmanifest   
     ├── /scripts                # Subfolder for scripts
-        /client.js
-        /skeleton.js
         /admin-dashboard.js
         /rain.js
         /location.js
@@ -116,6 +125,8 @@ Top level of project folder:
         /user-dashboard.js
         /user-profile.js
         /weather.js
+    ├── /sql                    # Subfolder for sql 
+        /config.sql
     ├── /styles                 # Subfolder for styles
         /admin-style.css
         /login.css
@@ -129,11 +140,13 @@ Top level of project folder:
 
 ├── Procfile                    # Necessary for Heroku deploys
 
-├── index.js                    # script to initialize web app (node index.js from CLI)
+├── server.js                   # script to initialize web app (node index.js from CLI)
 
 ├── package-lock.json
 
 ├──package.json
+
+├── Procfile
 
 ├── README.md
 

@@ -301,7 +301,10 @@ dd {
   }
 }
 
-/* Mobile View */
+/*-------------------------------------
+ * Media query for mobile view
+ *-------------------------------------
+ */
 @media only screen and (max-width: 800px) {
   .container {
     display: grid;
@@ -341,7 +344,10 @@ dd {
   }
 }
 
-/* Desktop View */
+/*-------------------------------------
+ * Media query for desktop view
+ *-------------------------------------
+ */
 @media only screen and (min-width: 801px) {
   .container {
     display: grid;

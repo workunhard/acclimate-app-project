@@ -13,6 +13,7 @@ const {
     JSDOM
 } = require('jsdom');
 
+// Self Signed SSL certificate, needed to use OpenWeatherAPI.
 const sslKey = fs.readFileSync('cert/key.pem', 'utf8');
 const sslCertificate = fs.readFileSync('cert/cert.pem', 'utf8');
 const sslCredentials = { key: sslKey, cert: sslCertificate };
@@ -84,6 +85,7 @@ app.use("/text", express.static("app/text"));
 app.use("/profileimages", express.static("app/profileimages"));
 app.use("/timeline", express.static("app/profileimages"));
 
+// Session settings.
 app.use(session({
     secret: "extra text that no one will guess",
     name: "codeSessionID",
@@ -91,7 +93,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
+// Access home/login page
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
         res.redirect("/dashboard");
@@ -101,6 +103,7 @@ app.get("/", function (req, res) {
     }
 });
 
+// Access dashboard if user is authenticated
 app.get("/dashboard", function (req, res) {
     connection.query(
         "SELECT * from bby23_user WHERE ID = ?",
@@ -144,17 +147,6 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
                                 "</div><br>";
-                            // str = str + "<div id=\"card\">" +
-                            // 	results[i].date + " " + results[i].time + "<br>" +
-                            // 	"<img id=\"photo\" src=\"profileimages/timeline/"
-                            // 	+ results[i].filename + "\"><br>" +
-                            // 	"<table><tr><td class='imageID'>" + results[i].imageID +
-                            // 	"</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-                            // 	"<td class='deleteImage'><input type='button' id='deleteImage' value='Delete Image Only'></td>" +
-                            // 	"<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-                            // 	"<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-                            // 	"<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                            // 	"</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
 
                         } else {
 
@@ -166,15 +158,6 @@ app.get("/dashboard", function (req, res) {
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
                                 "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
                                 "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div>";
-
-                            // str = str + "<div id=\"card\">" +
-                            // results[i].date + " " + results[i].time +
-                            // "<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
-                            // "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
-                            // "<td class='updateImage'><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
-                            // "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
-                            // "<table><tr><td class='imageIDdescription'>" + results[i].imageID +
-                            // "</td><td class='description'><span>" + results[i].description + "</span></td></tr></table></div><br>"
                         }
 
 
@@ -247,7 +230,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-// Log-in
+// Log-in process which authenticates user email and password to create a session.
 app.post("/login", function (req, res) {
     res.setHeader("Content-Type", "application/json");
     let results = authenticate(res, req.body.email, req.body.password,
@@ -274,6 +257,7 @@ app.post("/login", function (req, res) {
         });
 });
 
+// Allows user to logout and ends the session.
 app.get("/logout", function (req, res) {
     if (req.session) {
         req.session.destroy(function (error) {
@@ -449,6 +433,9 @@ app.post('/update-name', function (req, res) {
         });
 });
 
+/**
+ * To allow the user to update their name. 
+ */
 app.post('/update-userName', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -465,6 +452,9 @@ app.post('/update-userName', function (req, res) {
         });
 });
 
+/**
+ * To allow the admin to update the user's password.
+ */
 app.post('/update-password', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -481,6 +471,9 @@ app.post('/update-password', function (req, res) {
         });
 });
 
+/**
+ * To allow the user to update their password.
+ */
 app.post('/update-userPassword', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -497,6 +490,9 @@ app.post('/update-userPassword', function (req, res) {
         });
 });
 
+/**
+ * To allow the admin to update the user.
+ */
 app.post('/update-admin', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -513,6 +509,9 @@ app.post('/update-admin', function (req, res) {
         });
 });
 
+/**
+ * To allow the user to update the description of any of their posts.
+ */
 app.post('/update-description', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     req.body.description = sanitizeHtml(req.body.description);
@@ -529,7 +528,9 @@ app.post('/update-description', function (req, res) {
         });
 });
 
-// Deletes users
+/**
+ * To allow the deletion of a user.
+ */
 app.post('/delete-user', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     connection.query('DELETE FROM bby23_timeline WHERE ID = ?',
@@ -555,6 +556,9 @@ app.post('/delete-user', function (req, res) {
         });
 });
 
+/**
+ * To allow the user to recover their profile, including their profile photo. 
+ */
 app.get("/profile", function (req, res) {
     if (req.session.loggedIn) {
         const profile = fs.readFileSync("./app/html/profile.html", "utf8");
@@ -568,8 +572,6 @@ app.get("/profile", function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-                    // const rows = JSON.parse(JSON.stringify(results[0]));
-                    // const value = Object.values(rows);
                     connection.query(
                         "select avatar from bby23_user WHERE ID = ?",
                         [req.session.key],
@@ -593,79 +595,14 @@ app.get("/profile", function (req, res) {
     }
 });
 
-// app.get('/sign-s3', (req, res) => {
-//     const s3 = new aws.S3();
-//     const fileName = req.query['file-name'];
-//     const fileType = req.query['file-type'];
-//     const s3Params = {
-//         Bucket: "acclimate-avatars",
-//         Key: fileName,
-//         Expires: 300,
-//         ContentType: fileType,
-//         ACL: 'public-read'
-//     };
-
-//     console.log("at sign-s3 / getsigned");
-
-//     s3.getSignedUrl('putObject', s3Params, (err, data) => {
-//         if (err) {
-//             console.log("error in getSignedUrl");
-//             console.log(err);
-//             return res.end();
-//         }
-//         const returnData = {
-//             signedRequest: data,
-//             url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-//         };
-//         console.log("returned data");
-//         console.log(returnData);
-//         res.write(JSON.stringify(returnData));
-//         res.end();
-//     });
-//     console.log("end of sign-s3");
-// }
-// );
-
-// app.post('/save-details', (req, res) => {
-//     res.setHeader('Content-Type', 'application/json');
-//     var today = new Date();
-//     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-//     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-//     req.body.description = sanitizeHtml(req.body.description);
-
-
-
-//     if (req.files.length > 0) {
-//         connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-//             [`${req.files[0].filename}`, req.body.description, date, time, req.session.key],
-//             function (err, results) {
-//                 if (err) {
-//                     console.log(err);
-//                 } else {
-//                     console.log(results);
-//                 }
-//             })
-//     } else {
-//         connection.query("INSERT INTO bby23_timeline (filename, description, date, time, ID) VALUES (?, ?, ?, ?, ?)",
-//             [null, req.body.description, date, time, req.session.key],
-//             function (err, results) {
-//                 if (err) {
-//                     console.log(err);
-//                 } else {
-//                     console.log(results);
-//                 }
-//             })
-//     }
-// }
-// );
-
+/**
+ * To allow the user to upload their avatar in their profile. 
+ */
 app.post("/upload-images", upload.array("files"), function (req, res) {
     connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
         if (err) {
             console.log(err);
         } else {
-            // const rows = JSON.parse(JSON.stringify(results[0]));
-            // const key = Object.values(rows);
             connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, req.session.key], function (err, results) {
                 if (err) {
                     console.log(err);
@@ -686,6 +623,10 @@ function numberFixedPositions(x) {
     return Number.parseFloat(x).toFixed(5);
 }
 
+
+/**
+ * To allow the user to upload to their timeline, SQL queries will be chosen based on whether the timeline post has images or not. 
+ */
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     var today = new Date();
@@ -720,6 +661,9 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
     }
 });
 
+/**
+ * To allow the user to update the image. 
+ */
 app.post("/update-image", timelineupload.array("timeline"), function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     var today = new Date();
@@ -737,6 +681,9 @@ app.post("/update-image", timelineupload.array("timeline"), function (req, res) 
         });
 });
 
+/**
+ * To allow the user to delete the image.
+ */
 app.post("/delete-image", function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -754,6 +701,9 @@ app.post("/delete-image", function (req, res) {
         });
 });
 
+/** 
+ * To allow the user to delete their post including any text and images.
+ */
 app.post('/delete-post', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -776,9 +726,6 @@ const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-
 
 // Password validation using regex. 
 const stringLength = /^.{10,}$/; // Must be at least 10 characters.
-const upperCase = /^(?=.*[A-Z])$/;  // Must have at least 1 uppercase characters.
-const lowerCase = /^(?=.*[a-z])$/;  // Must have at least 1 lowercase characters.
-const number = /^(?=.*[0-9])$/;     // Must have at least 1 digit.
 const specialCharacter = /^(.*\W)$/; // Must have at least 1 special character.
 
 

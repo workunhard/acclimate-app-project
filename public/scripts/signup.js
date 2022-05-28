@@ -12,7 +12,6 @@ function loginTab() {
   event.preventDefault();
   regInput.style.visibility = "hidden";
   loginInput.style.visibility = "visible";
-  console.log("logintab");
 }
 
 /**
@@ -22,10 +21,11 @@ function registerTab() {
   event.preventDefault()
   regInput.style.visibility = "visible";
   loginInput.style.visibility = "hidden";
-  console.log("registertab");
 }
 
-
+/** 
+ * To allow the enter key to enter the information. 
+ */
 document.addEventListener("keyup", function (e) {
   if (e.which == 13) {
     let email = document.getElementById("email");
@@ -51,11 +51,11 @@ document.addEventListener("keyup", function (e) {
   }
 });
 
-
+/**
+ * To allow the user to attempt to login.
+ */
 document.querySelector("#submit1").addEventListener("click", function (e) {
   e.preventDefault();
-  console.log("Login Attempt");
-
   let email = document.getElementById("email");
   let password = document.getElementById("password");
   let emailEntry = email ? email.value : null;
@@ -77,11 +77,11 @@ document.querySelector("#submit1").addEventListener("click", function (e) {
   }, queryString);
 });
 
-
+/**
+ *  To allow the user to attempt to signup. 
+ */
 document.querySelector("#submit2").addEventListener("click", function (e) {
   e.preventDefault();
-  console.log("Sign up");
-
   let name = document.getElementById("rname");
   let email = document.getElementById("remail");
   let password = document.getElementById("rpassword");
@@ -104,9 +104,9 @@ document.querySelector("#submit2").addEventListener("click", function (e) {
 });
 
 /**
- * 
- * @param {*} url 
- * @param {*} callback 
+ * Creates an HTTP GET request using AJAX and XHR.
+ * @param {*} url the link on which the request is to be made
+ * @param {*} callback method to call in case the request is successful. 
  */
 function ajaxGET(url, callback) {
 
@@ -124,10 +124,10 @@ function ajaxGET(url, callback) {
 }
 
 /**
- * 
- * @param {*} url 
- * @param {*} callback 
- * @param {*} data 
+ * Creates an HTTP POST request using AJAX and XHR.
+ * @param {*} url the link on which the POST request is to be made.
+ * @param {*} callback mehtod to call in case the request is successfull.
+ * @param {*} data the data being sent in the POST request. 
  */
 function ajaxPOST(url, callback, data) {
 

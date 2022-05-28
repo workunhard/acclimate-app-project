@@ -79,7 +79,6 @@ function initMap() {
           dataParsed.rows.forEach(function (results) {
             var title = results.description;
             var pos = new google.maps.LatLng(results.lat, results.lng);
-            console.log(results);
             // The HTML template to be injected into the info window.
 
 

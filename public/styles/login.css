@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400&display=swap');
 
-/* Mobile View */
+/*-------------------------------------
+ * Media query for mobile view
+ *-------------------------------------
+ */
 @media only screen and (max-width: 700px) {
     body {
         background-image: url('/images/loginbg.svg');
@@ -23,6 +26,7 @@
         display: none;
     }
 
+    /* Loading animation */
     @keyframes fadeInAnimation {
         0% {
             opacity: 0;
@@ -118,7 +122,10 @@
     }
 }
 
-/* Desktop View */
+/*-------------------------------------
+ * Media query for desktop view
+ *-------------------------------------
+ */
 @media only screen and (min-width: 701px) {
     body {
         background-image: url('/images/loginbg.svg');
@@ -141,6 +148,7 @@
         display: none;
     }
 
+    /* Loading animation */
     @keyframes fadeInAnimation {
         0% {
             opacity: 0;
@@ -470,6 +478,7 @@ h3 {
     animation: drift 35s linear infinite;
 }
 
+/* Loading animation */
 @keyframes drift {
     0% {
         margin-left: 2000px;

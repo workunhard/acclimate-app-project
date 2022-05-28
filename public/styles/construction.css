@@ -120,6 +120,10 @@ nav {
   font-size: 48px;
 }
 
+/*-------------------------------------
+ * Media query for desktop view
+ *-------------------------------------
+ */
 @media only screen and (min-width: 801px) {
   .container {
     display: grid;
@@ -145,7 +149,10 @@ nav {
   }
 }
 
-
+/*-------------------------------------
+ * Media query for mobile view
+ *-------------------------------------
+ */
 @media only screen and (max-width: 800px) {
   .container {
     display: grid;

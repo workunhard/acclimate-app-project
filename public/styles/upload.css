@@ -251,6 +251,7 @@ input[type="file"] {
   animation: loader-inner 2s infinite ease-in;
 }
 
+/* Loading animation */
 @keyframes loader {
   0% {
     transform: rotate(0deg);
@@ -273,6 +274,7 @@ input[type="file"] {
   }
 }
 
+/* Loading animation */
 @keyframes loader-inner {
   0% {
     height: 0%;
