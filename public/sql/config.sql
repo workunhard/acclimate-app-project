@@ -4,7 +4,7 @@ CREATE TABLE bby23_user (
     email varchar(30) UNIQUE,
     password varchar(30),
     admin boolean,
-    avatar varchar (500) UNIQUE,
+    avatar varchar (50) UNIQUE,
     PRIMARY KEY (ID)
     );
 
