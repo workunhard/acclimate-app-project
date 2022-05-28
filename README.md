@@ -19,16 +19,17 @@ This COMP 2800 App Project is being developed by Andrew Chu, Jason Lee, Code Wor
 
 Technologies used for this project include:
 
-- HTML, CSS
+- HTML
+- CSS
 - JavaScript
 - Node.js
 - JQuery
 - MySQL
-- Geolocation APi
-- Google Maps API
+- Heroku
+- JawsDB
+- TinyMCE
 - OpenWeather API
-
-## YO ANDREW
+- Google Maps Platform
 
 ## Milestones
 
@@ -39,35 +40,68 @@ Milestone #1:
 - Implemented session-handling
 - Unified design across functional html pages
 
+
+Milestone #2:
+- Clearly defined Github workflow (GitFlow) and team practices
+- Refined admin-dashboard.html
+- Selected Heroku as our hosting platform
+- Integrated JawsDB to handle our database
+
+
+Milestone #3:
+- Refined profile.html to display relevant user info
+- Added database editing functions to admin-dashboard.html
+- Began work on a Timeline component for users to post text/photos
+- Completed Heroku implementation
+- Completed JawsDB integration
+
+
+Milestone #4:
+- Added OpenWeather API and Google Maps Platform implementations
+- Completed Timeline implementation using TinyMCE
+- Added database editing functions to profile.html (edit a user's info)
+
+
+Milestone #5:
+- Finalized project deliverable
+- Comprehensive comments added to repo files
+- Comprehensive testing of web app's core features
+
+
 ## Contents
 
-```
 Top level of project folder:
 
 ├── apps
+
     ├── /html
         /login.html             # Site root; log-in page
         /admin_dashboard.html   # 'Admin' landing page after successful log-in
         /user-dashboard.html    # 'User' landing page after successful log-in
-        /template.html          # template for future html pages
-    ├── /profileimages          # contains user submitted images
+        /template.html          # Template for future html pages
+        /profile.html           # User profile page
+        /upload.html            # Page for uploading a text/photo post to the Timeline component
+        /edit-post.html         # Page for editing previously uploaded text/photo posts
+        /construction.html      # Placeholder for incomplete html pages    
 
-    ├── /scripts                # To contain any js templates and/or user generated scripts. 
-        
+     ├── /profileimages
+        ├── /avatars            # stores images uploaded as profile pictures by users
+        ├── /timeline           # stores images uploaded to Timeline component by users    
+
     ├── /text                   # contains HTML templates for the application.
         /footer.html            
         /nav.html  
         /weather.html
-├── /cert                   # contains self signed SSL certificate
+
+├── /cert                       # contains self signed SSL certificate
     /cert.pem  
     /csr.pem
     /key.pem
-    
-    
+
 ├── node_modules                # required node modules
 
 ├── public                      # Folder for images, scripts, and stylesheets
-    ├── /images                 # Subolder for images
+    ├── /images                 # Subolder for image assets
         /bbymap.jpg
         /bbymap2.jpg
         /forecast.jpeg
@@ -83,10 +117,9 @@ Top level of project folder:
             /site.webmanifest   
     ├── /scripts                # Subfolder for scripts
         /admin-dashboard.js
-        /location.js
         /rain.js
+        /location.js
         /signup.js
-        /skeleton.js
         /upload-profile-pic.js
         /upload.js
         /user-dashboard.js
@@ -96,15 +129,18 @@ Top level of project folder:
         /config.sql
     ├── /styles                 # Subfolder for styles
         /admin-style.css
-        /construction.css
         /login.css
-        /profile.css
         /style.css
+        /construction.css
+        /profile.css
         /upload.css
         /user-style.css
-        
 
 ├── .gitignore                  # Git ignore file
+
+├── Procfile                    # Necessary for Heroku deploys
+
+├── server.js                   # script to initialize web app (node index.js from CLI)
 
 ├── package-lock.json
 
@@ -114,6 +150,4 @@ Top level of project folder:
 
 ├── README.md
 
-├── readme.txt                   #
-
-├── server.js                    # script to initialize web app (node server.js from CLI)
+├── readme.txt                  # .txt version of the readme for COMP 2537 submissions
