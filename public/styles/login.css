@@ -202,7 +202,8 @@
         font-weight: bold;
     }
 
-    #submit1, #submit2 {
+    #submit1,
+    #submit2 {
         color: #52BBE7;
         font-weight: bold;
         font-family: 'Radio Canada', sans serif;
@@ -216,7 +217,8 @@
         text-align: center;
     }
 
-    #submit1:hover, #submit2:hover {
+    #submit1:hover,
+    #submit2:hover {
         color: white;
         background-color: #52BBE7;
         border: 5px solid rgba(248, 253, 252, 0.8);
@@ -259,7 +261,8 @@
     color: #ffffff;
 }
 
-.tabs:hover, p {
+.tabs:hover,
+p {
     cursor: pointer;
 }
 
@@ -305,7 +308,7 @@ h3 {
     margin-top: 30px;
 }
 
-.tooltip{
+.tooltip {
     position: relative;
     background: white;
     color: #52BBE7;
@@ -316,25 +319,26 @@ h3 {
     cursor: help;
 }
 
-.tooltip::before, .tooltip::after{
+.tooltip::before,
+.tooltip::after {
     position: absolute;
     left: 50%;
     opacity: 0;
     transition: all ease 0.3s;
 }
 
-.tooltip::before{
+.tooltip::before {
     content: "";
     border-width: 10px 8px 0 8px;
     border-style: solid;
-    border-color: rgba(0,0,0,0.3) transparent transparent transparent;
+    border-color: rgba(0, 0, 0, 0.3) transparent transparent transparent;
     top: -20px;
     margin-left: -8px;
 }
 
-.tooltip::after{
+.tooltip::after {
     content: attr(data-tooltip);
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
     top: -20px;
     transform: translateY(-100%);
     font-size: 14px;
@@ -346,7 +350,8 @@ h3 {
 }
 
 /* Hover states */
-.tooltip:hover::before, .tooltip:hover::after{
+.tooltip:hover::before,
+.tooltip:hover::after {
     opacity: 1;
 }
 

@@ -19,11 +19,17 @@ This COMP 2800 App Project is being developed by Andrew Chu, Jason Lee, Code Wor
 
 Technologies used for this project include:
 
-- HTML, CSS
+- HTML
+- CSS
 - JavaScript
 - Node.js
 - JQuery
 - MySQL
+- Heroku
+- JawsDB
+- TinyMCE
+- OpenWeather API
+- Google Maps Platform
 
 ## Milestones
 
@@ -34,9 +40,36 @@ Milestone #1:
 - Implemented session-handling
 - Unified design across functional html pages
 
+
+Milestone #2:
+- Clearly defined Github workflow (GitFlow) and team practices
+- Refined admin-dashboard.html
+- Selected Heroku as our hosting platform
+- Integrated JawsDB to handle our database
+
+
+Milestone #3:
+- Refined profile.html to display relevant user info
+- Added database editing functions to admin-dashboard.html
+- Began work on a Timeline component for users to post text/photos
+- Completed Heroku implementation
+- Completed JawsDB integration
+
+
+Milestone #4:
+- Added OpenWeather API and Google Maps Platform implementations
+- Completed Timeline implementation using TinyMCE
+- Added database editing functions to profile.html (edit a user's info)
+
+
+Milestone #5:
+- Finalized project deliverable
+- Comprehensive comments added to repo files
+- Comprehensive testing of web app's core features
+
+
 ## Contents
 
-```
 Top level of project folder:
 
 ├── apps
@@ -44,13 +77,20 @@ Top level of project folder:
         /login.html             # Site root; log-in page
         /admin_dashboard.html   # 'Admin' landing page after successful log-in
         /user-dashboard.html    # 'User' landing page after successful log-in
-        /template.html          # template for future html pages
-    ├── /profileimages          # contains user submitted images
-    
+        /template.html          # Template for future html pages
+        /profile.html           # User profile page
+        /upload.html            # Page for uploading a text/photo post to the Timeline component
+        /edit-post.html         # Page for editing previously uploaded text/photo posts
+        /construction.html      # Placeholder for incomplete html pages
+        
+     ├── /profileimages
+        ├── /avatars            # stores images uploaded as profile pictures by users
+        ├── /timeline           # stores images uploaded to Timeline component by users
+
 ├── node_modules                # required node modules
 
 ├── public                      # Folder for images, scripts, and stylesheets
-    ├── /images                 # Subolder for images
+    ├── /images                 # Subolder for image assets
         /bbymap.jpg
         /bbymap2.jpg
         /forecast.jpeg
@@ -68,8 +108,9 @@ Top level of project folder:
         /client.js
         /skeleton.js
         /admin-dashboard.js
-        /location.js
         /rain.js
+        /location.js
+        /signup.js
         /upload-profile-pic.js
         /upload.js
         /user-dashboard.js
@@ -77,22 +118,23 @@ Top level of project folder:
         /weather.js
     ├── /styles                 # Subfolder for styles
         /admin-style.css
-        /construction.css
         /login.css
-        /profile.css
         /style.css
+        /construction.css
+        /profile.css
         /upload.css
         /user-style.css
-    ├── /sql                    # Subfolder for sql 
-        /config.sql
+
 ├── .gitignore                  # Git ignore file
 
-├── server.js                    # script to initialize web app (node server.js from CLI)
+├── Procfile                    # Necessary for Heroku deploys
+
+├── index.js                    # script to initialize web app (node index.js from CLI)
 
 ├── package-lock.json
-
-├── Procfile
 
 ├──package.json
 
 ├── README.md
+
+├── readme.txt                  # .txt version of the readme for COMP 2537 submissions
