@@ -171,6 +171,32 @@ Top level of project folder:
 - Accept location services so Google Maps API and Openweather API will load your weather and map information
 - Post updates for other users to see on the map
 
+
+## Get Started:
+
+    -Node.js
+    -A text editor of your choice
+    -A running MYSQL database (if you'd like to use a local database)
+
+API Key (request from repo owner):
+
+    1. OpenWeatherMap API
+    2. Google Maps Javascript API
+    3. Google Maps Geocoding API
+
+If using the default remote database:
+
+    1. Navigate to the main folder
+    2. Run the command node server.js
+    3. You can now access the app at http://localhost:8000 or https://127.0.0.1:8080 for HTTPS access.
+
+If using a local database:
+
+    1. On your database, run the SQL file located in app/sql/
+    2. Open the file server.js with your text editor of choice
+    3. Run the command node server.js from the main folder
+    4. You can now access the app at http://localhost:8000 or at https://127.0.0.1:8080
+
 ## Contact
 Andrew Chu, andrewchu06@gmail.com
 Jason Lee, jasontlee91@gmail.com

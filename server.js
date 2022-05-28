@@ -8,7 +8,6 @@ const multer = require("multer");
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
-const S3_BUCKET = "acclimate-avatars";
 const {
     JSDOM
 } = require('jsdom');
@@ -44,8 +43,6 @@ if (is_heroku) {
 
 app.engine('html', require('ejs').renderFile);
 
-aws.config.region = 'us-west-1';
-
 const mysql = require("mysql2");
 const { resolveNaptr } = require("dns");
 const connection = mysql.createPool(dbconfig);
@@ -75,7 +72,6 @@ const timeline = multer.diskStorage({
 const timelineupload = multer({
     storage: timeline
 });
-
 
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
@@ -147,7 +143,7 @@ app.get("/dashboard", function (req, res) {
                         } else {
                             str = str + "<div id=\"card\">" +
                                 `<h3>Posted by @${req.session.name} on ${results[i].date} at ${results[i].time}</h3>` +
-                                "<table><tr><td class='imageID'>" + results[i].imageID + "<br>" +
+                                "<table><tr><td class='imageID'>" + results[i].imageID +
                                 "</td><td class='deletePost'><input type='button' id='deletePost' value='Delete Post'></td>" +
                                 "<td class='updateImage'><label for='image-upload' class='image-label'>Edit image</label><input id='image-upload' type='file' value='Edit images' accept='image/png, image/gif, image/jpeg'/></td>" +
                                 "<td class='confirmImage'><input id='confirm' type='button' value='Confirm'></td></tr></table><br>" +
@@ -330,8 +326,6 @@ app.get('/coords', function (req, res) {
         });
     }
 });
-
-
 
 /**
  * To allow the admin to get all of the users' info. 
