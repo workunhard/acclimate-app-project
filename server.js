@@ -73,7 +73,6 @@ const timelineupload = multer({
     storage: timeline
 });
 
-
 // static path mappings
 app.use("/scripts", express.static("public/scripts"));
 app.use("/styles", express.static("public/styles"));
@@ -327,8 +326,6 @@ app.get('/coords', function (req, res) {
         });
     }
 });
-
-
 
 /**
  * To allow the admin to get all of the users' info. 
