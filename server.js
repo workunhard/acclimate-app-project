@@ -13,6 +13,7 @@ const {
     JSDOM
 } = require('jsdom');
 
+// Self Signed SSL certificate, needed to use OpenWeatherAPI.
 const sslKey = fs.readFileSync('cert/key.pem', 'utf8');
 const sslCertificate = fs.readFileSync('cert/cert.pem', 'utf8');
 const sslCredentials = { key: sslKey, cert: sslCertificate };
@@ -84,6 +85,7 @@ app.use("/text", express.static("app/text"));
 app.use("/profileimages", express.static("app/profileimages"));
 app.use("/timeline", express.static("app/profileimages"));
 
+// Session settings.
 app.use(session({
     secret: "extra text that no one will guess",
     name: "codeSessionID",
@@ -509,7 +511,9 @@ app.post('/update-description', function (req, res) {
         });
 });
 
-// Deletes users
+/**
+ * To allow the deletion of a user.
+ */
 app.post('/delete-user', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     connection.query('DELETE FROM bby23_timeline WHERE ID = ?',
@@ -535,6 +539,9 @@ app.post('/delete-user', function (req, res) {
         });
 });
 
+/**
+ * To allow the user to recover their profile, including their profile photo. 
+ */
 app.get("/profile", function (req, res) {
     if (req.session.loggedIn) {
         const profile = fs.readFileSync("./app/html/profile.html", "utf8");
@@ -548,8 +555,6 @@ app.get("/profile", function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-                    // const rows = JSON.parse(JSON.stringify(results[0]));
-                    // const value = Object.values(rows);
                     connection.query(
                         "select avatar from bby23_user WHERE ID = ?",
                         [req.session.key],
@@ -573,13 +578,14 @@ app.get("/profile", function (req, res) {
     }
 });
 
+/**
+ * To allow the user to upload their avatar in their profile. 
+ */
 app.post("/upload-images", upload.array("files"), function (req, res) {
     connection.query("SELECT ID FROM bby23_user WHERE name = ?", [req.session.name], function (err, results) {
         if (err) {
             console.log(err);
         } else {
-            // const rows = JSON.parse(JSON.stringify(results[0]));
-            // const key = Object.values(rows);
             connection.query("UPDATE bby23_user SET avatar = ? WHERE ID = ?", [req.files[0].filename, req.session.key], function (err, results) {
                 if (err) {
                     console.log(err);
@@ -600,6 +606,10 @@ function numberFixedPositions(x) {
     return Number.parseFloat(x).toFixed(5);
 }
 
+
+/**
+ * To allow the user to upload to their timeline, SQL queries will be chosen based on whether the timeline post has images or not. 
+ */
 app.post("/upload-timeline", timelineupload.array("timeline"), function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     var today = new Date();
@@ -634,6 +644,9 @@ app.post("/upload-timeline", timelineupload.array("timeline"), function (req, re
     }
 });
 
+/**
+ * To allow the user to update the image. 
+ */
 app.post("/update-image", timelineupload.array("timeline"), function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     var today = new Date();
@@ -651,6 +664,9 @@ app.post("/update-image", timelineupload.array("timeline"), function (req, res) 
         });
 });
 
+/**
+ * To allow the user to delete the image.
+ */
 app.post("/delete-image", function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
@@ -668,6 +684,9 @@ app.post("/delete-image", function (req, res) {
         });
 });
 
+/** 
+ * To allow the user to delete their post including any text and images.
+ */
 app.post('/delete-post', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
