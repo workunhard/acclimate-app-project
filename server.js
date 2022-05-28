@@ -8,7 +8,6 @@ const multer = require("multer");
 const app = express();
 const fs = require("fs");
 const is_heroku = process.env.IS_HEROKU || false;
-const S3_BUCKET = "acclimate-avatars";
 const {
     JSDOM
 } = require('jsdom');
