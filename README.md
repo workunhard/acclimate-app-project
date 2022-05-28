@@ -150,4 +150,30 @@ Top level of project folder:
 ├── README.md
 
 ├── readme.txt                  # .txt version of the readme for COMP 2537 submissions
+
+## Get Started:
+
+    Node.js
+    A text editor of your choice
+    A running MYSQL database (if you'd like to use a local database)
+
+API Key:
+
+    OpenWeatherMap API
+    Google Maps Javascript API
+    Google Maps Geocoding API
+
+If using the default remote database:
+
+    Navigate to the main folder
+    Run the command node server.js
+    You can now access the app at http://localhost:8000 or https://127.0.0.1:8080 for HTTPS access.
+
+If using a local database:
+
+    On your database, run the SQL file located in app/sql/
+    Open the file server.js with your text editor of choice
+    Run the command node server.js from the main folder
+    You can now access the app at http://localhost:8000 or at https://127.0.0.1:8080
+
 ```
