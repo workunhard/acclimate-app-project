@@ -43,8 +43,6 @@ if (is_heroku) {
 
 app.engine('html', require('ejs').renderFile);
 
-aws.config.region = 'us-west-1';
-
 const mysql = require("mysql2");
 const { resolveNaptr } = require("dns");
 const connection = mysql.createPool(dbconfig);
