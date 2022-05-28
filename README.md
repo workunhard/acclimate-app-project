@@ -71,7 +71,7 @@ Milestone #5:
 ## Contents
 
 Top level of project folder:
-
+```
 ├── apps
     ├── /html
         /login.html             # Site root; log-in page
@@ -82,7 +82,7 @@ Top level of project folder:
         /upload.html            # Page for uploading a text/photo post to the Timeline component
         /edit-post.html         # Page for editing previously uploaded text/photo posts
         /construction.html      # Placeholder for incomplete html pages    
-
+        
      ├── /profileimages
         ├── /avatars            # stores images uploaded as profile pictures by users
         ├── /timeline           # stores images uploaded to Timeline component by users    
@@ -91,11 +91,14 @@ Top level of project folder:
         /footer.html            
         /nav.html  
         /weather.html
+
 ├── /cert                       # contains self signed SSL certificate
     /cert.pem  
     /csr.pem
     /key.pem
+
 ├── node_modules                # required node modules
+
 ├── public                      # Folder for images, scripts, and stylesheets
     ├── /images                 # Subolder for image assets
         /bbymap.jpg
@@ -131,11 +134,20 @@ Top level of project folder:
         /profile.css
         /upload.css
         /user-style.css
+
 ├── .gitignore                  # Git ignore file
+
 ├── Procfile                    # Necessary for Heroku deploys
+
 ├── server.js                   # script to initialize web app (node index.js from CLI)
+
 ├── package-lock.json
+
 ├──package.json
+
 ├── Procfile
+
 ├── README.md
+
 ├── readme.txt                  # .txt version of the readme for COMP 2537 submissions
+```
