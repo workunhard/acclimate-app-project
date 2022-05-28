@@ -24,6 +24,11 @@ Technologies used for this project include:
 - Node.js
 - JQuery
 - MySQL
+- Geolocation APi
+- Google Maps API
+- OpenWeather API
+
+## YO ANDREW
 
 ## Milestones
 
@@ -46,6 +51,18 @@ Top level of project folder:
         /user-dashboard.html    # 'User' landing page after successful log-in
         /template.html          # template for future html pages
     ├── /profileimages          # contains user submitted images
+
+    ├── /scripts                # To contain any js templates and/or user generated scripts. 
+        
+    ├── /text                   # contains HTML templates for the application.
+        /footer.html            
+        /nav.html  
+        /weather.html
+├── /cert                   # contains self signed SSL certificate
+    /cert.pem  
+    /csr.pem
+    /key.pem
+    
     
 ├── node_modules                # required node modules
 
@@ -65,16 +82,18 @@ Top level of project folder:
             /favicon.ico
             /site.webmanifest   
     ├── /scripts                # Subfolder for scripts
-        /client.js
-        /skeleton.js
         /admin-dashboard.js
         /location.js
         /rain.js
+        /signup.js
+        /skeleton.js
         /upload-profile-pic.js
         /upload.js
         /user-dashboard.js
         /user-profile.js
         /weather.js
+    ├── /sql                    # Subfolder for sql 
+        /config.sql
     ├── /styles                 # Subfolder for styles
         /admin-style.css
         /construction.css
@@ -83,16 +102,18 @@ Top level of project folder:
         /style.css
         /upload.css
         /user-style.css
-    ├── /sql                    # Subfolder for sql 
-        /config.sql
-├── .gitignore                  # Git ignore file
+        
 
-├── server.js                    # script to initialize web app (node server.js from CLI)
+├── .gitignore                  # Git ignore file
 
 ├── package-lock.json
 
-├── Procfile
-
 ├──package.json
 
+├── Procfile
+
 ├── README.md
+
+├── readme.txt                   #
+
+├── server.js                    # script to initialize web app (node server.js from CLI)
