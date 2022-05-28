@@ -93,7 +93,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
+// Access home/login page
 app.get("/", function (req, res) {
     if (req.session.loggedIn) {
         res.redirect("/dashboard");
@@ -103,6 +103,7 @@ app.get("/", function (req, res) {
     }
 });
 
+// Access dashboard if user is authenticated
 app.get("/dashboard", function (req, res) {
     connection.query(
         "SELECT * from bby23_user WHERE ID = ?",
@@ -229,7 +230,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-// Log-in
+// Log-in process which authenticates user email and password to create a session.
 app.post("/login", function (req, res) {
     res.setHeader("Content-Type", "application/json");
     let results = authenticate(res, req.body.email, req.body.password,
@@ -256,6 +257,7 @@ app.post("/login", function (req, res) {
         });
 });
 
+// Allows user to logout and ends the session.
 app.get("/logout", function (req, res) {
     if (req.session) {
         req.session.destroy(function (error) {
