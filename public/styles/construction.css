@@ -10,6 +10,7 @@ nav {
   text-align: center;
 }
 
+
 /* Style the navigation menu */
 .navbar {
   overflow: hidden;
@@ -99,8 +100,10 @@ nav {
   right: 100px;
 }
 
-
-/* Material Icons */
+/*-------------------------------------
+ * customize material design icon sizes 
+ *-------------------------------------
+ */
 .material-icons.md-18 {
   font-size: 18px;
 }
@@ -117,30 +120,33 @@ nav {
   font-size: 48px;
 }
 
-/* Dashboard */
-.profile_name {
-  color: red;
-}
+/*-------------------------------------
+ * Media query for desktop view
+ *-------------------------------------
+ */
+@media only screen and (min-width: 801px) {
+  .container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 83% 7%;
+    height: 100vh;
+    padding: 1em;
+  }
 
-#alerts {
-  text-align: center;
-}
+  #navbarPlaceholder {
+    grid-row: 1;
+  }
 
-dd {
-  font-style: italic;
-  font-weight: bold;
-}
+  #bob {
+    grid-row: 2;
+    text-align: center;
+    margin-top: 20%;
+    margin-bottom: 20%;
+  }
 
-#bbymap {
-  width: 95%;
-  height: 100%;
-  border-radius: 10px 10px 10px 10px;
-}
-
-#forecastTable {
-  width: 95%;
-  height: 100%;
-  border-radius: 10px 10px 10px 10px;
+  #footerPlaceholder {
+    grid-row: 3;
+  }
 }
 
 /*-------------------------------------
@@ -151,104 +157,24 @@ dd {
   .container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 10% 27% 27% 29% 7%;
+    grid-template-rows: 10% 83% 7%;
     height: 100vh;
     padding: 0.5em;
     grid-gap: 5px;
   }
 
   #navbarPlaceholder {
-    grid-column: 1;
     grid-row: 1;
   }
 
-  #alerts {
-    grid-column: 1;
+  #bob {
     grid-row: 2;
-    background-color: blanchedalmond;
-    border-radius: 10px 10px 10px 10px;
-  }
-
-  #map {
-    grid-column: 1;
-    grid-row: 3;
-    background-color: beige;
     text-align: center;
-    border-radius: 10px 10px 10px 10px;
-  }
-
-  #forecast {
-    grid-column: 1;
-    grid-row: 4;
-    background-color: cornsilk;
-    text-align: center;
-    border-radius: 10px 10px 10px 10px;
+    margin-top: 20%;
+    margin-bottom: 20%;
   }
 
   #footerPlaceholder {
-    grid-column: 1;
-    grid-row: 5;
-  }
-}
-
-/*-------------------------------------
- * Media query for desktop view
- *-------------------------------------
- */
-@media only screen and (min-width: 801px) {
-  .container {
-    display: grid;
-    grid-template-columns: 25% 75%;
-    grid-template-rows: 10% 42% 41% 7%;
-    height: 100vh;
-    padding: 1em;
-  }
-
-  #navbarPlaceholder {
-    grid-column: 1 / span 2;
-    grid-row: 1;
-  }
-
-  #alerts {
-    grid-column: 1;
-    grid-row: 2 / span 2;
-    ;
-    background-color: blanchedalmond;
-    border-radius: 10px 10px 10px 10px;
-  }
-
-  #map {
-    grid-column: 2;
-    grid-row: 2;
-    text-align: center;
-    border-radius: 10px 10px 10px 10px;
-  }
-
-  #forecast {
-    grid-column: 2;
     grid-row: 3;
-    text-align: center;
-    border-radius: 10px 10px 10px 10px;
-    margin-top: 10px;
-  }
-
-  #footerPlaceholder {
-    grid-column: 1;
-    grid-row: 5;
-  }
-
-  #bbymap {
-    width: 70%;
-    height: 100%;
-    border-radius: 10px 10px 10px 10px;
-    border: 1px solid grey;
-
-  }
-
-  #forecastTable {
-    width: 70%;
-    height: 100%;
-    border-radius: 10px 10px 10px 10px;
-    border: 1px solid grey;
   }
 }

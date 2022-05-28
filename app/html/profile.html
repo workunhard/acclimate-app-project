@@ -8,7 +8,6 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
 	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
 	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png" />
-	<!-- <link rel="manifest" href="/site.webmanifest"> -->
 	<title>Dashboard | Acclimate</title>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -23,57 +22,39 @@
 
 		<div id="profileInfo">
 			<table id="userInfo">
-				
 			</table>
-			<!-- <p>Name:
-				<text id="avatar_name">
-			</p>
-			<p>Email:
-				<text id="avatar_email">
-			</p>
-			<p>Password:
-				<text id="avatar_password">
-			</p> -->
 		</div>
 
 		<div id="smallcontainer">
 			<form id="upload-images-form">
-				<input id="image-upload" type="file" value="Upload Image" accept="image/png, image/gif, image/jpeg"
-					multiple="multiple" />
-				<input id="submit" type="submit" value="Submit" />
+				<label for="image-upload" id="upload-label">Upload image</label>
+				<input id="image-upload" type="file" accept="image/png, image/gif, image/jpeg" multiple="multiple" />
+				<input id="submit" type="submit" value="Update Profile Pic" onclick="loader()" />
 			</form>
 		</div>
 		<div id="userAvatar"></div>
 
 		<nav id="footerPlaceholder"></nav>
+		<div id="loadAnimation">
+			<div class="loader-wrapper">
+				<span class="loader"><span class="loader-inner"></span></span>
+			</div>
+		</div>
 	</div>
 
 	<script src="../scripts/skeleton.js"></script>
 	<script src="../scripts/user-profile.js"></script>
+	<script src="../scripts/upload-profile-pic.js"></script>
 	<script>
-		const upLoadForm = document.getElementById("upload-images-form");
-		upLoadForm.addEventListener("submit", uploadImages);
-
-		function uploadImages(e) {
-			e.preventDefault();
-
-			const imageUpload = document.querySelector('#image-upload');
-			const formData = new FormData();
-
-			for (let i = 0; i < imageUpload.files.length; i++) {
-				// put the images from the input into the form data
-				formData.append("files", imageUpload.files[i]);
-			}
-			const options = {
-				method: 'POST',
-				body: formData,
-			};
-			fetch("/upload-images", options).then(function (res) {
-				console.log(res);
-			}).catch(function (err) {
-				("Error:", err)
-			});
+		function loader() {
+			document.getElementById("loadAnimation").innerHTML =
+				'<div class=\"loader-wrapper\"><span class=\"loader\"><span class=\"loader-inner\"></span></span></div>'
 		}
+	</script>
+	<script>
+		$(window).on("load", function () {
+			$(".loader-wrapper").fadeOut("slow");
+		});
 	</script>
 </body>
 

@@ -8,10 +8,94 @@ body {
 
 nav {
   text-align: center;
+  z-index: 10;
 }
 
+.userInfo td, th, caption {
+  text-align: left;
+  color: #52BBE7;
+  font-weight: bold;
+  height: 30px;
+  width: 120px;
+}
 
-/* Style the navigation menu */
+.name,
+.email,
+.password {
+  background-color: #e2f5fe;
+  border: 1px solid #52BBE7;
+  border-radius: 10px;
+  padding: 7px 15px;
+  margin: 8px 0;
+  width: 60%;
+}
+
+#userAvatar {
+  display: flex;
+  align-items: center;
+}
+
+#userAvatar #photo {
+  display: flex;
+  object-fit: cover;
+  width: 13em;
+  height: 13em;
+  border-radius: 100%;
+  border: 4px solid #52BBE7;
+  align-items: center;
+  margin: auto;
+  filter: drop-shadow(0px 20px 8px #000);
+}
+
+#upload-images-form {
+  text-align: center;
+}
+
+#upload-label {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 12pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+#upload-label:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#submit {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 12pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+#submit:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+/* Nav bar */
 .navbar {
   overflow: hidden;
   background-color: #333;
@@ -37,7 +121,7 @@ nav {
   display: block;
   position: absolute;
   top: 8px;
-} 
+}
 
 /* nav menu hamburger icon */
 .navbar a.menu {
@@ -58,7 +142,7 @@ nav {
 
 /* nav menu logo */
 .logo {
-  background-color:#52BBE7;
+  background-color: #52BBE7;
   color: white;
 }
 
@@ -100,17 +184,24 @@ nav {
   right: 100px;
 }
 
-/*-------------------------------------
- * customize material design icon sizes 
- *-------------------------------------
- */
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+/* Material Icons */
+.material-icons.md-18 {
+  font-size: 18px;
+}
 
-/* Dashboard Stuff */
+.material-icons.md-24 {
+  font-size: 24px;
+}
 
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+/* Dashboard */
 .profile_name {
   color: red;
 }
@@ -136,14 +227,93 @@ dd {
   border-radius: 10px 10px 10px 10px;
 }
 
+.loader-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #242f3f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+
+/* Loading Screen Animation */
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
+}
+
+/*-------------------------------------
+ * Media query for mobile view
+ *-------------------------------------
+ */
 @media only screen and (max-width: 800px) {
-  .container{
-    display:grid;
+  .container {
+    display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 10% 50% 7% 26% 7%;
+    grid-template-rows: 10% 30% 5% 50% 5%;
     height: 100vh;
     padding: 1em;
   }
+
   #navbarPlaceholder {
     grid-column: 1;
     grid-row: 1;
@@ -152,21 +322,20 @@ dd {
   #userAvatar {
     grid-column: 1;
     grid-row: 2;
-    /* object-fit: cover; */
-}
+  }
 
   #photo {
-   width: 60%;
+    width: 60%;
   }
 
   #smallcontainer {
-      grid-column: 1;
-      grid-row: 3;
+    grid-column: 1;
+    grid-row: 3;
   }
 
   #profileInfo {
-      grid-column: 1;
-      grid-row: 4;
+    grid-column: 1;
+    grid-row: 4;
   }
 
   #footerPlaceholder {
@@ -175,14 +344,19 @@ dd {
   }
 }
 
+/*-------------------------------------
+ * Media query for desktop view
+ *-------------------------------------
+ */
 @media only screen and (min-width: 801px) {
-  .container{
-    display:grid;
+  .container {
+    display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 10% 50% 7% 26% 7%;
     height: 100vh;
     padding: 1em;
   }
+
   #navbarPlaceholder {
     grid-column: 1;
     grid-row: 1;
@@ -193,26 +367,24 @@ dd {
     grid-row: 2;
     width: 95%;
     height: 90%;
-}
+  }
 
-#photo {
-  width: 500px;
-}
+  #photo {
+    width: 500px;
+  }
 
   #smallcontainer {
-      grid-column: 1;
-      grid-row: 3;
+    grid-column: 1;
+    grid-row: 3;
   }
 
   #profileInfo {
-      grid-column: 1;
-      grid-row: 4;
+    grid-column: 1;
+    grid-row: 4;
   }
 
   #footerPlaceholder {
     grid-column: 1;
     grid-row: 5;
   }
-
-
 }

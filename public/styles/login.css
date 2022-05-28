@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400&display=swap');
 
+/*-------------------------------------
+ * Media query for mobile view
+ *-------------------------------------
+ */
 @media only screen and (max-width: 700px) {
     body {
         background-image: url('/images/loginbg.svg');
@@ -18,6 +22,11 @@
         margin: 0;
     }
 
+    #rain h3 {
+        display: none;
+    }
+
+    /* Loading animation */
     @keyframes fadeInAnimation {
         0% {
             opacity: 0;
@@ -74,23 +83,7 @@
         width: 60%;
     }
 
-    #forgotP a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0.5em 0.5em;
-        transition: 0.3s;
-    }
-
-    #signUp a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0.5em 0.5em;
-        transition: 0.3s;
-    }
-
-    #clickme {
+    .clickme {
         color: #52BBE7;
         font-weight: bold;
     }
@@ -114,22 +107,25 @@
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    #footer {
+    .loginFooter {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
-        display: grid;
         height: 100%;
-        grid-row: 4 / span 1;
-        grid-column: 1 / span 3;
         align-content: center;
         margin: 0;
         padding: 20px;
         color: white;
-        position: relative;
+        grid-row: 4;
+        grid-column: 1 / span 3;
+        vertical-align: middle;
     }
 }
 
+/*-------------------------------------
+ * Media query for desktop view
+ *-------------------------------------
+ */
 @media only screen and (min-width: 701px) {
     body {
         background-image: url('/images/loginbg.svg');
@@ -139,7 +135,6 @@
         margin: 0;
         background-position: bottom center, 50%, 50%;
         font-family: 'Radio Canada', Calibri, "Segoe UI", Arial, sans-serif;
-        overflow: hidden;
     }
 
     #background {
@@ -149,6 +144,11 @@
         margin: 0;
     }
 
+    #rain h3 {
+        display: none;
+    }
+
+    /* Loading animation */
     @keyframes fadeInAnimation {
         0% {
             opacity: 0;
@@ -202,31 +202,16 @@
         border-radius: 14px;
         padding: 12px 15px;
         margin: 8px 0;
-        width: 40%;
+        width: 60%;
     }
 
-    #forgotP a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0.5em 0.5em;
-        transition: 0.3s;
-    }
-
-    #signUp a:hover {
-        color: #52BBE7;
-        border: 1px solid #52BBE7;
-        border-radius: 3px;
-        padding: 0.5em 0.5em;
-        transition: 0.3s;
-    }
-
-    #clickme {
+    .clickme {
         color: #52BBE7;
         font-weight: bold;
     }
 
-    #submit {
+    #submit1,
+    #submit2 {
         color: #52BBE7;
         font-weight: bold;
         font-family: 'Radio Canada', sans serif;
@@ -240,26 +225,150 @@
         text-align: center;
     }
 
-    #submit:hover {
+    #submit1:hover,
+    #submit2:hover {
         color: white;
         background-color: #52BBE7;
         border: 5px solid rgba(248, 253, 252, 0.8);
     }
 
-    #footer {
+    .loginFooter {
         background-color: #52BBE7;
         background-size: 100%;
         text-align: center;
-        display: grid;
         height: 100%;
-        grid-row: 4 / span 1;
-        grid-column: 1 / span 3;
         align-content: center;
         margin: 0;
-        padding: 20px;
+        padding: 10px;
         color: white;
-        position: relative;
+        grid-row: 4;
+        grid-column: 1 / span 3;
+        vertical-align: middle;
     }
+}
+
+/* Testing */
+#container {
+    width: 300px;
+    margin: 0 auto;
+}
+
+#tabs {
+    display: flex;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(11, 177, 224, 0.82);
+    padding: 10px;
+    vertical-align: middle;
+    position: relative;
+    font-size: 1.3em;
+    color: #ffffff;
+}
+
+.tabs:hover,
+p {
+    cursor: pointer;
+}
+
+#forgotP {
+    font-size: 1em;
+}
+
+#lt {
+    background-color: rgb(12, 132, 189);
+}
+
+#clear {
+    clear: both;
+}
+
+.comm {
+    position: absolute;
+    visibility: hidden;
+    width: 300px;
+}
+
+#login {
+    margin: 0 auto;
+    visibility: visible;
+    width: 300px;
+}
+
+h3 {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 10px 15px;
+    font-size: 1.5em;
+    color: #ffffff;
+}
+
+#forgot h3 {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+}
+
+#forgot div {
+    margin-top: 30px;
+}
+
+.tooltip {
+    position: relative;
+    background: white;
+    color: #52BBE7;
+    padding: 5px 12px;
+    border: 2px solid #52BBE7;
+    border-radius: 100%;
+    font-size: 20px;
+    cursor: help;
+}
+
+.tooltip::before,
+.tooltip::after {
+    position: absolute;
+    left: 50%;
+    opacity: 0;
+    transition: all ease 0.3s;
+}
+
+.tooltip::before {
+    content: "";
+    border-width: 10px 8px 0 8px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.3) transparent transparent transparent;
+    top: -20px;
+    margin-left: -8px;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    background: rgba(0, 0, 0, 0.3);
+    top: -20px;
+    transform: translateY(-100%);
+    font-size: 14px;
+    margin-left: -150px;
+    width: 300px;
+    border-radius: 10px;
+    color: #eee;
+    padding: 14px;
+}
+
+/* Hover states */
+.tooltip:hover::before,
+.tooltip:hover::after {
+    opacity: 1;
+}
+
+#passwordBox {
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 #serverMsg {
@@ -369,6 +478,7 @@
     animation: drift 35s linear infinite;
 }
 
+/* Loading animation */
 @keyframes drift {
     0% {
         margin-left: 2000px;
@@ -376,48 +486,5 @@
 
     100% {
         margin-left: -2000px;
-    }
-}
-
-/* CSS rain */
-
-#easteregg {
-    background-color: #52BBE7;
-    color: white;
-    border: none;
-}
-
-#rain {
-    display: none;
-}
-
-.drop {
-    background: -webkit-gradient(linear, 0% 0%, 2% 100%, from(rgb(203, 212, 213)), to(rgba(1, 55, 192, 0.74)));
-    background: -moz-linear-gradient(top, rgba(207, 228, 231, 0.607) 0%, rgba(12, 162, 192, 0.76) 100%);
-    width: 1px;
-    height: 70px;
-    bottom: 100px;
-    display: block;
-    position: absolute;
-    -webkit-animation: fall .63s linear infinite;
-    -moz-animation: fall .63s linear infinite;
-    animation: fall .63s linear infinite;
-}
-
-@-webkit-keyframes fall {
-    to {
-        margin-top: 900px;
-    }
-}
-
-@-moz-keyframes fall {
-    to {
-        margin-top: 900px;
-    }
-}
-
-@keyframes fall {
-    to {
-        margin-top: 900px;
     }
 }

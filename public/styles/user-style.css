@@ -8,22 +8,19 @@ body {
 
 nav {
   text-align: center;
+  z-index: 10;
 }
 
-
-/* Style the navigation menu */
 .navbar {
   overflow: hidden;
   background-color: #333;
   width: 100%;
 }
 
-/* Hide the links inside the navigation menu (except for logo/home) */
 .navbar #navLinks {
   display: none;
 }
 
-/* nav menu links */
 .navbar a {
   color: white;
   padding: 12px 18px;
@@ -32,14 +29,12 @@ nav {
   display: block;
 }
 
-/* nav menu profile icon */
 .navbar a.profile {
   display: block;
   position: absolute;
   top: 8px;
-} 
+}
 
-/* nav menu hamburger icon */
 .navbar a.menu {
   display: block;
   position: absolute;
@@ -47,7 +42,6 @@ nav {
   top: 8px;
 }
 
-/* when hovering above nav menu */
 .navbar a:hover {
   color: black;
 }
@@ -56,13 +50,11 @@ nav {
   color: black;
 }
 
-/* nav menu logo */
 .logo {
-  background-color:#52BBE7;
+  background-color: #52BBE7;
   color: white;
 }
 
-/* nav menu logo text */
 #logoText {
   font-size: 20px;
   font-weight: bold;
@@ -108,16 +100,21 @@ nav {
   right: 100px;
 }
 
-/*-------------------------------------
- * customize material design icon sizes 
- *-------------------------------------
- */
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
 
-/* Dashboard Stuff */
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
 
 .profile_name {
   color: red;
@@ -127,9 +124,124 @@ nav {
   text-align: center;
 }
 
+#card {
+  border-radius: 10px 10px 10px 10px;
+  background-color: white;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  width: 95%;
+  margin-left: 3%;
+  filter: drop-shadow(0px 0px 10px #000)
+}
+
+#card table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#card h3 {
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.description {
+  text-align: left;
+  padding: 20px;
+  width: 80%;
+}
+
+#sidebar {
+  background-color: white;
+}
+
 #timeline img {
   width: 80%;
   height: auto;
+  border-radius: 10px 10px 10px 10px;
+}
+
+#deletePost {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 8pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+#deletePost:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+#deleteImage {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 8pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+#deleteImage:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.image-label {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 8pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+.image-label:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
+}
+
+#confirm {
+  color: #52BBE7;
+  font-family: 'Radio Canada', sans serif;
+  font-size: 8pt;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #52BBE7;
+  border-radius: 14px;
+  padding: 0.5em;
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+
+#confirm:hover {
+  color: white;
+  background-color: #52BBE7;
+  border: 2px solid rgba(248, 253, 252, 0.8);
 }
 
 dd {
@@ -149,30 +261,17 @@ dd {
   border-radius: 10px 10px 10px 10px;
 }
 
-/* .box {
-  display: grid;
-  font-size: 12px;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr;
-}
-
-.weatherImg {
-  grid-column: 1; */
-
 #forecast {
   background: rgba(99, 99, 214, 0.8);
   padding: 5px;
-  /* position: fixed; */
   bottom: 0;
   display: flex;
   color: white;
-  /* width: 100%; */
   align-items: last baseline;
   justify-content: space-between;
   overflow-y: hidden;
   font-size: 11px;
   padding-left: 5px;
-  /* z-index: -1; */
 }
 
 .box {
@@ -180,20 +279,96 @@ dd {
   border-radius: 10px;
   padding: 9px;
   margin: 6px;
+  height: 85%;
 }
 
+.gm-style img {
+  max-width: 80%;
+}
 
+.loader-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #242f3f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  animation: loader 2s infinite ease;
+}
 
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
 
+/* Loading animation */
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
 
+  25% {
+    transform: rotate(180deg);
+  }
 
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
+}
+
+/*-------------------------------------
+ * Media query for mobile view
+ *-------------------------------------
+ */
 @media only screen and (max-width: 800px) {
-  .container{
+  .container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 60px max-content 60px;
-    /* grid-template-rows: 10% 27% 27% 29% 7%; */
+    grid-template-rows: 60px 800px 60px;
     height: 100vh;
     padding: 0.5em;
     grid-gap: 5px;
@@ -207,18 +382,17 @@ dd {
   #contentBody {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-rows: 4fr 1.5fr 2fr;
     grid-column: 1;
     grid-row: 2;
     padding-top: 20px;
-    padding-bottom: 70px;
+    padding-bottom: 0px;
     grid-gap: 5px;
   }
 
   #sidebar {
-    grid-column: 1;
+    grid-column: 1 / span 2;
     grid-row: 1;
-    background-color:blanchedalmond;
     border-radius: 10px 10px 10px 10px;
     overflow-y: auto;
   }
@@ -226,15 +400,17 @@ dd {
   #map {
     grid-column: 1;
     grid-row: 2;
-    background-color: beige;
+    background-color: #52BBE7;
     text-align: center;
     border-radius: 10px 10px 10px 10px;
+    height: 100%;
+    overflow-y: hidden;
   }
 
   #forecast {
     grid-column: 1;
     grid-row: 3;
-    background-color: cornsilk;
+    background-color: #52BBE7;
     text-align: center;
     border-radius: 10px 10px 10px 10px;
   }
@@ -245,13 +421,18 @@ dd {
   }
 }
 
+/*-------------------------------------
+ * Media query for desktop view
+ *-------------------------------------
+ */
 @media only screen and (min-width: 801px) {
-  .container{
+  .container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 12% 78% 10%;
     height: 100vh;
   }
+
   #navbarPlaceholder {
     grid-column: 1;
     grid-row: 1;
@@ -262,28 +443,32 @@ dd {
     grid-row: 3;
   }
 
+  .loader-wrapper {
+    height: 100vh;
+    position: absolute;
+  }
+
   #contentBody {
     display: grid;
     grid-template-columns: 46% 54%;
     grid-template-rows: 0.5fr 1fr 1fr 0.5fr;
     grid-column: 1;
     grid-row: 2;
-    margin-top: 0%;
+    margin-top: 1.5%;
     margin-bottom: 0%;
+    gap: 10px;
   }
 
   #sidebar {
     grid-column: 2;
     grid-row: 1 / span 4;
-    background-color:blanchedalmond;
     border-radius: 10px 10px 10px 10px;
     overflow-y: auto;
   }
 
   #map {
     grid-column: 1;
-    grid-row: 2;
-    /* background-color: beige; */
+    grid-row: 1 / span 2;
     text-align: center;
     margin-top: 0%;
     border-radius: 10px 10px 10px 10px;
@@ -291,15 +476,13 @@ dd {
 
   #bbymap {
     max-width: 95%;
-    max-height: auto;
     border-radius: 10px 10px 10px 10px;
-    border: 1px solid grey;  
+    border: 1px solid grey;
   }
 
   #forecast {
     grid-column: 1;
-    grid-row: 3;
-    /* background-color: cornsilk; */
+    grid-row: 3 / span 2;
     text-align: center;
     border-radius: 10px 10px 10px 10px;
     margin-top: 10px;
@@ -307,7 +490,6 @@ dd {
 
   #forecastTable {
     max-width: 95%;
-    max-height: auto;
     border-radius: 10px 10px 10px 10px;
     border: 1px solid grey;
   }

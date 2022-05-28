@@ -8,7 +8,6 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-	<!-- <link rel="manifest" href="/site.webmanifest"> -->
 	<title>Dashboard | Acclimate</title>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -25,43 +24,34 @@
 				<div id="alerts">
 					<h2 id="profile_name">PROFILE_NAME</h2>
 					<div id="timelinecontainer">
-						<!-- <h3>Upload to timeline</h3>
-                        <form id="upload-timeline-form">
-                            <input id="timeline-upload" type="file" value="Upload Image"
-                                accept="image/png, image/gif, image/jpeg" multiple="multiple" />
-                            <input id="submit" type="submit" value="Submit" />
-                        </form> -->
 						<br>
 						<div id="timeline"></div>
 						<br>
 					</div>
-					<!-- <h4>Recent Alerts</h4>
-                    <dl>
-                        <dt>Who needs to pay for a sauna with this current heat wave</dt>
-                        <dd>-everyonesGrandma @ 12:45PM</dd>
-                        <dt>Residents advised to stay indoors today amidst record high temperatures</dt>
-                        <dd>- BC Ministry of Health @ 9:10AM</dd>
-                        <dt>A tree fell on top of another car on SW Marine drive. </dt>
-                        <dd>- Wrongplacewrongtime @3:40PM</dd> -->
-					</dl>
 				</div>
 			</div>
 			<div id="map">
 			</div>
 			<div id="forecast">
-
 			</div>
 		</div>
 		<nav id="footerPlaceholder"></nav>
+		<div id="loadAnimation">
+			<div class="loader-wrapper">
+				<span class="loader"><span class="loader-inner"></span></span>
+			</div>
+		</div>
 	</div>
 
 	<script src="../scripts/skeleton.js"></script>
 	<script src="../scripts/user-dashboard.js"></script>
-	<script src="scripts/location.js"></script>
-	<script src="scripts/weather.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Z5HTQx6KUfp-isvrs8orgQc5a3KAUWQ&callback=initMap">
+	<script async src="scripts/location.js"></script>
+	<script async defer src="scripts/weather.js"></script>
+	<script>
+		$(window).on("load", function () {
+			$(".loader-wrapper").fadeOut("slow");
+		});
 	</script>
-
 </body>
 
 </html>

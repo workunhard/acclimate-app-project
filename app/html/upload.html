@@ -8,14 +8,13 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <!-- <link rel="manifest" href="/site.webmanifest"> -->
     <title>Dashboard | Acclimate</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.1/tinymce.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/user-style.css">
+    <link rel="stylesheet" href="../styles/upload.css">
 </head>
 
 <body>
@@ -24,18 +23,36 @@
         <div id="uploadbox">
             <h3>Upload to timeline</h3>
             <textarea id="description"></textarea>
-            <form id="upload-timeline-form">
-                <input id="timeline-upload" type="file" value="Upload Image" accept="image/png, image/gif, image/jpeg"
-                    multiple="multiple" />
-                <input id="submit" type="submit" value="Submit" />
+            <form id="upload-timeline-form"><br>
+                <label for="file-input" class="file-upload">
+                    Select image for upload
+                </label>
+                <input id="file-input" type="file" accept="image/png, image/gif, image/jpeg" multiple="multiple" />
+                <input id="submit" type="submit" value="Submit" onclick="loader()" />
             </form>
             <br>
-
-            <nav id="footerPlaceholder"></nav>
         </div>
-        <script src="../scripts/skeleton.js"></script>
-        <script src="../scripts/upload.js"></script>
+        <nav id="footerPlaceholder"></nav>
+        <div id="loadAnimation">
+            <div class="loader-wrapper">
+                <span class="loader"><span class="loader-inner"></span></span>
+            </div>
+        </div>
+    </div>
 
+    <script src="../scripts/skeleton.js"></script>
+    <script src="../scripts/upload.js"></script>
+    <script>
+        function loader() {
+            document.getElementById("loadAnimation").innerHTML =
+                '<div class=\"loader-wrapper\"><span class=\"loader\"><span class=\"loader-inner\"></span></span></div>'
+        }
+    </script>
+    <script>
+        $(window).on("load", function () {
+            $(".loader-wrapper").fadeOut("slow");
+        });
+    </script>
 </body>
 
 </html>
